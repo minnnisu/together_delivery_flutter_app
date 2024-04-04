@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:together_delivery_app/screens/post_list_screen.dart';
+import 'package:together_delivery_app/screens/signup_screen.dart';
 
 class MainScreen extends StatefulWidget {
   const MainScreen({super.key});
@@ -17,9 +18,7 @@ class _MainScreenState
     Text(
       'Index 1: Business',
     ),
-    Text(
-      'Index 2: School',
-    ),
+    SignupScreen(),
   ];
 
   void _onItemTapped(int index) {
@@ -30,6 +29,7 @@ class _MainScreenState
 
   @override
   Widget build(BuildContext context) {
+
     return Scaffold(
       appBar: MyAppBar(selectedIndex: _selectedIndex,),
       body: Center(
