@@ -1,70 +1,43 @@
 import 'package:flutter/material.dart';
-import 'package:together_delivery_app/helper/postService.dart';
-import 'package:together_delivery_app/widgets/loadingWidget.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:together_delivery_app/models/post.dart';
+import 'package:together_delivery_app/provider/postListProvider.dart';
 
-import '../models/post.dart';
-
-class PostListScreen extends StatefulWidget {
+class PostListScreen extends ConsumerWidget {
   const PostListScreen({super.key});
 
   @override
-  State<PostListScreen> createState() => _PostListScreenState();
-}
+  Widget build(BuildContext context, WidgetRef ref) {
+    ref.watch(postListProvider.notifier).fetchPosts();
 
-class _PostListScreenState extends State<PostListScreen> {
-  bool loading = true;
-  late List<Post> postList;
-
-  void getPost() async {
-    List<Post> _postList = (await PostService().getPostList()).cast<Post>();
-    setState(() {
-      postList = _postList;
-      loading = false;
-    });
-  }
-
-  @override
-  void initState() {
-    super.initState();
-
-    getPost();
-  }
-
-  @override
-  Widget build(BuildContext context) {
-    return loading
-        ? const LoadingWidget()
-        : Container(
-            decoration: BoxDecoration(
-              border: Border(
-                top: BorderSide(
-                  width: 0.5,
-                  color: Color(0xffcbcbcb),
-                ),
-              ),
-            ),
-            child: ListView.builder(
-              itemCount: postList.length,
-              itemBuilder: (context, index) => PostItem(post: postList[index]),
-            ));
+    return Container(
+      decoration: BoxDecoration(
+        border: Border(
+          top: BorderSide(
+            width: 0.5,
+            color: Color(0xffcbcbcb),
+          ),
+        ),
+      ),
+      child: ListView.builder(
+        itemCount: ref.watch(postListProvider.notifier).state.length,
+        itemBuilder: (context, index) =>
+            PostItem(post: ref.watch(postListProvider.notifier).state[index]),
+      ),
+    );
   }
 }
 
-class PostItem extends StatefulWidget {
-  Post post;
+class PostItem extends ConsumerWidget {
+  var post;
 
   PostItem({super.key, required this.post});
 
   @override
-  State<PostItem> createState() => _PostItemState();
-}
-
-class _PostItemState extends State<PostItem> {
-  @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context, WidgetRef ref) {
     return GestureDetector(
       onTap: () {
-        Navigator.pushNamed(context, '/postDetail', arguments: widget.post.id);
+        Navigator.pushNamed(context, '/postDetail', arguments: post.id);
       },
       child: Container(
         margin: EdgeInsets.symmetric(horizontal: 10),
@@ -81,7 +54,7 @@ class _PostItemState extends State<PostItem> {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             Text(
-              widget.post.title,
+              post.title,
               style: TextStyle(
                 fontWeight: FontWeight.bold,
                 fontSize: 15,
@@ -89,15 +62,15 @@ class _PostItemState extends State<PostItem> {
             ),
             Container(
               padding: const EdgeInsets.only(bottom: 5),
-              child: Text(widget.post.content),
+              child: Text(post.content),
             ),
             Row(
               children: [
                 PostItemBottom(value: "댓글 0"),
                 PostItemBottom(value: "|"),
-                PostItemBottom(value: widget.post.createdAt),
+                PostItemBottom(value: post.createdAt),
                 PostItemBottom(value: "|"),
-                PostItemBottom(value: widget.post.categoryCode),
+                PostItemBottom(value: post.categoryCode),
               ],
             )
           ],

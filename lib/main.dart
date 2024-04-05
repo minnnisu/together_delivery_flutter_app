@@ -1,8 +1,12 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:together_delivery_app/routes/routes.dart';
 
+import 'di/di_setup.dart';
+
 void main() {
-  runApp(const MyApp());
+  configureDependencies();
+  runApp(const ProviderScope(child: MyApp(),));
 }
 
 class MyApp extends StatelessWidget {
