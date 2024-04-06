@@ -4,7 +4,7 @@ import 'package:injectable/injectable.dart';
 import 'package:together_delivery_app/helper/apiUrls.dart';
 import '../constant/HttpFailure.dart';
 import '../helper/dio/dioService.dart';
-import '../models/SignupInput.dart';
+import '../models/signupInput.dart';
 import '../models/user.dart';
 
 typedef SignupResult = ({bool isSuccess, HttpFailure? message});
@@ -66,28 +66,28 @@ class SignupNotifier extends StateNotifier<SignupInput> {
 
   void updateField(String type, String value) {
     if (type == "username") {
-      state = state.copyWith(username: username);
+      state = state.copyWith(username: value);
     }
     if (type == "password") {
-      state = state.copyWith(password: password);
+      state = state.copyWith(password: value);
     }
     if (type == "passwordCheck") {
-      state = state.copyWith(passwordCheck: passwordCheck);
+      state = state.copyWith(passwordCheck: value);
     }
     if (type == "name") {
-      state = state.copyWith(name: name);
+      state = state.copyWith(name: value);
     }
     if (type == "nickname") {
-      state = state.copyWith(nickname: nickname);
+      state = state.copyWith(nickname: value);
     }
     if (type == "email") {
-      state = state.copyWith(email: email);
+      state = state.copyWith(email: value);
     }
     if (type == "telephone") {
-      state = state.copyWith(telephone: telephone);
+      state = state.copyWith(telephone: value);
     }
     if (type == "college") {
-      state = state.copyWith(college: college);
+      state = state.copyWith(college: value);
     }
   }
 

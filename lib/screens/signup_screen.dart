@@ -2,11 +2,14 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:together_delivery_app/constant/HttpFailure.dart';
-import 'package:together_delivery_app/models/SignupInput.dart';
+import 'package:together_delivery_app/models/signupInput.dart';
 
 import '../providers/signupProvider.dart';
 
-final signupProvider = StateNotifierProvider((ref) => SignupNotifier());
+// final signupProvider = StateNotifierProvider((ref) => SignupNotifier());
+final signupProvider = StateNotifierProvider<SignupNotifier, SignupInput>((ref) {
+  return SignupNotifier();
+});
 
 class SignupScreen extends StatefulWidget {
   const SignupScreen({super.key});
@@ -30,14 +33,14 @@ class InputForm extends ConsumerWidget {
   Future<void> _submitForm(BuildContext context, WidgetRef ref) async {
     var signup = ref.read(signupProvider.notifier);
     print('''
-          ${signup.usernameErrMsg}
-          ${signup.passwordErrMsg}
-          ${signup.passwordCheckErrMsg}
-          ${signup.nameErrMsg}
-          ${signup.nicknameErrMsg}
-          ${signup.emailErrMsg}
-          ${signup.telephoneErrMsg}
-          ${signup.collegeErrMsg}
+          ${signup.username}
+          ${signup.password}
+          ${signup.passwordCheck}
+          ${signup.name}
+          ${signup.nickname}
+          ${signup.email}
+          ${signup.telephone}
+          ${signup.college}
       ''');
 
     if (_formKey.currentState!.validate()) {
@@ -80,7 +83,7 @@ class InputForm extends ConsumerWidget {
         child: ListView(
           children: [
             TextFormField(
-              onChanged: (value) => signup.updateField("username", value),
+              onChanged: (value) => ref.read(signupProvider.notifier).updateField("username", value),
               decoration: InputDecoration(
                 labelText: '아이디',
               ),
