@@ -7,20 +7,17 @@ part 'signupInput.freezed.dart';
 class SignupInput with _$SignupInput{
   const factory SignupInput({
     required String username,
-    required String usernameErrMsg,
+
     required String password,
-    required String passwordErrMsg,
     required String passwordCheck,
-    required String passwordCheckErrMsg,
     required String name,
-    required String nameErrMsg,
     required String nickname,
-    required String nicknameErrMsg,
     required String email,
-    required String emailErrMsg,
     required String telephone,
-    required String telephoneErrMsg,
     required String college,
-    required String collegeErrMsg,
+    required String usernameErrMsg,
+    required String usernameCheckSuccessMessage,
+    required String nicknameErrMsg,
+    required String nicknameCheckSuccessMessage,
   }) = _SignupInput;
 }

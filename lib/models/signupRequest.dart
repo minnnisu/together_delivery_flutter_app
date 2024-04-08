@@ -1,4 +1,4 @@
-class User {
+class SignupRequest {
   String username;
   String password;
   String passwordCheck;
@@ -8,7 +8,7 @@ class User {
   String telephone;
   String college;
 
-  User({
+  SignupRequest({
     required this.username,
     required this.password,
     required this.passwordCheck,
@@ -19,8 +19,8 @@ class User {
     required this.college,
   });
 
-  factory User.fromJson(Map<String, dynamic> json) {
-    return User(
+  factory SignupRequest.fromJson(Map<String, dynamic> json) {
+    return SignupRequest(
       username: json['username'],
       password: json['password'],
       passwordCheck: json['passwordCheck'],

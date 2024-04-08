@@ -1,11 +1,6 @@
-import '../constant/errorCode.dart';
+import 'package:together_delivery_app/constant/errorCode.dart';
 
-class CustomException{
-  final bool isSuccess;
+class CustomException implements Exception{
   final ErrorCode errorCode;
-
-  CustomException(ErrorCode duplicatedUserNameError, {
-    this.isSuccess = true,
-    this.errorCode = ErrorCode.OK,
-  });
+  CustomException({required this.errorCode});
 }
