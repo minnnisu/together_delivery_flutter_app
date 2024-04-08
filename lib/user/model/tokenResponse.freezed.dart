@@ -21,7 +21,6 @@ TokenResponse _$TokenResponseFromJson(Map<String, dynamic> json) {
 /// @nodoc
 mixin _$TokenResponse {
   String get accessToken => throw _privateConstructorUsedError;
-  String get refreshToken => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
@@ -35,7 +34,7 @@ abstract class $TokenResponseCopyWith<$Res> {
           TokenResponse value, $Res Function(TokenResponse) then) =
       _$TokenResponseCopyWithImpl<$Res, TokenResponse>;
   @useResult
-  $Res call({String accessToken, String refreshToken});
+  $Res call({String accessToken});
 }
 
 /// @nodoc
@@ -52,16 +51,11 @@ class _$TokenResponseCopyWithImpl<$Res, $Val extends TokenResponse>
   @override
   $Res call({
     Object? accessToken = null,
-    Object? refreshToken = null,
   }) {
     return _then(_value.copyWith(
       accessToken: null == accessToken
           ? _value.accessToken
           : accessToken // ignore: cast_nullable_to_non_nullable
-              as String,
-      refreshToken: null == refreshToken
-          ? _value.refreshToken
-          : refreshToken // ignore: cast_nullable_to_non_nullable
               as String,
     ) as $Val);
   }
@@ -75,7 +69,7 @@ abstract class _$$TokenResponseImplCopyWith<$Res>
       __$$TokenResponseImplCopyWithImpl<$Res>;
   @override
   @useResult
-  $Res call({String accessToken, String refreshToken});
+  $Res call({String accessToken});
 }
 
 /// @nodoc
@@ -90,16 +84,11 @@ class __$$TokenResponseImplCopyWithImpl<$Res>
   @override
   $Res call({
     Object? accessToken = null,
-    Object? refreshToken = null,
   }) {
     return _then(_$TokenResponseImpl(
       accessToken: null == accessToken
           ? _value.accessToken
           : accessToken // ignore: cast_nullable_to_non_nullable
-              as String,
-      refreshToken: null == refreshToken
-          ? _value.refreshToken
-          : refreshToken // ignore: cast_nullable_to_non_nullable
               as String,
     ));
   }
@@ -110,20 +99,17 @@ class __$$TokenResponseImplCopyWithImpl<$Res>
 class _$TokenResponseImpl
     with DiagnosticableTreeMixin
     implements _TokenResponse {
-  const _$TokenResponseImpl(
-      {required this.accessToken, required this.refreshToken});
+  const _$TokenResponseImpl({required this.accessToken});
 
   factory _$TokenResponseImpl.fromJson(Map<String, dynamic> json) =>
       _$$TokenResponseImplFromJson(json);
 
   @override
   final String accessToken;
-  @override
-  final String refreshToken;
 
   @override
   String toString({DiagnosticLevel minLevel = DiagnosticLevel.info}) {
-    return 'TokenResponse(accessToken: $accessToken, refreshToken: $refreshToken)';
+    return 'TokenResponse(accessToken: $accessToken)';
   }
 
   @override
@@ -131,8 +117,7 @@ class _$TokenResponseImpl
     super.debugFillProperties(properties);
     properties
       ..add(DiagnosticsProperty('type', 'TokenResponse'))
-      ..add(DiagnosticsProperty('accessToken', accessToken))
-      ..add(DiagnosticsProperty('refreshToken', refreshToken));
+      ..add(DiagnosticsProperty('accessToken', accessToken));
   }
 
   @override
@@ -141,14 +126,12 @@ class _$TokenResponseImpl
         (other.runtimeType == runtimeType &&
             other is _$TokenResponseImpl &&
             (identical(other.accessToken, accessToken) ||
-                other.accessToken == accessToken) &&
-            (identical(other.refreshToken, refreshToken) ||
-                other.refreshToken == refreshToken));
+                other.accessToken == accessToken));
   }
 
   @JsonKey(ignore: true)
   @override
-  int get hashCode => Object.hash(runtimeType, accessToken, refreshToken);
+  int get hashCode => Object.hash(runtimeType, accessToken);
 
   @JsonKey(ignore: true)
   @override
@@ -165,17 +148,14 @@ class _$TokenResponseImpl
 }
 
 abstract class _TokenResponse implements TokenResponse {
-  const factory _TokenResponse(
-      {required final String accessToken,
-      required final String refreshToken}) = _$TokenResponseImpl;
+  const factory _TokenResponse({required final String accessToken}) =
+      _$TokenResponseImpl;
 
   factory _TokenResponse.fromJson(Map<String, dynamic> json) =
       _$TokenResponseImpl.fromJson;
 
   @override
   String get accessToken;
-  @override
-  String get refreshToken;
   @override
   @JsonKey(ignore: true)
   _$$TokenResponseImplCopyWith<_$TokenResponseImpl> get copyWith =>

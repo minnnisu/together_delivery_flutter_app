@@ -51,30 +51,20 @@ class AuthRepository {
       throw CustomException(errorCode: ErrorCode.NO_TOKEN_ERROR);
     }
 
-    try {
+      print("""
+      Bearer $accessToken
+      Bearer $refreshToken
+      """);
       final response = await dio.post(
         apiUrls.tokenRefresh,
         options: Options(
           headers: {
-            'authorization': 'Bearer $accessToken',
-            'authorization_refresh': 'Bearer $refreshToken',
+            'Authorization': 'Bearer $accessToken',
+            'Authorization-refresh': 'Bearer $refreshToken',
           },
         ),
       );
-
       return TokenResponse.fromJson(response.data);
-    } on DioException catch (e) {
-      if (e.response?.data["errorCode"] == 'NoSuchRefreshTokenError' ||
-          e.response?.data["errorCode"] == 'NoSuchAccessTokenError' ||
-          e.response?.data["errorCode"] == 'NotExpiredAccessTokenError' ||
-          e.response?.data["errorCode"] == 'NotValidAccessTokenError' ||
-          e.response?.data["errorCode"] == 'ExpiredRefreshTokenError' ||
-          e.response?.data["errorCode"] == 'NotValidRefreshTokenError') {
-        throw CustomException(errorCode: ErrorCode.ACCESS_TOKEN_REFRESH_ERROR);
-      }
-
-      rethrow; // NotValidRequestError, InternalServerError
-    }
   }
 
   Future<void> logout() async {
@@ -89,8 +79,8 @@ class AuthRepository {
       apiUrls.logout,
       options: Options(
         headers: {
-          'authorization': 'Bearer $accessToken',
-          'authorization_refresh': 'Bearer $refreshToken',
+          'Authorization': 'Bearer $accessToken',
+          'Authorization-refresh': 'Bearer $refreshToken',
         },
       ),
     );

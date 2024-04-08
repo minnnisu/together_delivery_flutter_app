@@ -71,6 +71,7 @@ class CustomInterceptor extends Interceptor {
     }
 
     if (err.response?.data["errorCode"] == 'ExpiredAccessTokenError') {
+      print("토큰이 만료됨");
       try {
         TokenResponse tokenResponse =
             await ref.read(authProvider.notifier).token(); // 토큰 재발급
@@ -78,9 +79,11 @@ class CustomInterceptor extends Interceptor {
 
         final options = err.requestOptions;
 
+        print("토큰 재발급 됨");
+
         // 요청의 헤더에 새로 발급받은 accessToken으로 변경하기
         options.headers.addAll({
-          'authorization': 'Bearer $accessToken',
+          'Authorization': 'Bearer $accessToken',
         });
 
         await storage.write(key: accessTokenKey, value: accessToken);
@@ -88,9 +91,11 @@ class CustomInterceptor extends Interceptor {
         Dio dio = Dio();
         // 원래 보내려던 요청 재전송
         final newResponse = await dio.fetch(options);
+        print("원래 요청 전송");
 
         return handler.resolve(newResponse);
       } catch (e) {
+        print("에러 내용: ${e.toString()}");
         await ref.read(authProvider.notifier).logout(); // 강제 로그아웃
       }
 

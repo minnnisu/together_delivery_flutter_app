@@ -1,8 +1,11 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:together_delivery_app/constant/const.dart';
+import 'package:together_delivery_app/secureStore/secureStore.dart';
 import 'package:together_delivery_app/user/model/userModel.dart';
 import 'package:together_delivery_app/user/provider/authNotifier.dart';
+import 'package:together_delivery_app/user/repository/userMeRepository.dart';
 
 class UserInfoScreen extends StatefulWidget {
   const UserInfoScreen({super.key});
@@ -45,6 +48,14 @@ class UserInfo extends ConsumerWidget {
           Text("휴대폰번호: ${userModel.telephone}"),
           Text("대학교: ${userModel.college}"),
           TextButton(
+            onPressed: () => getToken(ref),
+            child: Text("토큰 정보 가져오기"),
+          ),
+          TextButton(
+            onPressed: () => getUserInfo(ref),
+            child: Text("유저정보 다시 가져오기"),
+          ),
+          TextButton(
             onPressed: () => ref.read(authProvider.notifier).logout(),
             child: Text('로그아웃'),
           ),
@@ -71,8 +82,19 @@ class UserInfo extends ConsumerWidget {
           },
           child: Text('로그인'),
         ),
-
       ],
     );
   }
+}
+
+Future<void> getToken(WidgetRef ref) async{
+  print("""
+accessToken:  ${await ref.read(secureStorageProvider).read(key: accessTokenKey)}
+refreshToken: ${await ref.read(secureStorageProvider).read(key: refreshTokenKey)}
+            """);
+}
+
+Future<void> getUserInfo(WidgetRef ref) async {
+  UserModel userModel = await ref.read(userMeRepositoryProvider).getUserInfo();
+  print("유저정보: ${userModel.toJson()}");
 }

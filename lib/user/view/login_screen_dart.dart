@@ -16,7 +16,11 @@ class _LoginScreenState extends State<LoginScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text("로그인"),
+        automaticallyImplyLeading: false,
+        actions: [
+          IconButton(
+              onPressed: () => Navigator.pop(context), icon: Icon(Icons.close))
+        ],
       ),
       body: LoginForm(),
     );
@@ -99,3 +103,13 @@ class LoginForm extends ConsumerWidget {
     }
   }
 }
+
+// class Logo extends StatelessWidget {
+//   const Logo({super.key});
+//
+//   @override
+//   Widget build(BuildContext context) {
+//     return const Placehol der();
+//   }
+// }
+
