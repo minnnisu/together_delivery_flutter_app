@@ -1,7 +1,16 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:together_delivery_app/helper/auth/signupService.dart';
-import 'package:together_delivery_app/models/user.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:together_delivery_app/constant/HttpFailure.dart';
+import 'package:together_delivery_app/models/signupInput.dart';
+
+import '../providers/signupProvider.dart';
+
+// final signupProvider = StateNotifierProvider((ref) => SignupNotifier());
+final signupProvider =
+    StateNotifierProvider<SignupNotifier, SignupInput>((ref) {
+  return SignupNotifier();
+});
 
 class SignupScreen extends StatefulWidget {
   const SignupScreen({super.key});
@@ -11,184 +20,208 @@ class SignupScreen extends StatefulWidget {
 }
 
 class _SignupScreenState extends State<SignupScreen> {
-  final _formKey = GlobalKey<FormState>();
-  TextEditingController _usernameController = TextEditingController();
-  TextEditingController _passwordController = TextEditingController();
-  TextEditingController _passwordCheckController = TextEditingController();
-  TextEditingController _nameController = TextEditingController();
-  TextEditingController _nicknameController = TextEditingController();
-  TextEditingController _emailController = TextEditingController();
-  TextEditingController _telephoneController = TextEditingController();
-  TextEditingController _collegeController = TextEditingController();
-
-  Future<void> _submitForm() async {
-    // if (_formKey.currentState!.validate()) {
-    //   User user = User(
-    //     username: _usernameController.text,
-    //     password: _passwordCheckController.text,
-    //     passwordCheck: _passwordCheckController.text,
-    //     name: _nameController.text,
-    //     nickname: _nicknameController.text,
-    //     email: _emailController.text,
-    //     telephone: _telephoneController.text,
-    //     college: _collegeController.text,
-    //   );
-    //
-    //   await SignupService().registerUser(user);
-    //
-    //   // 회원가입 성공 메시지 출력
-    //   ScaffoldMessenger.of(context).showSnackBar(
-    //     SnackBar(content: Text('회원가입이 성공적으로 완료되었습니다.')),
-    //   );
-    // }
-
-    User user = User(
-        username: "minnnisu2",
-        password: "user1234#",
-        passwordCheck: "user1234#",
-        name: "최민수",
-        nickname: "코린이",
-        email: "korin123@naver.com",
-        telephone: "010-1234-5678",
-        college: "동국대학교 WISE캠퍼스");
-
-    await SignupService().registerUser(user);
-
-    // 회원가입 성공 메시지 출력
-    ScaffoldMessenger.of(context).showSnackBar(
-      SnackBar(
-        content: Text('회원가입이 성공적으로 완료되었습니다.'),
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: AppBar(
+        title: Text('회원가입'),
       ),
+      body: InputForm(),
     );
+  }
+}
+
+class InputForm extends ConsumerWidget {
+  InputForm({super.key});
+
+  final _formKey = GlobalKey<FormState>();
+
+  Future<void> _submitForm(BuildContext context, WidgetRef ref) async {
+    var signup = ref.read(signupProvider.notifier);
+    print('''
+          ${signup.username}
+          ${signup.password}
+          ${signup.passwordCheck}
+          ${signup.name}
+          ${signup.nickname}
+          ${signup.email}
+          ${signup.telephone}
+          ${signup.college}
+      ''');
+
+    if (_formKey.currentState!.validate()) {
+      // User user = User(
+      //     username: "minnnisu2",
+      //     password: "user1234#",
+      //     passwordCheck: "user1234#",
+      //     name: "최민수",
+      //     nickname: "코린이",
+      //     email: "korin123@naver.com",
+      //     telephone: "010-1234-5678",
+      //     college: "동국대학교 WISE캠퍼스");
+
+      var signupResult =
+          await ref.watch(signupProvider.notifier).registerUser();
+
+      ScaffoldMessenger.of(context).showSnackBar(
+        SnackBar(
+            content: Text(
+                signupResult ? '회원가입이 성공적으로 완료되었습니다.' : '회원가입 중 오류가 발생하였습니다')),
+      );
+    }
   }
 
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context, WidgetRef ref) {
+    var signup = ref.watch(signupProvider.notifier);
+    var signupRead = ref.read(signupProvider.notifier);
+    final signupWatch = ref.watch(signupProvider) as SignupInput;
     return Padding(
       padding: const EdgeInsets.all(16.0),
       child: Form(
         key: _formKey,
         child: ListView(
           children: [
-            TextFormField(
-              controller: _usernameController,
-              decoration: InputDecoration(labelText: '아이디'),
-              validator: (value) {
-                final RegExp regex = RegExp(r'^[A-Za-z0-9]+$');
-                if (value == null || value.isEmpty) {
-                  return '아이디를 입력하세요.';
-                }
-                if (!regex.hasMatch(value)) {
-                  return '아이디는 영문 대소문자와 숫자만 가능합니다.';
-                }
-                if (value.length < 4 || value.length > 20) {
-                  return '아이디는 4자 이상 20자 이하여야 합니다.';
-                }
-                return null;
-              },
+            Row(
+              children: <Widget>[
+                Expanded(
+                  child: TextFormField(
+                    onChanged: (value) => ref
+                        .read(signupProvider.notifier)
+                        .updateField("username", value),
+                    decoration: InputDecoration(
+                      labelText: '아이디',
+                      errorText: signup.usernameErrMsg == ""
+                          ? null
+                          : signup.usernameErrMsg,
+                      helperText: signup.usernameCheckSuccessMessage == ""
+                          ? null
+                          : signup.usernameCheckSuccessMessage,
+                    ),
+                    validator: (value) {
+                      var validationResult = signup.validateUsername(value);
+                      return validationResult.isValid
+                          ? null
+                          : validationResult.message;
+                    },
+                  ),
+                ),
+                TextButton(
+                  onPressed: () async {
+                    await signupRead.checkUsernameDuplication();
+                  },
+                  child: Text("중복확인"),
+                ),
+              ],
             ),
             TextFormField(
-              controller: _passwordController,
-              decoration: InputDecoration(labelText: '비밀번호'),
+              decoration: InputDecoration(
+                labelText: '비밀번호',
+              ),
+              onChanged: (value) => signup.updateField('password', value),
               obscureText: true,
               validator: (value) {
-                final RegExp regex = RegExp(
-                    r'^(?=.*[A-Za-z])(?=.*\d)(?=.*[@$!%*#?&])[A-Za-z\d@$!%*#?&]+$');
-                if (value == null || value.isEmpty) {
-                  return '비밀번호를 입력하세요.';
-                }
-                if (!regex.hasMatch(value)) {
-                  return '비밀번호는 영문자, 숫자, 특수문자(@, \$, !, %, *, #, ?, &)를 포함해야 합니다.';
-                }
-                if (value.length < 8 || value.length > 20) {
-                  return '비밀번호는 8자 이상 20자 이하여야 합니다.';
-                }
-                return null;
+                var validationResult = signup.validatePassword(value);
+                return validationResult.isValid
+                    ? null
+                    : validationResult.message;
               },
             ),
             TextFormField(
-              controller: _passwordCheckController,
-              decoration: InputDecoration(labelText: '비밀번호 확인'),
+              decoration: InputDecoration(
+                labelText: '비밀번호 확인',
+              ),
+              onChanged: (value) {
+                signup.updateField('passwordCheck', value);
+              },
               obscureText: true,
               validator: (value) {
-                if (value != _passwordController.text) {
-                  return '비밀번호가 일치하지 않습니다.';
-                }
-                return null;
+                var validationResult = signup.validatePasswordCheck(value);
+                return validationResult.isValid
+                    ? null
+                    : validationResult.message;
               },
             ),
             TextFormField(
-              controller: _nameController,
-              decoration: InputDecoration(labelText: '이름'),
+              decoration: InputDecoration(
+                labelText: '이름',
+              ),
+              onChanged: (value) => signup.updateField('name', value),
               validator: (value) {
-                if (value == null || value.isEmpty) {
-                  return '이름을 입력하세요.';
-                }
-                if (value.length < 2 || value.length > 20) {
-                  return '이름은 2자 이상 20자 이하여야 합니다.';
-                }
-                return null;
+                var validationResult = signup.validateName(value);
+                return validationResult.isValid
+                    ? null
+                    : validationResult.message;
+              },
+            ),
+            Row(
+              children: <Widget>[
+                Expanded(
+                  child: TextFormField(
+                    decoration: InputDecoration(
+                      labelText: '닉네임',
+                      errorText: signup.nicknameErrMsg == ""
+                          ? null
+                          : signup.nicknameErrMsg,
+                      helperText: signup.nicknameCheckSuccessMessage == ""
+                          ? null
+                          : signup.nicknameCheckSuccessMessage,
+                    ),
+                    onChanged: (value) => signup.updateField('nickname', value),
+                    validator: (value) {
+                      var validationResult = signup.validateNickname(value);
+                      return validationResult.isValid
+                          ? null
+                          : validationResult.message;
+                    },
+                  ),
+                ),
+                TextButton(
+                  onPressed: () async {
+                    await signupRead.checkNicknameDuplication();
+                  },
+                  child: Text("중복확인"),
+                ),
+              ],
+            ),
+            TextFormField(
+              decoration: InputDecoration(
+                labelText: '이메일',
+              ),
+              onChanged: (value) => signup.updateField('email', value),
+              validator: (value) {
+                var validationResult = signup.validateEmail(value);
+                return validationResult.isValid
+                    ? null
+                    : validationResult.message;
               },
             ),
             TextFormField(
-              controller: _nicknameController,
-              decoration: InputDecoration(labelText: '닉네임'),
+              decoration: InputDecoration(
+                labelText: '전화번호',
+              ),
+              onChanged: (value) => signup.updateField('telephone', value),
               validator: (value) {
-                if (value == null || value.isEmpty) {
-                  return '닉네임을 입력하세요.';
-                }
-                if (value.length < 2 || value.length > 10) {
-                  return '닉네임은 2자 이상 10자 이하여야 합니다.';
-                }
-                return null;
+                var validationResult = signup.validateTelephone(value);
+                return validationResult.isValid
+                    ? null
+                    : validationResult.message;
               },
             ),
             TextFormField(
-              controller: _emailController,
-              decoration: InputDecoration(labelText: '이메일'),
+              decoration: InputDecoration(
+                labelText: '대학교명',
+              ),
+              onChanged: (value) => signup.updateField('college', value),
               validator: (value) {
-                final RegExp regex =
-                    RegExp(r'^[a-zA-Z0-9]+@[a-zA-Z0-9]+\.[a-zA-Z]+');
-                if (value == null || value.isEmpty) {
-                  return '이메일을 입력하세요.';
-                }
-                if (!regex.hasMatch(value)) {
-                  return '유효한 이메일 주소를 입력하세요.';
-                }
-                if (value.length > 30) {
-                  return '이메일은 30자 이하여야 합니다.';
-                }
-                return null;
-              },
-            ),
-            TextFormField(
-              controller: _telephoneController,
-              decoration: InputDecoration(labelText: '전화번호'),
-              validator: (value) {
-                if (value == null || value.isEmpty) {
-                  return '전화번호를 입력하세요.';
-                }
-                if (value.length > 20) {
-                  return '전화번호는 20자 이하여야 합니다.';
-                }
-                return null;
-              },
-            ),
-            TextFormField(
-              controller: _collegeController,
-              decoration: InputDecoration(labelText: '대학'),
-              validator: (value) {
-                if (value == null || value.isEmpty) {
-                  return '대학을 입력하세요.';
-                }
-                if (value.length > 20) {
-                  return '대학은 20자 이하여야 합니다.';
-                }
-                return null;
+                var validationResult = signup.validateCollege(value);
+                return validationResult.isValid
+                    ? null
+                    : validationResult.message;
               },
             ),
             ElevatedButton(
-              onPressed: _submitForm,
+              onPressed: () => _submitForm(context, ref),
               child: Text('회원가입'),
             ),
           ],

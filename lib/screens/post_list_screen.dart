@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:together_delivery_app/models/post.dart';
-import 'package:together_delivery_app/provider/postListProvider.dart';
+import 'package:together_delivery_app/providers/postListProvider.dart';
 
 class PostListScreen extends ConsumerWidget {
   const PostListScreen({super.key});
