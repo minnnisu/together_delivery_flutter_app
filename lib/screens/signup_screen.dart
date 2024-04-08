@@ -7,7 +7,8 @@ import 'package:together_delivery_app/models/signupInput.dart';
 import '../providers/signupProvider.dart';
 
 // final signupProvider = StateNotifierProvider((ref) => SignupNotifier());
-final signupProvider = StateNotifierProvider<SignupNotifier, SignupInput>((ref) {
+final signupProvider =
+    StateNotifierProvider<SignupNotifier, SignupInput>((ref) {
   return SignupNotifier();
 });
 
@@ -21,7 +22,12 @@ class SignupScreen extends StatefulWidget {
 class _SignupScreenState extends State<SignupScreen> {
   @override
   Widget build(BuildContext context) {
-    return InputForm();
+    return Scaffold(
+      appBar: AppBar(
+        title: Text('회원가입'),
+      ),
+      body: InputForm(),
+    );
   }
 }
 
@@ -56,18 +62,11 @@ class InputForm extends ConsumerWidget {
 
       var signupResult =
           await ref.watch(signupProvider.notifier).registerUser();
-      if (!signupResult.isSuccess) {
-        if (signupResult.message == HttpFailure.DuplicatedUserNameError) {}
 
-        ScaffoldMessenger.of(context).showSnackBar(
-          SnackBar(content: Text('회원가입 중 오류가 발생하였습니다')),
-        );
-        return;
-      }
-
-      // 회원가입 성공 메시지 출력
       ScaffoldMessenger.of(context).showSnackBar(
-        SnackBar(content: Text('회원가입이 성공적으로 완료되었습니다.')),
+        SnackBar(
+            content: Text(
+                signupResult ? '회원가입이 성공적으로 완료되었습니다.' : '회원가입 중 오류가 발생하였습니다')),
       );
     }
   }
@@ -75,6 +74,7 @@ class InputForm extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     var signup = ref.watch(signupProvider.notifier);
+    var signupRead = ref.read(signupProvider.notifier);
     final signupWatch = ref.watch(signupProvider) as SignupInput;
     return Padding(
       padding: const EdgeInsets.all(16.0),
@@ -82,24 +82,37 @@ class InputForm extends ConsumerWidget {
         key: _formKey,
         child: ListView(
           children: [
-            TextFormField(
-              onChanged: (value) => ref.read(signupProvider.notifier).updateField("username", value),
-              decoration: InputDecoration(
-                labelText: '아이디',
-              ),
-              validator: (value) {
-                var validationResult = signup.validateUsername(value);
-                return validationResult.isValid
-                    ? null
-                    : validationResult.message;
-              },
-            ),
-            Text(
-              signupWatch.usernameErrMsg,
-              style: TextStyle(
-                color: Color(0xffde1315),
-                fontSize: 12,
-              ),
+            Row(
+              children: <Widget>[
+                Expanded(
+                  child: TextFormField(
+                    onChanged: (value) => ref
+                        .read(signupProvider.notifier)
+                        .updateField("username", value),
+                    decoration: InputDecoration(
+                      labelText: '아이디',
+                      errorText: signup.usernameErrMsg == ""
+                          ? null
+                          : signup.usernameErrMsg,
+                      helperText: signup.usernameCheckSuccessMessage == ""
+                          ? null
+                          : signup.usernameCheckSuccessMessage,
+                    ),
+                    validator: (value) {
+                      var validationResult = signup.validateUsername(value);
+                      return validationResult.isValid
+                          ? null
+                          : validationResult.message;
+                    },
+                  ),
+                ),
+                TextButton(
+                  onPressed: () async {
+                    await signupRead.checkUsernameDuplication();
+                  },
+                  child: Text("중복확인"),
+                ),
+              ],
             ),
             TextFormField(
               decoration: InputDecoration(
@@ -141,17 +154,35 @@ class InputForm extends ConsumerWidget {
                     : validationResult.message;
               },
             ),
-            TextFormField(
-              decoration: InputDecoration(
-                labelText: '닉네임',
-              ),
-              onChanged: (value) => signup.updateField('nickname', value),
-              validator: (value) {
-                var validationResult = signup.validateNickname(value);
-                return validationResult.isValid
-                    ? null
-                    : validationResult.message;
-              },
+            Row(
+              children: <Widget>[
+                Expanded(
+                  child: TextFormField(
+                    decoration: InputDecoration(
+                      labelText: '닉네임',
+                      errorText: signup.nicknameErrMsg == ""
+                          ? null
+                          : signup.nicknameErrMsg,
+                      helperText: signup.nicknameCheckSuccessMessage == ""
+                          ? null
+                          : signup.nicknameCheckSuccessMessage,
+                    ),
+                    onChanged: (value) => signup.updateField('nickname', value),
+                    validator: (value) {
+                      var validationResult = signup.validateNickname(value);
+                      return validationResult.isValid
+                          ? null
+                          : validationResult.message;
+                    },
+                  ),
+                ),
+                TextButton(
+                  onPressed: () async {
+                    await signupRead.checkNicknameDuplication();
+                  },
+                  child: Text("중복확인"),
+                ),
+              ],
             ),
             TextFormField(
               decoration: InputDecoration(

@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:together_delivery_app/screens/post_list_screen.dart';
 import 'package:together_delivery_app/screens/signup_screen.dart';
 import 'package:together_delivery_app/screens/test_screen.dart';
+import 'package:together_delivery_app/user/view/user_info_screen.dart';
 
 class MainScreen extends StatefulWidget {
   const MainScreen({super.key});
@@ -16,10 +17,7 @@ class _MainScreenState
   int _selectedIndex = 0;
   static const List<Widget> _widgetOptions = <Widget>[
     PostListScreen(),
-    Text(
-      'Index 1: Business',
-    ),
-    SignupScreen(),
+    UserInfoScreen(),
   ];
 
   void _onItemTapped(int index) {
@@ -41,10 +39,6 @@ class _MainScreenState
           BottomNavigationBarItem(
             icon: Icon(Icons.home),
             label: 'Home',
-          ),
-          BottomNavigationBarItem(
-            icon: Icon(Icons.business),
-            label: 'Business',
           ),
           BottomNavigationBarItem(
             icon: Icon(Icons.school),
@@ -77,7 +71,6 @@ class _MyAppBarState extends State<MyAppBar> {
 
   List<Text> appBarTitle = [
     Text("배달 게시물"),
-    Text("채팅방 목록"),
     Text("마이페이지"),
   ];
 
