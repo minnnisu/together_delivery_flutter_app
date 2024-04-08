@@ -19,6 +19,8 @@ class LoginNotifier extends StateNotifier<LoginForm> {
   String get errorMsg => state.errorMsg;
 
   void updateField(String type, String value) {
+    print("validateUsername 실행");
+    print("value: " + value);
     if (type == "username") {
       state = state.copyWith(username: value);
     }

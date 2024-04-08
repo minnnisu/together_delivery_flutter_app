@@ -3,6 +3,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:together_delivery_app/user/provider/loginNotifier.dart';
+import 'package:together_delivery_app/widgets/inputField.dart';
+import 'package:together_delivery_app/widgets/submitBtn.dart';
 
 class LoginScreen extends StatefulWidget {
   const LoginScreen({super.key});
@@ -22,7 +24,19 @@ class _LoginScreenState extends State<LoginScreen> {
               onPressed: () => Navigator.pop(context), icon: Icon(Icons.close))
         ],
       ),
-      body: LoginForm(),
+      body: SafeArea(
+        child: Container(
+          padding: EdgeInsets.all(16),
+          child: Column(
+            children: [
+              Logo(),
+              Expanded(
+                child: LoginForm(),
+              ),
+            ],
+          ),
+        ),
+      ),
     );
   }
 }
@@ -36,48 +50,46 @@ class LoginForm extends ConsumerWidget {
   Widget build(BuildContext context, WidgetRef ref) {
     var loginRead = ref.read(loginProvider.notifier);
     var loginForm = ref.watch(loginProvider);
-    return Padding(
-      padding: const EdgeInsets.all(16.0),
-      child: Form(
-        key: formKey,
-        child: ListView(
-          children: [
-            Column(
-              children: [
-                TextFormField(
-                  decoration: InputDecoration(
-                    labelText: '아이디',
-                  ),
-                  onChanged: (value) =>
-                      loginRead.updateField('username', value),
-                  validator: (value) {
-                    var validationResult = loginRead.validateUsername(value);
-                    return validationResult.isValid
-                        ? null
-                        : validationResult.message;
-                  },
-                ),
-                TextFormField(
-                  decoration: InputDecoration(
-                    labelText: '비밀번호',
-                  ),
-                  onChanged: (value) =>
-                      loginRead.updateField('password', value),
-                  obscureText: true,
-                  validator: (value) {
-                    var validationResult = loginRead.validatePassword(value);
-                    return validationResult.isValid
-                        ? null
-                        : validationResult.message;
-                  },
-                ),
-                Text(loginForm.errorMsg),
-              ],
-            ),
-            ElevatedButton(
-                onPressed: () => _submitForm(context, ref), child: Text("로그인")),
-          ],
-        ),
+    return Form(
+      key: formKey,
+      child: ListView(
+        children: [
+          Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              InputField(
+                fieldName: "아이디",
+                marginBottomSize: 20,
+                validate: (value) {
+                  var validationResult = loginRead.validateUsername(value);
+                  return validationResult.isValid
+                      ? null
+                      : validationResult.message;
+                },
+                onChange: (value) {
+                  loginRead.updateField('username', value);
+                },
+              ),
+              InputField(
+                fieldName: "비밀번호",
+                marginBottomSize: 20,
+                validate: (value) {
+                  var validationResult = loginRead.validatePassword(value);
+                  return validationResult.isValid
+                      ? null
+                      : validationResult.message;
+                },
+                onChange: (value) {
+                  loginRead.updateField('password', value);
+                },
+              ),
+              ErrorMsg(
+                errorMsg: loginForm.errorMsg,
+              ),
+            ],
+          ),
+          SubmitBtn(btnName: "로그인", onPressed: () => _submitForm(context, ref))
+        ],
       ),
     );
   }
@@ -104,12 +116,49 @@ class LoginForm extends ConsumerWidget {
   }
 }
 
-// class Logo extends StatelessWidget {
-//   const Logo({super.key});
-//
-//   @override
-//   Widget build(BuildContext context) {
-//     return const Placehol der();
-//   }
-// }
+class Logo extends StatelessWidget {
+  const Logo({super.key});
 
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      padding: const EdgeInsets.symmetric(
+        vertical: 30,
+      ),
+      child: const Column(
+        children: [
+          Text(
+            "한끼절약",
+            style: TextStyle(fontSize: 32, fontWeight: FontWeight.w700),
+          ),
+          Text(
+            "식사비용을 아끼기 위한 최고의 선택",
+            style: TextStyle(
+              fontWeight: FontWeight.w700,
+            ),
+          ),
+        ],
+      ),
+    );
+  }
+}
+
+class ErrorMsg extends StatelessWidget {
+  final String errorMsg;
+
+  const ErrorMsg({super.key, required this.errorMsg});
+
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      margin: EdgeInsets.only(bottom: 20),
+      child: Text(
+        errorMsg,
+        style: TextStyle(
+          fontWeight: FontWeight.w600,
+          color: Color(0xffde6161),
+        ),
+      ),
+    );
+  }
+}
