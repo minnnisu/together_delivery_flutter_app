@@ -46,7 +46,6 @@ class LoginForm extends ConsumerWidget {
                   ),
                   onChanged: (value) =>
                       loginRead.updateField('username', value),
-                  obscureText: true,
                   validator: (value) {
                     var validationResult = loginRead.validateUsername(value);
                     return validationResult.isValid
@@ -85,6 +84,9 @@ class LoginForm extends ConsumerWidget {
     final formKeyState = formKey.currentState!;
     if (formKeyState.validate()) {
       bool signupResult = await loginRead.login();
+
+      print(loginRead.username);
+      print(loginRead.password);
 
       if (signupResult) {
         ScaffoldMessenger.of(context).showSnackBar(
