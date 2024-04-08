@@ -1,9 +1,7 @@
 import 'package:dio/dio.dart';
-import 'package:together_delivery_app/exception/customException.dart';
 import 'package:together_delivery_app/helper/apiUrls.dart';
-import 'package:together_delivery_app/models/user.dart';
+import 'package:together_delivery_app/models/signupRequest.dart';
 
-import '../../constant/errorCode.dart';
 import '../dio/dioService.dart';
 
 class SignupService {
