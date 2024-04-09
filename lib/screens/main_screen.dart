@@ -6,17 +6,15 @@ class MainScreen extends StatefulWidget {
   const MainScreen({super.key});
 
   @override
-  State<MainScreen> createState() =>
-      _MainScreenState();
+  State<MainScreen> createState() => _MainScreenState();
 }
 
-List<Text> appBarTitle = [
-  Text("게시글"),
-  Text("내정보"),
+List<String> appBarTitle = [
+  "게시글",
+  "내정보",
 ];
 
-class _MainScreenState
-    extends State<MainScreen> {
+class _MainScreenState extends State<MainScreen> {
   int _selectedIndex = 0;
   static const List<Widget> _widgetOptions = <Widget>[
     PostListScreen(),
@@ -31,9 +29,16 @@ class _MainScreenState
 
   @override
   Widget build(BuildContext context) {
-
     return Scaffold(
-      appBar: AppBar(title: appBarTitle[_selectedIndex],),
+      appBar: AppBar(
+        title: Text(
+          appBarTitle[_selectedIndex],
+          style: TextStyle(
+            fontWeight: FontWeight.w600,
+          ),
+        ),
+        centerTitle: true,
+      ),
       body: Container(
         width: double.infinity,
         child: _widgetOptions.elementAt(_selectedIndex),
