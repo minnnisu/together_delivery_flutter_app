@@ -27,10 +27,24 @@ class _SignupScreenState extends State<SignupScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: Text('회원가입'),
+      appBar: AppBar(),
+      body: SingleChildScrollView(
+        child: Padding(
+          padding: const EdgeInsets.symmetric(horizontal: 16.0),
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Container(
+                  margin: EdgeInsets.only(bottom: 20),
+                  child: Text(
+                    "회원가입",
+                    style: TextStyle(fontSize: 22, fontWeight: FontWeight.w600),
+                  )),
+              InputForm()
+            ],
+          ),
+        ),
       ),
-      body: InputForm(),
     );
   }
 }
@@ -59,66 +73,63 @@ class InputForm extends ConsumerWidget {
 
     return PopScope(
       onPopInvoked: (didPop) => signupRead.popSignupScreen(),
-      child: SingleChildScrollView(
-        child: Padding(
-          padding: const EdgeInsets.all(16.0),
-          child: Form(
-            key: _formKey,
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                InputFieldCheck(
-                  marginBottomSize: 16,
-                  type: SignupFieldType.username,
-                  fieldName: "아이디",
-                  btnName: "중복확인",
-                ),
-                SignupInputField(
-                  marginBottomSize: 16,
-                  type: SignupFieldType.password,
-                  fieldName: '비밀번호',
-                  isObscureText: true,
-                ),
-                SignupInputField(
-                  marginBottomSize: 16,
-                  type: SignupFieldType.passwordCheck,
-                  fieldName: '비밀번호 확인',
-                  isObscureText: true,
-                ),
-                SignupInputField(
-                  marginBottomSize: 16,
-                  type: SignupFieldType.name,
-                  fieldName: '이름',
-                ),
-                InputFieldCheck(
-                  marginBottomSize: 16,
-                  type: SignupFieldType.nickname,
-                  fieldName: "닉네임",
-                  btnName: "중복확인",
-                ),
-                SignupInputField(
-                  marginBottomSize: 16,
-                  type: SignupFieldType.email,
-                  fieldName: '이메일',
-                ),
-                SignupInputField(
-                  marginBottomSize: 16,
-                  type: SignupFieldType.telephone,
-                  fieldName: '전화번호',
-                ),
-                SignupInputField(
-                  marginBottomSize: 16,
-                  type: SignupFieldType.college,
-                  fieldName: '대학교명',
-                ),
-                SubmitBtn(
-                  btnName: "회원가입",
-                  onPressed: () => submitForm(context, ref),
-                ),
-              ],
+      child: Form(
+        key: _formKey,
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            InputFieldCheck(
+              marginBottomSize: 16,
+              type: SignupFieldType.username,
+              fieldName: "아이디",
+              btnName: "중복확인",
             ),
-
-          ),
+            SignupInputField(
+              marginBottomSize: 16,
+              type: SignupFieldType.password,
+              fieldName: '비밀번호',
+              isObscureText: true,
+            ),
+            SignupInputField(
+              marginBottomSize: 16,
+              type: SignupFieldType.passwordCheck,
+              fieldName: '비밀번호 확인',
+              isObscureText: true,
+            ),
+            SignupInputField(
+              marginBottomSize: 16,
+              type: SignupFieldType.name,
+              fieldName: '이름',
+            ),
+            InputFieldCheck(
+              marginBottomSize: 16,
+              type: SignupFieldType.nickname,
+              fieldName: "닉네임",
+              btnName: "중복확인",
+            ),
+            SignupInputField(
+              marginBottomSize: 16,
+              type: SignupFieldType.email,
+              hintText: 'savemeal@naver.com',
+              fieldName: '이메일',
+            ),
+            SignupInputField(
+              marginBottomSize: 16,
+              type: SignupFieldType.telephone,
+              hintText: "010-1234-5678",
+              fieldName: '전화번호',
+            ),
+            SignupInputField(
+              marginBottomSize: 16,
+              type: SignupFieldType.college,
+              hintText: '절약대학교',
+              fieldName: '대학교명',
+            ),
+            SubmitBtn(
+              btnName: "회원가입",
+              onPressed: () => submitForm(context, ref),
+            ),
+          ],
         ),
       ),
     );
@@ -149,18 +160,18 @@ class InputFieldCheck extends ConsumerWidget {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
+          Text(
+            fieldName,
+            style: const TextStyle(
+              fontWeight: FontWeight.w600,
+            ),
+          ),
           TextFormField(
             decoration: InputDecoration(
-              labelText: fieldName,
-              labelStyle: const TextStyle(
-                fontSize: 12.0,
-                color: Color(0xff000000),
-                fontWeight: FontWeight.w600,
-              ),
               errorText: signupWatch.getErrorValue(type),
               helperText: signupWatch.getSuccessMsg(type),
               helperStyle: const TextStyle(
-                fontSize: 12.0,
+                fontSize: 14.0,
                 color: Color(0xff3f993b),
                 fontWeight: FontWeight.w600,
               ),
@@ -193,12 +204,14 @@ class SignupInputField extends ConsumerWidget {
   final double marginBottomSize;
   final bool isObscureText;
   final SignupFieldType type;
+  final String? hintText;
 
   const SignupInputField({
     super.key,
     required this.fieldName,
     this.isObscureText = false,
     this.marginBottomSize = 0,
+    this.hintText,
     required this.type,
   });
 
@@ -209,23 +222,18 @@ class SignupInputField extends ConsumerWidget {
 
     return Container(
       margin: EdgeInsets.only(bottom: marginBottomSize),
-      child: Stack(
-        // crossAxisAlignment: CrossAxisAlignment.start,
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          // Text(
-          //   fieldName,
-          //   style: const TextStyle(
-          //     fontWeight: FontWeight.w600,
-          //   ),
-          // ),
+          Text(
+            fieldName,
+            style: const TextStyle(
+              fontWeight: FontWeight.w600,
+            ),
+          ),
           TextFormField(
             decoration: InputDecoration(
-              labelText: fieldName,
-              labelStyle: const TextStyle(
-                fontSize: 12.0,
-                color: Color(0xff000000),
-                fontWeight: FontWeight.w600,
-              ),
+              hintText: hintText,
               errorText: errorText,
               enabledBorder: const UnderlineInputBorder(
                 borderSide: BorderSide(
