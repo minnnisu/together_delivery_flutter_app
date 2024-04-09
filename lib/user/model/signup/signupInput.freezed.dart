@@ -24,10 +24,18 @@ mixin _$SignupInput {
   String get email => throw _privateConstructorUsedError;
   String get telephone => throw _privateConstructorUsedError;
   String get college => throw _privateConstructorUsedError;
-  String? get usernameErrMsg => throw _privateConstructorUsedError;
   String? get usernameCheckSuccessMessage => throw _privateConstructorUsedError;
-  String? get nicknameErrMsg => throw _privateConstructorUsedError;
   String? get nicknameCheckSuccessMessage => throw _privateConstructorUsedError;
+  String? get usernameErrMsg => throw _privateConstructorUsedError;
+  String? get passwordErrMsg => throw _privateConstructorUsedError;
+  String? get passwordCheckErrMsg => throw _privateConstructorUsedError;
+  String? get nameErrMsg => throw _privateConstructorUsedError;
+  String? get nicknameErrMsg => throw _privateConstructorUsedError;
+  String? get emailErrMsg => throw _privateConstructorUsedError;
+  String? get telephoneErrMsg => throw _privateConstructorUsedError;
+  String? get collegeErrMsg => throw _privateConstructorUsedError;
+  SignupFieldType? get currentFocusedField =>
+      throw _privateConstructorUsedError;
 
   @JsonKey(ignore: true)
   $SignupInputCopyWith<SignupInput> get copyWith =>
@@ -49,10 +57,17 @@ abstract class $SignupInputCopyWith<$Res> {
       String email,
       String telephone,
       String college,
-      String? usernameErrMsg,
       String? usernameCheckSuccessMessage,
+      String? nicknameCheckSuccessMessage,
+      String? usernameErrMsg,
+      String? passwordErrMsg,
+      String? passwordCheckErrMsg,
+      String? nameErrMsg,
       String? nicknameErrMsg,
-      String? nicknameCheckSuccessMessage});
+      String? emailErrMsg,
+      String? telephoneErrMsg,
+      String? collegeErrMsg,
+      SignupFieldType? currentFocusedField});
 }
 
 /// @nodoc
@@ -76,10 +91,17 @@ class _$SignupInputCopyWithImpl<$Res, $Val extends SignupInput>
     Object? email = null,
     Object? telephone = null,
     Object? college = null,
-    Object? usernameErrMsg = freezed,
     Object? usernameCheckSuccessMessage = freezed,
-    Object? nicknameErrMsg = freezed,
     Object? nicknameCheckSuccessMessage = freezed,
+    Object? usernameErrMsg = freezed,
+    Object? passwordErrMsg = freezed,
+    Object? passwordCheckErrMsg = freezed,
+    Object? nameErrMsg = freezed,
+    Object? nicknameErrMsg = freezed,
+    Object? emailErrMsg = freezed,
+    Object? telephoneErrMsg = freezed,
+    Object? collegeErrMsg = freezed,
+    Object? currentFocusedField = freezed,
   }) {
     return _then(_value.copyWith(
       username: null == username
@@ -114,22 +136,50 @@ class _$SignupInputCopyWithImpl<$Res, $Val extends SignupInput>
           ? _value.college
           : college // ignore: cast_nullable_to_non_nullable
               as String,
-      usernameErrMsg: freezed == usernameErrMsg
-          ? _value.usernameErrMsg
-          : usernameErrMsg // ignore: cast_nullable_to_non_nullable
-              as String?,
       usernameCheckSuccessMessage: freezed == usernameCheckSuccessMessage
           ? _value.usernameCheckSuccessMessage
           : usernameCheckSuccessMessage // ignore: cast_nullable_to_non_nullable
-              as String?,
-      nicknameErrMsg: freezed == nicknameErrMsg
-          ? _value.nicknameErrMsg
-          : nicknameErrMsg // ignore: cast_nullable_to_non_nullable
               as String?,
       nicknameCheckSuccessMessage: freezed == nicknameCheckSuccessMessage
           ? _value.nicknameCheckSuccessMessage
           : nicknameCheckSuccessMessage // ignore: cast_nullable_to_non_nullable
               as String?,
+      usernameErrMsg: freezed == usernameErrMsg
+          ? _value.usernameErrMsg
+          : usernameErrMsg // ignore: cast_nullable_to_non_nullable
+              as String?,
+      passwordErrMsg: freezed == passwordErrMsg
+          ? _value.passwordErrMsg
+          : passwordErrMsg // ignore: cast_nullable_to_non_nullable
+              as String?,
+      passwordCheckErrMsg: freezed == passwordCheckErrMsg
+          ? _value.passwordCheckErrMsg
+          : passwordCheckErrMsg // ignore: cast_nullable_to_non_nullable
+              as String?,
+      nameErrMsg: freezed == nameErrMsg
+          ? _value.nameErrMsg
+          : nameErrMsg // ignore: cast_nullable_to_non_nullable
+              as String?,
+      nicknameErrMsg: freezed == nicknameErrMsg
+          ? _value.nicknameErrMsg
+          : nicknameErrMsg // ignore: cast_nullable_to_non_nullable
+              as String?,
+      emailErrMsg: freezed == emailErrMsg
+          ? _value.emailErrMsg
+          : emailErrMsg // ignore: cast_nullable_to_non_nullable
+              as String?,
+      telephoneErrMsg: freezed == telephoneErrMsg
+          ? _value.telephoneErrMsg
+          : telephoneErrMsg // ignore: cast_nullable_to_non_nullable
+              as String?,
+      collegeErrMsg: freezed == collegeErrMsg
+          ? _value.collegeErrMsg
+          : collegeErrMsg // ignore: cast_nullable_to_non_nullable
+              as String?,
+      currentFocusedField: freezed == currentFocusedField
+          ? _value.currentFocusedField
+          : currentFocusedField // ignore: cast_nullable_to_non_nullable
+              as SignupFieldType?,
     ) as $Val);
   }
 }
@@ -151,10 +201,17 @@ abstract class _$$SignupInputImplCopyWith<$Res>
       String email,
       String telephone,
       String college,
-      String? usernameErrMsg,
       String? usernameCheckSuccessMessage,
+      String? nicknameCheckSuccessMessage,
+      String? usernameErrMsg,
+      String? passwordErrMsg,
+      String? passwordCheckErrMsg,
+      String? nameErrMsg,
       String? nicknameErrMsg,
-      String? nicknameCheckSuccessMessage});
+      String? emailErrMsg,
+      String? telephoneErrMsg,
+      String? collegeErrMsg,
+      SignupFieldType? currentFocusedField});
 }
 
 /// @nodoc
@@ -176,10 +233,17 @@ class __$$SignupInputImplCopyWithImpl<$Res>
     Object? email = null,
     Object? telephone = null,
     Object? college = null,
-    Object? usernameErrMsg = freezed,
     Object? usernameCheckSuccessMessage = freezed,
-    Object? nicknameErrMsg = freezed,
     Object? nicknameCheckSuccessMessage = freezed,
+    Object? usernameErrMsg = freezed,
+    Object? passwordErrMsg = freezed,
+    Object? passwordCheckErrMsg = freezed,
+    Object? nameErrMsg = freezed,
+    Object? nicknameErrMsg = freezed,
+    Object? emailErrMsg = freezed,
+    Object? telephoneErrMsg = freezed,
+    Object? collegeErrMsg = freezed,
+    Object? currentFocusedField = freezed,
   }) {
     return _then(_$SignupInputImpl(
       username: null == username
@@ -214,22 +278,50 @@ class __$$SignupInputImplCopyWithImpl<$Res>
           ? _value.college
           : college // ignore: cast_nullable_to_non_nullable
               as String,
-      usernameErrMsg: freezed == usernameErrMsg
-          ? _value.usernameErrMsg
-          : usernameErrMsg // ignore: cast_nullable_to_non_nullable
-              as String?,
       usernameCheckSuccessMessage: freezed == usernameCheckSuccessMessage
           ? _value.usernameCheckSuccessMessage
           : usernameCheckSuccessMessage // ignore: cast_nullable_to_non_nullable
-              as String?,
-      nicknameErrMsg: freezed == nicknameErrMsg
-          ? _value.nicknameErrMsg
-          : nicknameErrMsg // ignore: cast_nullable_to_non_nullable
               as String?,
       nicknameCheckSuccessMessage: freezed == nicknameCheckSuccessMessage
           ? _value.nicknameCheckSuccessMessage
           : nicknameCheckSuccessMessage // ignore: cast_nullable_to_non_nullable
               as String?,
+      usernameErrMsg: freezed == usernameErrMsg
+          ? _value.usernameErrMsg
+          : usernameErrMsg // ignore: cast_nullable_to_non_nullable
+              as String?,
+      passwordErrMsg: freezed == passwordErrMsg
+          ? _value.passwordErrMsg
+          : passwordErrMsg // ignore: cast_nullable_to_non_nullable
+              as String?,
+      passwordCheckErrMsg: freezed == passwordCheckErrMsg
+          ? _value.passwordCheckErrMsg
+          : passwordCheckErrMsg // ignore: cast_nullable_to_non_nullable
+              as String?,
+      nameErrMsg: freezed == nameErrMsg
+          ? _value.nameErrMsg
+          : nameErrMsg // ignore: cast_nullable_to_non_nullable
+              as String?,
+      nicknameErrMsg: freezed == nicknameErrMsg
+          ? _value.nicknameErrMsg
+          : nicknameErrMsg // ignore: cast_nullable_to_non_nullable
+              as String?,
+      emailErrMsg: freezed == emailErrMsg
+          ? _value.emailErrMsg
+          : emailErrMsg // ignore: cast_nullable_to_non_nullable
+              as String?,
+      telephoneErrMsg: freezed == telephoneErrMsg
+          ? _value.telephoneErrMsg
+          : telephoneErrMsg // ignore: cast_nullable_to_non_nullable
+              as String?,
+      collegeErrMsg: freezed == collegeErrMsg
+          ? _value.collegeErrMsg
+          : collegeErrMsg // ignore: cast_nullable_to_non_nullable
+              as String?,
+      currentFocusedField: freezed == currentFocusedField
+          ? _value.currentFocusedField
+          : currentFocusedField // ignore: cast_nullable_to_non_nullable
+              as SignupFieldType?,
     ));
   }
 }
@@ -246,10 +338,17 @@ class _$SignupInputImpl with DiagnosticableTreeMixin implements _SignupInput {
       required this.email,
       required this.telephone,
       required this.college,
-      required this.usernameErrMsg,
       required this.usernameCheckSuccessMessage,
+      required this.nicknameCheckSuccessMessage,
+      required this.usernameErrMsg,
+      required this.passwordErrMsg,
+      required this.passwordCheckErrMsg,
+      required this.nameErrMsg,
       required this.nicknameErrMsg,
-      required this.nicknameCheckSuccessMessage});
+      required this.emailErrMsg,
+      required this.telephoneErrMsg,
+      required this.collegeErrMsg,
+      required this.currentFocusedField});
 
   @override
   final String username;
@@ -268,17 +367,31 @@ class _$SignupInputImpl with DiagnosticableTreeMixin implements _SignupInput {
   @override
   final String college;
   @override
+  final String? usernameCheckSuccessMessage;
+  @override
+  final String? nicknameCheckSuccessMessage;
+  @override
   final String? usernameErrMsg;
   @override
-  final String? usernameCheckSuccessMessage;
+  final String? passwordErrMsg;
+  @override
+  final String? passwordCheckErrMsg;
+  @override
+  final String? nameErrMsg;
   @override
   final String? nicknameErrMsg;
   @override
-  final String? nicknameCheckSuccessMessage;
+  final String? emailErrMsg;
+  @override
+  final String? telephoneErrMsg;
+  @override
+  final String? collegeErrMsg;
+  @override
+  final SignupFieldType? currentFocusedField;
 
   @override
   String toString({DiagnosticLevel minLevel = DiagnosticLevel.info}) {
-    return 'SignupInput(username: $username, password: $password, passwordCheck: $passwordCheck, name: $name, nickname: $nickname, email: $email, telephone: $telephone, college: $college, usernameErrMsg: $usernameErrMsg, usernameCheckSuccessMessage: $usernameCheckSuccessMessage, nicknameErrMsg: $nicknameErrMsg, nicknameCheckSuccessMessage: $nicknameCheckSuccessMessage)';
+    return 'SignupInput(username: $username, password: $password, passwordCheck: $passwordCheck, name: $name, nickname: $nickname, email: $email, telephone: $telephone, college: $college, usernameCheckSuccessMessage: $usernameCheckSuccessMessage, nicknameCheckSuccessMessage: $nicknameCheckSuccessMessage, usernameErrMsg: $usernameErrMsg, passwordErrMsg: $passwordErrMsg, passwordCheckErrMsg: $passwordCheckErrMsg, nameErrMsg: $nameErrMsg, nicknameErrMsg: $nicknameErrMsg, emailErrMsg: $emailErrMsg, telephoneErrMsg: $telephoneErrMsg, collegeErrMsg: $collegeErrMsg, currentFocusedField: $currentFocusedField)';
   }
 
   @override
@@ -294,12 +407,19 @@ class _$SignupInputImpl with DiagnosticableTreeMixin implements _SignupInput {
       ..add(DiagnosticsProperty('email', email))
       ..add(DiagnosticsProperty('telephone', telephone))
       ..add(DiagnosticsProperty('college', college))
-      ..add(DiagnosticsProperty('usernameErrMsg', usernameErrMsg))
       ..add(DiagnosticsProperty(
           'usernameCheckSuccessMessage', usernameCheckSuccessMessage))
-      ..add(DiagnosticsProperty('nicknameErrMsg', nicknameErrMsg))
       ..add(DiagnosticsProperty(
-          'nicknameCheckSuccessMessage', nicknameCheckSuccessMessage));
+          'nicknameCheckSuccessMessage', nicknameCheckSuccessMessage))
+      ..add(DiagnosticsProperty('usernameErrMsg', usernameErrMsg))
+      ..add(DiagnosticsProperty('passwordErrMsg', passwordErrMsg))
+      ..add(DiagnosticsProperty('passwordCheckErrMsg', passwordCheckErrMsg))
+      ..add(DiagnosticsProperty('nameErrMsg', nameErrMsg))
+      ..add(DiagnosticsProperty('nicknameErrMsg', nicknameErrMsg))
+      ..add(DiagnosticsProperty('emailErrMsg', emailErrMsg))
+      ..add(DiagnosticsProperty('telephoneErrMsg', telephoneErrMsg))
+      ..add(DiagnosticsProperty('collegeErrMsg', collegeErrMsg))
+      ..add(DiagnosticsProperty('currentFocusedField', currentFocusedField));
   }
 
   @override
@@ -320,35 +440,57 @@ class _$SignupInputImpl with DiagnosticableTreeMixin implements _SignupInput {
             (identical(other.telephone, telephone) ||
                 other.telephone == telephone) &&
             (identical(other.college, college) || other.college == college) &&
-            (identical(other.usernameErrMsg, usernameErrMsg) ||
-                other.usernameErrMsg == usernameErrMsg) &&
             (identical(other.usernameCheckSuccessMessage,
                     usernameCheckSuccessMessage) ||
                 other.usernameCheckSuccessMessage ==
                     usernameCheckSuccessMessage) &&
-            (identical(other.nicknameErrMsg, nicknameErrMsg) ||
-                other.nicknameErrMsg == nicknameErrMsg) &&
             (identical(other.nicknameCheckSuccessMessage,
                     nicknameCheckSuccessMessage) ||
                 other.nicknameCheckSuccessMessage ==
-                    nicknameCheckSuccessMessage));
+                    nicknameCheckSuccessMessage) &&
+            (identical(other.usernameErrMsg, usernameErrMsg) ||
+                other.usernameErrMsg == usernameErrMsg) &&
+            (identical(other.passwordErrMsg, passwordErrMsg) ||
+                other.passwordErrMsg == passwordErrMsg) &&
+            (identical(other.passwordCheckErrMsg, passwordCheckErrMsg) ||
+                other.passwordCheckErrMsg == passwordCheckErrMsg) &&
+            (identical(other.nameErrMsg, nameErrMsg) ||
+                other.nameErrMsg == nameErrMsg) &&
+            (identical(other.nicknameErrMsg, nicknameErrMsg) ||
+                other.nicknameErrMsg == nicknameErrMsg) &&
+            (identical(other.emailErrMsg, emailErrMsg) ||
+                other.emailErrMsg == emailErrMsg) &&
+            (identical(other.telephoneErrMsg, telephoneErrMsg) ||
+                other.telephoneErrMsg == telephoneErrMsg) &&
+            (identical(other.collegeErrMsg, collegeErrMsg) ||
+                other.collegeErrMsg == collegeErrMsg) &&
+            (identical(other.currentFocusedField, currentFocusedField) ||
+                other.currentFocusedField == currentFocusedField));
   }
 
   @override
-  int get hashCode => Object.hash(
-      runtimeType,
-      username,
-      password,
-      passwordCheck,
-      name,
-      nickname,
-      email,
-      telephone,
-      college,
-      usernameErrMsg,
-      usernameCheckSuccessMessage,
-      nicknameErrMsg,
-      nicknameCheckSuccessMessage);
+  int get hashCode => Object.hashAll([
+        runtimeType,
+        username,
+        password,
+        passwordCheck,
+        name,
+        nickname,
+        email,
+        telephone,
+        college,
+        usernameCheckSuccessMessage,
+        nicknameCheckSuccessMessage,
+        usernameErrMsg,
+        passwordErrMsg,
+        passwordCheckErrMsg,
+        nameErrMsg,
+        nicknameErrMsg,
+        emailErrMsg,
+        telephoneErrMsg,
+        collegeErrMsg,
+        currentFocusedField
+      ]);
 
   @JsonKey(ignore: true)
   @override
@@ -367,10 +509,17 @@ abstract class _SignupInput implements SignupInput {
       required final String email,
       required final String telephone,
       required final String college,
-      required final String? usernameErrMsg,
       required final String? usernameCheckSuccessMessage,
+      required final String? nicknameCheckSuccessMessage,
+      required final String? usernameErrMsg,
+      required final String? passwordErrMsg,
+      required final String? passwordCheckErrMsg,
+      required final String? nameErrMsg,
       required final String? nicknameErrMsg,
-      required final String? nicknameCheckSuccessMessage}) = _$SignupInputImpl;
+      required final String? emailErrMsg,
+      required final String? telephoneErrMsg,
+      required final String? collegeErrMsg,
+      required final SignupFieldType? currentFocusedField}) = _$SignupInputImpl;
 
   @override
   String get username;
@@ -389,13 +538,27 @@ abstract class _SignupInput implements SignupInput {
   @override
   String get college;
   @override
+  String? get usernameCheckSuccessMessage;
+  @override
+  String? get nicknameCheckSuccessMessage;
+  @override
   String? get usernameErrMsg;
   @override
-  String? get usernameCheckSuccessMessage;
+  String? get passwordErrMsg;
+  @override
+  String? get passwordCheckErrMsg;
+  @override
+  String? get nameErrMsg;
   @override
   String? get nicknameErrMsg;
   @override
-  String? get nicknameCheckSuccessMessage;
+  String? get emailErrMsg;
+  @override
+  String? get telephoneErrMsg;
+  @override
+  String? get collegeErrMsg;
+  @override
+  SignupFieldType? get currentFocusedField;
   @override
   @JsonKey(ignore: true)
   _$$SignupInputImplCopyWith<_$SignupInputImpl> get copyWith =>
