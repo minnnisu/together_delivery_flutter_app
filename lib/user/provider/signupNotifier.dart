@@ -200,17 +200,18 @@ class SignupNotifier extends StateNotifier<SignupInput> {
 
   Future<void> checkNicknameDuplication() async {
     try {
-      signupRepository.checkNicknameDuplication(state.nickname);
+      await signupRepository.checkNicknameDuplication(state.nickname);
       state = state.copyWith(nicknameErrMsg: "");
       state = state.copyWith(nicknameCheckSuccessMessage: "사용가능한 닉네임입니다.");
     } on DioException catch (e) {
       if (e.response?.data["errorCode"] == "DuplicatedNicknameError") {
         state = state.copyWith(nicknameErrMsg: "중복된 닉네임입니다.");
         state = state.copyWith(nicknameCheckSuccessMessage: "");
+        return;
       }
 
-      state = state.copyWith(usernameErrMsg: "중복 확인 과정에서 오류가 발생하였습니다.");
-      state = state.copyWith(usernameCheckSuccessMessage: "");
+      state = state.copyWith(nicknameErrMsg: "중복 확인 과정에서 오류가 발생하였습니다.");
+      state = state.copyWith(nicknameCheckSuccessMessage: "");
       return;
     }
   }
