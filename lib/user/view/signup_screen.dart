@@ -1,16 +1,9 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:together_delivery_app/constant/HttpFailure.dart';
-import 'package:together_delivery_app/models/signupInput.dart';
+import 'package:together_delivery_app/user/model/signup/signupInput.dart';
 
-import '../providers/signupProvider.dart';
-
-// final signupProvider = StateNotifierProvider((ref) => SignupNotifier());
-final signupProvider =
-    StateNotifierProvider<SignupNotifier, SignupInput>((ref) {
-  return SignupNotifier();
-});
+import '../provider/signupNotifier.dart';
 
 class SignupScreen extends StatefulWidget {
   const SignupScreen({super.key});

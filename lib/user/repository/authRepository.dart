@@ -1,17 +1,15 @@
 import 'package:dio/dio.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_secure_storage/flutter_secure_storage.dart' as fss;
 import 'package:together_delivery_app/constant/errorCode.dart';
 import 'package:together_delivery_app/exception/customException.dart';
 import 'package:together_delivery_app/helper/apiUrls.dart';
-import 'package:together_delivery_app/user/model/loginRequest.dart';
 
 import '../../constant/const.dart';
-import '../../providers/dioProvider.dart';
 import '../../secureStore/secureStore.dart';
-import '../model/loginResponse.dart';
-import '../model/tokenResponse.dart';
+import '../model/login/loginRequest.dart';
+import '../model/login/loginResponse.dart';
+import '../model/token/tokenResponse.dart';
 
 final authRepositoryProvider = Provider<AuthRepository>((ref) {
   final dio = Dio(); // onError의 재귀적 호출을 막기위해 dioProvier 대신 새로운 인스턴스을 의존성으로 주입

@@ -7,7 +7,7 @@ import 'package:flutter_secure_storage/flutter_secure_storage.dart'
 import 'package:together_delivery_app/constant/errorCode.dart';
 import 'package:together_delivery_app/exception/customException.dart';
 import 'package:together_delivery_app/helper/apiUrls.dart';
-import 'package:together_delivery_app/user/model/tokenResponse.dart';
+import 'package:together_delivery_app/user/model/token/tokenResponse.dart';
 
 import '../constant/const.dart';
 import '../secureStore/secureStore.dart';

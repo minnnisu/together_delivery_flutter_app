@@ -1,7 +1,6 @@
 import 'package:dio/dio.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:together_delivery_app/user/model/loginForm.dart';
-import 'package:together_delivery_app/user/model/loginRequest.dart';
+import 'package:together_delivery_app/user/model/login/loginForm.dart';
 import 'package:together_delivery_app/user/provider/authNotifier.dart';
 
 typedef ValidationResult = ({bool isValid, String? message});

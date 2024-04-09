@@ -5,7 +5,7 @@ import 'package:together_delivery_app/helper/apiUrls.dart';
 import 'package:together_delivery_app/user/provider/authNotifier.dart';
 
 import '../../providers/dioProvider.dart';
-import '../model/userModel.dart';
+import '../model/user/userModel.dart';
 
 final userMeRepositoryProvider = Provider<UserMeRepository>((ref) {
   final dio = ref.watch(dioProvider);

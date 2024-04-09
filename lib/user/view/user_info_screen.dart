@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:together_delivery_app/constant/const.dart';
 import 'package:together_delivery_app/secureStore/secureStore.dart';
-import 'package:together_delivery_app/user/model/userModel.dart';
+import 'package:together_delivery_app/user/model/user/userModel.dart';
 import 'package:together_delivery_app/user/provider/authNotifier.dart';
 import 'package:together_delivery_app/user/repository/userMeRepository.dart';
 
