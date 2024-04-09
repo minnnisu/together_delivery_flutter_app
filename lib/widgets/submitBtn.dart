@@ -8,23 +8,26 @@ class SubmitBtn extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return ElevatedButton(
-      style: ButtonStyle(
-          backgroundColor: MaterialStateProperty.all(const Color(0xffA091DE)),
-          padding: MaterialStateProperty.all(
-            const EdgeInsets.symmetric(vertical: 16),
+    return Container(
+      width: double.infinity,
+      child: ElevatedButton(
+        style: ButtonStyle(
+            backgroundColor: MaterialStateProperty.all(const Color(0xffA091DE)),
+            padding: MaterialStateProperty.all(
+              const EdgeInsets.symmetric(vertical: 16),
+            ),
+            shadowColor: MaterialStateProperty.all(const Color(0xffffffff)),
+            shape: MaterialStateProperty.all(
+              RoundedRectangleBorder(borderRadius: BorderRadius.circular(10)),
+            )),
+        onPressed: onPressed,
+        child: Text(
+          btnName,
+          style: const TextStyle(
+            color: Color(0xffffffff),
+            fontSize: 20,
+            fontWeight: FontWeight.w600,
           ),
-          shadowColor: MaterialStateProperty.all(const Color(0xffffffff)),
-          shape: MaterialStateProperty.all(
-            RoundedRectangleBorder(borderRadius: BorderRadius.circular(10)),
-          )),
-      onPressed: onPressed,
-      child: Text(
-        btnName,
-        style: const TextStyle(
-          color: Color(0xffffffff),
-          fontSize: 20,
-          fontWeight: FontWeight.w600,
         ),
       ),
     );

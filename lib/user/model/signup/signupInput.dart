@@ -3,6 +3,8 @@ import 'package:flutter/foundation.dart';
 import 'package:together_delivery_app/user/const/signupFieldType.dart';
 
 part 'signupInput.freezed.dart';
+part 'signupInput.g.dart';
+
 
 @freezed
 class SignupInput with _$SignupInput{
@@ -30,4 +32,6 @@ class SignupInput with _$SignupInput{
 
     required SignupFieldType? currentFocusedField,
   }) = _SignupInput;
+
+  factory SignupInput.fromJson(Map<String, Object?> json) => _$SignupInputFromJson(json);
 }

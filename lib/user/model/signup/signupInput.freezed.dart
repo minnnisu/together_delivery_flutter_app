@@ -14,6 +14,10 @@ T _$identity<T>(T value) => value;
 final _privateConstructorUsedError = UnsupportedError(
     'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#adding-getters-and-methods-to-our-models');
 
+SignupInput _$SignupInputFromJson(Map<String, dynamic> json) {
+  return _SignupInput.fromJson(json);
+}
+
 /// @nodoc
 mixin _$SignupInput {
   String get username => throw _privateConstructorUsedError;
@@ -37,6 +41,7 @@ mixin _$SignupInput {
   SignupFieldType? get currentFocusedField =>
       throw _privateConstructorUsedError;
 
+  Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
   $SignupInputCopyWith<SignupInput> get copyWith =>
       throw _privateConstructorUsedError;
@@ -327,7 +332,7 @@ class __$$SignupInputImplCopyWithImpl<$Res>
 }
 
 /// @nodoc
-
+@JsonSerializable()
 class _$SignupInputImpl with DiagnosticableTreeMixin implements _SignupInput {
   const _$SignupInputImpl(
       {required this.username,
@@ -349,6 +354,9 @@ class _$SignupInputImpl with DiagnosticableTreeMixin implements _SignupInput {
       required this.telephoneErrMsg,
       required this.collegeErrMsg,
       required this.currentFocusedField});
+
+  factory _$SignupInputImpl.fromJson(Map<String, dynamic> json) =>
+      _$$SignupInputImplFromJson(json);
 
   @override
   final String username;
@@ -468,6 +476,7 @@ class _$SignupInputImpl with DiagnosticableTreeMixin implements _SignupInput {
                 other.currentFocusedField == currentFocusedField));
   }
 
+  @JsonKey(ignore: true)
   @override
   int get hashCode => Object.hashAll([
         runtimeType,
@@ -497,6 +506,13 @@ class _$SignupInputImpl with DiagnosticableTreeMixin implements _SignupInput {
   @pragma('vm:prefer-inline')
   _$$SignupInputImplCopyWith<_$SignupInputImpl> get copyWith =>
       __$$SignupInputImplCopyWithImpl<_$SignupInputImpl>(this, _$identity);
+
+  @override
+  Map<String, dynamic> toJson() {
+    return _$$SignupInputImplToJson(
+      this,
+    );
+  }
 }
 
 abstract class _SignupInput implements SignupInput {
@@ -520,6 +536,9 @@ abstract class _SignupInput implements SignupInput {
       required final String? telephoneErrMsg,
       required final String? collegeErrMsg,
       required final SignupFieldType? currentFocusedField}) = _$SignupInputImpl;
+
+  factory _SignupInput.fromJson(Map<String, dynamic> json) =
+      _$SignupInputImpl.fromJson;
 
   @override
   String get username;
