@@ -1,22 +1,25 @@
 import 'package:dio/dio.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:injectable/injectable.dart';
-import 'package:together_delivery_app/helper/apiUrls.dart';
-import 'package:together_delivery_app/models/usernameDuplicationCheck.dart';
-import '../constant/HttpFailure.dart';
-import '../helper/dio/dioService.dart';
-import '../models/nicknameDuplicationCheck.dart';
-import '../models/signupInput.dart';
-import '../models/signupRequest.dart';
+import 'package:together_delivery_app/user/repository/signupRepository.dart';
+import '../../constant/HttpFailure.dart';
+import '../model/signup/signupInput.dart';
+import '../model/signup/signupRequest.dart';
 
 typedef HttpResult = ({bool isSuccess, HttpFailure? message});
 typedef ValidationResult = ({bool isValid, String? message});
 
-@Injectable()
-class SignupNotifier extends StateNotifier<SignupInput> {
-  String get username => state.username;
+final signupProvider = StateNotifierProvider<SignupNotifier, SignupInput>(
+  (ref) {
+    final SignupRepository signupRepository =
+        ref.watch(signupRepositoryProvider);
+    return SignupNotifier(signupRepository);
+  },
+);
 
-  SignupNotifier()
+class SignupNotifier extends StateNotifier<SignupInput> {
+  final SignupRepository signupRepository;
+
+  SignupNotifier(this.signupRepository)
       : super(SignupInput(
           username: "",
           password: "",
@@ -31,6 +34,8 @@ class SignupNotifier extends StateNotifier<SignupInput> {
           usernameCheckSuccessMessage: "",
           nicknameCheckSuccessMessage: "",
         ));
+
+  String get username => state.username;
 
   String get password => state.password;
 
@@ -176,57 +181,42 @@ class SignupNotifier extends StateNotifier<SignupInput> {
   }
 
   Future<void> checkUsernameDuplication() async {
-    Dio dio = DioService().to();
-    UsernameDuplicationCheck usernameDuplicationCheck =
-        UsernameDuplicationCheck(username: state.username);
-
     try {
-      Response response = await dio.post(
-        apiUrls.usernameDuplicationCheck,
-        data: usernameDuplicationCheck.toJson(),
-      );
-
+      await signupRepository.checkUsernameDuplication(state.username);
       state = state.copyWith(usernameErrMsg: "");
       state = state.copyWith(usernameCheckSuccessMessage: "사용가능한 아이디입니다.");
     } on DioException catch (e) {
-      final response = e.response;
-      if (response != null) {
-        if (response.data["errorCode"] == "DuplicatedUsernameError") {
-          state = state.copyWith(usernameErrMsg: "중복된 아이디입니다.");
-          state = state.copyWith(usernameCheckSuccessMessage: "");
-        }
+      if (e.response?.data["errorCode"] == "DuplicatedUsernameError") {
+        state = state.copyWith(usernameErrMsg: "중복된 아이디입니다.");
+        state = state.copyWith(usernameCheckSuccessMessage: "");
+        return;
       }
+
+      state = state.copyWith(usernameErrMsg: "중복 확인 과정에서 오류가 발생하였습니다.");
+      state = state.copyWith(usernameCheckSuccessMessage: "");
+      return;
     }
   }
 
   Future<void> checkNicknameDuplication() async {
-    Dio dio = DioService().to();
-    NicknameDuplicationCheck nicknameDuplicationCheck =
-    NicknameDuplicationCheck(nickname: state.nickname);
-
     try {
-      Response response = await dio.post(
-        apiUrls.nicknameDuplicationCheck,
-        data: nicknameDuplicationCheck.toJson(),
-      );
-
+      signupRepository.checkNicknameDuplication(state.nickname);
       state = state.copyWith(nicknameErrMsg: "");
       state = state.copyWith(nicknameCheckSuccessMessage: "사용가능한 닉네임입니다.");
     } on DioException catch (e) {
-      final response = e.response;
-      if (response != null) {
-        if (response.data["errorCode"] == "DuplicatedNicknameError") {
-          state = state.copyWith(nicknameErrMsg: "중복된 닉네임입니다.");
-          state = state.copyWith(nicknameCheckSuccessMessage: "");
-        }
+      if (e.response?.data["errorCode"] == "DuplicatedNicknameError") {
+        state = state.copyWith(nicknameErrMsg: "중복된 닉네임입니다.");
+        state = state.copyWith(nicknameCheckSuccessMessage: "");
       }
+
+      state = state.copyWith(usernameErrMsg: "중복 확인 과정에서 오류가 발생하였습니다.");
+      state = state.copyWith(usernameCheckSuccessMessage: "");
+      return;
     }
   }
 
   Future<bool> registerUser() async {
-    Dio dio = DioService().to();
-
-    SignupRequest user = SignupRequest(
+    SignupRequest newUser = SignupRequest(
       username: username,
       password: password,
       passwordCheck: passwordCheck,
@@ -238,24 +228,17 @@ class SignupNotifier extends StateNotifier<SignupInput> {
     );
 
     try {
-      Response response = await dio.post(
-        apiUrls.userRegister,
-        data: user.toJson(),
-      );
-
+      signupRepository.registerUser(newUser);
       return true;
     } on DioException catch (e) {
-      final response = e.response;
-      if (response != null) {
-        if (response.data["errorCode"] == "DuplicatedUsernameError") {
-          state = state.copyWith(usernameErrMsg: "중복된 아이디입니다.");
-          state = state.copyWith(usernameCheckSuccessMessage: "");
-        }
+      if (e.response?.data["errorCode"] == "DuplicatedUsernameError") {
+        state = state.copyWith(usernameErrMsg: "중복된 아이디입니다.");
+        state = state.copyWith(usernameCheckSuccessMessage: "");
+      }
 
-        if (response.data["errorCode"] == "DuplicatedNicknameError") {
-          state = state.copyWith(nicknameErrMsg: "중복된 닉네임입니다.");
-          state = state.copyWith(nicknameCheckSuccessMessage: "");
-        }
+      if (e.response?.data["errorCode"] == "DuplicatedNicknameError") {
+        state = state.copyWith(nicknameErrMsg: "중복된 닉네임입니다.");
+        state = state.copyWith(nicknameCheckSuccessMessage: "");
       }
 
       return false;
