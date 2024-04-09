@@ -24,10 +24,10 @@ mixin _$SignupInput {
   String get email => throw _privateConstructorUsedError;
   String get telephone => throw _privateConstructorUsedError;
   String get college => throw _privateConstructorUsedError;
-  String get usernameErrMsg => throw _privateConstructorUsedError;
-  String get usernameCheckSuccessMessage => throw _privateConstructorUsedError;
-  String get nicknameErrMsg => throw _privateConstructorUsedError;
-  String get nicknameCheckSuccessMessage => throw _privateConstructorUsedError;
+  String? get usernameErrMsg => throw _privateConstructorUsedError;
+  String? get usernameCheckSuccessMessage => throw _privateConstructorUsedError;
+  String? get nicknameErrMsg => throw _privateConstructorUsedError;
+  String? get nicknameCheckSuccessMessage => throw _privateConstructorUsedError;
 
   @JsonKey(ignore: true)
   $SignupInputCopyWith<SignupInput> get copyWith =>
@@ -49,10 +49,10 @@ abstract class $SignupInputCopyWith<$Res> {
       String email,
       String telephone,
       String college,
-      String usernameErrMsg,
-      String usernameCheckSuccessMessage,
-      String nicknameErrMsg,
-      String nicknameCheckSuccessMessage});
+      String? usernameErrMsg,
+      String? usernameCheckSuccessMessage,
+      String? nicknameErrMsg,
+      String? nicknameCheckSuccessMessage});
 }
 
 /// @nodoc
@@ -76,10 +76,10 @@ class _$SignupInputCopyWithImpl<$Res, $Val extends SignupInput>
     Object? email = null,
     Object? telephone = null,
     Object? college = null,
-    Object? usernameErrMsg = null,
-    Object? usernameCheckSuccessMessage = null,
-    Object? nicknameErrMsg = null,
-    Object? nicknameCheckSuccessMessage = null,
+    Object? usernameErrMsg = freezed,
+    Object? usernameCheckSuccessMessage = freezed,
+    Object? nicknameErrMsg = freezed,
+    Object? nicknameCheckSuccessMessage = freezed,
   }) {
     return _then(_value.copyWith(
       username: null == username
@@ -114,22 +114,22 @@ class _$SignupInputCopyWithImpl<$Res, $Val extends SignupInput>
           ? _value.college
           : college // ignore: cast_nullable_to_non_nullable
               as String,
-      usernameErrMsg: null == usernameErrMsg
+      usernameErrMsg: freezed == usernameErrMsg
           ? _value.usernameErrMsg
           : usernameErrMsg // ignore: cast_nullable_to_non_nullable
-              as String,
-      usernameCheckSuccessMessage: null == usernameCheckSuccessMessage
+              as String?,
+      usernameCheckSuccessMessage: freezed == usernameCheckSuccessMessage
           ? _value.usernameCheckSuccessMessage
           : usernameCheckSuccessMessage // ignore: cast_nullable_to_non_nullable
-              as String,
-      nicknameErrMsg: null == nicknameErrMsg
+              as String?,
+      nicknameErrMsg: freezed == nicknameErrMsg
           ? _value.nicknameErrMsg
           : nicknameErrMsg // ignore: cast_nullable_to_non_nullable
-              as String,
-      nicknameCheckSuccessMessage: null == nicknameCheckSuccessMessage
+              as String?,
+      nicknameCheckSuccessMessage: freezed == nicknameCheckSuccessMessage
           ? _value.nicknameCheckSuccessMessage
           : nicknameCheckSuccessMessage // ignore: cast_nullable_to_non_nullable
-              as String,
+              as String?,
     ) as $Val);
   }
 }
@@ -151,10 +151,10 @@ abstract class _$$SignupInputImplCopyWith<$Res>
       String email,
       String telephone,
       String college,
-      String usernameErrMsg,
-      String usernameCheckSuccessMessage,
-      String nicknameErrMsg,
-      String nicknameCheckSuccessMessage});
+      String? usernameErrMsg,
+      String? usernameCheckSuccessMessage,
+      String? nicknameErrMsg,
+      String? nicknameCheckSuccessMessage});
 }
 
 /// @nodoc
@@ -176,10 +176,10 @@ class __$$SignupInputImplCopyWithImpl<$Res>
     Object? email = null,
     Object? telephone = null,
     Object? college = null,
-    Object? usernameErrMsg = null,
-    Object? usernameCheckSuccessMessage = null,
-    Object? nicknameErrMsg = null,
-    Object? nicknameCheckSuccessMessage = null,
+    Object? usernameErrMsg = freezed,
+    Object? usernameCheckSuccessMessage = freezed,
+    Object? nicknameErrMsg = freezed,
+    Object? nicknameCheckSuccessMessage = freezed,
   }) {
     return _then(_$SignupInputImpl(
       username: null == username
@@ -214,22 +214,22 @@ class __$$SignupInputImplCopyWithImpl<$Res>
           ? _value.college
           : college // ignore: cast_nullable_to_non_nullable
               as String,
-      usernameErrMsg: null == usernameErrMsg
+      usernameErrMsg: freezed == usernameErrMsg
           ? _value.usernameErrMsg
           : usernameErrMsg // ignore: cast_nullable_to_non_nullable
-              as String,
-      usernameCheckSuccessMessage: null == usernameCheckSuccessMessage
+              as String?,
+      usernameCheckSuccessMessage: freezed == usernameCheckSuccessMessage
           ? _value.usernameCheckSuccessMessage
           : usernameCheckSuccessMessage // ignore: cast_nullable_to_non_nullable
-              as String,
-      nicknameErrMsg: null == nicknameErrMsg
+              as String?,
+      nicknameErrMsg: freezed == nicknameErrMsg
           ? _value.nicknameErrMsg
           : nicknameErrMsg // ignore: cast_nullable_to_non_nullable
-              as String,
-      nicknameCheckSuccessMessage: null == nicknameCheckSuccessMessage
+              as String?,
+      nicknameCheckSuccessMessage: freezed == nicknameCheckSuccessMessage
           ? _value.nicknameCheckSuccessMessage
           : nicknameCheckSuccessMessage // ignore: cast_nullable_to_non_nullable
-              as String,
+              as String?,
     ));
   }
 }
@@ -268,13 +268,13 @@ class _$SignupInputImpl with DiagnosticableTreeMixin implements _SignupInput {
   @override
   final String college;
   @override
-  final String usernameErrMsg;
+  final String? usernameErrMsg;
   @override
-  final String usernameCheckSuccessMessage;
+  final String? usernameCheckSuccessMessage;
   @override
-  final String nicknameErrMsg;
+  final String? nicknameErrMsg;
   @override
-  final String nicknameCheckSuccessMessage;
+  final String? nicknameCheckSuccessMessage;
 
   @override
   String toString({DiagnosticLevel minLevel = DiagnosticLevel.info}) {
@@ -367,10 +367,10 @@ abstract class _SignupInput implements SignupInput {
       required final String email,
       required final String telephone,
       required final String college,
-      required final String usernameErrMsg,
-      required final String usernameCheckSuccessMessage,
-      required final String nicknameErrMsg,
-      required final String nicknameCheckSuccessMessage}) = _$SignupInputImpl;
+      required final String? usernameErrMsg,
+      required final String? usernameCheckSuccessMessage,
+      required final String? nicknameErrMsg,
+      required final String? nicknameCheckSuccessMessage}) = _$SignupInputImpl;
 
   @override
   String get username;
@@ -389,13 +389,13 @@ abstract class _SignupInput implements SignupInput {
   @override
   String get college;
   @override
-  String get usernameErrMsg;
+  String? get usernameErrMsg;
   @override
-  String get usernameCheckSuccessMessage;
+  String? get usernameCheckSuccessMessage;
   @override
-  String get nicknameErrMsg;
+  String? get nicknameErrMsg;
   @override
-  String get nicknameCheckSuccessMessage;
+  String? get nicknameCheckSuccessMessage;
   @override
   @JsonKey(ignore: true)
   _$$SignupInputImplCopyWith<_$SignupInputImpl> get copyWith =>

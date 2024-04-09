@@ -51,13 +51,13 @@ class SignupNotifier extends StateNotifier<SignupInput> {
 
   String get college => state.college;
 
-  String get usernameErrMsg => state.usernameErrMsg;
+  String? get usernameErrMsg => state.usernameErrMsg;
 
-  String get usernameCheckSuccessMessage => state.usernameCheckSuccessMessage;
+  String? get usernameCheckSuccessMessage => state.usernameCheckSuccessMessage;
 
-  String get nicknameErrMsg => state.nicknameErrMsg;
+  String? get nicknameErrMsg => state.nicknameErrMsg;
 
-  String get nicknameCheckSuccessMessage => state.nicknameCheckSuccessMessage;
+  String? get nicknameCheckSuccessMessage => state.nicknameCheckSuccessMessage;
 
   void updateField(String type, String value) {
     if (type == "username") {
@@ -181,37 +181,50 @@ class SignupNotifier extends StateNotifier<SignupInput> {
   }
 
   Future<void> checkUsernameDuplication() async {
+    print("username: " + username);
     try {
+      if(!validateUsername(state.username).isValid) {
+        state = state.copyWith(usernameErrMsg: "유효하지 않은 아이디입니다.");
+        state = state.copyWith(usernameCheckSuccessMessage: null);
+        return;
+      }
+
       await signupRepository.checkUsernameDuplication(state.username);
       state = state.copyWith(usernameErrMsg: "");
       state = state.copyWith(usernameCheckSuccessMessage: "사용가능한 아이디입니다.");
     } on DioException catch (e) {
       if (e.response?.data["errorCode"] == "DuplicatedUsernameError") {
         state = state.copyWith(usernameErrMsg: "중복된 아이디입니다.");
-        state = state.copyWith(usernameCheckSuccessMessage: "");
+        state = state.copyWith(usernameCheckSuccessMessage: null);
         return;
       }
 
       state = state.copyWith(usernameErrMsg: "중복 확인 과정에서 오류가 발생하였습니다.");
-      state = state.copyWith(usernameCheckSuccessMessage: "");
+      state = state.copyWith(usernameCheckSuccessMessage: null);
       return;
     }
   }
 
   Future<void> checkNicknameDuplication() async {
     try {
+      if(!validateNickname(state.nickname).isValid) {
+        state = state.copyWith(nicknameErrMsg: "유효하지 않은 닉네임입니다.");
+        state = state.copyWith(nicknameCheckSuccessMessage: null);
+        return;
+      }
+
       await signupRepository.checkNicknameDuplication(state.nickname);
-      state = state.copyWith(nicknameErrMsg: "");
+      state = state.copyWith(nicknameErrMsg: null);
       state = state.copyWith(nicknameCheckSuccessMessage: "사용가능한 닉네임입니다.");
     } on DioException catch (e) {
       if (e.response?.data["errorCode"] == "DuplicatedNicknameError") {
         state = state.copyWith(nicknameErrMsg: "중복된 닉네임입니다.");
-        state = state.copyWith(nicknameCheckSuccessMessage: "");
+        state = state.copyWith(nicknameCheckSuccessMessage: null);
         return;
       }
 
       state = state.copyWith(nicknameErrMsg: "중복 확인 과정에서 오류가 발생하였습니다.");
-      state = state.copyWith(nicknameCheckSuccessMessage: "");
+      state = state.copyWith(nicknameCheckSuccessMessage: null);
       return;
     }
   }
@@ -234,12 +247,12 @@ class SignupNotifier extends StateNotifier<SignupInput> {
     } on DioException catch (e) {
       if (e.response?.data["errorCode"] == "DuplicatedUsernameError") {
         state = state.copyWith(usernameErrMsg: "중복된 아이디입니다.");
-        state = state.copyWith(usernameCheckSuccessMessage: "");
+        state = state.copyWith(usernameCheckSuccessMessage: null);
       }
 
       if (e.response?.data["errorCode"] == "DuplicatedNicknameError") {
         state = state.copyWith(nicknameErrMsg: "중복된 닉네임입니다.");
-        state = state.copyWith(nicknameCheckSuccessMessage: "");
+        state = state.copyWith(nicknameCheckSuccessMessage: null);
       }
 
       return false;

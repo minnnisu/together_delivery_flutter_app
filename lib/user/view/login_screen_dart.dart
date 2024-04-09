@@ -79,6 +79,7 @@ class LoginForm extends ConsumerWidget {
                       ? null
                       : validationResult.message;
                 },
+                isObscureText: true,
                 onChange: (value) {
                   loginRead.updateField('password', value);
                 },

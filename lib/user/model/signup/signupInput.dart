@@ -15,9 +15,9 @@ class SignupInput with _$SignupInput{
     required String email,
     required String telephone,
     required String college,
-    required String usernameErrMsg,
-    required String usernameCheckSuccessMessage,
-    required String nicknameErrMsg,
-    required String nicknameCheckSuccessMessage,
+    required String? usernameErrMsg,
+    required String? usernameCheckSuccessMessage,
+    required String? nicknameErrMsg,
+    required String? nicknameCheckSuccessMessage,
   }) = _SignupInput;
 }

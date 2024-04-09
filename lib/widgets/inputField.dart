@@ -3,12 +3,14 @@ import 'package:flutter/material.dart';
 class InputField extends StatelessWidget {
   final String fieldName;
   final double marginBottomSize;
+  final bool isObscureText;
   final Function(String value) validate;
   final Function(String value) onChange;
 
   const InputField({
     super.key,
     required this.fieldName,
+    this.isObscureText = false,
     this.marginBottomSize = 0,
     required this.validate,
     required this.onChange,
@@ -42,6 +44,7 @@ class InputField extends StatelessWidget {
                 ),
               ),
             ),
+            obscureText: isObscureText,
             cursorColor: const Color(0xff000000),
             onChanged: (value) => onChange(value),
             validator: (value) => validate(value!),

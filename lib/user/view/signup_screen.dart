@@ -68,45 +68,62 @@ class InputForm extends ConsumerWidget {
   Widget build(BuildContext context, WidgetRef ref) {
     var signup = ref.watch(signupProvider.notifier);
     var signupRead = ref.read(signupProvider.notifier);
-    final signupWatch = ref.watch(signupProvider) as SignupInput;
+    final signupWatch = ref.watch(signupProvider.notifier);
+
     return Padding(
       padding: const EdgeInsets.all(16.0),
       child: Form(
         key: _formKey,
         child: ListView(
           children: [
-            Row(
-              children: <Widget>[
-                Expanded(
-                  child: TextFormField(
-                    onChanged: (value) => ref
-                        .read(signupProvider.notifier)
-                        .updateField("username", value),
-                    decoration: InputDecoration(
-                      labelText: '아이디',
-                      errorText: signup.usernameErrMsg == ""
-                          ? null
-                          : signup.usernameErrMsg,
-                      helperText: signup.usernameCheckSuccessMessage == ""
-                          ? null
-                          : signup.usernameCheckSuccessMessage,
-                    ),
-                    validator: (value) {
-                      var validationResult = signup.validateUsername(value);
-                      return validationResult.isValid
-                          ? null
-                          : validationResult.message;
-                    },
-                  ),
-                ),
-                TextButton(
-                  onPressed: () async {
-                    await signupRead.checkUsernameDuplication();
-                  },
-                  child: Text("중복확인"),
-                ),
-              ],
-            ),
+            // Row(
+            //   children: <Widget>[
+            //     Expanded(
+            //       child: TextFormField(
+            //         onChanged: (value) => ref
+            //             .read(signupProvider.notifier)
+            //             .updateField("username", value),
+            //         decoration: InputDecoration(
+            //           labelText: '아이디',
+            //           errorText: signup.usernameErrMsg == ""
+            //               ? null
+            //               : signup.usernameErrMsg,
+            //           helperText: signup.usernameCheckSuccessMessage == ""
+            //               ? null
+            //               : signup.usernameCheckSuccessMessage,
+            //         ),
+            //         validator: (value) {
+            //           var validationResult = signup.validateUsername(value);
+            //           return validationResult.isValid
+            //               ? null
+            //               : validationResult.message;
+            //         },
+            //       ),
+            //     ),
+            //     TextButton(
+            //       onPressed: () async {
+            //         await signupRead.checkUsernameDuplication();
+            //       },
+            //       child: Text("중복확인"),
+            //     ),
+            //   ],
+            // ),
+            // InputFieldCheck(
+            //   fieldName: "아이디",
+            //   btnName: "중복확인",
+            //   errorText: signup.usernameErrMsg,
+            //   helperText: signup.usernameCheckSuccessMessage,
+            //   validate:  (value) {
+            //     var validationResult = signupWatch.validateUsername(value);
+            //     return validationResult.isValid
+            //         ? null
+            //         : validationResult.message;
+            //   },
+            //   onChanged: (value) =>  signupWatch.updateField("username", value),
+            //   onPressed: () async {
+            //     await signupWatch.checkUsernameDuplication();
+            //   },
+            // ),
             TextFormField(
               decoration: InputDecoration(
                 labelText: '비밀번호',
@@ -147,35 +164,21 @@ class InputForm extends ConsumerWidget {
                     : validationResult.message;
               },
             ),
-            Row(
-              children: <Widget>[
-                Expanded(
-                  child: TextFormField(
-                    decoration: InputDecoration(
-                      labelText: '닉네임',
-                      errorText: signup.nicknameErrMsg == ""
-                          ? null
-                          : signup.nicknameErrMsg,
-                      helperText: signup.nicknameCheckSuccessMessage == ""
-                          ? null
-                          : signup.nicknameCheckSuccessMessage,
-                    ),
-                    onChanged: (value) => signup.updateField('nickname', value),
-                    validator: (value) {
-                      var validationResult = signup.validateNickname(value);
-                      return validationResult.isValid
-                          ? null
-                          : validationResult.message;
-                    },
-                  ),
-                ),
-                TextButton(
-                  onPressed: () async {
-                    await signupRead.checkNicknameDuplication();
-                  },
-                  child: Text("중복확인"),
-                ),
-              ],
+            InputFieldCheck(
+              fieldName: "닉네임",
+              btnName: "중복확인",
+              errorText: signup.nicknameErrMsg,
+              helperText: signup.nicknameCheckSuccessMessage,
+              validate: (value) {
+                var validationResult = signup.validateNickname(value);
+                return validationResult.isValid
+                    ? null
+                    : validationResult.message;
+              },
+              onChanged: (value) => signup.updateField('nickname', value),
+              onPressed: () async {
+                await signup.checkNicknameDuplication();
+                },
             ),
             TextFormField(
               decoration: InputDecoration(
@@ -220,6 +223,55 @@ class InputForm extends ConsumerWidget {
           ],
         ),
       ),
+    );
+  }
+}
+
+class InputFieldCheck extends StatefulWidget {
+  final String fieldName;
+  final String? errorText;
+  final String? helperText;
+  final String btnName;
+  final Function(String value) validate;
+  final Function(String value) onChanged;
+  final Function() onPressed;
+
+  const InputFieldCheck({
+    super.key,
+    required this.fieldName,
+    this.errorText = null,
+    this.helperText = null,
+    required this.btnName,
+    required this.validate,
+    required this.onChanged,
+    required this.onPressed,
+  });
+
+  @override
+  State<InputFieldCheck> createState() => _InputFieldCheckState();
+}
+
+class _InputFieldCheckState extends State<InputFieldCheck> {
+  @override
+  Widget build(BuildContext context) {
+    return Row(
+      children: <Widget>[
+        Expanded(
+          child: TextFormField(
+            decoration: InputDecoration(
+              labelText: widget.fieldName,
+              errorText: widget.errorText,
+              helperText: widget.helperText,
+            ),
+            onChanged: (value) => widget.onChanged(value),
+            validator: (value) => widget.validate(value!),
+          ),
+        ),
+        TextButton(
+          onPressed: widget.onPressed,
+          child: Text(widget.btnName),
+        )
+      ],
     );
   }
 }
