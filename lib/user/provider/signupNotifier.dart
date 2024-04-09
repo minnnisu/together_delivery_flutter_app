@@ -181,7 +181,6 @@ class SignupNotifier extends StateNotifier<SignupInput> {
   }
 
   Future<void> checkUsernameDuplication() async {
-    print("username: " + username);
     try {
       if(!validateUsername(state.username).isValid) {
         state = state.copyWith(usernameErrMsg: "유효하지 않은 아이디입니다.");
@@ -190,8 +189,11 @@ class SignupNotifier extends StateNotifier<SignupInput> {
       }
 
       await signupRepository.checkUsernameDuplication(state.username);
-      state = state.copyWith(usernameErrMsg: "");
+      state = state.copyWith(usernameErrMsg: null);
       state = state.copyWith(usernameCheckSuccessMessage: "사용가능한 아이디입니다.");
+
+      print(state.usernameErrMsg);
+      print(state.usernameCheckSuccessMessage);
     } on DioException catch (e) {
       if (e.response?.data["errorCode"] == "DuplicatedUsernameError") {
         state = state.copyWith(usernameErrMsg: "중복된 아이디입니다.");
