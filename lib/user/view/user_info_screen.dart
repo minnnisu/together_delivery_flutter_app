@@ -74,7 +74,7 @@ class UserInfo extends ConsumerWidget {
                   children: [
                     Container(
                       padding: EdgeInsets.only(
-                        bottom: 16,
+                        bottom: 20,
                       ),
                       child: Text(
                         "내 계정",
@@ -181,18 +181,18 @@ class RowItem extends StatelessWidget {
     return GestureDetector(
       onTap: onTap ?? () {},
       child: Container(
-        padding: EdgeInsets.only(bottom: 16),
+        padding: EdgeInsets.only(bottom: 20),
         child: Row(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
             Text(
               itemName,
-              style: TextStyle(color: itemNameColor),
+              style: TextStyle(color: itemNameColor, fontSize: 16, fontWeight: FontWeight.w600),
             ),
             itemValue != null
                 ? Text(
                     itemValue!,
-                    style: TextStyle(color: Color(0xffadadad)),
+                    style: TextStyle(color: Color(0xffadadad), fontSize: 16, fontWeight: FontWeight.w600),
                   )
                 : Text(""),
           ],
