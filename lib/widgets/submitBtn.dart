@@ -2,30 +2,45 @@ import 'package:flutter/material.dart';
 
 class SubmitBtn extends StatelessWidget {
   final String btnName;
+  final double width;
+  final Color? backgroundColor;
+  final Color textColor;
   final Function() onPressed;
 
-  const SubmitBtn({super.key, required this.btnName, required this.onPressed});
+  const SubmitBtn(
+      {super.key,
+      required this.btnName,
+      required this.onPressed,
+      this.width = double.infinity,
+      this.backgroundColor,
+      this.textColor = const Color(0xff545454)});
 
   @override
   Widget build(BuildContext context) {
     return Container(
-      width: double.infinity,
-      child: ElevatedButton(
+      width: width,
+      child: TextButton(
         style: ButtonStyle(
-            backgroundColor: MaterialStateProperty.all(const Color(0xffA091DE)),
-            padding: MaterialStateProperty.all(
-              const EdgeInsets.symmetric(vertical: 16),
+          backgroundColor: MaterialStateProperty.all(backgroundColor),
+          padding: MaterialStateProperty.all(
+            const EdgeInsets.symmetric(vertical: 8),
+          ),
+          shadowColor: MaterialStateProperty.all(textColor),
+          shape: MaterialStateProperty.all(
+            RoundedRectangleBorder(borderRadius: BorderRadius.circular(10)),
+          ),
+          side: MaterialStateProperty.all(
+            BorderSide(
+              color: Color(0xffcbcbcb),
             ),
-            shadowColor: MaterialStateProperty.all(const Color(0xffffffff)),
-            shape: MaterialStateProperty.all(
-              RoundedRectangleBorder(borderRadius: BorderRadius.circular(10)),
-            )),
+          ),
+        ),
         onPressed: onPressed,
         child: Text(
           btnName,
           style: const TextStyle(
-            color: Color(0xffffffff),
-            fontSize: 20,
+            color: Color(0xff4f4f4f),
+            fontSize: 16,
             fontWeight: FontWeight.w600,
           ),
         ),

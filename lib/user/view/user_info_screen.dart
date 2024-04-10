@@ -7,6 +7,7 @@ import 'package:together_delivery_app/secureStore/secureStore.dart';
 import 'package:together_delivery_app/user/model/user/userModel.dart';
 import 'package:together_delivery_app/user/provider/authNotifier.dart';
 import 'package:together_delivery_app/user/repository/userMeRepository.dart';
+import 'package:together_delivery_app/widgets/submitBtn.dart';
 
 class UserInfoScreen extends StatefulWidget {
   const UserInfoScreen({super.key});
@@ -29,6 +30,7 @@ class UserInfo extends ConsumerWidget {
   Widget build(BuildContext context, WidgetRef ref) {
     final userModel = ref.watch(authProvider);
     final authRead = ref.read(authProvider.notifier);
+    double screenWidth = MediaQuery.of(context).size.width;
 
     if (userModel is UserModel) {
       return SingleChildScrollView(
@@ -129,22 +131,63 @@ class UserInfo extends ConsumerWidget {
       authRead.updateStateNull();
     }
 
-    return Column(
-      children: [
-        Text("로그인이 필요합니다."),
-        TextButton(
-          onPressed: () {
-            Navigator.pushNamed(context, '/signup');
-          },
-          child: Text("회원가입"),
+    return SingleChildScrollView(
+      child: Container(
+        // margin: EdgeInsets.all(20),
+        margin: EdgeInsets.only(left: 20, right: 20, bottom: 20),
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            Container(
+              width: double.infinity,
+
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  Padding(
+                    padding: EdgeInsets.only(top: 10),
+                    child: Text(
+                      "저희 서비스가 처음이신가요?",
+                      style: TextStyle(
+                        fontSize: 16,
+                        fontWeight: FontWeight.w600,
+                        color: Color(0xff4b4b4b),
+                      ),
+                    ),
+                  ),
+                  Padding(
+                    padding: EdgeInsets.only(top: 10),
+                    child: Text(
+                      "저희와 함께 식사비용을 아껴보아요!",
+                      style:
+                          TextStyle(fontSize: 20, fontWeight: FontWeight.w600),
+                    ),
+                  ),
+                  Container(
+                    padding: EdgeInsets.only(top: 10),
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceAround,
+                      children: [
+                        SubmitBtn(
+                          btnName: "회원가입",
+                          onPressed: () =>
+                              Navigator.pushNamed(context, '/signup'),
+                          width: screenWidth * 0.4,
+                        ),
+                        SubmitBtn(
+                          btnName: "로그인",
+                          onPressed: () => Navigator.pushNamed(context, '/login'),
+                          width: screenWidth * 0.4,
+                        ),
+                      ],
+                    ),
+                  )
+                ],
+              ),
+            ),
+          ],
         ),
-        TextButton(
-          onPressed: () {
-            Navigator.pushNamed(context, '/login');
-          },
-          child: Text('로그인'),
-        ),
-      ],
+      ),
     );
   }
 }
@@ -187,12 +230,18 @@ class RowItem extends StatelessWidget {
           children: [
             Text(
               itemName,
-              style: TextStyle(color: itemNameColor, fontSize: 16, fontWeight: FontWeight.w600),
+              style: TextStyle(
+                  color: itemNameColor,
+                  fontSize: 16,
+                  fontWeight: FontWeight.w600),
             ),
             itemValue != null
                 ? Text(
                     itemValue!,
-                    style: TextStyle(color: Color(0xffadadad), fontSize: 16, fontWeight: FontWeight.w600),
+                    style: TextStyle(
+                        color: Color(0xffadadad),
+                        fontSize: 16,
+                        fontWeight: FontWeight.w600),
                   )
                 : Text(""),
           ],
@@ -211,15 +260,11 @@ void showAlertDialog(BuildContext context, WidgetRef ref) {
       return AlertDialog(
         shape:
             RoundedRectangleBorder(borderRadius: BorderRadius.circular(10.0)),
-        content: Column(
-          mainAxisSize: MainAxisSize.min,
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: <Widget>[
-            Text(
-              "로그아웃하시겠습니까?",
-            ),
-          ],
+        title: Text("로그아웃"),
+        content: Text(
+          "로그아웃하시겠습니까?",
         ),
+        backgroundColor: Color(0xffffffff),
         actions: <Widget>[
           TextButton(
             onPressed: () {
