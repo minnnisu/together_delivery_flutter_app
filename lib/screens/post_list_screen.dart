@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:together_delivery_app/models/post.dart';
+import 'package:together_delivery_app/post/model/postModel.dart';
 import 'package:together_delivery_app/providers/postListProvider.dart';
 
 class PostListScreen extends ConsumerWidget {
@@ -8,24 +8,26 @@ class PostListScreen extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    ref.watch(postListProvider.notifier).fetchPosts();
-
-    return Container(
-      decoration: BoxDecoration(
-        border: Border(
-          top: BorderSide(
-            width: 0.5,
-            color: Color(0xffcbcbcb),
-          ),
-        ),
-      ),
-      child: ListView.builder(
-        itemCount: ref.watch(postListProvider.notifier).state.length,
-        itemBuilder: (context, index) =>
-            PostItem(post: ref.watch(postListProvider.notifier).state[index]),
-      ),
-    );
+    return  const Placeholder();
   }
+  //   ref.watch(postListProvider.notifier).fetchPosts();
+  //
+  //   return Container(
+  //     decoration: BoxDecoration(
+  //       border: Border(
+  //         top: BorderSide(
+  //           width: 0.5,
+  //           color: Color(0xffcbcbcb),
+  //         ),
+  //       ),
+  //     ),
+  //     child: ListView.builder(
+  //       itemCount: ref.watch(postListProvider.notifier).state.length,
+  //       itemBuilder: (context, index) =>
+  //           PostItem(post: ref.watch(postListProvider.notifier).state[index]),
+  //     ),
+  //   );
+  // }
 }
 
 class PostItem extends ConsumerWidget {
