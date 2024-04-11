@@ -77,7 +77,6 @@ class AuthRepository {
       apiUrls.logout,
       options: Options(
         headers: {
-          'Authorization': 'Bearer $accessToken',
           'Authorization-refresh': 'Bearer $refreshToken',
         },
       ),

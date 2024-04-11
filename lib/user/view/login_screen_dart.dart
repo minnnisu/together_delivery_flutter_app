@@ -50,51 +50,90 @@ class LoginForm extends ConsumerWidget {
   Widget build(BuildContext context, WidgetRef ref) {
     var loginRead = ref.read(loginProvider.notifier);
     var loginForm = ref.watch(loginProvider);
-    return Form(
-      key: formKey,
-      child: ListView(
-        children: [
-          Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              InputField(
-                fieldName: "아이디",
-                marginBottomSize: 20,
-                validate: (value) {
-                  var validationResult = loginRead.validateUsername(value);
-                  return validationResult.isValid
-                      ? null
-                      : validationResult.message;
-                },
-                onChange: (value) {
-                  loginRead.updateField('username', value);
-                },
+    return PopScope(
+      onPopInvoked: (didPop) => loginRead.popSignupScreen(),
+      child: Form(
+        key: formKey,
+        child: ListView(
+          children: [
+            Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                InputField(
+                  fieldName: "아이디",
+                  marginBottomSize: 20,
+                  validate: (value) {
+                    var validationResult = loginRead.validateUsername(value);
+                    return validationResult.isValid
+                        ? null
+                        : validationResult.message;
+                  },
+                  onChange: (value) {
+                    loginRead.updateField('username', value);
+                  },
+                ),
+                InputField(
+                  fieldName: "비밀번호",
+                  marginBottomSize: 20,
+                  validate: (value) {
+                    var validationResult = loginRead.validatePassword(value);
+                    return validationResult.isValid
+                        ? null
+                        : validationResult.message;
+                  },
+                  isObscureText: true,
+                  onChange: (value) {
+                    loginRead.updateField('password', value);
+                  },
+                ),
+                ErrorMsg(
+                  errorMsg: loginForm.errorMsg,
+                ),
+              ],
+            ),
+            SubmitBtn(
+                btnName: "로그인", onPressed: () => _submitForm(context, ref)),
+            Padding(
+              padding: const EdgeInsets.all(16.0),
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  Padding(
+                    padding: EdgeInsets.only(right: 20),
+                    child: Text(
+                      "아이디 찾기",
+                      style: TextStyle(
+                        color: Color(0xff8d8686),
+                      ),
+                    ),
+                  ),
+                  Padding(
+                    padding: EdgeInsets.only(right: 20),
+                    child: Text(
+                      "비밀번호 찾기",
+                      style: TextStyle(
+                        color: Color(0xff8d8686),
+                      ),
+                    ),
+                  ),
+                  GestureDetector(
+                    child: Text(
+                      "회원가입",
+                      style: TextStyle(
+                        color: Color(0xff8d8686),
+                      ),
+                    ),
+                    onTap: () =>
+                        Navigator.pushReplacementNamed(context, "/signup"),
+                  ),
+                ],
               ),
-              InputField(
-                fieldName: "비밀번호",
-                marginBottomSize: 20,
-                validate: (value) {
-                  var validationResult = loginRead.validatePassword(value);
-                  return validationResult.isValid
-                      ? null
-                      : validationResult.message;
-                },
-                isObscureText: true,
-                onChange: (value) {
-                  loginRead.updateField('password', value);
-                },
-              ),
-              ErrorMsg(
-                errorMsg: loginForm.errorMsg,
-              ),
-            ],
-          ),
-          SubmitBtn(btnName: "로그인", onPressed: () => _submitForm(context, ref))
-        ],
+            )
+          ],
+        ),
       ),
     );
   }
-
 
   // TODO: Provider로 옮기기
   Future<void> _submitForm(BuildContext context, WidgetRef ref) async {
@@ -154,7 +193,7 @@ class ErrorMsg extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      margin: EdgeInsets.only(bottom: 20),
+      margin: EdgeInsets.only(bottom: 10),
       child: Text(
         errorMsg,
         style: TextStyle(

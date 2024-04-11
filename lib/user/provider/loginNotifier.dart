@@ -5,6 +5,9 @@ import 'package:together_delivery_app/user/provider/authNotifier.dart';
 
 typedef ValidationResult = ({bool isValid, String? message});
 
+final loginProvider = StateNotifierProvider<LoginNotifier, LoginForm>(
+        (ref) => LoginNotifier(ref));
+
 class LoginNotifier extends StateNotifier<LoginForm> {
   final Ref ref;
 
@@ -72,7 +75,8 @@ class LoginNotifier extends StateNotifier<LoginForm> {
     }
     return false;
   }
-}
 
-final loginProvider = StateNotifierProvider<LoginNotifier, LoginForm>(
-    (ref) => LoginNotifier(ref));
+  void popSignupScreen(){
+    state = const LoginForm(username: "", password: "", errorMsg: "");
+  }
+}

@@ -140,44 +140,52 @@ class UserInfo extends ConsumerWidget {
           children: [
             Container(
               width: double.infinity,
-
-              child: Column(
+              child: Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
-                  Padding(
-                    padding: EdgeInsets.only(top: 10),
-                    child: Text(
-                      "저희 서비스가 처음이신가요?",
-                      style: TextStyle(
-                        fontSize: 16,
-                        fontWeight: FontWeight.w600,
-                        color: Color(0xff4b4b4b),
+                  Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Padding(
+                        padding: EdgeInsets.only(top: 10),
+                        child: Text(
+                          "한끼절약 회원이라면",
+                          style: TextStyle(
+                            fontSize: 18,
+                            fontWeight: FontWeight.w600,
+                            color: Color(0xffb7b5b5),
+                          ),
+                        ),
                       ),
-                    ),
-                  ),
-                  Padding(
-                    padding: EdgeInsets.only(top: 10),
-                    child: Text(
-                      "저희와 함께 식사비용을 아껴보아요!",
-                      style:
-                          TextStyle(fontSize: 20, fontWeight: FontWeight.w600),
-                    ),
+                      Padding(
+                        padding: EdgeInsets.only(top: 10),
+                        child: Text(
+                          "누구나 저렴한 식사!",
+                          style: TextStyle(
+                              fontSize: 20, fontWeight: FontWeight.w600),
+                        ),
+                      ),
+                    ],
                   ),
                   Container(
                     padding: EdgeInsets.only(top: 10),
                     child: Row(
                       mainAxisAlignment: MainAxisAlignment.spaceAround,
                       children: [
-                        SubmitBtn(
-                          btnName: "회원가입",
-                          onPressed: () =>
-                              Navigator.pushNamed(context, '/signup'),
-                          width: screenWidth * 0.4,
+                        Padding(
+                          padding: EdgeInsets.only(right: 8),
+                          child: Button(
+                            btnName: "회원가입",
+                            onPressed: () =>
+                                Navigator.pushNamed(context, '/signup'),
+                            width: screenWidth * 0.2,
+                          ),
                         ),
-                        SubmitBtn(
+                        Button(
                           btnName: "로그인",
-                          onPressed: () => Navigator.pushNamed(context, '/login'),
-                          width: screenWidth * 0.4,
+                          onPressed: () =>
+                              Navigator.pushNamed(context, '/login'),
+                          width: screenWidth * 0.2,
                         ),
                       ],
                     ),
@@ -283,4 +291,53 @@ void showAlertDialog(BuildContext context, WidgetRef ref) {
       );
     },
   );
+}
+
+class Button extends StatelessWidget {
+  final String btnName;
+  final double width;
+  final Color? backgroundColor;
+  final Color textColor;
+  final Function() onPressed;
+
+  const Button(
+      {super.key,
+      required this.btnName,
+      required this.onPressed,
+      this.width = double.infinity,
+      this.backgroundColor,
+      this.textColor = const Color(0xff545454)});
+
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      width: width,
+      child: TextButton(
+        style: ButtonStyle(
+          backgroundColor: MaterialStateProperty.all(backgroundColor),
+          padding: MaterialStateProperty.all(
+            const EdgeInsets.symmetric(vertical: 8),
+          ),
+          shadowColor: MaterialStateProperty.all(textColor),
+          shape: MaterialStateProperty.all(
+            RoundedRectangleBorder(borderRadius: BorderRadius.circular(16)),
+          ),
+          side: MaterialStateProperty.all(
+            BorderSide(
+              color: Color(0xffdcdcdc),
+            ),
+          ),
+        ),
+        onPressed: onPressed,
+        child: Text(
+          btnName,
+          style: const TextStyle(
+            color: Color(0xff4f4f4f),
+            fontSize: 16,
+            fontWeight: FontWeight.w600,
+          ),
+        ),
+      ),
+    );
+  }
 }

@@ -30,7 +30,7 @@ class _SignupScreenState extends State<SignupScreen> {
       appBar: AppBar(),
       body: SingleChildScrollView(
         child: Padding(
-          padding: const EdgeInsets.symmetric(horizontal: 16.0),
+          padding: const EdgeInsets.symmetric(horizontal: 16.0, vertical: 20),
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
@@ -63,6 +63,10 @@ class InputForm extends ConsumerWidget {
           content: Text(
               signupResult ? '회원가입이 성공적으로 완료되었습니다.' : '회원가입 중 오류가 발생하였습니다')),
     );
+
+    if (signupResult) {
+      Navigator.pushReplacementNamed(context, '/login');
+    }
   }
 
   @override
@@ -83,29 +87,34 @@ class InputForm extends ConsumerWidget {
               type: SignupFieldType.username,
               fieldName: "아이디",
               btnName: "중복확인",
+              hintText: "아이디",
             ),
             SignupInputField(
               marginBottomSize: 16,
               type: SignupFieldType.password,
               fieldName: '비밀번호',
               isObscureText: true,
+              hintText: "비밀번호",
             ),
             SignupInputField(
               marginBottomSize: 16,
               type: SignupFieldType.passwordCheck,
               fieldName: '비밀번호 확인',
               isObscureText: true,
+              hintText: "비밀번호 확인",
             ),
             SignupInputField(
               marginBottomSize: 16,
               type: SignupFieldType.name,
               fieldName: '이름',
+              hintText: "이름",
             ),
             InputFieldCheck(
               marginBottomSize: 16,
               type: SignupFieldType.nickname,
               fieldName: "닉네임",
               btnName: "중복확인",
+              hintText: "닉네임",
             ),
             SignupInputField(
               marginBottomSize: 16,
@@ -141,12 +150,14 @@ class InputFieldCheck extends ConsumerWidget {
   final String btnName;
   final SignupFieldType type;
   final double marginBottomSize;
+  final String? hintText;
 
   const InputFieldCheck({
     super.key,
     required this.fieldName,
     required this.btnName,
     required this.type,
+    this.hintText,
     this.marginBottomSize = 0,
   });
 
@@ -164,12 +175,17 @@ class InputFieldCheck extends ConsumerWidget {
             fieldName,
             style: const TextStyle(
               fontWeight: FontWeight.w600,
+              fontSize: 16,
             ),
           ),
           TextFormField(
             decoration: InputDecoration(
               errorText: signupWatch.getErrorValue(type),
               helperText: signupWatch.getSuccessMsg(type),
+              hintText: hintText,
+              hintStyle: TextStyle(
+                color: Color(0xffd3cfcf),
+              ),
               helperStyle: const TextStyle(
                 fontSize: 14.0,
                 color: Color(0xff3f993b),
@@ -229,11 +245,15 @@ class SignupInputField extends ConsumerWidget {
             fieldName,
             style: const TextStyle(
               fontWeight: FontWeight.w600,
+              fontSize: 16,
             ),
           ),
           TextFormField(
             decoration: InputDecoration(
               hintText: hintText,
+              hintStyle: TextStyle(
+                color: Color(0xffd3cfcf),
+              ),
               errorText: errorText,
               enabledBorder: const UnderlineInputBorder(
                 borderSide: BorderSide(
