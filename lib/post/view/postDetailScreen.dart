@@ -3,9 +3,12 @@ import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:together_delivery_app/post/model/postDetailModel.dart';
+import 'package:together_delivery_app/post/model/postDetailRequest.dart';
 import 'package:together_delivery_app/post/provider/postDetailProvider.dart';
 
 import '../provider/postDetailNotifier.dart';
+
+late final int postId;
 
 const BoxDecoration bottomBorder = BoxDecoration(
   border: Border(
@@ -26,13 +29,13 @@ class PostDetailScreen extends StatefulWidget {
 class _PostDetailScreenState extends State<PostDetailScreen> {
   @override
   Widget build(BuildContext context) {
-    int index = ModalRoute.of(context)!.settings.arguments as int;
-    print(index);
+    postId = ModalRoute.of(context)!.settings.arguments as int;
+    print(postId);
     return Scaffold(
       appBar: AppBar(
         title: Text("배달게시물"),
       ),
-      body: PostDetailBody(index),
+      body: PostDetailBody(postId),
     );
   }
 }
@@ -44,8 +47,7 @@ class PostDetailBody extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final postDetail = ref.watch(postDetailNotifierProvider);
-    final postDetailWatch = ref.watch(postDetailNotifierProvider.notifier);
+    final postDetail = ref.watch(postDetailNotifierProvider(PostDetailRequest(postId: postId)));
 
     if (postDetail is PostDetailModelLoading) {
       return const CircularProgressIndicator();
@@ -103,7 +105,7 @@ class PostDetailHeaderLeft extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final postDetailModel = ref.watch(postDetailNotifierProvider) as PostDetailModel;
+    final postDetailModel = ref.watch(postDetailNotifierProvider(PostDetailRequest(postId: postId))) as PostDetailModel;
 
     return Container(
       child: Row(
@@ -233,15 +235,17 @@ class PostDetail extends StatelessWidget {
   }
 }
 
-class PostTitle extends StatelessWidget {
+class PostTitle extends ConsumerWidget {
   const PostTitle({super.key});
 
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context, WidgetRef ref) {
+    final postDetailModel = ref.watch(postDetailNotifierProvider(PostDetailRequest(postId: postId))) as PostDetailModel;
+
     return Container(
       padding: EdgeInsets.only(bottom: 5),
       child: Text(
-        "같이 배달 시켜 먹을 사람",
+        postDetailModel.title,
         style: TextStyle(
           fontSize: 18,
           fontWeight: FontWeight.w600,

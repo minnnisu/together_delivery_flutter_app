@@ -1,5 +1,6 @@
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:together_delivery_app/post/model/postDetailModel.dart';
+import 'package:together_delivery_app/post/model/postDetailRequest.dart';
 import 'package:together_delivery_app/post/provider/postDetailProvider.dart';
 import 'package:together_delivery_app/post/repository/postRepository.dart';
 
@@ -9,31 +10,31 @@ import 'package:together_delivery_app/post/repository/postRepository.dart';
 //   PostInfo(this.postId);
 // }
 
-
-final postDetailNotifierProvider =
-    StateNotifierProvider<PostDetailNotifier, PostDetailModelBase>((ref) {
+final postDetailNotifierProvider = StateNotifierProvider.autoDispose
+    .family<PostDetailNotifier, PostDetailModelBase, PostDetailRequest>(
+        (ref, postDetailRequest) {
   final postRepository = ref.watch(postRepositoryProvider);
 
-  return PostDetailNotifier(postRepository);
+  return PostDetailNotifier(
+      postRepository: postRepository, postId: postDetailRequest.postId);
 });
 
 class PostDetailNotifier extends StateNotifier<PostDetailModelBase> {
   final PostRepository postRepository;
+  final int postId;
 
-  PostDetailNotifier(this.postRepository) : super(PostDetailModelLoading()) {
-    fetchPostDetail(1);
+  PostDetailNotifier({required this.postRepository, required this.postId})
+      : super(PostDetailModelLoading()) {
+    fetchPostDetail(postId);
   }
 
   Future<void> fetchPostDetail(postId) async {
     try {
+      state = PostDetailModelLoading();
       state = await postRepository.getPostDetail(postId);
     } catch (e) {
       state = PostDetailModelError(message: e.toString());
     }
-  }
-
-  void setState(PostDetailModelBase post) {
-    state = post;
   }
 }
 
