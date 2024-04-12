@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:together_delivery_app/post/view/post_list_screen.dart';
+import 'package:together_delivery_app/post/view/postListScreen.dart';
 import 'package:together_delivery_app/user/view/user_info_screen.dart';
 
 class MainScreen extends StatefulWidget {
