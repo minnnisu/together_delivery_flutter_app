@@ -21,7 +21,7 @@ class PostDetailScreen extends StatefulWidget {
 class _PostDetailScreenState extends State<PostDetailScreen> {
   @override
   Widget build(BuildContext context) {
-    String index = ModalRoute.of(context)!.settings.arguments as String;
+    int index = ModalRoute.of(context)!.settings.arguments as int;
     print(index);
     return Scaffold(
       appBar: AppBar(
