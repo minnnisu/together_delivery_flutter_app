@@ -1,5 +1,4 @@
 import 'package:together_delivery_app/post/model/postListMetaDataModel.dart';
-import 'package:together_delivery_app/post/model/postModel.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:flutter/foundation.dart';
 import 'package:together_delivery_app/post/model/postSummaryModel.dart';

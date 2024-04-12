@@ -1,6 +1,11 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:together_delivery_app/post/model/postDetailModel.dart';
+import 'package:together_delivery_app/post/provider/postDetailProvider.dart';
+
+import '../provider/postDetailNotifier.dart';
 
 const BoxDecoration bottomBorder = BoxDecoration(
   border: Border(
@@ -27,43 +32,79 @@ class _PostDetailScreenState extends State<PostDetailScreen> {
       appBar: AppBar(
         title: Text("배달게시물"),
       ),
-      body: MyBody(),
+      body: PostDetailBody(index),
     );
   }
 }
 
-class MyBody extends StatefulWidget {
-  const MyBody({super.key});
+class PostDetailBody extends ConsumerWidget {
+  final int postId;
+
+  const PostDetailBody(this.postId, {super.key});
 
   @override
-  State<MyBody> createState() => _MyBodyState();
-}
+  Widget build(BuildContext context, WidgetRef ref) {
+    final postDetail = ref.watch(postDetailNotifierProvider);
+    final postDetailWatch = ref.watch(postDetailNotifierProvider.notifier);
 
-class _MyBodyState extends State<MyBody> {
-  @override
-  Widget build(BuildContext context) {
-    return Container(
-      margin: EdgeInsets.symmetric(
-        vertical: 10,
-        horizontal: 20,
-      ),
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          PostHeader(),
-          PostDetail(),
-          PostCommentAndReply(),
-        ],
-      ),
-    );
+    if (postDetail is PostDetailModelLoading) {
+      return const CircularProgressIndicator();
+    }
+
+    if (postDetail is PostDetailModelError) {
+      Text('Error: ${postDetail.message}');
+    }
+
+    if (postDetail is PostDetailModel) {
+      return Container(
+        margin: EdgeInsets.symmetric(
+          vertical: 10,
+          horizontal: 20,
+        ),
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            PostHeader(),
+            PostDetail(),
+            PostCommentAndReply(),
+          ],
+        ),
+      );
+    }
+
+    return Text('오류가 발생하였습니다.');
+
+    // return ref.watch(postDetailProvider(PostInfo(postId))).when(
+    //   loading: () => const CircularProgressIndicator(),
+    //   error: (err, stack) => Text('Error: $err'),
+    //   data: (data)
+    //   {
+    //     return Container(
+    //       margin: EdgeInsets.symmetric(
+    //         vertical: 10,
+    //         horizontal: 20,
+    //       ),
+    //       child: Column(
+    //         crossAxisAlignment: CrossAxisAlignment.start,
+    //         children: [
+    //           PostHeader(),
+    //           PostDetail(),
+    //           PostCommentAndReply(),
+    //         ],
+    //       ),
+    //     );
+    //   }
+    // );
   }
 }
 
-class UserInfo extends StatelessWidget {
-  const UserInfo({super.key});
+class PostDetailHeaderLeft extends ConsumerWidget {
+  const PostDetailHeaderLeft({super.key});
 
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context, WidgetRef ref) {
+    final postDetailModel = ref.watch(postDetailNotifierProvider) as PostDetailModel;
+
     return Container(
       child: Row(
         children: [
@@ -78,16 +119,8 @@ class UserInfo extends StatelessWidget {
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               Text(
-                "코린이",
+                postDetailModel.nickname,
                 style: TextStyle(
-                  fontWeight: FontWeight.w600,
-                  fontSize: 13,
-                ),
-              ),
-              Text(
-                "04/01 10:04",
-                style: TextStyle(
-                  color: Color(0xff9a9a9a),
                   fontWeight: FontWeight.w600,
                   fontSize: 13,
                 ),
@@ -97,6 +130,7 @@ class UserInfo extends StatelessWidget {
         ],
       ),
     );
+    return Text("");
   }
 }
 
@@ -171,7 +205,7 @@ class PostHeader extends StatelessWidget {
     return Row(
       mainAxisAlignment: MainAxisAlignment.spaceBetween,
       children: [
-        UserInfo(),
+        PostDetailHeaderLeft(),
         PostStatus(),
       ],
     );

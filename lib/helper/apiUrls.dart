@@ -3,6 +3,8 @@ class apiUrls {
 
   static const String postGet = baseUrl + "/api/post";
 
+  static const String postDetailGet = baseUrl + "/api/post";
+
   static const String userRegister = baseUrl + "/auth/signup";
 
   static const String usernameDuplicationCheck = baseUrl + "/auth/check/username";
