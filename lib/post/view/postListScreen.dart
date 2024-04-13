@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:infinite_scroll_pagination/infinite_scroll_pagination.dart';
 import 'package:together_delivery_app/post/model/postSummaryModel.dart';
 import 'package:together_delivery_app/post/util/postUtil.dart';
-import 'package:together_delivery_app/post/view/widget/postLisItem.dart';
+import 'package:together_delivery_app/post/view/widget/postList/postLisItem.dart';
 
 class PostListScreen extends StatefulWidget {
   const PostListScreen({super.key});

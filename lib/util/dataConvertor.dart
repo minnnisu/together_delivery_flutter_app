@@ -29,4 +29,16 @@ class DateConvertor{
       return '$years년 전';
     }
   }
+
+  static String formatDateTime(String dateTimeString) {
+    DateTime dateTime = DateTime.parse(dateTimeString);
+    String year = dateTime.year != DateTime.now().year ?
+    dateTime.year.toString().substring(2) + "/": '';
+    String month = dateTime.month.toString().padLeft(2, '0');
+    String day = dateTime.day.toString().padLeft(2, '0');
+    String hour = dateTime.hour.toString().padLeft(2, '0');
+    String minute = dateTime.minute.toString().padLeft(2, '0');
+
+    return '${year}$month/$day $hour:$minute';
+  }
 }

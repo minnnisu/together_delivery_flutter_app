@@ -1,9 +1,9 @@
 import 'package:flutter/cupertino.dart';
 import 'package:together_delivery_app/constant/restaurantCategory.dart';
-import 'package:together_delivery_app/post/view/widget/smallGreyText.dart';
+import 'package:together_delivery_app/post/view/widget/postList/smallGreyText.dart';
 import 'package:together_delivery_app/util/dataConvertor.dart';
 
-import '../../model/postSummaryModel.dart';
+import '../../../model/postSummaryModel.dart';
 
 class PostItem extends StatelessWidget {
   final PostSummaryModel post;

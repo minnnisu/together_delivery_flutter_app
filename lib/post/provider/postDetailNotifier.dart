@@ -10,23 +10,19 @@ import 'package:together_delivery_app/post/repository/postRepository.dart';
 //   PostInfo(this.postId);
 // }
 
-final postDetailNotifierProvider = StateNotifierProvider.autoDispose
-    .family<PostDetailNotifier, PostDetailModelBase, PostDetailRequest>(
-        (ref, postDetailRequest) {
+final postDetailNotifierProvider =
+    StateNotifierProvider.autoDispose<PostDetailNotifier, PostDetailModelBase>(
+        (ref) {
   final postRepository = ref.watch(postRepositoryProvider);
 
-  return PostDetailNotifier(
-      postRepository: postRepository, postId: postDetailRequest.postId);
+  return PostDetailNotifier(postRepository: postRepository);
 });
 
 class PostDetailNotifier extends StateNotifier<PostDetailModelBase> {
   final PostRepository postRepository;
-  final int postId;
 
-  PostDetailNotifier({required this.postRepository, required this.postId})
-      : super(PostDetailModelLoading()) {
-    fetchPostDetail(postId);
-  }
+  PostDetailNotifier({required this.postRepository})
+      : super(PostDetailModelLoading());
 
   Future<void> fetchPostDetail(postId) async {
     try {
@@ -35,6 +31,10 @@ class PostDetailNotifier extends StateNotifier<PostDetailModelBase> {
     } catch (e) {
       state = PostDetailModelError(message: e.toString());
     }
+  }
+
+  void updateState(PostDetailModelBase postDetailModelBase){
+    state = postDetailModelBase;
   }
 }
 
