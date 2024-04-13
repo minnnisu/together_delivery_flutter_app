@@ -43,21 +43,6 @@ class SignupNotifier extends StateNotifier<SignupInput> {
           currentFocusedField: null,
         ));
 
-  String get username => state.username;
-
-  String get password => state.password;
-
-  String get passwordCheck => state.passwordCheck;
-
-  String get name => state.name;
-
-  String get nickname => state.nickname;
-
-  String get email => state.email;
-
-  String get telephone => state.telephone;
-
-  String get college => state.college;
 
 
   String? getFieldValue(SignupFieldType type) {
@@ -127,15 +112,6 @@ class SignupNotifier extends StateNotifier<SignupInput> {
 
     return null;
   }
-
-
-  // String? get usernameErrMsg => state.usernameErrMsg;
-
-  // String? get usernameCheckSuccessMessage => state.usernameCheckSuccessMessage;
-
-  // String? get nicknameErrMsg => state.nicknameErrMsg;
-
-  // String? get nicknameCheckSuccessMessage => state.nicknameCheckSuccessMessage;
 
   void checkFocusedFieldChange(SignupFieldType type) {
     if(state.currentFocusedField == null) {
@@ -396,14 +372,14 @@ class SignupNotifier extends StateNotifier<SignupInput> {
     }
 
     SignupRequest newUser = SignupRequest(
-      username: username,
-      password: password,
-      passwordCheck: passwordCheck,
-      nickname: nickname,
-      name: name,
-      email: email,
-      telephone: telephone,
-      college: college,
+      username: state.username,
+      password: state.password,
+      passwordCheck: state.passwordCheck,
+      nickname: state.nickname,
+      name: state.name,
+      email: state.email,
+      telephone: state.telephone,
+      college: state.college,
     );
 
     try {
