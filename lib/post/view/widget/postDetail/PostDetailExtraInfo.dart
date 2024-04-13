@@ -4,41 +4,41 @@ import 'package:together_delivery_app/constant/restaurantCategory.dart';
 import 'package:together_delivery_app/post/model/postDetailModel.dart';
 import 'package:together_delivery_app/post/provider/postDetailNotifier.dart';
 
-class PostExtraInfo extends ConsumerWidget {
-  const PostExtraInfo({super.key});
+class PostDetailExtraInfo extends ConsumerWidget {
+  const PostDetailExtraInfo({super.key});
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final postDetailModel =
         ref.watch(postDetailNotifierProvider) as PostDetailModel;
 
-    return PostExtraRowWrapper(
+    return PostDetailExtraRowWrapper(
       [
-        PostExtraRow(
+        PostDetailExtraRow(
           [
-            PostExtraInfoItem(
+            PostDetailExtraInfoItem(
               itemKey: "카테고리",
               itemValue: RestaurantCategory.getCategoryFromString(
                       postDetailModel.categoryCode)
                   .name,
             ),
-            PostExtraInfoItem(
+            PostDetailExtraInfoItem(
               itemKey: "가게이름",
               itemValue: postDetailModel.restaurantName,
             ),
-            PostExtraInfoItem(
+            PostDetailExtraInfoItem(
               itemKey: "최소배달금액",
               itemValue: "${postDetailModel.minOrderFee}원",
             ),
           ],
         ),
-        PostExtraRow(
+        PostDetailExtraRow(
           [
-            PostExtraInfoItem(
+            PostDetailExtraInfoItem(
               itemKey: "배달비",
               itemValue: "${postDetailModel.deliveryFee}원",
             ),
-            PostExtraInfoItem(
+            PostDetailExtraInfoItem(
               itemKey: "만남장소",
               itemValue: postDetailModel.location,
             ),
@@ -49,10 +49,10 @@ class PostExtraInfo extends ConsumerWidget {
   }
 }
 
-class PostExtraRowWrapper extends StatelessWidget {
-  final List<PostExtraRow> postExtraRows;
+class PostDetailExtraRowWrapper extends StatelessWidget {
+  final List<PostDetailExtraRow> postExtraRows;
 
-  const PostExtraRowWrapper(this.postExtraRows, {super.key});
+  const PostDetailExtraRowWrapper(this.postExtraRows, {super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -66,10 +66,10 @@ class PostExtraRowWrapper extends StatelessWidget {
   }
 }
 
-class PostExtraRow extends StatelessWidget {
-  final List<PostExtraInfoItem> rowItems;
+class PostDetailExtraRow extends StatelessWidget {
+  final List<PostDetailExtraInfoItem> rowItems;
 
-  const PostExtraRow(this.rowItems, {super.key});
+  const PostDetailExtraRow(this.rowItems, {super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -84,11 +84,11 @@ class PostExtraRow extends StatelessWidget {
   }
 }
 
-class PostExtraInfoItem extends StatelessWidget {
+class PostDetailExtraInfoItem extends StatelessWidget {
   final String itemKey;
   final String itemValue;
 
-  const PostExtraInfoItem(
+  const PostDetailExtraInfoItem(
       {required this.itemKey, required this.itemValue, super.key});
 
   @override

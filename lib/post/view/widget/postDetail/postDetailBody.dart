@@ -3,7 +3,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:together_delivery_app/constant/restaurantCategory.dart';
 import 'package:together_delivery_app/post/model/postDetailModel.dart';
 import 'package:together_delivery_app/post/provider/postDetailNotifier.dart';
-import 'package:together_delivery_app/post/view/widget/postDetail/PostExtraInfo.dart';
+import 'package:together_delivery_app/post/view/widget/postDetail/PostDetailExtraInfo.dart';
 import 'package:together_delivery_app/widgets/border.dart';
 
 class PostDetailBody extends StatelessWidget {
@@ -17,7 +17,7 @@ class PostDetailBody extends StatelessWidget {
         children: [
           PostTitle(),
           PostContent(),
-          PostExtraInfo(),
+          PostDetailExtraInfo(),
         ],
       ),
     );
