@@ -12,6 +12,7 @@ import 'package:together_delivery_app/user/const/signupFieldType.dart';
 import 'package:together_delivery_app/user/const/signupFieldType.dart';
 import 'package:together_delivery_app/user/model/signup/signupInput.dart';
 import 'package:together_delivery_app/user/provider/authNotifier.dart';
+import 'package:together_delivery_app/widgets/fieldInput.dart';
 import 'package:together_delivery_app/widgets/submitBtn.dart';
 
 import '../provider/signupNotifier.dart';
@@ -56,7 +57,7 @@ class InputForm extends ConsumerWidget {
 
   Future<void> submitForm(BuildContext context, WidgetRef ref) async {
     final signupResult =
-        await ref.watch(signupProvider.notifier).registerUser();
+    await ref.watch(signupProvider.notifier).registerUser();
 
     ScaffoldMessenger.of(context).showSnackBar(
       SnackBar(
@@ -215,66 +216,31 @@ class InputFieldCheck extends ConsumerWidget {
   }
 }
 
-class SignupInputField extends ConsumerWidget {
-  final String fieldName;
-  final double marginBottomSize;
-  final bool isObscureText;
+class SignupInputField extends FieldInput {
   final SignupFieldType type;
-  final String? hintText;
 
   const SignupInputField({
-    super.key,
-    required this.fieldName,
-    this.isObscureText = false,
-    this.marginBottomSize = 0,
-    this.hintText,
     required this.type,
+    super.key,
+    required super.fieldName,
+    super.marginBottomSize,
+    super.isObscureText,
+    super.hintText,
   });
 
   @override
-  Widget build(BuildContext context, WidgetRef ref) {
-    final errorText = ref.watch(signupProvider.notifier).getErrorValue(type);
-    final signupRead = ref.read(signupProvider.notifier);
-
-    return Container(
-      margin: EdgeInsets.only(bottom: marginBottomSize),
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          Text(
-            fieldName,
-            style: const TextStyle(
-              fontWeight: FontWeight.w600,
-              fontSize: 16,
-            ),
-          ),
-          TextFormField(
-            decoration: InputDecoration(
-              hintText: hintText,
-              hintStyle: TextStyle(
-                color: Color(0xffd3cfcf),
-              ),
-              errorText: errorText,
-              enabledBorder: const UnderlineInputBorder(
-                borderSide: BorderSide(
-                  color: Color(0xffd5d5d5),
-                  width: 0.9,
-                ),
-              ),
-              focusedBorder: const UnderlineInputBorder(
-                borderSide: BorderSide(
-                  color: Color(0xffd5d5d5),
-                  width: 0.9,
-                ),
-              ),
-            ),
-            onTap: () =>
-                ref.read(signupProvider.notifier).checkFocusedFieldChange(type),
-            onChanged: (value) => signupRead.updateField(type, value),
-            obscureText: isObscureText,
-          ),
-        ],
-      ),
-    );
+  String? getErrorText(WidgetRef ref) {
+    return ref.watch(signupProvider.notifier).getErrorValue(type);
   }
+
+  @override
+  void onChange(WidgetRef ref, String value) {
+    ref.read(signupProvider.notifier).updateField(type, value);
+  }
+
+  @override
+  void onTap(WidgetRef ref) {
+    ref.read(signupProvider.notifier).checkFocusedFieldChange(type);
+  }
+
 }
