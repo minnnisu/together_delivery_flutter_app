@@ -43,6 +43,12 @@ class _MainScreenState extends State<MainScreen> {
         width: double.infinity,
         child: _widgetOptions.elementAt(_selectedIndex),
       ),
+      floatingActionButton: _selectedIndex == 0
+          ? FloatingActionButton(
+              onPressed: () => Navigator.pushNamed(context, "/newPost"),
+              child: const Icon(Icons.add),
+            )
+          : null,
       bottomNavigationBar: BottomNavigationBar(
         items: const <BottomNavigationBarItem>[
           BottomNavigationBarItem(

@@ -7,6 +7,7 @@ abstract class FieldInput extends ConsumerWidget {
   final double marginBottomSize;
   final bool isObscureText;
   final String? hintText;
+  final int maxLines;
 
   const FieldInput({
     super.key,
@@ -14,6 +15,7 @@ abstract class FieldInput extends ConsumerWidget {
     this.isObscureText = false,
     this.marginBottomSize = 0,
     this.hintText,
+    this.maxLines = 1,
   });
 
   void onTap(WidgetRef ref);
@@ -36,6 +38,7 @@ abstract class FieldInput extends ConsumerWidget {
             ),
           ),
           TextFormField(
+            maxLines: maxLines,
             decoration: InputDecoration(
               hintText: hintText,
               hintStyle: TextStyle(
@@ -55,9 +58,9 @@ abstract class FieldInput extends ConsumerWidget {
                 ),
               ),
             ),
+            obscureText: isObscureText,
             onTap: () => onTap(ref),
             onChanged: (value) => onChange(ref, value),
-            obscureText: isObscureText,
           ),
         ],
       ),
