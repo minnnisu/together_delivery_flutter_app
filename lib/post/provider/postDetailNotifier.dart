@@ -4,12 +4,6 @@ import 'package:together_delivery_app/post/model/postDetailRequest.dart';
 import 'package:together_delivery_app/post/provider/postDetailProvider.dart';
 import 'package:together_delivery_app/post/repository/postRepository.dart';
 
-// class PostInfo{
-//   int postId;
-//
-//   PostInfo(this.postId);
-// }
-
 final postDetailNotifierProvider =
     StateNotifierProvider.autoDispose<PostDetailNotifier, PostDetailModelBase>(
         (ref) {
