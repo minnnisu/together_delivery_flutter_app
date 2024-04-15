@@ -5,13 +5,16 @@ import 'package:flutter/material.dart';
 import 'package:flutter/painting.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:together_delivery_app/constant/restaurantCategory.dart';
+import 'package:together_delivery_app/post/const/postEditFieldType.dart';
+import 'package:together_delivery_app/post/provider/postEditNotifier.dart';
 
-class PostInputForm extends StatelessWidget {
+class PostInputForm extends ConsumerWidget {
   const PostInputForm({super.key});
 
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context, WidgetRef ref) {
     final screenWidth = MediaQuery.of(context).size.width;
+    final postEditModel = ref.watch(postEditProvider);
     return SingleChildScrollView(
       child: Padding(
         padding: const EdgeInsets.symmetric(horizontal: 16.0, vertical: 20),
@@ -19,25 +22,31 @@ class PostInputForm extends StatelessWidget {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             PostTextInputField(
-              fieldName: "제목",
-              hintText: "제목을 입력해주세요.",
-              marginBottomSize: 12,
-            ),
+                type: PostEditFieldType.title,
+                fieldName: "제목",
+                hintText: "제목을 입력해주세요.",
+                marginBottomSize: 12,
+                errorText: postEditModel.titleErrMsg),
             PostTextInputField(
+              type: PostEditFieldType.content,
               fieldName: "내용",
               hintText: "내용을 입력해주세요.",
               maxLines: 5,
               marginBottomSize: 12,
+              errorText: postEditModel.contentErrMsg,
             ),
             Row(
+              crossAxisAlignment: CrossAxisAlignment.start,
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
                 PostDropdownInputField(
+                  type: PostEditFieldType.restaurantCategory,
                   width: screenWidth * 0.45,
                   fieldName: "카테고리",
                   marginBottomSize: 12,
                 ),
                 PostTextInputField(
+                  type: PostEditFieldType.restaurantName,
                   width: screenWidth * 0.45,
                   fieldName: "가게이름",
                   hintText: "한끼 치킨",
@@ -47,23 +56,32 @@ class PostInputForm extends StatelessWidget {
             ),
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 PostNumberInputField(
-                  width: screenWidth * 0.45,
-                  fieldName: "최소배달금액",
-                  marginBottomSize: 12,
-                ),
+                    type: PostEditFieldType.minOrderFee,
+                    width: screenWidth * 0.45,
+                    fieldName: "최소배달금액",
+                    marginBottomSize: 12,
+                    errorText: postEditModel.minOrderFeeErrMsg),
                 PostNumberInputField(
-                  width: screenWidth * 0.45,
-                  fieldName: "배달비",
-                  marginBottomSize: 12,
-                ),
+                    type: PostEditFieldType.deliveryFee,
+                    width: screenWidth * 0.45,
+                    fieldName: "배달비",
+                    marginBottomSize: 12,
+                    errorText: postEditModel.deliveryFeeErrMsg),
               ],
             ),
             PostTextInputField(
+              type: PostEditFieldType.location,
               fieldName: "만남장소",
               marginBottomSize: 12,
+              errorText: postEditModel.locationErrMsg,
             ),
+            TextButton(
+                onPressed: () =>
+                    ref.read(postEditProvider.notifier).registerPost(),
+                child: Text("등록"))
           ],
         ),
       ),
@@ -77,14 +95,26 @@ class PostTextInputField extends ConsumerWidget {
   final String? hintText;
   final int maxLines;
   final double width;
+  final PostEditFieldType type;
+  final String? errorText;
 
   const PostTextInputField(
       {super.key,
+      required this.type,
       required this.fieldName,
       this.marginBottomSize = 0,
       this.hintText,
       this.maxLines = 1,
+      this.errorText,
       this.width = double.infinity});
+
+  void onChange(WidgetRef ref, String value) {
+    ref.read(postEditProvider.notifier).updateFieldValue(type, value);
+  }
+
+  void onTap(WidgetRef ref) {
+    ref.read(postEditProvider.notifier).checkFocusedFieldChange(type);
+  }
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
@@ -108,11 +138,18 @@ class PostTextInputField extends ConsumerWidget {
             maxLines: maxLines,
             decoration: InputDecoration(
               contentPadding: EdgeInsets.symmetric(vertical: 6, horizontal: 12),
-              hintText: hintText,
-              hintStyle: TextStyle(
-                color: Color(0xffd3cfcf),
-              ),
-              // errorText: getErrorText(ref),
+              errorBorder: const OutlineInputBorder(
+                  borderSide: BorderSide(
+                    color: Color(0xffcc4747),
+                    width: 0.9,
+                  ),
+                  borderRadius: BorderRadius.all(Radius.circular(10))),
+              focusedErrorBorder: const OutlineInputBorder(
+                  borderSide: BorderSide(
+                    color: Color(0xffcc4747),
+                    width: 0.9,
+                  ),
+                  borderRadius: BorderRadius.all(Radius.circular(10))),
               enabledBorder: const OutlineInputBorder(
                   borderSide: BorderSide(
                     color: Color(0xffd5d5d5),
@@ -125,9 +162,15 @@ class PostTextInputField extends ConsumerWidget {
                     width: 0.9,
                   ),
                   borderRadius: BorderRadius.all(Radius.circular(10))),
+              errorStyle: TextStyle(color: Color(0xffcc4747)),
+              hintText: hintText,
+              hintStyle: TextStyle(
+                color: Color(0xffd3cfcf),
+              ),
+              errorText: errorText,
             ),
-            // onTap: () => onTap(ref),
-            // onChanged: (value) => onChange(ref, value),
+            onTap: () => onTap(ref),
+            onChanged: (value) => onChange(ref, value),
           ),
         ],
       ),
@@ -140,13 +183,26 @@ class PostNumberInputField extends ConsumerWidget {
   final double marginBottomSize;
   final String? hintText;
   final double width;
+  final PostEditFieldType type;
+  final String? errorText;
 
-  const PostNumberInputField(
-      {super.key,
-      required this.fieldName,
-      this.marginBottomSize = 0,
-      this.hintText,
-      this.width = double.infinity});
+  const PostNumberInputField({
+    super.key,
+    required this.type,
+    required this.fieldName,
+    this.marginBottomSize = 0,
+    this.hintText,
+    this.errorText,
+    this.width = double.infinity,
+  });
+
+  void onChange(WidgetRef ref, String value) {
+    ref.read(postEditProvider.notifier).updateFieldValue(type, value);
+  }
+
+  void onTap(WidgetRef ref) {
+    ref.read(postEditProvider.notifier).checkFocusedFieldChange(type);
+  }
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
@@ -185,15 +241,17 @@ class PostNumberInputField extends ConsumerWidget {
                         top: 6,
                         bottom: 6,
                       ),
+                      focusedBorder: InputBorder.none,
+                      errorBorder: InputBorder.none,
+                      focusedErrorBorder: InputBorder.none,
                       hintText: hintText,
                       hintStyle: TextStyle(
                         color: Color(0xffd3cfcf),
                       ),
-                      // errorText: getErrorText(ref),
                       border: InputBorder.none,
                     ),
-                    // onTap: () => onTap(ref),
-                    // onChanged: (value) => onChange(ref, value),
+                    onTap: () => onTap(ref),
+                    onChanged: (value) => onChange(ref, value),
                   ),
                 ),
                 Container(
@@ -204,7 +262,19 @@ class PostNumberInputField extends ConsumerWidget {
                     )),
               ],
             ),
-          )
+          ),
+          errorText != null
+              ? Container(
+                  padding: EdgeInsets.symmetric(vertical: 4, horizontal: 12),
+                  child: Text(
+                    errorText!,
+                    style: TextStyle(
+                      fontSize: 12,
+                      color: Color(0xffcc4747),
+                    ),
+                  ),
+                )
+              : Container(),
         ],
       ),
     );
@@ -217,10 +287,25 @@ class PostDropdownInputField extends ConsumerWidget {
   final String? hintText;
   final int maxLines;
   final double width;
+  final PostEditFieldType type;
+
+  void onChange(WidgetRef ref, RestaurantCategory? value) {
+    if (value == null) {
+      ref.read(postEditProvider.notifier).updateFieldValue(
+          type,
+          ref
+              .read(postEditProvider.notifier)
+              .getRestaurantCategoryList()
+              .first);
+      return;
+    }
+    ref.read(postEditProvider.notifier).updateFieldValue(type, value);
+  }
 
   const PostDropdownInputField(
       {super.key,
       required this.fieldName,
+      required this.type,
       this.marginBottomSize = 0,
       this.hintText,
       this.maxLines = 1,
@@ -228,8 +313,6 @@ class PostDropdownInputField extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    const List<RestaurantCategory> list = RestaurantCategory.values;
-    RestaurantCategory dropdownValue = list.first;
     return Container(
       width: width,
       margin: EdgeInsets.only(bottom: marginBottomSize),
@@ -256,14 +339,17 @@ class PostDropdownInputField extends ConsumerWidget {
               borderRadius: BorderRadius.circular(12),
               menuMaxHeight: 200,
               isExpanded: true,
-              value: dropdownValue,
+              value: ref.watch(postEditProvider).restaurantCategory,
               elevation: 16,
               underline: Container(
                 height: 2,
               ),
-              onChanged: (value) {},
-              items: list.map<DropdownMenuItem<RestaurantCategory>>(
-                  (RestaurantCategory value) {
+              onChanged: (value) => onChange(ref, value),
+              items: ref
+                  .read(postEditProvider.notifier)
+                  .getRestaurantCategoryList()
+                  .map<DropdownMenuItem<RestaurantCategory>>(
+                      (RestaurantCategory value) {
                 return DropdownMenuItem<RestaurantCategory>(
                   value: value,
                   child: Text(value.name),
