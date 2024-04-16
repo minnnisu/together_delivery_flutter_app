@@ -2,6 +2,7 @@ import 'dart:io';
 
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/widgets.dart';
 import 'package:image_picker/image_picker.dart';
 
 class PostEditImageField extends StatefulWidget {
@@ -12,7 +13,7 @@ class PostEditImageField extends StatefulWidget {
 }
 
 class _PostEditImageFieldState extends State<PostEditImageField> {
-  XFile? _image; //이미지를 담을 변수 선언
+  List<XFile> images = [];
   final ImagePicker picker = ImagePicker(); //ImagePicker 초기화
 
   //이미지를 가져오는 함수
@@ -21,7 +22,7 @@ class _PostEditImageFieldState extends State<PostEditImageField> {
     final XFile? pickedFile = await picker.pickImage(source: imageSource);
     if (pickedFile != null) {
       setState(() {
-        _image = XFile(pickedFile.path); //가져온 이미지를 _image에 저장
+        images.add(XFile(pickedFile.path)); //가져온 이미지를 _image에 저장
       });
     }
   }
@@ -36,17 +37,17 @@ class _PostEditImageFieldState extends State<PostEditImageField> {
           },
           child: Text("갤러리"),
         ),
-        _image != null
-            ? Container(
-                width: 300,
-                height: 300,
-                child: Image.file(File(_image!.path)), //가져온 이미지를 화면에 띄워주는 코드
-              )
-            : Container(
-                width: 300,
-                height: 300,
-                color: Colors.grey,
-              ),
+        GridView.builder(
+          gridDelegate:
+              SliverGridDelegateWithFixedCrossAxisCount(crossAxisCount: 3),
+          itemBuilder: (context, index) => Container(
+            width: 300,
+            height: 300,
+            child: Image.file(
+              File(images[index].path),
+            ),
+          ),
+        ),
       ],
     );
   }

@@ -1,42 +1,45 @@
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:image_picker/image_picker.dart';
 import 'package:together_delivery_app/constant/restaurantCategory.dart';
 import 'package:together_delivery_app/post/const/postEditFieldType.dart';
 import 'package:together_delivery_app/post/model/postEditModel.dart';
 
 typedef ValidationResult = ({bool isValid, String? message});
 
-
 final postEditProvider = StateNotifierProvider<PostEditNotifier, PostEditModel>(
-      (ref) {
-    return PostEditNotifier();
+  (ref) {
+    final ImagePicker picker = ImagePicker();
+
+    return PostEditNotifier(picker);
   },
 );
 
 class PostEditNotifier extends StateNotifier<PostEditModel> {
-  PostEditNotifier()
+  final ImagePicker picker;
+
+  PostEditNotifier(this.picker)
       : super(
-    PostEditModel(
-        title: "",
-        content: "",
-        restaurantCategory: RestaurantCategory.AMERICAN_FOOD,
-        restaurantName: "",
-        deliveryFee: "",
-        minOrderFee: "",
-        location: "",
+          PostEditModel(
+            title: "",
+            content: "",
+            restaurantCategory: RestaurantCategory.AMERICAN_FOOD,
+            restaurantName: "",
+            deliveryFee: "",
+            minOrderFee: "",
+            location: "",
+            images: [],
+            titleErrMsg: null,
+            contentErrMsg: null,
+            restaurantCategoryErrMsg: null,
+            restaurantNameErrMsg: null,
+            deliveryFeeErrMsg: null,
+            minOrderFeeErrMsg: null,
+            locationErrMsg: null,
+            currentFocusedField: null,
+          ),
+        );
 
-        titleErrMsg: null,
-        contentErrMsg: null,
-        restaurantCategoryErrMsg: null,
-        restaurantNameErrMsg: null,
-        deliveryFeeErrMsg: null,
-        minOrderFeeErrMsg: null,
-        locationErrMsg: null,
-
-        currentFocusedField: null,
-    ),
-  );
-
-  List<RestaurantCategory> getRestaurantCategoryList(){
+  List<RestaurantCategory> getRestaurantCategoryList() {
     return RestaurantCategory.values;
   }
 
@@ -150,7 +153,6 @@ class PostEditNotifier extends StateNotifier<PostEditModel> {
       return;
     }
 
-
     String value = getFieldValue(state.currentFocusedField!) as String;
 
     if (value.isEmpty) {
@@ -158,10 +160,9 @@ class PostEditNotifier extends StateNotifier<PostEditModel> {
       return;
     }
 
-
     if (state.currentFocusedField != type) {
-      ValidationResult validationResult = validate(
-          state.currentFocusedField!, value);
+      ValidationResult validationResult =
+          validate(state.currentFocusedField!, value);
       if (!validationResult.isValid) {
         updateFieldErrorValue(
             state.currentFocusedField!, validationResult.message!);
@@ -202,8 +203,8 @@ class PostEditNotifier extends StateNotifier<PostEditModel> {
       }
       if (!onlyNumberRegExp.hasMatch(value)) {
         return (
-        isValid: false,
-        message: '배달비는 숫자만 가능합니다.',
+          isValid: false,
+          message: '배달비는 숫자만 가능합니다.',
         );
       }
 
@@ -213,8 +214,8 @@ class PostEditNotifier extends StateNotifier<PostEditModel> {
         }
       } catch (e) {
         return (
-        isValid: false,
-        message: '배달비는 숫자만 가능합니다.',
+          isValid: false,
+          message: '배달비는 숫자만 가능합니다.',
         );
       }
       return (isValid: true, message: null);
@@ -226,8 +227,8 @@ class PostEditNotifier extends StateNotifier<PostEditModel> {
       }
       if (!onlyNumberRegExp.hasMatch(value)) {
         return (
-        isValid: false,
-        message: '최소주문금액은 숫자만 가능합니다.',
+          isValid: false,
+          message: '최소주문금액은 숫자만 가능합니다.',
         );
       }
 
@@ -237,8 +238,8 @@ class PostEditNotifier extends StateNotifier<PostEditModel> {
         }
       } catch (e) {
         return (
-        isValid: false,
-        message: '최소주문금액은 숫자만 가능합니다.',
+          isValid: false,
+          message: '최소주문금액은 숫자만 가능합니다.',
         );
       }
       return (isValid: true, message: null);
@@ -254,12 +255,20 @@ class PostEditNotifier extends StateNotifier<PostEditModel> {
     return (isValid: false, message: "존재하지 않은 필드입니다.");
   }
 
-  bool checkAllFieldValid(){
-    for (var fieldType in PostEditFieldType.values) {
-      if(fieldType == PostEditFieldType.restaurantCategory) continue;
+  Future getImage(ImageSource imageSource) async {
+    final XFile? pickedFile = await picker.pickImage(source: imageSource);
+    if (pickedFile != null) {
+      state = state.copyWith(images: [...state.images, XFile(pickedFile.path)]);
+    }
+  }
 
-      ValidationResult validationResult = validate(fieldType, getFieldValue(fieldType) as String);
-      if(!validationResult.isValid) {
+  bool checkAllFieldValid() {
+    for (var fieldType in PostEditFieldType.values) {
+      if (fieldType == PostEditFieldType.restaurantCategory) continue;
+
+      ValidationResult validationResult =
+          validate(fieldType, getFieldValue(fieldType) as String);
+      if (!validationResult.isValid) {
         updateFieldErrorValue(fieldType, validationResult.message!);
         return false;
       }
@@ -269,13 +278,15 @@ class PostEditNotifier extends StateNotifier<PostEditModel> {
   }
 
   Future<bool> registerPost() async {
-    if(!checkAllFieldValid()) {
+    if (!checkAllFieldValid()) {
       // return false;
     }
 
     for (var fieldType in PostEditFieldType.values) {
-      if(fieldType == PostEditFieldType.restaurantCategory){
-        print((getFieldValue(PostEditFieldType.restaurantCategory) as RestaurantCategory).name);
+      if (fieldType == PostEditFieldType.restaurantCategory) {
+        print((getFieldValue(PostEditFieldType.restaurantCategory)
+                as RestaurantCategory)
+            .name);
         continue;
       }
 
@@ -285,4 +296,3 @@ class PostEditNotifier extends StateNotifier<PostEditModel> {
     return true;
   }
 }
-

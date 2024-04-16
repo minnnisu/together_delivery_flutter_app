@@ -1,10 +1,10 @@
 import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:flutter/foundation.dart';
+import 'package:image_picker/image_picker.dart';
 import 'package:together_delivery_app/post/const/postEditFieldType.dart';
 import '../../constant/restaurantCategory.dart';
 
 part 'postEditModel.freezed.dart';
-part 'postEditModel.g.dart';
 
 
 @freezed
@@ -17,6 +17,7 @@ class PostEditModel with _$PostEditModel{
     required String deliveryFee,
     required String minOrderFee,
     required String location,
+    required List<XFile> images,
 
 
     required String? titleErrMsg,
@@ -29,6 +30,4 @@ class PostEditModel with _$PostEditModel{
 
     required PostEditFieldType? currentFocusedField,
   }) = _PostEditModel;
-
-  factory PostEditModel.fromJson(Map<String, Object?> json) => _$PostEditModelFromJson(json);
 }

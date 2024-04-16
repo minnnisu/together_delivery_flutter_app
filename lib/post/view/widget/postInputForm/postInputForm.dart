@@ -1,9 +1,12 @@
+import 'dart:io';
 import 'dart:ui';
 
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/painting.dart';
+import 'package:flutter/widgets.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:image_picker/image_picker.dart';
 import 'package:together_delivery_app/constant/restaurantCategory.dart';
 import 'package:together_delivery_app/post/const/postEditFieldType.dart';
 import 'package:together_delivery_app/post/provider/postEditNotifier.dart';
@@ -16,77 +19,93 @@ class PostInputForm extends ConsumerWidget {
   Widget build(BuildContext context, WidgetRef ref) {
     final screenWidth = MediaQuery.of(context).size.width;
     final postEditModel = ref.watch(postEditProvider);
-    return SingleChildScrollView(
-      child: Padding(
-        padding: const EdgeInsets.symmetric(horizontal: 16.0, vertical: 20),
-        child: Column(
+
+
+    return ListView(
+      padding: const EdgeInsets.symmetric(horizontal: 16.0, vertical: 20),
+      children: [
+        PostTextInputField(
+            type: PostEditFieldType.title,
+            fieldName: "제목",
+            hintText: "제목을 입력해주세요.",
+            marginBottomSize: 12,
+            errorText: postEditModel.titleErrMsg),
+        PostTextInputField(
+          type: PostEditFieldType.content,
+          fieldName: "내용",
+          hintText: "내용을 입력해주세요.",
+          maxLines: 5,
+          marginBottomSize: 12,
+          errorText: postEditModel.contentErrMsg,
+        ),
+        Row(
           crossAxisAlignment: CrossAxisAlignment.start,
+          mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
-            PostTextInputField(
-                type: PostEditFieldType.title,
-                fieldName: "제목",
-                hintText: "제목을 입력해주세요.",
-                marginBottomSize: 12,
-                errorText: postEditModel.titleErrMsg),
-            PostTextInputField(
-              type: PostEditFieldType.content,
-              fieldName: "내용",
-              hintText: "내용을 입력해주세요.",
-              maxLines: 5,
+            PostDropdownInputField(
+              type: PostEditFieldType.restaurantCategory,
+              width: screenWidth * 0.45,
+              fieldName: "카테고리",
               marginBottomSize: 12,
-              errorText: postEditModel.contentErrMsg,
-            ),
-            Row(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: [
-                PostDropdownInputField(
-                  type: PostEditFieldType.restaurantCategory,
-                  width: screenWidth * 0.45,
-                  fieldName: "카테고리",
-                  marginBottomSize: 12,
-                ),
-                PostTextInputField(
-                  type: PostEditFieldType.restaurantName,
-                  width: screenWidth * 0.45,
-                  fieldName: "가게이름",
-                  hintText: "한끼 치킨",
-                  marginBottomSize: 12,
-                ),
-              ],
-            ),
-            Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                PostNumberInputField(
-                    type: PostEditFieldType.minOrderFee,
-                    width: screenWidth * 0.45,
-                    fieldName: "최소배달금액",
-                    marginBottomSize: 12,
-                    errorText: postEditModel.minOrderFeeErrMsg),
-                PostNumberInputField(
-                    type: PostEditFieldType.deliveryFee,
-                    width: screenWidth * 0.45,
-                    fieldName: "배달비",
-                    marginBottomSize: 12,
-                    errorText: postEditModel.deliveryFeeErrMsg),
-              ],
             ),
             PostTextInputField(
-              type: PostEditFieldType.location,
-              fieldName: "만남장소",
+              type: PostEditFieldType.restaurantName,
+              width: screenWidth * 0.45,
+              fieldName: "가게이름",
+              hintText: "한끼 치킨",
               marginBottomSize: 12,
-              errorText: postEditModel.locationErrMsg,
             ),
-            TextButton(
-                onPressed: () =>
-                    ref.read(postEditProvider.notifier).registerPost(),
-                child: Text("등록")),
-            PostEditImageField()
           ],
         ),
-      ),
+        Row(
+          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            PostNumberInputField(
+                type: PostEditFieldType.minOrderFee,
+                width: screenWidth * 0.45,
+                fieldName: "최소배달금액",
+                marginBottomSize: 12,
+                errorText: postEditModel.minOrderFeeErrMsg),
+            PostNumberInputField(
+                type: PostEditFieldType.deliveryFee,
+                width: screenWidth * 0.45,
+                fieldName: "배달비",
+                marginBottomSize: 12,
+                errorText: postEditModel.deliveryFeeErrMsg),
+          ],
+        ),
+        PostTextInputField(
+          type: PostEditFieldType.location,
+          fieldName: "만남장소",
+          marginBottomSize: 12,
+          errorText: postEditModel.locationErrMsg,
+        ),
+        ElevatedButton(
+          onPressed: () {
+            ref.read(postEditProvider.notifier).getImage(ImageSource.gallery); //getImage 함수를 호출해서 갤러리에서 사진 가져오기
+          },
+          child: Text("갤러리"),
+        ),
+        GridView.builder(
+          shrinkWrap : true,
+          physics : NeverScrollableScrollPhysics(),
+          gridDelegate:
+          SliverGridDelegateWithFixedCrossAxisCount(crossAxisCount: 3),
+          itemCount: postEditModel.images.length,
+          itemBuilder: (context, index) => Container(
+            width: 300,
+            height: 300,
+            child: Image.file(
+              File(postEditModel.images[index].path),
+            ),
+          ),
+        ),
+        TextButton(
+          onPressed: () => ref.read(postEditProvider.notifier).registerPost(),
+          child: Text("등록"),
+        ),
+      ],
     );
   }
 }

@@ -14,10 +14,6 @@ T _$identity<T>(T value) => value;
 final _privateConstructorUsedError = UnsupportedError(
     'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#adding-getters-and-methods-to-our-models');
 
-PostEditModel _$PostEditModelFromJson(Map<String, dynamic> json) {
-  return _PostEditModel.fromJson(json);
-}
-
 /// @nodoc
 mixin _$PostEditModel {
   String get title => throw _privateConstructorUsedError;
@@ -28,6 +24,7 @@ mixin _$PostEditModel {
   String get deliveryFee => throw _privateConstructorUsedError;
   String get minOrderFee => throw _privateConstructorUsedError;
   String get location => throw _privateConstructorUsedError;
+  List<XFile> get images => throw _privateConstructorUsedError;
   String? get titleErrMsg => throw _privateConstructorUsedError;
   String? get contentErrMsg => throw _privateConstructorUsedError;
   String? get restaurantCategoryErrMsg => throw _privateConstructorUsedError;
@@ -38,7 +35,6 @@ mixin _$PostEditModel {
   PostEditFieldType? get currentFocusedField =>
       throw _privateConstructorUsedError;
 
-  Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
   $PostEditModelCopyWith<PostEditModel> get copyWith =>
       throw _privateConstructorUsedError;
@@ -58,6 +54,7 @@ abstract class $PostEditModelCopyWith<$Res> {
       String deliveryFee,
       String minOrderFee,
       String location,
+      List<XFile> images,
       String? titleErrMsg,
       String? contentErrMsg,
       String? restaurantCategoryErrMsg,
@@ -88,6 +85,7 @@ class _$PostEditModelCopyWithImpl<$Res, $Val extends PostEditModel>
     Object? deliveryFee = null,
     Object? minOrderFee = null,
     Object? location = null,
+    Object? images = null,
     Object? titleErrMsg = freezed,
     Object? contentErrMsg = freezed,
     Object? restaurantCategoryErrMsg = freezed,
@@ -126,6 +124,10 @@ class _$PostEditModelCopyWithImpl<$Res, $Val extends PostEditModel>
           ? _value.location
           : location // ignore: cast_nullable_to_non_nullable
               as String,
+      images: null == images
+          ? _value.images
+          : images // ignore: cast_nullable_to_non_nullable
+              as List<XFile>,
       titleErrMsg: freezed == titleErrMsg
           ? _value.titleErrMsg
           : titleErrMsg // ignore: cast_nullable_to_non_nullable
@@ -178,6 +180,7 @@ abstract class _$$PostEditModelImplCopyWith<$Res>
       String deliveryFee,
       String minOrderFee,
       String location,
+      List<XFile> images,
       String? titleErrMsg,
       String? contentErrMsg,
       String? restaurantCategoryErrMsg,
@@ -206,6 +209,7 @@ class __$$PostEditModelImplCopyWithImpl<$Res>
     Object? deliveryFee = null,
     Object? minOrderFee = null,
     Object? location = null,
+    Object? images = null,
     Object? titleErrMsg = freezed,
     Object? contentErrMsg = freezed,
     Object? restaurantCategoryErrMsg = freezed,
@@ -244,6 +248,10 @@ class __$$PostEditModelImplCopyWithImpl<$Res>
           ? _value.location
           : location // ignore: cast_nullable_to_non_nullable
               as String,
+      images: null == images
+          ? _value._images
+          : images // ignore: cast_nullable_to_non_nullable
+              as List<XFile>,
       titleErrMsg: freezed == titleErrMsg
           ? _value.titleErrMsg
           : titleErrMsg // ignore: cast_nullable_to_non_nullable
@@ -281,7 +289,7 @@ class __$$PostEditModelImplCopyWithImpl<$Res>
 }
 
 /// @nodoc
-@JsonSerializable()
+
 class _$PostEditModelImpl
     with DiagnosticableTreeMixin
     implements _PostEditModel {
@@ -293,6 +301,7 @@ class _$PostEditModelImpl
       required this.deliveryFee,
       required this.minOrderFee,
       required this.location,
+      required final List<XFile> images,
       required this.titleErrMsg,
       required this.contentErrMsg,
       required this.restaurantCategoryErrMsg,
@@ -300,10 +309,8 @@ class _$PostEditModelImpl
       required this.deliveryFeeErrMsg,
       required this.minOrderFeeErrMsg,
       required this.locationErrMsg,
-      required this.currentFocusedField});
-
-  factory _$PostEditModelImpl.fromJson(Map<String, dynamic> json) =>
-      _$$PostEditModelImplFromJson(json);
+      required this.currentFocusedField})
+      : _images = images;
 
   @override
   final String title;
@@ -319,6 +326,14 @@ class _$PostEditModelImpl
   final String minOrderFee;
   @override
   final String location;
+  final List<XFile> _images;
+  @override
+  List<XFile> get images {
+    if (_images is EqualUnmodifiableListView) return _images;
+    // ignore: implicit_dynamic_type
+    return EqualUnmodifiableListView(_images);
+  }
+
   @override
   final String? titleErrMsg;
   @override
@@ -338,7 +353,7 @@ class _$PostEditModelImpl
 
   @override
   String toString({DiagnosticLevel minLevel = DiagnosticLevel.info}) {
-    return 'PostEditModel(title: $title, content: $content, restaurantCategory: $restaurantCategory, restaurantName: $restaurantName, deliveryFee: $deliveryFee, minOrderFee: $minOrderFee, location: $location, titleErrMsg: $titleErrMsg, contentErrMsg: $contentErrMsg, restaurantCategoryErrMsg: $restaurantCategoryErrMsg, restaurantNameErrMsg: $restaurantNameErrMsg, deliveryFeeErrMsg: $deliveryFeeErrMsg, minOrderFeeErrMsg: $minOrderFeeErrMsg, locationErrMsg: $locationErrMsg, currentFocusedField: $currentFocusedField)';
+    return 'PostEditModel(title: $title, content: $content, restaurantCategory: $restaurantCategory, restaurantName: $restaurantName, deliveryFee: $deliveryFee, minOrderFee: $minOrderFee, location: $location, images: $images, titleErrMsg: $titleErrMsg, contentErrMsg: $contentErrMsg, restaurantCategoryErrMsg: $restaurantCategoryErrMsg, restaurantNameErrMsg: $restaurantNameErrMsg, deliveryFeeErrMsg: $deliveryFeeErrMsg, minOrderFeeErrMsg: $minOrderFeeErrMsg, locationErrMsg: $locationErrMsg, currentFocusedField: $currentFocusedField)';
   }
 
   @override
@@ -353,6 +368,7 @@ class _$PostEditModelImpl
       ..add(DiagnosticsProperty('deliveryFee', deliveryFee))
       ..add(DiagnosticsProperty('minOrderFee', minOrderFee))
       ..add(DiagnosticsProperty('location', location))
+      ..add(DiagnosticsProperty('images', images))
       ..add(DiagnosticsProperty('titleErrMsg', titleErrMsg))
       ..add(DiagnosticsProperty('contentErrMsg', contentErrMsg))
       ..add(DiagnosticsProperty(
@@ -381,6 +397,7 @@ class _$PostEditModelImpl
                 other.minOrderFee == minOrderFee) &&
             (identical(other.location, location) ||
                 other.location == location) &&
+            const DeepCollectionEquality().equals(other._images, _images) &&
             (identical(other.titleErrMsg, titleErrMsg) ||
                 other.titleErrMsg == titleErrMsg) &&
             (identical(other.contentErrMsg, contentErrMsg) ||
@@ -400,7 +417,6 @@ class _$PostEditModelImpl
                 other.currentFocusedField == currentFocusedField));
   }
 
-  @JsonKey(ignore: true)
   @override
   int get hashCode => Object.hash(
       runtimeType,
@@ -411,6 +427,7 @@ class _$PostEditModelImpl
       deliveryFee,
       minOrderFee,
       location,
+      const DeepCollectionEquality().hash(_images),
       titleErrMsg,
       contentErrMsg,
       restaurantCategoryErrMsg,
@@ -425,13 +442,6 @@ class _$PostEditModelImpl
   @pragma('vm:prefer-inline')
   _$$PostEditModelImplCopyWith<_$PostEditModelImpl> get copyWith =>
       __$$PostEditModelImplCopyWithImpl<_$PostEditModelImpl>(this, _$identity);
-
-  @override
-  Map<String, dynamic> toJson() {
-    return _$$PostEditModelImplToJson(
-      this,
-    );
-  }
 }
 
 abstract class _PostEditModel implements PostEditModel {
@@ -443,6 +453,7 @@ abstract class _PostEditModel implements PostEditModel {
           required final String deliveryFee,
           required final String minOrderFee,
           required final String location,
+          required final List<XFile> images,
           required final String? titleErrMsg,
           required final String? contentErrMsg,
           required final String? restaurantCategoryErrMsg,
@@ -452,9 +463,6 @@ abstract class _PostEditModel implements PostEditModel {
           required final String? locationErrMsg,
           required final PostEditFieldType? currentFocusedField}) =
       _$PostEditModelImpl;
-
-  factory _PostEditModel.fromJson(Map<String, dynamic> json) =
-      _$PostEditModelImpl.fromJson;
 
   @override
   String get title;
@@ -470,6 +478,8 @@ abstract class _PostEditModel implements PostEditModel {
   String get minOrderFee;
   @override
   String get location;
+  @override
+  List<XFile> get images;
   @override
   String? get titleErrMsg;
   @override
