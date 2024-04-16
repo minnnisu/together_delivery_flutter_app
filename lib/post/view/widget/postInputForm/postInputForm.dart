@@ -7,6 +7,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:together_delivery_app/constant/restaurantCategory.dart';
 import 'package:together_delivery_app/post/const/postEditFieldType.dart';
 import 'package:together_delivery_app/post/provider/postEditNotifier.dart';
+import 'package:together_delivery_app/post/view/widget/postInputForm/postEditImageField.dart';
 
 class PostInputForm extends ConsumerWidget {
   const PostInputForm({super.key});
@@ -81,7 +82,8 @@ class PostInputForm extends ConsumerWidget {
             TextButton(
                 onPressed: () =>
                     ref.read(postEditProvider.notifier).registerPost(),
-                child: Text("등록"))
+                child: Text("등록")),
+            PostEditImageField()
           ],
         ),
       ),
