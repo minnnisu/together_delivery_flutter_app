@@ -1,26 +1,39 @@
 import 'dart:async';
+import 'dart:convert';
+import 'dart:typed_data';
 
+import 'package:dio/dio.dart';
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:multi_image_picker_plus/multi_image_picker_plus.dart';
+import 'package:together_delivery_app/constant/errorCode.dart';
 
 import 'package:together_delivery_app/constant/restaurantCategory.dart';
+import 'package:together_delivery_app/exception/SuccessFailure.dart';
+import 'package:together_delivery_app/exception/customException.dart';
 import 'package:together_delivery_app/post/const/postEditFieldType.dart';
 import 'package:together_delivery_app/post/model/postEditModel.dart';
+import 'package:together_delivery_app/post/model/postSaveRequestModel.dart';
+import 'package:http_parser/http_parser.dart';
+import 'package:together_delivery_app/post/repository/postRepository.dart';
+
+import '../model/post_save_response_model.dart';
 
 typedef ValidationResult = ({bool isValid, String? message});
 
 final postEditProvider = StateNotifierProvider<PostEditNotifier, PostEditModel>(
   (ref) {
+    final PostRepository postRepository = ref.watch(postRepositoryProvider);
 
-
-    return PostEditNotifier();
+    return PostEditNotifier(postRepository);
   },
 );
 
 class PostEditNotifier extends StateNotifier<PostEditModel> {
+  final PostRepository postRepository;
 
-  PostEditNotifier()
+  PostEditNotifier(this.postRepository)
       : super(
           PostEditModel(
             title: "",
@@ -324,9 +337,8 @@ class PostEditNotifier extends StateNotifier<PostEditModel> {
     );
 
     try {
-      resultList = await MultiImagePicker.pickImages(
-        selectedAssets: state.images
-      );
+      resultList =
+          await MultiImagePicker.pickImages(selectedAssets: state.images);
     } on Exception catch (e) {
       print(e);
     }
@@ -339,8 +351,7 @@ class PostEditNotifier extends StateNotifier<PostEditModel> {
     state = state.copyWith(images: resultList);
   }
 
-
-  void deleteAssets(int index){
+  void deleteAssets(int index) {
     List<Asset> images = state.images;
     images.removeAt(index);
     state = state.copyWith(images: images);
@@ -349,11 +360,12 @@ class PostEditNotifier extends StateNotifier<PostEditModel> {
 
   bool checkAllFieldValid() {
     for (var fieldType in PostEditFieldType.values) {
-      if (fieldType == PostEditFieldType.restaurantCategory) continue;
+      if (fieldType == PostEditFieldType.restaurantCategory || fieldType == PostEditFieldType.restaurantName) continue;
 
       ValidationResult validationResult =
           validate(fieldType, getFieldValue(fieldType) as String);
       if (!validationResult.isValid) {
+        print(validationResult.message);
         updateFieldErrorValue(fieldType, validationResult.message!);
         return false;
       }
@@ -362,22 +374,41 @@ class PostEditNotifier extends StateNotifier<PostEditModel> {
     return true;
   }
 
-  Future<bool> registerPost() async {
+  Future<List<MultipartFile>> convertImageToFormData() async {
+    List<MultipartFile> images = [];
+
+    for (int i = 0; i < state.images.length; i++) {
+      // 각 이미지를 바이트 배열로 읽어오기
+      ByteData byteData = await state.images[i].getByteData();
+      List<int> imageData = byteData.buffer.asUint8List();
+
+      images.add(MultipartFile.fromBytes(
+        imageData,
+        filename: 'image$i.jpg',
+        contentType: MediaType('image', 'jpeg')
+      ));
+    }
+
+    return images;
+  }
+
+  Future<Result<PostSaveResponseModel, Exception>> registerPost() async {
     if (!checkAllFieldValid()) {
-      // return false;
+      return Failure(CustomException(errorCode: ErrorCode.NOT_VALID_INPUT_FORM_ERROR));
     }
 
-    for (var fieldType in PostEditFieldType.values) {
-      if (fieldType == PostEditFieldType.restaurantCategory) {
-        print((getFieldValue(PostEditFieldType.restaurantCategory)
-                as RestaurantCategory)
-            .name);
-        continue;
-      }
+    PostSaveRequestModel postSaveRequestModel = PostSaveRequestModel(
+      title: state.title,
+      content: state.content,
+      categoryCode: describeEnum(state.restaurantCategory),
+      restaurantName: state.restaurantName,
+      deliveryFee: int.parse(state.deliveryFee),
+      minOrderFee: int.parse(state.minOrderFee),
+      location: state.location,
+    );
 
-      print((getFieldValue(fieldType) as String));
-    }
-
-    return true;
+    List<MultipartFile> images = await convertImageToFormData();
+    final result = await postRepository.savePostDetail(postSaveRequestModel, images);
+    return result;
   }
 }

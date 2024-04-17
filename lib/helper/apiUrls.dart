@@ -1,10 +1,12 @@
 class apiUrls {
-  // static const String baseUrl = "http://192.168.0.2:8080";
-  static const String baseUrl = "http://10.0.2.2:8080";
+  static const String baseUrl = "http://192.168.0.2:8080";
+  // static const String baseUrl = "http://10.0.2.2:8080";
 
   static const String postGet = baseUrl + "/api/post";
 
   static const String postDetailGet = baseUrl + "/api/post";
+
+  static const String postDetailPost = baseUrl + '/api/post';
 
   static const String userRegister = baseUrl + "/auth/signup";
 
@@ -21,4 +23,5 @@ class apiUrls {
   static const String userInfoGetPath = "/api/user";
 
   static const String userInfoGet = baseUrl + "/api/user";
+
 }

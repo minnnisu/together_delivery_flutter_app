@@ -7,8 +7,12 @@ import 'package:flutter/painting.dart';
 import 'package:flutter/widgets.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:multi_image_picker_plus/multi_image_picker_plus.dart';
+import 'package:together_delivery_app/constant/errorCode.dart';
 import 'package:together_delivery_app/constant/restaurantCategory.dart';
+import 'package:together_delivery_app/exception/SuccessFailure.dart';
+import 'package:together_delivery_app/exception/customException.dart';
 import 'package:together_delivery_app/post/const/postEditFieldType.dart';
+import 'package:together_delivery_app/post/model/post_save_response_model.dart';
 import 'package:together_delivery_app/post/provider/postEditNotifier.dart';
 
 class PostInputForm extends ConsumerWidget {
@@ -126,7 +130,43 @@ class PostInputForm extends ConsumerWidget {
               );
             }),
         TextButton(
-          onPressed: () => ref.read(postEditProvider.notifier).registerPost(),
+          onPressed: () async {
+           final result = await ref.read(postEditProvider.notifier).registerPost();
+           // final _ = switch (result) {
+           //   Success(value: final responese) => responese.id,
+           //   Failure(exception: final exception) => {
+           //     return ""
+           //   }
+           // };
+
+           if(result is Success) {
+             print((result as Success<PostSaveResponseModel, Exception>).value.id);
+             return;
+           }
+
+           if(result is Failure) {
+             Failure<PostSaveResponseModel, Exception> failure = (result as Failure<PostSaveResponseModel, Exception>);
+             if(failure.exception is CustomException) {
+               if((failure.exception as CustomException).errorCode == ErrorCode.NOT_VALID_INPUT_FORM_ERROR){
+                 ScaffoldMessenger.of(context).showSnackBar(
+                   const SnackBar(
+                     content: Text("입력한 값들이 유효하지 않습니다."),
+                     duration: Duration(seconds: 8),
+                     margin: EdgeInsets.all(20),
+                     behavior: SnackBarBehavior.floating, //  required when writing margin
+                   ),
+                 );
+                 return;
+               }
+             }
+
+             print(failure.exception);
+           }
+
+
+
+
+          },
           child: Text("등록"),
         ),
       ],

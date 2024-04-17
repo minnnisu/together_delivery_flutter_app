@@ -29,6 +29,7 @@ dependencies:
   infinite_scroll_pagination: ^4.0.0
   cached_network_image: ^3.3.1
   multi_image_picker_plus: ^0.0.4
+  http_parser: ^4.0.2
 
 dev_dependencies:
   flutter_test:
