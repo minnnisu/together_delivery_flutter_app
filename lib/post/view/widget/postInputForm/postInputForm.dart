@@ -19,7 +19,6 @@ class PostInputForm extends ConsumerWidget {
     final screenWidth = MediaQuery.of(context).size.width;
     final postEditModel = ref.watch(postEditProvider);
 
-
     return ListView(
       padding: const EdgeInsets.symmetric(horizontal: 16.0, vertical: 20),
       children: [
@@ -82,22 +81,50 @@ class PostInputForm extends ConsumerWidget {
         ),
         ElevatedButton(
           onPressed: () {
-            ref.read(postEditProvider.notifier).loadAssets(context); //getImage 함수를 호출해서 갤러리에서 사진 가져오기
+            ref
+                .read(postEditProvider.notifier)
+                .loadAssets(context); //getImage 함수를 호출해서 갤러리에서 사진 가져오기
           },
           child: Text("갤러리"),
         ),
         GridView.builder(
-          shrinkWrap : true,
-          physics : NeverScrollableScrollPhysics(),
-          gridDelegate:
-          SliverGridDelegateWithFixedCrossAxisCount(crossAxisCount: 3),
-          itemCount: postEditModel.images.length,
-          itemBuilder: (context, index) {
-            Asset asset = postEditModel.images[index];
-            return AssetThumb(
-                asset: asset, width: 300, height: 300);
-          }
-        ),
+            shrinkWrap: true,
+            physics: NeverScrollableScrollPhysics(),
+            gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+                crossAxisCount: 5, crossAxisSpacing: 5, mainAxisSpacing: 5),
+            itemCount: postEditModel.images.length,
+            itemBuilder: (context, index) {
+              Asset asset = postEditModel.images[index];
+              return Stack(
+                children: [
+                  AssetThumb(
+                    asset: asset,
+                    width: 300,
+                    height: 300,
+                  ),
+                  Positioned(
+                    left: -10,
+                    top: -10,
+                    child: IconButton(
+                      style: ButtonStyle(
+                        foregroundColor:
+                            MaterialStateProperty.all<Color>(Color(0xff000000)),
+                        backgroundColor:
+                            MaterialStateProperty.all<Color>(Color(0xffffffff)),
+                      ),
+                      padding: EdgeInsets.zero,
+                      // 패딩 설정
+                      constraints: BoxConstraints(),
+                      // constraints
+                      onPressed: () => ref
+                          .read(postEditProvider.notifier)
+                          .deleteAssets(index),
+                      icon: Icon(Icons.close),
+                    ),
+                  )
+                ],
+              );
+            }),
         TextButton(
           onPressed: () => ref.read(postEditProvider.notifier).registerPost(),
           child: Text("등록"),

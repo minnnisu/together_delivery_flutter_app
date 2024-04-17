@@ -249,7 +249,7 @@ class __$$PostEditModelImplCopyWithImpl<$Res>
           : location // ignore: cast_nullable_to_non_nullable
               as String,
       images: null == images
-          ? _value._images
+          ? _value.images
           : images // ignore: cast_nullable_to_non_nullable
               as List<Asset>,
       titleErrMsg: freezed == titleErrMsg
@@ -301,7 +301,7 @@ class _$PostEditModelImpl
       required this.deliveryFee,
       required this.minOrderFee,
       required this.location,
-      required final List<Asset> images,
+      required this.images,
       required this.titleErrMsg,
       required this.contentErrMsg,
       required this.restaurantCategoryErrMsg,
@@ -309,8 +309,7 @@ class _$PostEditModelImpl
       required this.deliveryFeeErrMsg,
       required this.minOrderFeeErrMsg,
       required this.locationErrMsg,
-      required this.currentFocusedField})
-      : _images = images;
+      required this.currentFocusedField});
 
   @override
   final String title;
@@ -326,14 +325,8 @@ class _$PostEditModelImpl
   final String minOrderFee;
   @override
   final String location;
-  final List<Asset> _images;
   @override
-  List<Asset> get images {
-    if (_images is EqualUnmodifiableListView) return _images;
-    // ignore: implicit_dynamic_type
-    return EqualUnmodifiableListView(_images);
-  }
-
+  final List<Asset> images;
   @override
   final String? titleErrMsg;
   @override
@@ -397,7 +390,7 @@ class _$PostEditModelImpl
                 other.minOrderFee == minOrderFee) &&
             (identical(other.location, location) ||
                 other.location == location) &&
-            const DeepCollectionEquality().equals(other._images, _images) &&
+            const DeepCollectionEquality().equals(other.images, images) &&
             (identical(other.titleErrMsg, titleErrMsg) ||
                 other.titleErrMsg == titleErrMsg) &&
             (identical(other.contentErrMsg, contentErrMsg) ||
@@ -427,7 +420,7 @@ class _$PostEditModelImpl
       deliveryFee,
       minOrderFee,
       location,
-      const DeepCollectionEquality().hash(_images),
+      const DeepCollectionEquality().hash(images),
       titleErrMsg,
       contentErrMsg,
       restaurantCategoryErrMsg,

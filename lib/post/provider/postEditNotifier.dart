@@ -1,3 +1,5 @@
+import 'dart:async';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:multi_image_picker_plus/multi_image_picker_plus.dart';
@@ -256,13 +258,6 @@ class PostEditNotifier extends StateNotifier<PostEditModel> {
     return (isValid: false, message: "존재하지 않은 필드입니다.");
   }
 
-  // Future<void> getImage() async {
-  //   List<Asset> resultList =
-  //       await MultiImagePicker.pickImages(maxImages: 10, enableCamera: true,selectedAssets:state.images);
-  //
-  //     state = state.copyWith(images: resultList);
-  // }
-
   Future<void> loadAssets(BuildContext context) async {
     final ColorScheme colorScheme = Theme.of(context).colorScheme;
     List<Asset> resultList = <Asset>[];
@@ -342,6 +337,14 @@ class PostEditNotifier extends StateNotifier<PostEditModel> {
     if (!mounted) return;
 
     state = state.copyWith(images: resultList);
+  }
+
+
+  void deleteAssets(int index){
+    List<Asset> images = state.images;
+    images.removeAt(index);
+    state = state.copyWith(images: images);
+    print(state.images.length);
   }
 
   bool checkAllFieldValid() {

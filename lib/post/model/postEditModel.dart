@@ -7,7 +7,7 @@ import '../../constant/restaurantCategory.dart';
 part 'postEditModel.freezed.dart';
 
 
-@freezed
+@Freezed(makeCollectionsUnmodifiable: false)
 class PostEditModel with _$PostEditModel{
   const factory PostEditModel({
     required String title,
