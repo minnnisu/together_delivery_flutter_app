@@ -1,6 +1,6 @@
 import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:flutter/foundation.dart';
-import 'package:image_picker/image_picker.dart';
+import 'package:multi_image_picker_plus/multi_image_picker_plus.dart';
 import 'package:together_delivery_app/post/const/postEditFieldType.dart';
 import '../../constant/restaurantCategory.dart';
 
@@ -17,7 +17,7 @@ class PostEditModel with _$PostEditModel{
     required String deliveryFee,
     required String minOrderFee,
     required String location,
-    required List<XFile> images,
+    required List<Asset> images,
 
 
     required String? titleErrMsg,

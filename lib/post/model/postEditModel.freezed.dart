@@ -24,7 +24,7 @@ mixin _$PostEditModel {
   String get deliveryFee => throw _privateConstructorUsedError;
   String get minOrderFee => throw _privateConstructorUsedError;
   String get location => throw _privateConstructorUsedError;
-  List<XFile> get images => throw _privateConstructorUsedError;
+  List<Asset> get images => throw _privateConstructorUsedError;
   String? get titleErrMsg => throw _privateConstructorUsedError;
   String? get contentErrMsg => throw _privateConstructorUsedError;
   String? get restaurantCategoryErrMsg => throw _privateConstructorUsedError;
@@ -54,7 +54,7 @@ abstract class $PostEditModelCopyWith<$Res> {
       String deliveryFee,
       String minOrderFee,
       String location,
-      List<XFile> images,
+      List<Asset> images,
       String? titleErrMsg,
       String? contentErrMsg,
       String? restaurantCategoryErrMsg,
@@ -127,7 +127,7 @@ class _$PostEditModelCopyWithImpl<$Res, $Val extends PostEditModel>
       images: null == images
           ? _value.images
           : images // ignore: cast_nullable_to_non_nullable
-              as List<XFile>,
+              as List<Asset>,
       titleErrMsg: freezed == titleErrMsg
           ? _value.titleErrMsg
           : titleErrMsg // ignore: cast_nullable_to_non_nullable
@@ -180,7 +180,7 @@ abstract class _$$PostEditModelImplCopyWith<$Res>
       String deliveryFee,
       String minOrderFee,
       String location,
-      List<XFile> images,
+      List<Asset> images,
       String? titleErrMsg,
       String? contentErrMsg,
       String? restaurantCategoryErrMsg,
@@ -251,7 +251,7 @@ class __$$PostEditModelImplCopyWithImpl<$Res>
       images: null == images
           ? _value._images
           : images // ignore: cast_nullable_to_non_nullable
-              as List<XFile>,
+              as List<Asset>,
       titleErrMsg: freezed == titleErrMsg
           ? _value.titleErrMsg
           : titleErrMsg // ignore: cast_nullable_to_non_nullable
@@ -301,7 +301,7 @@ class _$PostEditModelImpl
       required this.deliveryFee,
       required this.minOrderFee,
       required this.location,
-      required final List<XFile> images,
+      required final List<Asset> images,
       required this.titleErrMsg,
       required this.contentErrMsg,
       required this.restaurantCategoryErrMsg,
@@ -326,9 +326,9 @@ class _$PostEditModelImpl
   final String minOrderFee;
   @override
   final String location;
-  final List<XFile> _images;
+  final List<Asset> _images;
   @override
-  List<XFile> get images {
+  List<Asset> get images {
     if (_images is EqualUnmodifiableListView) return _images;
     // ignore: implicit_dynamic_type
     return EqualUnmodifiableListView(_images);
@@ -453,7 +453,7 @@ abstract class _PostEditModel implements PostEditModel {
           required final String deliveryFee,
           required final String minOrderFee,
           required final String location,
-          required final List<XFile> images,
+          required final List<Asset> images,
           required final String? titleErrMsg,
           required final String? contentErrMsg,
           required final String? restaurantCategoryErrMsg,
@@ -479,7 +479,7 @@ abstract class _PostEditModel implements PostEditModel {
   @override
   String get location;
   @override
-  List<XFile> get images;
+  List<Asset> get images;
   @override
   String? get titleErrMsg;
   @override

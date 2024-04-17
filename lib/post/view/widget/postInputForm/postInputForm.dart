@@ -6,11 +6,10 @@ import 'package:flutter/material.dart';
 import 'package:flutter/painting.dart';
 import 'package:flutter/widgets.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:image_picker/image_picker.dart';
+import 'package:multi_image_picker_plus/multi_image_picker_plus.dart';
 import 'package:together_delivery_app/constant/restaurantCategory.dart';
 import 'package:together_delivery_app/post/const/postEditFieldType.dart';
 import 'package:together_delivery_app/post/provider/postEditNotifier.dart';
-import 'package:together_delivery_app/post/view/widget/postInputForm/postEditImageField.dart';
 
 class PostInputForm extends ConsumerWidget {
   const PostInputForm({super.key});
@@ -83,7 +82,7 @@ class PostInputForm extends ConsumerWidget {
         ),
         ElevatedButton(
           onPressed: () {
-            ref.read(postEditProvider.notifier).getImage(ImageSource.gallery); //getImage 함수를 호출해서 갤러리에서 사진 가져오기
+            ref.read(postEditProvider.notifier).loadAssets(context); //getImage 함수를 호출해서 갤러리에서 사진 가져오기
           },
           child: Text("갤러리"),
         ),
@@ -93,13 +92,11 @@ class PostInputForm extends ConsumerWidget {
           gridDelegate:
           SliverGridDelegateWithFixedCrossAxisCount(crossAxisCount: 3),
           itemCount: postEditModel.images.length,
-          itemBuilder: (context, index) => Container(
-            width: 300,
-            height: 300,
-            child: Image.file(
-              File(postEditModel.images[index].path),
-            ),
-          ),
+          itemBuilder: (context, index) {
+            Asset asset = postEditModel.images[index];
+            return AssetThumb(
+                asset: asset, width: 300, height: 300);
+          }
         ),
         TextButton(
           onPressed: () => ref.read(postEditProvider.notifier).registerPost(),

@@ -1,5 +1,7 @@
+import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:image_picker/image_picker.dart';
+import 'package:multi_image_picker_plus/multi_image_picker_plus.dart';
+
 import 'package:together_delivery_app/constant/restaurantCategory.dart';
 import 'package:together_delivery_app/post/const/postEditFieldType.dart';
 import 'package:together_delivery_app/post/model/postEditModel.dart';
@@ -8,16 +10,15 @@ typedef ValidationResult = ({bool isValid, String? message});
 
 final postEditProvider = StateNotifierProvider<PostEditNotifier, PostEditModel>(
   (ref) {
-    final ImagePicker picker = ImagePicker();
 
-    return PostEditNotifier(picker);
+
+    return PostEditNotifier();
   },
 );
 
 class PostEditNotifier extends StateNotifier<PostEditModel> {
-  final ImagePicker picker;
 
-  PostEditNotifier(this.picker)
+  PostEditNotifier()
       : super(
           PostEditModel(
             title: "",
@@ -27,7 +28,7 @@ class PostEditNotifier extends StateNotifier<PostEditModel> {
             deliveryFee: "",
             minOrderFee: "",
             location: "",
-            images: [],
+            images: <Asset>[],
             titleErrMsg: null,
             contentErrMsg: null,
             restaurantCategoryErrMsg: null,
@@ -255,11 +256,92 @@ class PostEditNotifier extends StateNotifier<PostEditModel> {
     return (isValid: false, message: "존재하지 않은 필드입니다.");
   }
 
-  Future getImage(ImageSource imageSource) async {
-    final XFile? pickedFile = await picker.pickImage(source: imageSource);
-    if (pickedFile != null) {
-      state = state.copyWith(images: [...state.images, XFile(pickedFile.path)]);
+  // Future<void> getImage() async {
+  //   List<Asset> resultList =
+  //       await MultiImagePicker.pickImages(maxImages: 10, enableCamera: true,selectedAssets:state.images);
+  //
+  //     state = state.copyWith(images: resultList);
+  // }
+
+  Future<void> loadAssets(BuildContext context) async {
+    final ColorScheme colorScheme = Theme.of(context).colorScheme;
+    List<Asset> resultList = <Asset>[];
+
+    const AlbumSetting albumSetting = AlbumSetting(
+      fetchResults: {
+        PHFetchResult(
+          type: PHAssetCollectionType.smartAlbum,
+          subtype: PHAssetCollectionSubtype.smartAlbumUserLibrary,
+        ),
+        PHFetchResult(
+          type: PHAssetCollectionType.smartAlbum,
+          subtype: PHAssetCollectionSubtype.smartAlbumFavorites,
+        ),
+        PHFetchResult(
+          type: PHAssetCollectionType.album,
+          subtype: PHAssetCollectionSubtype.albumRegular,
+        ),
+        PHFetchResult(
+          type: PHAssetCollectionType.smartAlbum,
+          subtype: PHAssetCollectionSubtype.smartAlbumSelfPortraits,
+        ),
+        PHFetchResult(
+          type: PHAssetCollectionType.smartAlbum,
+          subtype: PHAssetCollectionSubtype.smartAlbumPanoramas,
+        ),
+        PHFetchResult(
+          type: PHAssetCollectionType.smartAlbum,
+          subtype: PHAssetCollectionSubtype.smartAlbumVideos,
+        ),
+      },
+    );
+    const SelectionSetting selectionSetting = SelectionSetting(
+      min: 0,
+      max: 3,
+      unselectOnReachingMax: true,
+    );
+    const DismissSetting dismissSetting = DismissSetting(
+      enabled: true,
+      allowSwipe: true,
+    );
+    final ThemeSetting themeSetting = ThemeSetting(
+      backgroundColor: colorScheme.background,
+      selectionFillColor: colorScheme.primary,
+      selectionStrokeColor: colorScheme.onPrimary,
+      previewSubtitleAttributes: const TitleAttribute(fontSize: 12.0),
+      previewTitleAttributes: TitleAttribute(
+        foregroundColor: colorScheme.primary,
+      ),
+      albumTitleAttributes: TitleAttribute(
+        foregroundColor: colorScheme.primary,
+      ),
+    );
+    const ListSetting listSetting = ListSetting(
+      spacing: 5.0,
+      cellsPerRow: 4,
+    );
+    final CupertinoSettings iosSettings = CupertinoSettings(
+      fetch: const FetchSetting(album: albumSetting),
+      theme: themeSetting,
+      selection: selectionSetting,
+      dismiss: dismissSetting,
+      list: listSetting,
+    );
+
+    try {
+      resultList = await MultiImagePicker.pickImages(
+        selectedAssets: state.images
+      );
+    } on Exception catch (e) {
+      print(e);
     }
+
+    // If the widget was removed from the tree while the asynchronous platform
+    // message was in flight, we want to discard the reply rather than calling
+    // setState to update our non-existent appearance.
+    if (!mounted) return;
+
+    state = state.copyWith(images: resultList);
   }
 
   bool checkAllFieldValid() {
