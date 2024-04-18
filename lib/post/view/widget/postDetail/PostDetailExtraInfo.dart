@@ -1,7 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:together_delivery_app/constant/restaurantCategory.dart';
-import 'package:together_delivery_app/post/model/postDetailModel.dart';
+import 'package:together_delivery_app/post/model/post_detail_response_model.dart';
 import 'package:together_delivery_app/post/provider/postDetailNotifier.dart';
 
 class PostDetailExtraInfo extends ConsumerWidget {
@@ -10,7 +10,7 @@ class PostDetailExtraInfo extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final postDetailModel =
-        ref.watch(postDetailNotifierProvider) as PostDetailModel;
+        ref.watch(postDetailNotifierProvider) as PostDetailResponseModel;
 
     return PostDetailExtraRowWrapper(
       [

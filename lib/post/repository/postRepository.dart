@@ -4,7 +4,7 @@ import 'package:dio/dio.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:together_delivery_app/exception/SuccessFailure.dart';
 import 'package:together_delivery_app/helper/apiUrls.dart';
-import 'package:together_delivery_app/post/model/postDetailModel.dart';
+import 'package:together_delivery_app/post/model/post_detail_response_model.dart';
 import 'package:together_delivery_app/post/model/post_save_response_model.dart';
 import 'package:together_delivery_app/providers/dioProvider.dart';
 
@@ -20,11 +20,11 @@ class PostRepository {
 
   PostRepository(this.dio);
 
-  Future<PostDetailModel> getPostDetail(int postId) async {
+  Future<PostDetailResponseModel> getPostDetail(int postId) async {
     final response = await dio.get(
       '${apiUrls.postDetailGet}/$postId',
     );
-    return PostDetailModel.fromJson(response.data);
+    return PostDetailResponseModel.fromJson(response.data);
   }
 
   Future<Result<PostSaveResponseModel, Exception>> savePostDetail(PostSaveRequestModel postSaveRequestModel,
