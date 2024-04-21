@@ -15,10 +15,10 @@ class PostDetailScreen extends StatefulWidget {
 }
 
 class _PostDetailScreenState extends State<PostDetailScreen> {
+
   @override
   Widget build(BuildContext context) {
     final postId = ModalRoute.of(context)!.settings.arguments as int;
-    print(postId);
     return Scaffold(
       appBar: AppBar(
         title: Text("배달게시물"),

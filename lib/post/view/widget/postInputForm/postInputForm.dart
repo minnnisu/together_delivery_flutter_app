@@ -132,16 +132,10 @@ class PostInputForm extends ConsumerWidget {
         TextButton(
           onPressed: () async {
            final result = await ref.read(postEditProvider.notifier).registerPost();
-           // final _ = switch (result) {
-           //   Success(value: final responese) => responese.id,
-           //   Failure(exception: final exception) => {
-           //     return ""
-           //   }
-           // };
 
            if(result is Success) {
-             print((result as Success<PostSaveResponseModel, Exception>).value.id);
-             return;
+             final newPostId = (result as Success<PostSaveResponseModel, Exception>).value.id;
+             Navigator.pushReplacementNamed(context, '/postDetail', arguments: newPostId);
            }
 
            if(result is Failure) {
