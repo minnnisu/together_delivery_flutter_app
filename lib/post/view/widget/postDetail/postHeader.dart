@@ -69,30 +69,10 @@ class PostDetailHeader extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final PostDetailResponseModel = ref.watch(postDetailNotifierProvider) as post_detail_response_model.PostDetailResponseModel;
 
     return Row(
       mainAxisAlignment: MainAxisAlignment.spaceBetween,
       children: [
-        CarouselSlider.builder(
-            options: CarouselOptions(
-              height: 400,
-              aspectRatio: 16/9,
-              viewportFraction: 0.8,
-              initialPage: 0,
-              enableInfiniteScroll: true,
-              reverse: false,
-              autoPlay: true,
-              autoPlayInterval: Duration(seconds: 3),
-              autoPlayAnimationDuration: Duration(milliseconds: 800),
-              autoPlayCurve: Curves.fastOutSlowIn,
-              enlargeCenterPage: true,
-              enlargeFactor: 0.3,
-              scrollDirection: Axis.horizontal,
-            ),
-          itemCount: PostDetailResponseModel.images.length,
-          itemBuilder: (context, index, realIndex) {return Image.network("");},
-        ),
         PostDetailHeaderLeft(),
         PostDetailHeaderRight(),
       ],

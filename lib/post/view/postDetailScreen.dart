@@ -7,7 +7,6 @@ import 'package:together_delivery_app/post/provider/postDetailProvider.dart';
 import 'package:together_delivery_app/post/view/widget/postDetail/postComment.dart';
 import 'package:together_delivery_app/post/view/widget/postDetail/postDetail.dart';
 
-
 class PostDetailScreen extends StatefulWidget {
   PostDetailScreen({super.key});
 
@@ -36,27 +35,29 @@ class PostDetailScreenBody extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    return ref.watch(postDetailProvider(PostDetailRequest(postId: postId))).when(
-        loading: () => const CircularProgressIndicator(),
-        error: (err, stack) => Text('Error: $err'),
-        data: (data)
-        {
-          return Container(
-            margin: EdgeInsets.symmetric(
-              vertical: 10,
-              horizontal: 20,
-            ),
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                PostDetail(),
-                PostCommentAndReply(),
-              ],
-            ),
-          );
-        }
-    );
+    return ref
+        .watch(
+          postDetailProvider(
+            PostDetailRequest(postId: postId),
+          ),
+        )
+        .when(
+          loading: () => const CircularProgressIndicator(),
+          error: (err, stack) => Text('Error: $err'),
+          data: (data) {
+            return Container(
+              margin: EdgeInsets.symmetric(
+                vertical: 10,
+                horizontal: 20,
+              ),
+              child: ListView(
+                children: [
+                  PostDetail(),
+                  PostCommentAndReply(),
+                ],
+              ),
+            );
+          },
+        );
   }
 }
-
-

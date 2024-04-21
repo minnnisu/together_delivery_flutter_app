@@ -8,6 +8,8 @@ class apiUrls {
 
   static const String postDetailPost = baseUrl + '/api/post';
 
+  static const String postDetailPostImage = baseUrl + '/images/post';
+
   static const String userRegister = baseUrl + "/auth/signup";
 
   static const String usernameDuplicationCheck = baseUrl + "/auth/check/username";
