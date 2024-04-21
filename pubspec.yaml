@@ -31,6 +31,8 @@ dependencies:
   multi_image_picker_plus: ^0.0.4
   http_parser: ^4.0.2
   carousel_slider: ^4.2.1
+  flutter_naver_map: ^1.2.2
+  flutter_dotenv: ^5.1.0
 
 dev_dependencies:
   flutter_test:
@@ -48,6 +50,7 @@ flutter:
   uses-material-design: true
   assets:
     - assets/
+    - assets/config/.env
   fonts:
     - family: Pretendard
       fonts:
