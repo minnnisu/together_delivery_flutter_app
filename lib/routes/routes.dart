@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:together_delivery_app/post/view/kakaoLocationSetScreen.dart';
+import 'package:together_delivery_app/post/view/meetLocationSetScreen.dart';
 import 'package:together_delivery_app/post/view/postEditScreen.dart';
 import 'package:together_delivery_app/view/main_screen.dart';
 import 'package:together_delivery_app/post/view/postDetailScreen.dart';
@@ -13,5 +13,5 @@ final routes = {
   '/signup': (BuildContext content) => SignupScreen(),
   '/login': (BuildContext content) => LoginScreen(),
   '/newPost': (BuildContext context) => PostEditScreen(),
-  '/location/set': (BuildContext context) => KakaoLocationSetScreen(),
+  '/location/set': (BuildContext context) => MeetLocationSetScreen(),
 };
