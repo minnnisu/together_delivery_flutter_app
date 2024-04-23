@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:together_delivery_app/post/view/meetLocationSetScreen.dart';
+import 'package:together_delivery_app/post/view/widget/meet_location_set_screen/meet_location_set_screen.dart';
 import 'package:together_delivery_app/post/view/postEditScreen.dart';
 import 'package:together_delivery_app/view/main_screen.dart';
 import 'package:together_delivery_app/post/view/postDetailScreen.dart';

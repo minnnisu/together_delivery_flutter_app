@@ -8,7 +8,7 @@ import 'package:together_delivery_app/routes/routes.dart';
 Future<void> _initialize() async {
   WidgetsFlutterBinding.ensureInitialized();
   await NaverMapSdk.instance.initialize(
-    clientId: dotenv.env['NAVER_MAP_API_KEY'], // 클라이언트 ID 설정
+    clientId: dotenv.env['NAVER_APPLICATION_CLIENT_ID'], // 클라이언트 ID 설정
     onAuthFailed: (e) => print("네이버맵 인증오류 : $e, name: onAuthFailed"),
   );
 }

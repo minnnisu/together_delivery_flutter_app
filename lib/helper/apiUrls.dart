@@ -26,4 +26,6 @@ class apiUrls {
 
   static const String userInfoGet = baseUrl + "/api/user";
 
+  static const String reverseGeocoding = "https://naveropenapi.apigw.ntruss.com/map-reversegeocode/v2/gc";
+
 }
