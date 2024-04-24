@@ -14,17 +14,13 @@ T _$identity<T>(T value) => value;
 final _privateConstructorUsedError = UnsupportedError(
     'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#adding-getters-and-methods-to-our-models');
 
-MeetLocationSetModel _$MeetLocationSetModelFromJson(Map<String, dynamic> json) {
-  return _MeetLocationSetModel.fromJson(json);
-}
-
 /// @nodoc
 mixin _$MeetLocationSetModel {
   double get latitude => throw _privateConstructorUsedError;
   double get longitude => throw _privateConstructorUsedError;
   String get roadAddr => throw _privateConstructorUsedError;
+  Position get currentLocation => throw _privateConstructorUsedError;
 
-  Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
   $MeetLocationSetModelCopyWith<MeetLocationSetModel> get copyWith =>
       throw _privateConstructorUsedError;
@@ -36,7 +32,11 @@ abstract class $MeetLocationSetModelCopyWith<$Res> {
           $Res Function(MeetLocationSetModel) then) =
       _$MeetLocationSetModelCopyWithImpl<$Res, MeetLocationSetModel>;
   @useResult
-  $Res call({double latitude, double longitude, String roadAddr});
+  $Res call(
+      {double latitude,
+      double longitude,
+      String roadAddr,
+      Position currentLocation});
 }
 
 /// @nodoc
@@ -56,6 +56,7 @@ class _$MeetLocationSetModelCopyWithImpl<$Res,
     Object? latitude = null,
     Object? longitude = null,
     Object? roadAddr = null,
+    Object? currentLocation = null,
   }) {
     return _then(_value.copyWith(
       latitude: null == latitude
@@ -70,6 +71,10 @@ class _$MeetLocationSetModelCopyWithImpl<$Res,
           ? _value.roadAddr
           : roadAddr // ignore: cast_nullable_to_non_nullable
               as String,
+      currentLocation: null == currentLocation
+          ? _value.currentLocation
+          : currentLocation // ignore: cast_nullable_to_non_nullable
+              as Position,
     ) as $Val);
   }
 }
@@ -82,7 +87,11 @@ abstract class _$$MeetLocationSetModelImplCopyWith<$Res>
       __$$MeetLocationSetModelImplCopyWithImpl<$Res>;
   @override
   @useResult
-  $Res call({double latitude, double longitude, String roadAddr});
+  $Res call(
+      {double latitude,
+      double longitude,
+      String roadAddr,
+      Position currentLocation});
 }
 
 /// @nodoc
@@ -99,6 +108,7 @@ class __$$MeetLocationSetModelImplCopyWithImpl<$Res>
     Object? latitude = null,
     Object? longitude = null,
     Object? roadAddr = null,
+    Object? currentLocation = null,
   }) {
     return _then(_$MeetLocationSetModelImpl(
       latitude: null == latitude
@@ -113,20 +123,22 @@ class __$$MeetLocationSetModelImplCopyWithImpl<$Res>
           ? _value.roadAddr
           : roadAddr // ignore: cast_nullable_to_non_nullable
               as String,
+      currentLocation: null == currentLocation
+          ? _value.currentLocation
+          : currentLocation // ignore: cast_nullable_to_non_nullable
+              as Position,
     ));
   }
 }
 
 /// @nodoc
-@JsonSerializable()
+
 class _$MeetLocationSetModelImpl implements _MeetLocationSetModel {
   const _$MeetLocationSetModelImpl(
       {required this.latitude,
       required this.longitude,
-      required this.roadAddr});
-
-  factory _$MeetLocationSetModelImpl.fromJson(Map<String, dynamic> json) =>
-      _$$MeetLocationSetModelImplFromJson(json);
+      required this.roadAddr,
+      required this.currentLocation});
 
   @override
   final double latitude;
@@ -134,10 +146,12 @@ class _$MeetLocationSetModelImpl implements _MeetLocationSetModel {
   final double longitude;
   @override
   final String roadAddr;
+  @override
+  final Position currentLocation;
 
   @override
   String toString() {
-    return 'MeetLocationSetModel(latitude: $latitude, longitude: $longitude, roadAddr: $roadAddr)';
+    return 'MeetLocationSetModel(latitude: $latitude, longitude: $longitude, roadAddr: $roadAddr, currentLocation: $currentLocation)';
   }
 
   @override
@@ -150,12 +164,14 @@ class _$MeetLocationSetModelImpl implements _MeetLocationSetModel {
             (identical(other.longitude, longitude) ||
                 other.longitude == longitude) &&
             (identical(other.roadAddr, roadAddr) ||
-                other.roadAddr == roadAddr));
+                other.roadAddr == roadAddr) &&
+            (identical(other.currentLocation, currentLocation) ||
+                other.currentLocation == currentLocation));
   }
 
-  @JsonKey(ignore: true)
   @override
-  int get hashCode => Object.hash(runtimeType, latitude, longitude, roadAddr);
+  int get hashCode =>
+      Object.hash(runtimeType, latitude, longitude, roadAddr, currentLocation);
 
   @JsonKey(ignore: true)
   @override
@@ -164,23 +180,14 @@ class _$MeetLocationSetModelImpl implements _MeetLocationSetModel {
       get copyWith =>
           __$$MeetLocationSetModelImplCopyWithImpl<_$MeetLocationSetModelImpl>(
               this, _$identity);
-
-  @override
-  Map<String, dynamic> toJson() {
-    return _$$MeetLocationSetModelImplToJson(
-      this,
-    );
-  }
 }
 
 abstract class _MeetLocationSetModel implements MeetLocationSetModel {
   const factory _MeetLocationSetModel(
       {required final double latitude,
       required final double longitude,
-      required final String roadAddr}) = _$MeetLocationSetModelImpl;
-
-  factory _MeetLocationSetModel.fromJson(Map<String, dynamic> json) =
-      _$MeetLocationSetModelImpl.fromJson;
+      required final String roadAddr,
+      required final Position currentLocation}) = _$MeetLocationSetModelImpl;
 
   @override
   double get latitude;
@@ -188,6 +195,8 @@ abstract class _MeetLocationSetModel implements MeetLocationSetModel {
   double get longitude;
   @override
   String get roadAddr;
+  @override
+  Position get currentLocation;
   @override
   @JsonKey(ignore: true)
   _$$MeetLocationSetModelImplCopyWith<_$MeetLocationSetModelImpl>
