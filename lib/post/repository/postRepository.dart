@@ -4,11 +4,11 @@ import 'package:dio/dio.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:together_delivery_app/exception/SuccessFailure.dart';
 import 'package:together_delivery_app/helper/apiUrls.dart';
-import 'package:together_delivery_app/post/model/post_detail_response_model.dart';
-import 'package:together_delivery_app/post/model/post_save_response_model.dart';
+import 'package:together_delivery_app/post/view/post_detail_screen/model/post_detail_response_model.dart';
+import 'package:together_delivery_app/post/view/post_input_form_screen/model/post_save_response_model.dart';
 import 'package:together_delivery_app/providers/dioProvider.dart';
 
-import '../model/postSaveRequestModel.dart';
+import '../view/post_input_form_screen/model/post_save_request_model.dart';
 
 final postRepositoryProvider = Provider<PostRepository>((ref) {
   final dio = ref.read(dioProvider);

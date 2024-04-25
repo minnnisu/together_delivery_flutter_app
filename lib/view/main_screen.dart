@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:together_delivery_app/post/view/widget/meet_location_set_screen/meet_location_set_screen.dart';
-import 'package:together_delivery_app/post/view/postListScreen.dart';
+import 'package:together_delivery_app/post/view/postList/postListScreen.dart';
 import 'package:together_delivery_app/user/view/user_info_screen.dart';
 
 class MainScreen extends StatefulWidget {
@@ -12,7 +11,6 @@ class MainScreen extends StatefulWidget {
 
 List<String> appBarTitle = [
   "게시글",
-  "지도",
   "내정보",
 ];
 
@@ -20,7 +18,6 @@ class _MainScreenState extends State<MainScreen> {
   int _selectedIndex = 0;
   static const List<Widget> _widgetOptions = <Widget>[
     PostListScreen(),
-    MeetLocationSetScreen(),
     UserInfoScreen(),
   ];
 
@@ -57,10 +54,6 @@ class _MainScreenState extends State<MainScreen> {
           BottomNavigationBarItem(
             icon: Icon(Icons.home),
             label: '홈',
-          ),
-          BottomNavigationBarItem(
-            icon: Icon(Icons.map),
-            label: '지도',
           ),
           BottomNavigationBarItem(
             icon: Icon(Icons.account_circle_outlined),
