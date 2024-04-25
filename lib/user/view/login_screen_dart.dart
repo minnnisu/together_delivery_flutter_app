@@ -2,9 +2,9 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:together_delivery_app/common/widgets/inputField.dart';
+import 'package:together_delivery_app/common/widgets/submitBtn.dart';
 import 'package:together_delivery_app/user/provider/loginNotifier.dart';
-import 'package:together_delivery_app/widgets/inputField.dart';
-import 'package:together_delivery_app/widgets/submitBtn.dart';
 
 class LoginScreen extends StatefulWidget {
   const LoginScreen({super.key});

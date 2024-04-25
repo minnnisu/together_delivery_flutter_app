@@ -1,5 +1,5 @@
 import 'package:flutter/cupertino.dart';
-import 'package:together_delivery_app/widgets/border.dart';
+import 'package:together_delivery_app/common/widgets/border.dart';
 
 class SmallUserInfo extends StatelessWidget {
   const SmallUserInfo({super.key});

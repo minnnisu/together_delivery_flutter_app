@@ -1,8 +1,8 @@
 import 'package:dio/dio.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:together_delivery_app/common/const/HttpFailure.dart';
 import 'package:together_delivery_app/user/const/signupFieldType.dart';
 import 'package:together_delivery_app/user/repository/signupRepository.dart';
-import '../../constant/HttpFailure.dart';
 import '../model/signup/signupInput.dart';
 import '../model/signup/signupRequest.dart';
 

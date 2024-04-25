@@ -2,18 +2,9 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:together_delivery_app/common/widgets/fieldInput.dart';
+import 'package:together_delivery_app/common/widgets/submitBtn.dart';
 import 'package:together_delivery_app/user/const/signupFieldType.dart';
-import 'package:together_delivery_app/user/const/signupFieldType.dart';
-import 'package:together_delivery_app/user/const/signupFieldType.dart';
-import 'package:together_delivery_app/user/const/signupFieldType.dart';
-import 'package:together_delivery_app/user/const/signupFieldType.dart';
-import 'package:together_delivery_app/user/const/signupFieldType.dart';
-import 'package:together_delivery_app/user/const/signupFieldType.dart';
-import 'package:together_delivery_app/user/const/signupFieldType.dart';
-import 'package:together_delivery_app/user/model/signup/signupInput.dart';
-import 'package:together_delivery_app/user/provider/authNotifier.dart';
-import 'package:together_delivery_app/widgets/fieldInput.dart';
-import 'package:together_delivery_app/widgets/submitBtn.dart';
 
 import '../provider/signupNotifier.dart';
 

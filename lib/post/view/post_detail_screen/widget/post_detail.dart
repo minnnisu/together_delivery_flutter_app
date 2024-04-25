@@ -2,13 +2,13 @@ import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:together_delivery_app/helper/apiUrls.dart';
+import 'package:together_delivery_app/common/helper/apiUrls.dart';
+import 'package:together_delivery_app/common/widgets/border.dart';
 import 'package:together_delivery_app/post/view/post_detail_screen/model/post_detail_response_model.dart'
     as pdrm;
 import 'package:together_delivery_app/post/view/post_detail_screen/provider/post_detail_provider.dart';
 import 'package:together_delivery_app/post/view/post_detail_screen/widget/post_detail_body.dart';
 import 'package:together_delivery_app/post/view/post_detail_screen/widget/post_header.dart';
-import 'package:together_delivery_app/widgets/border.dart';
 
 class PostDetail extends ConsumerWidget {
   const PostDetail({super.key});

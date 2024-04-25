@@ -1,5 +1,5 @@
 import 'package:dio/dio.dart';
-import 'package:together_delivery_app/helper/apiUrls.dart';
+import 'package:together_delivery_app/common/helper/apiUrls.dart';
 
 import '../view/postList/model/post_list_model.dart';
 

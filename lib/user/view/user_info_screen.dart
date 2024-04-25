@@ -2,12 +2,11 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:together_delivery_app/constant/const.dart';
-import 'package:together_delivery_app/secureStore/secureStore.dart';
+import 'package:together_delivery_app/common/const/const.dart';
+import 'package:together_delivery_app/common/secureStore/secureStore.dart';
 import 'package:together_delivery_app/user/model/user/userModel.dart';
 import 'package:together_delivery_app/user/provider/authNotifier.dart';
 import 'package:together_delivery_app/user/repository/userMeRepository.dart';
-import 'package:together_delivery_app/widgets/submitBtn.dart';
 
 class UserInfoScreen extends StatefulWidget {
   const UserInfoScreen({super.key});
