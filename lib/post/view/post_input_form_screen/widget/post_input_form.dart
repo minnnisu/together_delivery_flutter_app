@@ -15,6 +15,7 @@ import 'package:together_delivery_app/post/view/post_input_form_screen/const/pos
 import 'package:together_delivery_app/post/view/post_input_form_screen/model/post_save_response_model.dart';
 import 'package:together_delivery_app/post/view/post_input_form_screen/provider/post_input_form_provider.dart';
 import 'package:together_delivery_app/post/view/post_input_form_screen/widget/post_dropdown_input_field.dart';
+import 'package:together_delivery_app/post/view/post_input_form_screen/widget/post_image_input_field.dart';
 import 'package:together_delivery_app/post/view/post_input_form_screen/widget/post_number_input_field.dart';
 import 'package:together_delivery_app/post/view/post_input_form_screen/widget/post_text_input_field.dart';
 
@@ -82,53 +83,8 @@ class PostInputForm extends ConsumerWidget {
                 errorText: postEditModel.deliveryFeeErrMsg),
           ],
         ),
-        MeetLocationInputField(),
-        ElevatedButton(
-          onPressed: () {
-            ref
-                .read(postInputFormProvider.notifier)
-                .loadAssets(context); //getImage 함수를 호출해서 갤러리에서 사진 가져오기
-          },
-          child: Text("갤러리"),
-        ),
-        GridView.builder(
-            shrinkWrap: true,
-            physics: NeverScrollableScrollPhysics(),
-            gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-                crossAxisCount: 5, crossAxisSpacing: 5, mainAxisSpacing: 5),
-            itemCount: postEditModel.images.length,
-            itemBuilder: (context, index) {
-              Asset asset = postEditModel.images[index];
-              return Stack(
-                children: [
-                  AssetThumb(
-                    asset: asset,
-                    width: 300,
-                    height: 300,
-                  ),
-                  Positioned(
-                    left: -10,
-                    top: -10,
-                    child: IconButton(
-                      style: ButtonStyle(
-                        foregroundColor:
-                            MaterialStateProperty.all<Color>(Color(0xff000000)),
-                        backgroundColor:
-                            MaterialStateProperty.all<Color>(Color(0xffffffff)),
-                      ),
-                      padding: EdgeInsets.zero,
-                      // 패딩 설정
-                      constraints: BoxConstraints(),
-                      // constraints
-                      onPressed: () => ref
-                          .read(postInputFormProvider.notifier)
-                          .deleteAssets(index),
-                      icon: Icon(Icons.close),
-                    ),
-                  )
-                ],
-              );
-            }),
+        MeetLocationInputField( marginBottomSize: 12,),
+        PostImageInputField( marginBottomSize: 12,),
         TextButton(
           onPressed: () async {
             final result =

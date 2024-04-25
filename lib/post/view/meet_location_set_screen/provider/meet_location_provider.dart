@@ -7,10 +7,12 @@ import 'package:together_delivery_app/post/view/meet_location_set_screen/model/m
 import '../model/reverse_geocoding_response.dart';
 import 'meet_location_repository.dart';
 
+typedef InfoWindowInfo = ({NInfoWindow InfoWindowInfo, String roadAddr});
+
 final meetLocationProvider =
-    StateNotifierProvider.autoDispose<MeetLocationNotifier, MeetLocationModel>((ref) {
+    StateNotifierProvider<MeetLocationNotifier, MeetLocationModel>((ref) {
   final meetLocationSetRepository =
-      ref.watch(meetLocationSetRepositoryProvider);
+      ref.watch(meetLocationRepositoryProvider);
 
   return MeetLocationNotifier(
     meetLocationSetRepository: meetLocationSetRepository,
@@ -35,7 +37,7 @@ class MeetLocationNotifier extends StateNotifier<MeetLocationModel> {
     mapControllerCompleter.complete(controller); // Completer에 지도 컨트롤러 완료 신호 전송
   }
 
-  Future<NInfoWindow> onMapTapped(NLatLng latLng) async {
+  Future<InfoWindowInfo> onMapTapped(NLatLng latLng) async {
     final marker = NMarker(id: '1', position: latLng);
     controller.addOverlay(marker);
 
@@ -43,12 +45,12 @@ class MeetLocationNotifier extends StateNotifier<MeetLocationModel> {
         await meetLocationSetRepository.getReverseGeocoding(latLng);
 
     final touchedLocation = getRoadAddr(reverseGeocodingResponse);
-    state = state.copyWith(roadAddr: touchedLocation);
+    // state = state.copyWith(roadAddr: touchedLocation);
 
     final onMarkerInfoWindow =
         NInfoWindow.onMarker(id: "1", text: touchedLocation);
     marker.openInfoWindow(onMarkerInfoWindow);
-    return onMarkerInfoWindow;
+    return (InfoWindowInfo: onMarkerInfoWindow, roadAddr: touchedLocation);
   }
 
   String getRoadAddr(ReverseGeocodingResponse reverseGeocodingResponse) {
