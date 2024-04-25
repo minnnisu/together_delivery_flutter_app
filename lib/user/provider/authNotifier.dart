@@ -1,12 +1,12 @@
 import 'package:dio/dio.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
+import 'package:together_delivery_app/common/const/const.dart';
+import 'package:together_delivery_app/common/secureStore/secureStore.dart';
 import 'package:together_delivery_app/user/model/user/userModel.dart';
 import 'package:together_delivery_app/user/repository/authRepository.dart';
 import 'package:together_delivery_app/user/repository/userMeRepository.dart';
 
-import '../../constant/const.dart';
-import '../../secureStore/secureStore.dart';
 import '../model/token/tokenResponse.dart';
 
 class AuthNotifier extends StateNotifier<UserModelBase?> {

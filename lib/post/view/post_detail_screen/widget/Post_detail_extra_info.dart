@@ -1,6 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:together_delivery_app/constant/restaurantCategory.dart';
+import 'package:together_delivery_app/common/const/restaurantCategory.dart';
 import 'package:together_delivery_app/post/view/post_detail_screen/model/post_detail_response_model.dart';
 import 'package:together_delivery_app/post/view/post_detail_screen/provider/post_detail_provider.dart';
 

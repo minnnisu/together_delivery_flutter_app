@@ -2,9 +2,9 @@ import 'package:dio/dio.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:flutter_naver_map/flutter_naver_map.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:together_delivery_app/helper/apiUrls.dart';
+import 'package:together_delivery_app/common/helper/apiUrls.dart';
+import 'package:together_delivery_app/common/provider/dioProvider.dart';
 import 'package:together_delivery_app/post/view/meet_location_set_screen/model/reverse_geocoding_response.dart';
-import 'package:together_delivery_app/providers/dioProvider.dart';
 
 final meetLocationSetRepositoryProvider = Provider<MeetLocationSetRepository>((ref) {
   final dio = ref.watch(dioProvider);

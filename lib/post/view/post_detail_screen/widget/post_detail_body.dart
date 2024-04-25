@@ -1,9 +1,9 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:together_delivery_app/common/widgets/border.dart';
 import 'package:together_delivery_app/post/view/post_detail_screen/model/post_detail_response_model.dart';
 import 'package:together_delivery_app/post/view/post_detail_screen/widget/Post_detail_extra_info.dart';
 import 'package:together_delivery_app/post/view/post_detail_screen/provider/post_detail_provider.dart';
-import 'package:together_delivery_app/widgets/border.dart';
 
 class PostDetailBody extends StatelessWidget {
   const PostDetailBody({super.key});

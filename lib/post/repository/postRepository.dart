@@ -2,11 +2,11 @@ import 'dart:convert';
 
 import 'package:dio/dio.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:together_delivery_app/exception/SuccessFailure.dart';
-import 'package:together_delivery_app/helper/apiUrls.dart';
+import 'package:together_delivery_app/common/exception/SuccessFailure.dart';
+import 'package:together_delivery_app/common/helper/apiUrls.dart';
+import 'package:together_delivery_app/common/provider/dioProvider.dart';
 import 'package:together_delivery_app/post/view/post_detail_screen/model/post_detail_response_model.dart';
 import 'package:together_delivery_app/post/view/post_input_form_screen/model/post_save_response_model.dart';
-import 'package:together_delivery_app/providers/dioProvider.dart';
 
 import '../view/post_input_form_screen/model/post_save_request_model.dart';
 

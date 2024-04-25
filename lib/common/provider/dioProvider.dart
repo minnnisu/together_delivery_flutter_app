@@ -4,14 +4,12 @@ import 'package:dio/dio.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_secure_storage/flutter_secure_storage.dart'
     as fss; // dio와 충돌하는 부분이 발생하여 별칭 지정(Options에서 충볼 발생)
-import 'package:together_delivery_app/constant/errorCode.dart';
-import 'package:together_delivery_app/exception/customException.dart';
-import 'package:together_delivery_app/helper/apiUrls.dart';
+import 'package:together_delivery_app/common/const/const.dart';
 import 'package:together_delivery_app/user/model/token/tokenResponse.dart';
+import 'package:together_delivery_app/user/provider/authNotifier.dart';
 
-import '../constant/const.dart';
 import '../secureStore/secureStore.dart';
-import '../user/provider/authNotifier.dart';
+
 
 final dioProvider = Provider<Dio>((ref) {
   final dio = Dio();

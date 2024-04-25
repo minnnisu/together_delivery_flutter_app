@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:flutter_naver_map/flutter_naver_map.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:together_delivery_app/routes/routes.dart';
+import 'package:together_delivery_app/common/routes/routes.dart';
 
 // 지도 초기화하기
 Future<void> _initialize() async {

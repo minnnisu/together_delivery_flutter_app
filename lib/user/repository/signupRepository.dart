@@ -1,7 +1,7 @@
 import 'package:dio/dio.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:together_delivery_app/helper/apiUrls.dart';
-import 'package:together_delivery_app/providers/dioProvider.dart';
+import 'package:together_delivery_app/common/helper/apiUrls.dart';
+import 'package:together_delivery_app/common/provider/dioProvider.dart';
 
 import '../model/signup/nicknameDuplicationCheck.dart';
 import '../model/signup/signupRequest.dart';

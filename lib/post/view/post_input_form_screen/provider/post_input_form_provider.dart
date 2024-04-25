@@ -1,17 +1,12 @@
-import 'dart:async';
-import 'dart:convert';
-import 'dart:typed_data';
-
 import 'package:dio/dio.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:multi_image_picker_plus/multi_image_picker_plus.dart';
-import 'package:together_delivery_app/constant/errorCode.dart';
-
-import 'package:together_delivery_app/constant/restaurantCategory.dart';
-import 'package:together_delivery_app/exception/SuccessFailure.dart';
-import 'package:together_delivery_app/exception/customException.dart';
+import 'package:together_delivery_app/common/const/errorCode.dart';
+import 'package:together_delivery_app/common/const/restaurantCategory.dart';
+import 'package:together_delivery_app/common/exception/SuccessFailure.dart';
+import 'package:together_delivery_app/common/exception/customException.dart';
 import 'package:together_delivery_app/post/view/post_input_form_screen/const/post_input_form_field_type.dart';
 import 'package:together_delivery_app/post/view/post_input_form_screen/model/post_input_form_model.dart';
 import 'package:together_delivery_app/post/view/post_input_form_screen/model/post_save_request_model.dart';
