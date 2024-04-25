@@ -8,7 +8,7 @@ import '../model/reverse_geocoding_response.dart';
 import 'meet_location_repository.dart';
 
 final meetLocationProvider =
-    StateNotifierProvider<MeetLocationNotifier, MeetLocationModel>((ref) {
+    StateNotifierProvider.autoDispose<MeetLocationNotifier, MeetLocationModel>((ref) {
   final meetLocationSetRepository =
       ref.watch(meetLocationSetRepositoryProvider);
 

@@ -17,7 +17,7 @@ import 'package:together_delivery_app/post/view/post_input_form_screen/model/pos
 
 typedef ValidationResult = ({bool isValid, String? message});
 
-final postInputFormProvider = StateNotifierProvider<PostInputFormNotifier, PostInputFormModel>(
+final postInputFormProvider = StateNotifierProvider.autoDispose<PostInputFormNotifier, PostInputFormModel>(
   (ref) {
     final PostRepository postRepository = ref.watch(postRepositoryProvider);
 
