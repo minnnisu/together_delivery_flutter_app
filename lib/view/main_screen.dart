@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:together_delivery_app/screens/post_list_screen.dart';
+import 'package:together_delivery_app/post/view/postList/postListScreen.dart';
 import 'package:together_delivery_app/user/view/user_info_screen.dart';
 
 class MainScreen extends StatefulWidget {
@@ -43,6 +43,12 @@ class _MainScreenState extends State<MainScreen> {
         width: double.infinity,
         child: _widgetOptions.elementAt(_selectedIndex),
       ),
+      floatingActionButton: _selectedIndex == 0
+          ? FloatingActionButton(
+              onPressed: () => Navigator.pushNamed(context, "/newPost"),
+              child: const Icon(Icons.add),
+            )
+          : null,
       bottomNavigationBar: BottomNavigationBar(
         items: const <BottomNavigationBarItem>[
           BottomNavigationBarItem(
