@@ -40,7 +40,7 @@ class PostDetailExtraInfo extends ConsumerWidget {
             ),
             PostDetailExtraInfoItem(
               itemKey: "만남장소",
-              itemValue: postDetailModel.location,
+              itemValue: postDetailModel.meetLocation.address,
             ),
           ],
         ),

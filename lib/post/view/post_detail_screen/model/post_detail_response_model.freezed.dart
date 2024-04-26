@@ -29,7 +29,7 @@ mixin _$PostDetailResponseModel {
   String get categoryCode => throw _privateConstructorUsedError;
   int get deliveryFee => throw _privateConstructorUsedError;
   int get minOrderFee => throw _privateConstructorUsedError;
-  String get location => throw _privateConstructorUsedError;
+  MeetLocationModel get meetLocation => throw _privateConstructorUsedError;
   bool get status => throw _privateConstructorUsedError;
   String get createdAt => throw _privateConstructorUsedError;
   String get updatedAt => throw _privateConstructorUsedError;
@@ -56,11 +56,13 @@ abstract class $PostDetailResponseModelCopyWith<$Res> {
       String categoryCode,
       int deliveryFee,
       int minOrderFee,
-      String location,
+      MeetLocationModel meetLocation,
       bool status,
       String createdAt,
       String updatedAt,
       List<Image> images});
+
+  $MeetLocationModelCopyWith<$Res> get meetLocation;
 }
 
 /// @nodoc
@@ -85,7 +87,7 @@ class _$PostDetailResponseModelCopyWithImpl<$Res,
     Object? categoryCode = null,
     Object? deliveryFee = null,
     Object? minOrderFee = null,
-    Object? location = null,
+    Object? meetLocation = null,
     Object? status = null,
     Object? createdAt = null,
     Object? updatedAt = null,
@@ -124,10 +126,10 @@ class _$PostDetailResponseModelCopyWithImpl<$Res,
           ? _value.minOrderFee
           : minOrderFee // ignore: cast_nullable_to_non_nullable
               as int,
-      location: null == location
-          ? _value.location
-          : location // ignore: cast_nullable_to_non_nullable
-              as String,
+      meetLocation: null == meetLocation
+          ? _value.meetLocation
+          : meetLocation // ignore: cast_nullable_to_non_nullable
+              as MeetLocationModel,
       status: null == status
           ? _value.status
           : status // ignore: cast_nullable_to_non_nullable
@@ -145,6 +147,14 @@ class _$PostDetailResponseModelCopyWithImpl<$Res,
           : images // ignore: cast_nullable_to_non_nullable
               as List<Image>,
     ) as $Val);
+  }
+
+  @override
+  @pragma('vm:prefer-inline')
+  $MeetLocationModelCopyWith<$Res> get meetLocation {
+    return $MeetLocationModelCopyWith<$Res>(_value.meetLocation, (value) {
+      return _then(_value.copyWith(meetLocation: value) as $Val);
+    });
   }
 }
 
@@ -166,11 +176,14 @@ abstract class _$$PostDetailResponseModelImplCopyWith<$Res>
       String categoryCode,
       int deliveryFee,
       int minOrderFee,
-      String location,
+      MeetLocationModel meetLocation,
       bool status,
       String createdAt,
       String updatedAt,
       List<Image> images});
+
+  @override
+  $MeetLocationModelCopyWith<$Res> get meetLocation;
 }
 
 /// @nodoc
@@ -194,7 +207,7 @@ class __$$PostDetailResponseModelImplCopyWithImpl<$Res>
     Object? categoryCode = null,
     Object? deliveryFee = null,
     Object? minOrderFee = null,
-    Object? location = null,
+    Object? meetLocation = null,
     Object? status = null,
     Object? createdAt = null,
     Object? updatedAt = null,
@@ -233,10 +246,10 @@ class __$$PostDetailResponseModelImplCopyWithImpl<$Res>
           ? _value.minOrderFee
           : minOrderFee // ignore: cast_nullable_to_non_nullable
               as int,
-      location: null == location
-          ? _value.location
-          : location // ignore: cast_nullable_to_non_nullable
-              as String,
+      meetLocation: null == meetLocation
+          ? _value.meetLocation
+          : meetLocation // ignore: cast_nullable_to_non_nullable
+              as MeetLocationModel,
       status: null == status
           ? _value.status
           : status // ignore: cast_nullable_to_non_nullable
@@ -269,7 +282,7 @@ class _$PostDetailResponseModelImpl implements _PostDetailResponseModel {
       required this.categoryCode,
       required this.deliveryFee,
       required this.minOrderFee,
-      required this.location,
+      required this.meetLocation,
       required this.status,
       required this.createdAt,
       required this.updatedAt,
@@ -296,7 +309,7 @@ class _$PostDetailResponseModelImpl implements _PostDetailResponseModel {
   @override
   final int minOrderFee;
   @override
-  final String location;
+  final MeetLocationModel meetLocation;
   @override
   final bool status;
   @override
@@ -313,7 +326,7 @@ class _$PostDetailResponseModelImpl implements _PostDetailResponseModel {
 
   @override
   String toString() {
-    return 'PostDetailResponseModel(id: $id, nickname: $nickname, title: $title, content: $content, restaurantName: $restaurantName, categoryCode: $categoryCode, deliveryFee: $deliveryFee, minOrderFee: $minOrderFee, location: $location, status: $status, createdAt: $createdAt, updatedAt: $updatedAt, images: $images)';
+    return 'PostDetailResponseModel(id: $id, nickname: $nickname, title: $title, content: $content, restaurantName: $restaurantName, categoryCode: $categoryCode, deliveryFee: $deliveryFee, minOrderFee: $minOrderFee, meetLocation: $meetLocation, status: $status, createdAt: $createdAt, updatedAt: $updatedAt, images: $images)';
   }
 
   @override
@@ -334,8 +347,8 @@ class _$PostDetailResponseModelImpl implements _PostDetailResponseModel {
                 other.deliveryFee == deliveryFee) &&
             (identical(other.minOrderFee, minOrderFee) ||
                 other.minOrderFee == minOrderFee) &&
-            (identical(other.location, location) ||
-                other.location == location) &&
+            (identical(other.meetLocation, meetLocation) ||
+                other.meetLocation == meetLocation) &&
             (identical(other.status, status) || other.status == status) &&
             (identical(other.createdAt, createdAt) ||
                 other.createdAt == createdAt) &&
@@ -356,7 +369,7 @@ class _$PostDetailResponseModelImpl implements _PostDetailResponseModel {
       categoryCode,
       deliveryFee,
       minOrderFee,
-      location,
+      meetLocation,
       status,
       createdAt,
       updatedAt,
@@ -387,7 +400,7 @@ abstract class _PostDetailResponseModel implements PostDetailResponseModel {
       required final String categoryCode,
       required final int deliveryFee,
       required final int minOrderFee,
-      required final String location,
+      required final MeetLocationModel meetLocation,
       required final bool status,
       required final String createdAt,
       required final String updatedAt,
@@ -413,7 +426,7 @@ abstract class _PostDetailResponseModel implements PostDetailResponseModel {
   @override
   int get minOrderFee;
   @override
-  String get location;
+  MeetLocationModel get meetLocation;
   @override
   bool get status;
   @override
@@ -436,7 +449,7 @@ Image _$ImageFromJson(Map<String, dynamic> json) {
 mixin _$Image {
   int get id => throw _privateConstructorUsedError;
   String get imageName => throw _privateConstructorUsedError;
-  String get createdAt => throw _privateConstructorUsedError;
+  DateTime get createdAt => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
@@ -448,7 +461,7 @@ abstract class $ImageCopyWith<$Res> {
   factory $ImageCopyWith(Image value, $Res Function(Image) then) =
       _$ImageCopyWithImpl<$Res, Image>;
   @useResult
-  $Res call({int id, String imageName, String createdAt});
+  $Res call({int id, String imageName, DateTime createdAt});
 }
 
 /// @nodoc
@@ -480,7 +493,7 @@ class _$ImageCopyWithImpl<$Res, $Val extends Image>
       createdAt: null == createdAt
           ? _value.createdAt
           : createdAt // ignore: cast_nullable_to_non_nullable
-              as String,
+              as DateTime,
     ) as $Val);
   }
 }
@@ -492,7 +505,7 @@ abstract class _$$ImageImplCopyWith<$Res> implements $ImageCopyWith<$Res> {
       __$$ImageImplCopyWithImpl<$Res>;
   @override
   @useResult
-  $Res call({int id, String imageName, String createdAt});
+  $Res call({int id, String imageName, DateTime createdAt});
 }
 
 /// @nodoc
@@ -522,7 +535,7 @@ class __$$ImageImplCopyWithImpl<$Res>
       createdAt: null == createdAt
           ? _value.createdAt
           : createdAt // ignore: cast_nullable_to_non_nullable
-              as String,
+              as DateTime,
     ));
   }
 }
@@ -541,7 +554,7 @@ class _$ImageImpl implements _Image {
   @override
   final String imageName;
   @override
-  final String createdAt;
+  final DateTime createdAt;
 
   @override
   String toString() {
@@ -582,7 +595,7 @@ abstract class _Image implements Image {
   const factory _Image(
       {required final int id,
       required final String imageName,
-      required final String createdAt}) = _$ImageImpl;
+      required final DateTime createdAt}) = _$ImageImpl;
 
   factory _Image.fromJson(Map<String, dynamic> json) = _$ImageImpl.fromJson;
 
@@ -591,7 +604,7 @@ abstract class _Image implements Image {
   @override
   String get imageName;
   @override
-  String get createdAt;
+  DateTime get createdAt;
   @override
   @JsonKey(ignore: true)
   _$$ImageImplCopyWith<_$ImageImpl> get copyWith =>

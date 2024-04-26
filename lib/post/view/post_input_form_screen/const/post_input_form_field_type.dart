@@ -5,5 +5,7 @@ enum PostInputFormFieldType {
   restaurantName,
   deliveryFee,
   minOrderFee,
-  location
+  address,
+  latitude,
+  longitude,
 }

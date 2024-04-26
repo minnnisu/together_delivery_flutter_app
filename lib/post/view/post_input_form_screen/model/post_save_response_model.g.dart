@@ -17,7 +17,8 @@ _$PostSaveResponseModelImpl _$$PostSaveResponseModelImplFromJson(
       categoryCode: json['categoryCode'] as String,
       deliveryFee: json['deliveryFee'] as int,
       minOrderFee: json['minOrderFee'] as int,
-      location: json['location'] as String,
+      meetLocation: MeetLocationModel.fromJson(
+          json['meetLocation'] as Map<String, dynamic>),
       status: json['status'] as bool,
       createdAt: DateTime.parse(json['createdAt'] as String),
       updatedAt: DateTime.parse(json['updatedAt'] as String),
@@ -37,7 +38,7 @@ Map<String, dynamic> _$$PostSaveResponseModelImplToJson(
       'categoryCode': instance.categoryCode,
       'deliveryFee': instance.deliveryFee,
       'minOrderFee': instance.minOrderFee,
-      'location': instance.location,
+      'meetLocation': instance.meetLocation,
       'status': instance.status,
       'createdAt': instance.createdAt.toIso8601String(),
       'updatedAt': instance.updatedAt.toIso8601String(),

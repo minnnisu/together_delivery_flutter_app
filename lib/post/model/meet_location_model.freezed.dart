@@ -14,12 +14,17 @@ T _$identity<T>(T value) => value;
 final _privateConstructorUsedError = UnsupportedError(
     'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#adding-getters-and-methods-to-our-models');
 
+MeetLocationModel _$MeetLocationModelFromJson(Map<String, dynamic> json) {
+  return _MeetLocationModel.fromJson(json);
+}
+
 /// @nodoc
 mixin _$MeetLocationModel {
+  String get address => throw _privateConstructorUsedError;
   double get latitude => throw _privateConstructorUsedError;
   double get longitude => throw _privateConstructorUsedError;
-  String get roadAddr => throw _privateConstructorUsedError;
 
+  Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
   $MeetLocationModelCopyWith<MeetLocationModel> get copyWith =>
       throw _privateConstructorUsedError;
@@ -31,7 +36,7 @@ abstract class $MeetLocationModelCopyWith<$Res> {
           MeetLocationModel value, $Res Function(MeetLocationModel) then) =
       _$MeetLocationModelCopyWithImpl<$Res, MeetLocationModel>;
   @useResult
-  $Res call({double latitude, double longitude, String roadAddr});
+  $Res call({String address, double latitude, double longitude});
 }
 
 /// @nodoc
@@ -47,11 +52,15 @@ class _$MeetLocationModelCopyWithImpl<$Res, $Val extends MeetLocationModel>
   @pragma('vm:prefer-inline')
   @override
   $Res call({
+    Object? address = null,
     Object? latitude = null,
     Object? longitude = null,
-    Object? roadAddr = null,
   }) {
     return _then(_value.copyWith(
+      address: null == address
+          ? _value.address
+          : address // ignore: cast_nullable_to_non_nullable
+              as String,
       latitude: null == latitude
           ? _value.latitude
           : latitude // ignore: cast_nullable_to_non_nullable
@@ -60,10 +69,6 @@ class _$MeetLocationModelCopyWithImpl<$Res, $Val extends MeetLocationModel>
           ? _value.longitude
           : longitude // ignore: cast_nullable_to_non_nullable
               as double,
-      roadAddr: null == roadAddr
-          ? _value.roadAddr
-          : roadAddr // ignore: cast_nullable_to_non_nullable
-              as String,
     ) as $Val);
   }
 }
@@ -76,7 +81,7 @@ abstract class _$$MeetLocationModelImplCopyWith<$Res>
       __$$MeetLocationModelImplCopyWithImpl<$Res>;
   @override
   @useResult
-  $Res call({double latitude, double longitude, String roadAddr});
+  $Res call({String address, double latitude, double longitude});
 }
 
 /// @nodoc
@@ -90,11 +95,15 @@ class __$$MeetLocationModelImplCopyWithImpl<$Res>
   @pragma('vm:prefer-inline')
   @override
   $Res call({
+    Object? address = null,
     Object? latitude = null,
     Object? longitude = null,
-    Object? roadAddr = null,
   }) {
     return _then(_$MeetLocationModelImpl(
+      address: null == address
+          ? _value.address
+          : address // ignore: cast_nullable_to_non_nullable
+              as String,
       latitude: null == latitude
           ? _value.latitude
           : latitude // ignore: cast_nullable_to_non_nullable
@@ -103,32 +112,29 @@ class __$$MeetLocationModelImplCopyWithImpl<$Res>
           ? _value.longitude
           : longitude // ignore: cast_nullable_to_non_nullable
               as double,
-      roadAddr: null == roadAddr
-          ? _value.roadAddr
-          : roadAddr // ignore: cast_nullable_to_non_nullable
-              as String,
     ));
   }
 }
 
 /// @nodoc
-
+@JsonSerializable()
 class _$MeetLocationModelImpl implements _MeetLocationModel {
   const _$MeetLocationModelImpl(
-      {required this.latitude,
-      required this.longitude,
-      required this.roadAddr});
+      {required this.address, required this.latitude, required this.longitude});
 
+  factory _$MeetLocationModelImpl.fromJson(Map<String, dynamic> json) =>
+      _$$MeetLocationModelImplFromJson(json);
+
+  @override
+  final String address;
   @override
   final double latitude;
   @override
   final double longitude;
-  @override
-  final String roadAddr;
 
   @override
   String toString() {
-    return 'MeetLocationModel(latitude: $latitude, longitude: $longitude, roadAddr: $roadAddr)';
+    return 'MeetLocationModel(address: $address, latitude: $latitude, longitude: $longitude)';
   }
 
   @override
@@ -136,16 +142,16 @@ class _$MeetLocationModelImpl implements _MeetLocationModel {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$MeetLocationModelImpl &&
+            (identical(other.address, address) || other.address == address) &&
             (identical(other.latitude, latitude) ||
                 other.latitude == latitude) &&
             (identical(other.longitude, longitude) ||
-                other.longitude == longitude) &&
-            (identical(other.roadAddr, roadAddr) ||
-                other.roadAddr == roadAddr));
+                other.longitude == longitude));
   }
 
+  @JsonKey(ignore: true)
   @override
-  int get hashCode => Object.hash(runtimeType, latitude, longitude, roadAddr);
+  int get hashCode => Object.hash(runtimeType, address, latitude, longitude);
 
   @JsonKey(ignore: true)
   @override
@@ -153,20 +159,30 @@ class _$MeetLocationModelImpl implements _MeetLocationModel {
   _$$MeetLocationModelImplCopyWith<_$MeetLocationModelImpl> get copyWith =>
       __$$MeetLocationModelImplCopyWithImpl<_$MeetLocationModelImpl>(
           this, _$identity);
+
+  @override
+  Map<String, dynamic> toJson() {
+    return _$$MeetLocationModelImplToJson(
+      this,
+    );
+  }
 }
 
 abstract class _MeetLocationModel implements MeetLocationModel {
   const factory _MeetLocationModel(
-      {required final double latitude,
-      required final double longitude,
-      required final String roadAddr}) = _$MeetLocationModelImpl;
+      {required final String address,
+      required final double latitude,
+      required final double longitude}) = _$MeetLocationModelImpl;
 
+  factory _MeetLocationModel.fromJson(Map<String, dynamic> json) =
+      _$MeetLocationModelImpl.fromJson;
+
+  @override
+  String get address;
   @override
   double get latitude;
   @override
   double get longitude;
-  @override
-  String get roadAddr;
   @override
   @JsonKey(ignore: true)
   _$$MeetLocationModelImplCopyWith<_$MeetLocationModelImpl> get copyWith =>

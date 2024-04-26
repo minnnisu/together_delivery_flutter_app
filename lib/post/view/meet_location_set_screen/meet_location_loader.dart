@@ -82,10 +82,17 @@ class _NaverMap extends ConsumerWidget {
         targetInfoWindowInfo.InfoWindowInfo.setOnTapListener(
           (overlay) {
             ref.watch(postInputFormProvider.notifier).updateFieldValue(
-                  PostInputFormFieldType.location,
-                  targetInfoWindowInfo.roadAddr,
+                  PostInputFormFieldType.address,
+                  targetInfoWindowInfo.meetLocation.address,
                 );
-
+            ref.watch(postInputFormProvider.notifier).updateFieldValue(
+              PostInputFormFieldType.latitude,
+              targetInfoWindowInfo.meetLocation.latitude,
+            );
+            ref.watch(postInputFormProvider.notifier).updateFieldValue(
+              PostInputFormFieldType.longitude,
+              targetInfoWindowInfo.meetLocation.longitude,
+            );
             Navigator.pop(context);
           },
         );

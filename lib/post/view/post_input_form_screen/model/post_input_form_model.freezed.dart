@@ -23,15 +23,17 @@ mixin _$PostInputFormModel {
   String get restaurantName => throw _privateConstructorUsedError;
   String get deliveryFee => throw _privateConstructorUsedError;
   String get minOrderFee => throw _privateConstructorUsedError;
-  String get location => throw _privateConstructorUsedError;
   List<Asset> get images => throw _privateConstructorUsedError;
+  String get address => throw _privateConstructorUsedError;
+  double get latitude => throw _privateConstructorUsedError;
+  double get longitude => throw _privateConstructorUsedError;
   String? get titleErrMsg => throw _privateConstructorUsedError;
   String? get contentErrMsg => throw _privateConstructorUsedError;
   String? get restaurantCategoryErrMsg => throw _privateConstructorUsedError;
   String? get restaurantNameErrMsg => throw _privateConstructorUsedError;
   String? get deliveryFeeErrMsg => throw _privateConstructorUsedError;
   String? get minOrderFeeErrMsg => throw _privateConstructorUsedError;
-  String? get locationErrMsg => throw _privateConstructorUsedError;
+  String? get addressErrMsg => throw _privateConstructorUsedError;
   PostInputFormFieldType? get currentFocusedField =>
       throw _privateConstructorUsedError;
 
@@ -53,15 +55,17 @@ abstract class $PostInputFormModelCopyWith<$Res> {
       String restaurantName,
       String deliveryFee,
       String minOrderFee,
-      String location,
       List<Asset> images,
+      String address,
+      double latitude,
+      double longitude,
       String? titleErrMsg,
       String? contentErrMsg,
       String? restaurantCategoryErrMsg,
       String? restaurantNameErrMsg,
       String? deliveryFeeErrMsg,
       String? minOrderFeeErrMsg,
-      String? locationErrMsg,
+      String? addressErrMsg,
       PostInputFormFieldType? currentFocusedField});
 }
 
@@ -84,15 +88,17 @@ class _$PostInputFormModelCopyWithImpl<$Res, $Val extends PostInputFormModel>
     Object? restaurantName = null,
     Object? deliveryFee = null,
     Object? minOrderFee = null,
-    Object? location = null,
     Object? images = null,
+    Object? address = null,
+    Object? latitude = null,
+    Object? longitude = null,
     Object? titleErrMsg = freezed,
     Object? contentErrMsg = freezed,
     Object? restaurantCategoryErrMsg = freezed,
     Object? restaurantNameErrMsg = freezed,
     Object? deliveryFeeErrMsg = freezed,
     Object? minOrderFeeErrMsg = freezed,
-    Object? locationErrMsg = freezed,
+    Object? addressErrMsg = freezed,
     Object? currentFocusedField = freezed,
   }) {
     return _then(_value.copyWith(
@@ -120,14 +126,22 @@ class _$PostInputFormModelCopyWithImpl<$Res, $Val extends PostInputFormModel>
           ? _value.minOrderFee
           : minOrderFee // ignore: cast_nullable_to_non_nullable
               as String,
-      location: null == location
-          ? _value.location
-          : location // ignore: cast_nullable_to_non_nullable
-              as String,
       images: null == images
           ? _value.images
           : images // ignore: cast_nullable_to_non_nullable
               as List<Asset>,
+      address: null == address
+          ? _value.address
+          : address // ignore: cast_nullable_to_non_nullable
+              as String,
+      latitude: null == latitude
+          ? _value.latitude
+          : latitude // ignore: cast_nullable_to_non_nullable
+              as double,
+      longitude: null == longitude
+          ? _value.longitude
+          : longitude // ignore: cast_nullable_to_non_nullable
+              as double,
       titleErrMsg: freezed == titleErrMsg
           ? _value.titleErrMsg
           : titleErrMsg // ignore: cast_nullable_to_non_nullable
@@ -152,9 +166,9 @@ class _$PostInputFormModelCopyWithImpl<$Res, $Val extends PostInputFormModel>
           ? _value.minOrderFeeErrMsg
           : minOrderFeeErrMsg // ignore: cast_nullable_to_non_nullable
               as String?,
-      locationErrMsg: freezed == locationErrMsg
-          ? _value.locationErrMsg
-          : locationErrMsg // ignore: cast_nullable_to_non_nullable
+      addressErrMsg: freezed == addressErrMsg
+          ? _value.addressErrMsg
+          : addressErrMsg // ignore: cast_nullable_to_non_nullable
               as String?,
       currentFocusedField: freezed == currentFocusedField
           ? _value.currentFocusedField
@@ -179,15 +193,17 @@ abstract class _$$PostInputFormModelImplCopyWith<$Res>
       String restaurantName,
       String deliveryFee,
       String minOrderFee,
-      String location,
       List<Asset> images,
+      String address,
+      double latitude,
+      double longitude,
       String? titleErrMsg,
       String? contentErrMsg,
       String? restaurantCategoryErrMsg,
       String? restaurantNameErrMsg,
       String? deliveryFeeErrMsg,
       String? minOrderFeeErrMsg,
-      String? locationErrMsg,
+      String? addressErrMsg,
       PostInputFormFieldType? currentFocusedField});
 }
 
@@ -208,15 +224,17 @@ class __$$PostInputFormModelImplCopyWithImpl<$Res>
     Object? restaurantName = null,
     Object? deliveryFee = null,
     Object? minOrderFee = null,
-    Object? location = null,
     Object? images = null,
+    Object? address = null,
+    Object? latitude = null,
+    Object? longitude = null,
     Object? titleErrMsg = freezed,
     Object? contentErrMsg = freezed,
     Object? restaurantCategoryErrMsg = freezed,
     Object? restaurantNameErrMsg = freezed,
     Object? deliveryFeeErrMsg = freezed,
     Object? minOrderFeeErrMsg = freezed,
-    Object? locationErrMsg = freezed,
+    Object? addressErrMsg = freezed,
     Object? currentFocusedField = freezed,
   }) {
     return _then(_$PostInputFormModelImpl(
@@ -244,14 +262,22 @@ class __$$PostInputFormModelImplCopyWithImpl<$Res>
           ? _value.minOrderFee
           : minOrderFee // ignore: cast_nullable_to_non_nullable
               as String,
-      location: null == location
-          ? _value.location
-          : location // ignore: cast_nullable_to_non_nullable
-              as String,
       images: null == images
           ? _value.images
           : images // ignore: cast_nullable_to_non_nullable
               as List<Asset>,
+      address: null == address
+          ? _value.address
+          : address // ignore: cast_nullable_to_non_nullable
+              as String,
+      latitude: null == latitude
+          ? _value.latitude
+          : latitude // ignore: cast_nullable_to_non_nullable
+              as double,
+      longitude: null == longitude
+          ? _value.longitude
+          : longitude // ignore: cast_nullable_to_non_nullable
+              as double,
       titleErrMsg: freezed == titleErrMsg
           ? _value.titleErrMsg
           : titleErrMsg // ignore: cast_nullable_to_non_nullable
@@ -276,9 +302,9 @@ class __$$PostInputFormModelImplCopyWithImpl<$Res>
           ? _value.minOrderFeeErrMsg
           : minOrderFeeErrMsg // ignore: cast_nullable_to_non_nullable
               as String?,
-      locationErrMsg: freezed == locationErrMsg
-          ? _value.locationErrMsg
-          : locationErrMsg // ignore: cast_nullable_to_non_nullable
+      addressErrMsg: freezed == addressErrMsg
+          ? _value.addressErrMsg
+          : addressErrMsg // ignore: cast_nullable_to_non_nullable
               as String?,
       currentFocusedField: freezed == currentFocusedField
           ? _value.currentFocusedField
@@ -300,15 +326,17 @@ class _$PostInputFormModelImpl
       required this.restaurantName,
       required this.deliveryFee,
       required this.minOrderFee,
-      required this.location,
       required this.images,
+      required this.address,
+      required this.latitude,
+      required this.longitude,
       required this.titleErrMsg,
       required this.contentErrMsg,
       required this.restaurantCategoryErrMsg,
       required this.restaurantNameErrMsg,
       required this.deliveryFeeErrMsg,
       required this.minOrderFeeErrMsg,
-      required this.locationErrMsg,
+      required this.addressErrMsg,
       required this.currentFocusedField});
 
   @override
@@ -324,9 +352,13 @@ class _$PostInputFormModelImpl
   @override
   final String minOrderFee;
   @override
-  final String location;
-  @override
   final List<Asset> images;
+  @override
+  final String address;
+  @override
+  final double latitude;
+  @override
+  final double longitude;
   @override
   final String? titleErrMsg;
   @override
@@ -340,13 +372,13 @@ class _$PostInputFormModelImpl
   @override
   final String? minOrderFeeErrMsg;
   @override
-  final String? locationErrMsg;
+  final String? addressErrMsg;
   @override
   final PostInputFormFieldType? currentFocusedField;
 
   @override
   String toString({DiagnosticLevel minLevel = DiagnosticLevel.info}) {
-    return 'PostInputFormModel(title: $title, content: $content, restaurantCategory: $restaurantCategory, restaurantName: $restaurantName, deliveryFee: $deliveryFee, minOrderFee: $minOrderFee, location: $location, images: $images, titleErrMsg: $titleErrMsg, contentErrMsg: $contentErrMsg, restaurantCategoryErrMsg: $restaurantCategoryErrMsg, restaurantNameErrMsg: $restaurantNameErrMsg, deliveryFeeErrMsg: $deliveryFeeErrMsg, minOrderFeeErrMsg: $minOrderFeeErrMsg, locationErrMsg: $locationErrMsg, currentFocusedField: $currentFocusedField)';
+    return 'PostInputFormModel(title: $title, content: $content, restaurantCategory: $restaurantCategory, restaurantName: $restaurantName, deliveryFee: $deliveryFee, minOrderFee: $minOrderFee, images: $images, address: $address, latitude: $latitude, longitude: $longitude, titleErrMsg: $titleErrMsg, contentErrMsg: $contentErrMsg, restaurantCategoryErrMsg: $restaurantCategoryErrMsg, restaurantNameErrMsg: $restaurantNameErrMsg, deliveryFeeErrMsg: $deliveryFeeErrMsg, minOrderFeeErrMsg: $minOrderFeeErrMsg, addressErrMsg: $addressErrMsg, currentFocusedField: $currentFocusedField)';
   }
 
   @override
@@ -360,8 +392,10 @@ class _$PostInputFormModelImpl
       ..add(DiagnosticsProperty('restaurantName', restaurantName))
       ..add(DiagnosticsProperty('deliveryFee', deliveryFee))
       ..add(DiagnosticsProperty('minOrderFee', minOrderFee))
-      ..add(DiagnosticsProperty('location', location))
       ..add(DiagnosticsProperty('images', images))
+      ..add(DiagnosticsProperty('address', address))
+      ..add(DiagnosticsProperty('latitude', latitude))
+      ..add(DiagnosticsProperty('longitude', longitude))
       ..add(DiagnosticsProperty('titleErrMsg', titleErrMsg))
       ..add(DiagnosticsProperty('contentErrMsg', contentErrMsg))
       ..add(DiagnosticsProperty(
@@ -369,7 +403,7 @@ class _$PostInputFormModelImpl
       ..add(DiagnosticsProperty('restaurantNameErrMsg', restaurantNameErrMsg))
       ..add(DiagnosticsProperty('deliveryFeeErrMsg', deliveryFeeErrMsg))
       ..add(DiagnosticsProperty('minOrderFeeErrMsg', minOrderFeeErrMsg))
-      ..add(DiagnosticsProperty('locationErrMsg', locationErrMsg))
+      ..add(DiagnosticsProperty('addressErrMsg', addressErrMsg))
       ..add(DiagnosticsProperty('currentFocusedField', currentFocusedField));
   }
 
@@ -388,9 +422,12 @@ class _$PostInputFormModelImpl
                 other.deliveryFee == deliveryFee) &&
             (identical(other.minOrderFee, minOrderFee) ||
                 other.minOrderFee == minOrderFee) &&
-            (identical(other.location, location) ||
-                other.location == location) &&
             const DeepCollectionEquality().equals(other.images, images) &&
+            (identical(other.address, address) || other.address == address) &&
+            (identical(other.latitude, latitude) ||
+                other.latitude == latitude) &&
+            (identical(other.longitude, longitude) ||
+                other.longitude == longitude) &&
             (identical(other.titleErrMsg, titleErrMsg) ||
                 other.titleErrMsg == titleErrMsg) &&
             (identical(other.contentErrMsg, contentErrMsg) ||
@@ -404,8 +441,8 @@ class _$PostInputFormModelImpl
                 other.deliveryFeeErrMsg == deliveryFeeErrMsg) &&
             (identical(other.minOrderFeeErrMsg, minOrderFeeErrMsg) ||
                 other.minOrderFeeErrMsg == minOrderFeeErrMsg) &&
-            (identical(other.locationErrMsg, locationErrMsg) ||
-                other.locationErrMsg == locationErrMsg) &&
+            (identical(other.addressErrMsg, addressErrMsg) ||
+                other.addressErrMsg == addressErrMsg) &&
             (identical(other.currentFocusedField, currentFocusedField) ||
                 other.currentFocusedField == currentFocusedField));
   }
@@ -419,15 +456,17 @@ class _$PostInputFormModelImpl
       restaurantName,
       deliveryFee,
       minOrderFee,
-      location,
       const DeepCollectionEquality().hash(images),
+      address,
+      latitude,
+      longitude,
       titleErrMsg,
       contentErrMsg,
       restaurantCategoryErrMsg,
       restaurantNameErrMsg,
       deliveryFeeErrMsg,
       minOrderFeeErrMsg,
-      locationErrMsg,
+      addressErrMsg,
       currentFocusedField);
 
   @JsonKey(ignore: true)
@@ -446,15 +485,17 @@ abstract class _PostInputFormModel implements PostInputFormModel {
           required final String restaurantName,
           required final String deliveryFee,
           required final String minOrderFee,
-          required final String location,
           required final List<Asset> images,
+          required final String address,
+          required final double latitude,
+          required final double longitude,
           required final String? titleErrMsg,
           required final String? contentErrMsg,
           required final String? restaurantCategoryErrMsg,
           required final String? restaurantNameErrMsg,
           required final String? deliveryFeeErrMsg,
           required final String? minOrderFeeErrMsg,
-          required final String? locationErrMsg,
+          required final String? addressErrMsg,
           required final PostInputFormFieldType? currentFocusedField}) =
       _$PostInputFormModelImpl;
 
@@ -471,9 +512,13 @@ abstract class _PostInputFormModel implements PostInputFormModel {
   @override
   String get minOrderFee;
   @override
-  String get location;
-  @override
   List<Asset> get images;
+  @override
+  String get address;
+  @override
+  double get latitude;
+  @override
+  double get longitude;
   @override
   String? get titleErrMsg;
   @override
@@ -487,7 +532,7 @@ abstract class _PostInputFormModel implements PostInputFormModel {
   @override
   String? get minOrderFeeErrMsg;
   @override
-  String? get locationErrMsg;
+  String? get addressErrMsg;
   @override
   PostInputFormFieldType? get currentFocusedField;
   @override

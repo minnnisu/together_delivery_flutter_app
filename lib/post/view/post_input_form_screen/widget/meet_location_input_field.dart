@@ -44,7 +44,7 @@ class MeetLocationInputField extends ConsumerWidget {
                     width: 0.9,
                   ),
                   borderRadius: BorderRadius.all(Radius.circular(10))),
-              child: Text(postEditModel.location, style: TextStyle(fontSize: 16),),
+              child: Text(postEditModel.address, style: TextStyle(fontSize: 16),),
             ),
           )
         ],
