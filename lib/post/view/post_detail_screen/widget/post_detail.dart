@@ -1,6 +1,7 @@
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/widgets.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:together_delivery_app/common/helper/apiUrls.dart';
 import 'package:together_delivery_app/common/widgets/border.dart';
@@ -8,6 +9,7 @@ import 'package:together_delivery_app/post/view/post_detail_screen/model/post_de
     as pdrm;
 import 'package:together_delivery_app/post/view/post_detail_screen/provider/post_detail_provider.dart';
 import 'package:together_delivery_app/post/view/post_detail_screen/widget/post_detail_body.dart';
+import 'package:together_delivery_app/post/view/post_detail_screen/widget/post_detail_meet_location.dart';
 import 'package:together_delivery_app/post/view/post_detail_screen/widget/post_header.dart';
 
 class PostDetail extends ConsumerWidget {
@@ -27,7 +29,8 @@ class PostDetail extends ConsumerWidget {
         mainAxisSize: MainAxisSize.min,
         children: [
           PostDetailHeader(),
-          Flexible(child: PostDetailBody()),
+          PostDetailBody(),
+          PostDetailMeetLocation(),
           CarouselSlider.builder(
             options: CarouselOptions(
               height: 400,

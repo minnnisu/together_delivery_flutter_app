@@ -2,7 +2,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:together_delivery_app/common/widgets/border.dart';
 import 'package:together_delivery_app/post/view/post_detail_screen/model/post_detail_response_model.dart';
-import 'package:together_delivery_app/post/view/post_detail_screen/widget/Post_detail_extra_info.dart';
+import 'package:together_delivery_app/post/view/post_detail_screen/widget/post_detail_extra_info.dart';
 import 'package:together_delivery_app/post/view/post_detail_screen/provider/post_detail_provider.dart';
 
 class PostDetailBody extends StatelessWidget {
@@ -10,14 +10,16 @@ class PostDetailBody extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          PostTitle(),
-          PostContent(),
-          PostDetailExtraInfo(),
-        ],
+    return Flexible(
+      child: Container(
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            PostTitle(),
+            PostContent(),
+            PostDetailExtraInfo(),
+          ],
+        ),
       ),
     );
   }
