@@ -11,11 +11,12 @@ _$PostSaveRequestModelImpl _$$PostSaveRequestModelImplFromJson(
     _$PostSaveRequestModelImpl(
       title: json['title'] as String,
       content: json['content'] as String,
-      categoryCode: json['categoryCode'] as String,
       restaurantName: json['restaurantName'] as String,
+      categoryCode: json['categoryCode'] as String,
       deliveryFee: json['deliveryFee'] as int,
       minOrderFee: json['minOrderFee'] as int,
-      location: json['location'] as String,
+      meetLocation: MeetLocationModel.fromJson(
+          json['meetLocation'] as Map<String, dynamic>),
     );
 
 Map<String, dynamic> _$$PostSaveRequestModelImplToJson(
@@ -23,9 +24,9 @@ Map<String, dynamic> _$$PostSaveRequestModelImplToJson(
     <String, dynamic>{
       'title': instance.title,
       'content': instance.content,
-      'categoryCode': instance.categoryCode,
       'restaurantName': instance.restaurantName,
+      'categoryCode': instance.categoryCode,
       'deliveryFee': instance.deliveryFee,
       'minOrderFee': instance.minOrderFee,
-      'location': instance.location,
+      'meetLocation': instance.meetLocation,
     };

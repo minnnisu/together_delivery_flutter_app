@@ -6,7 +6,7 @@ import 'package:together_delivery_app/common/helper/apiUrls.dart';
 import 'package:together_delivery_app/common/provider/dioProvider.dart';
 import 'package:together_delivery_app/post/view/meet_location_set_screen/model/reverse_geocoding_response.dart';
 
-final meetLocationSetRepositoryProvider = Provider<MeetLocationSetRepository>((ref) {
+final meetLocationRepositoryProvider = Provider<MeetLocationSetRepository>((ref) {
   final dio = ref.watch(dioProvider);
 
   return MeetLocationSetRepository(

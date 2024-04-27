@@ -59,7 +59,6 @@ class _NaverMap extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final meetLocationSetRead = ref.read(meetLocationProvider.notifier);
-    final meetLocationModel = ref.watch(meetLocationProvider);
 
     return NaverMap(
       options: NaverMapViewOptions(
@@ -78,15 +77,22 @@ class _NaverMap extends ConsumerWidget {
         meetLocationSetRead.onMapReady(controller);
       },
       onMapTapped: (point, latLng) async {
-        NInfoWindow targetInfoWindow =
+        final targetInfoWindowInfo =
             await meetLocationSetRead.onMapTapped(latLng);
-        print("만남장소: ${meetLocationModel.roadAddr}");
-        targetInfoWindow.setOnTapListener(
+        targetInfoWindowInfo.InfoWindowInfo.setOnTapListener(
           (overlay) {
-            ref.read(postInputFormProvider.notifier).updateFieldValue(
-                  PostInputFormFieldType.location,
-                  meetLocationModel.roadAddr,
+            ref.watch(postInputFormProvider.notifier).updateFieldValue(
+                  PostInputFormFieldType.address,
+                  targetInfoWindowInfo.meetLocation.address,
                 );
+            ref.watch(postInputFormProvider.notifier).updateFieldValue(
+              PostInputFormFieldType.latitude,
+              targetInfoWindowInfo.meetLocation.latitude,
+            );
+            ref.watch(postInputFormProvider.notifier).updateFieldValue(
+              PostInputFormFieldType.longitude,
+              targetInfoWindowInfo.meetLocation.longitude,
+            );
             Navigator.pop(context);
           },
         );

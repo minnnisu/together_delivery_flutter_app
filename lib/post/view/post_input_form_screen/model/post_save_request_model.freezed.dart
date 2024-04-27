@@ -22,11 +22,11 @@ PostSaveRequestModel _$PostSaveRequestModelFromJson(Map<String, dynamic> json) {
 mixin _$PostSaveRequestModel {
   String get title => throw _privateConstructorUsedError;
   String get content => throw _privateConstructorUsedError;
-  String get categoryCode => throw _privateConstructorUsedError;
   String get restaurantName => throw _privateConstructorUsedError;
+  String get categoryCode => throw _privateConstructorUsedError;
   int get deliveryFee => throw _privateConstructorUsedError;
   int get minOrderFee => throw _privateConstructorUsedError;
-  String get location => throw _privateConstructorUsedError;
+  MeetLocationModel get meetLocation => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
@@ -43,11 +43,13 @@ abstract class $PostSaveRequestModelCopyWith<$Res> {
   $Res call(
       {String title,
       String content,
-      String categoryCode,
       String restaurantName,
+      String categoryCode,
       int deliveryFee,
       int minOrderFee,
-      String location});
+      MeetLocationModel meetLocation});
+
+  $MeetLocationModelCopyWith<$Res> get meetLocation;
 }
 
 /// @nodoc
@@ -66,11 +68,11 @@ class _$PostSaveRequestModelCopyWithImpl<$Res,
   $Res call({
     Object? title = null,
     Object? content = null,
-    Object? categoryCode = null,
     Object? restaurantName = null,
+    Object? categoryCode = null,
     Object? deliveryFee = null,
     Object? minOrderFee = null,
-    Object? location = null,
+    Object? meetLocation = null,
   }) {
     return _then(_value.copyWith(
       title: null == title
@@ -81,13 +83,13 @@ class _$PostSaveRequestModelCopyWithImpl<$Res,
           ? _value.content
           : content // ignore: cast_nullable_to_non_nullable
               as String,
-      categoryCode: null == categoryCode
-          ? _value.categoryCode
-          : categoryCode // ignore: cast_nullable_to_non_nullable
-              as String,
       restaurantName: null == restaurantName
           ? _value.restaurantName
           : restaurantName // ignore: cast_nullable_to_non_nullable
+              as String,
+      categoryCode: null == categoryCode
+          ? _value.categoryCode
+          : categoryCode // ignore: cast_nullable_to_non_nullable
               as String,
       deliveryFee: null == deliveryFee
           ? _value.deliveryFee
@@ -97,11 +99,19 @@ class _$PostSaveRequestModelCopyWithImpl<$Res,
           ? _value.minOrderFee
           : minOrderFee // ignore: cast_nullable_to_non_nullable
               as int,
-      location: null == location
-          ? _value.location
-          : location // ignore: cast_nullable_to_non_nullable
-              as String,
+      meetLocation: null == meetLocation
+          ? _value.meetLocation
+          : meetLocation // ignore: cast_nullable_to_non_nullable
+              as MeetLocationModel,
     ) as $Val);
+  }
+
+  @override
+  @pragma('vm:prefer-inline')
+  $MeetLocationModelCopyWith<$Res> get meetLocation {
+    return $MeetLocationModelCopyWith<$Res>(_value.meetLocation, (value) {
+      return _then(_value.copyWith(meetLocation: value) as $Val);
+    });
   }
 }
 
@@ -116,11 +126,14 @@ abstract class _$$PostSaveRequestModelImplCopyWith<$Res>
   $Res call(
       {String title,
       String content,
-      String categoryCode,
       String restaurantName,
+      String categoryCode,
       int deliveryFee,
       int minOrderFee,
-      String location});
+      MeetLocationModel meetLocation});
+
+  @override
+  $MeetLocationModelCopyWith<$Res> get meetLocation;
 }
 
 /// @nodoc
@@ -136,11 +149,11 @@ class __$$PostSaveRequestModelImplCopyWithImpl<$Res>
   $Res call({
     Object? title = null,
     Object? content = null,
-    Object? categoryCode = null,
     Object? restaurantName = null,
+    Object? categoryCode = null,
     Object? deliveryFee = null,
     Object? minOrderFee = null,
-    Object? location = null,
+    Object? meetLocation = null,
   }) {
     return _then(_$PostSaveRequestModelImpl(
       title: null == title
@@ -151,13 +164,13 @@ class __$$PostSaveRequestModelImplCopyWithImpl<$Res>
           ? _value.content
           : content // ignore: cast_nullable_to_non_nullable
               as String,
-      categoryCode: null == categoryCode
-          ? _value.categoryCode
-          : categoryCode // ignore: cast_nullable_to_non_nullable
-              as String,
       restaurantName: null == restaurantName
           ? _value.restaurantName
           : restaurantName // ignore: cast_nullable_to_non_nullable
+              as String,
+      categoryCode: null == categoryCode
+          ? _value.categoryCode
+          : categoryCode // ignore: cast_nullable_to_non_nullable
               as String,
       deliveryFee: null == deliveryFee
           ? _value.deliveryFee
@@ -167,27 +180,25 @@ class __$$PostSaveRequestModelImplCopyWithImpl<$Res>
           ? _value.minOrderFee
           : minOrderFee // ignore: cast_nullable_to_non_nullable
               as int,
-      location: null == location
-          ? _value.location
-          : location // ignore: cast_nullable_to_non_nullable
-              as String,
+      meetLocation: null == meetLocation
+          ? _value.meetLocation
+          : meetLocation // ignore: cast_nullable_to_non_nullable
+              as MeetLocationModel,
     ));
   }
 }
 
 /// @nodoc
 @JsonSerializable()
-class _$PostSaveRequestModelImpl
-    with DiagnosticableTreeMixin
-    implements _PostSaveRequestModel {
+class _$PostSaveRequestModelImpl implements _PostSaveRequestModel {
   const _$PostSaveRequestModelImpl(
       {required this.title,
       required this.content,
-      required this.categoryCode,
       required this.restaurantName,
+      required this.categoryCode,
       required this.deliveryFee,
       required this.minOrderFee,
-      required this.location});
+      required this.meetLocation});
 
   factory _$PostSaveRequestModelImpl.fromJson(Map<String, dynamic> json) =>
       _$$PostSaveRequestModelImplFromJson(json);
@@ -197,33 +208,19 @@ class _$PostSaveRequestModelImpl
   @override
   final String content;
   @override
-  final String categoryCode;
-  @override
   final String restaurantName;
+  @override
+  final String categoryCode;
   @override
   final int deliveryFee;
   @override
   final int minOrderFee;
   @override
-  final String location;
+  final MeetLocationModel meetLocation;
 
   @override
-  String toString({DiagnosticLevel minLevel = DiagnosticLevel.info}) {
-    return 'PostSaveRequestModel(title: $title, content: $content, categoryCode: $categoryCode, restaurantName: $restaurantName, deliveryFee: $deliveryFee, minOrderFee: $minOrderFee, location: $location)';
-  }
-
-  @override
-  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
-    super.debugFillProperties(properties);
-    properties
-      ..add(DiagnosticsProperty('type', 'PostSaveRequestModel'))
-      ..add(DiagnosticsProperty('title', title))
-      ..add(DiagnosticsProperty('content', content))
-      ..add(DiagnosticsProperty('categoryCode', categoryCode))
-      ..add(DiagnosticsProperty('restaurantName', restaurantName))
-      ..add(DiagnosticsProperty('deliveryFee', deliveryFee))
-      ..add(DiagnosticsProperty('minOrderFee', minOrderFee))
-      ..add(DiagnosticsProperty('location', location));
+  String toString() {
+    return 'PostSaveRequestModel(title: $title, content: $content, restaurantName: $restaurantName, categoryCode: $categoryCode, deliveryFee: $deliveryFee, minOrderFee: $minOrderFee, meetLocation: $meetLocation)';
   }
 
   @override
@@ -233,22 +230,22 @@ class _$PostSaveRequestModelImpl
             other is _$PostSaveRequestModelImpl &&
             (identical(other.title, title) || other.title == title) &&
             (identical(other.content, content) || other.content == content) &&
-            (identical(other.categoryCode, categoryCode) ||
-                other.categoryCode == categoryCode) &&
             (identical(other.restaurantName, restaurantName) ||
                 other.restaurantName == restaurantName) &&
+            (identical(other.categoryCode, categoryCode) ||
+                other.categoryCode == categoryCode) &&
             (identical(other.deliveryFee, deliveryFee) ||
                 other.deliveryFee == deliveryFee) &&
             (identical(other.minOrderFee, minOrderFee) ||
                 other.minOrderFee == minOrderFee) &&
-            (identical(other.location, location) ||
-                other.location == location));
+            (identical(other.meetLocation, meetLocation) ||
+                other.meetLocation == meetLocation));
   }
 
   @JsonKey(ignore: true)
   @override
-  int get hashCode => Object.hash(runtimeType, title, content, categoryCode,
-      restaurantName, deliveryFee, minOrderFee, location);
+  int get hashCode => Object.hash(runtimeType, title, content, restaurantName,
+      categoryCode, deliveryFee, minOrderFee, meetLocation);
 
   @JsonKey(ignore: true)
   @override
@@ -268,13 +265,14 @@ class _$PostSaveRequestModelImpl
 
 abstract class _PostSaveRequestModel implements PostSaveRequestModel {
   const factory _PostSaveRequestModel(
-      {required final String title,
-      required final String content,
-      required final String categoryCode,
-      required final String restaurantName,
-      required final int deliveryFee,
-      required final int minOrderFee,
-      required final String location}) = _$PostSaveRequestModelImpl;
+          {required final String title,
+          required final String content,
+          required final String restaurantName,
+          required final String categoryCode,
+          required final int deliveryFee,
+          required final int minOrderFee,
+          required final MeetLocationModel meetLocation}) =
+      _$PostSaveRequestModelImpl;
 
   factory _PostSaveRequestModel.fromJson(Map<String, dynamic> json) =
       _$PostSaveRequestModelImpl.fromJson;
@@ -284,15 +282,15 @@ abstract class _PostSaveRequestModel implements PostSaveRequestModel {
   @override
   String get content;
   @override
-  String get categoryCode;
-  @override
   String get restaurantName;
+  @override
+  String get categoryCode;
   @override
   int get deliveryFee;
   @override
   int get minOrderFee;
   @override
-  String get location;
+  MeetLocationModel get meetLocation;
   @override
   @JsonKey(ignore: true)
   _$$PostSaveRequestModelImplCopyWith<_$PostSaveRequestModelImpl>

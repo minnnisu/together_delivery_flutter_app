@@ -6,6 +6,9 @@ import 'package:together_delivery_app/post/view/post_detail_screen/widget/post_c
 import 'package:together_delivery_app/post/view/post_detail_screen/widget/post_detail.dart';
 import 'package:together_delivery_app/post/view/post_detail_screen/model/post_detail_request_model.dart';
 import 'package:together_delivery_app/post/view/post_detail_screen/provider/post_detail_load_provider.dart';
+import 'package:together_delivery_app/post/view/post_detail_screen/widget/separate_line.dart';
+
+import '../../../common/const/const.dart';
 
 class PostDetailScreen extends StatefulWidget {
   PostDetailScreen({super.key});
@@ -15,7 +18,6 @@ class PostDetailScreen extends StatefulWidget {
 }
 
 class _PostDetailScreenState extends State<PostDetailScreen> {
-
   @override
   Widget build(BuildContext context) {
     final postId = ModalRoute.of(context)!.settings.arguments as int;
@@ -45,17 +47,12 @@ class PostDetailScreenBody extends ConsumerWidget {
           loading: () => const CircularProgressIndicator(),
           error: (err, stack) => Text('Error: $err'),
           data: (data) {
-            return Container(
-              margin: EdgeInsets.symmetric(
-                vertical: 10,
-                horizontal: 20,
-              ),
-              child: ListView(
-                children: [
-                  PostDetail(),
-                  PostCommentAndReply(),
-                ],
-              ),
+            return ListView(
+              children: [
+                PostDetail(),
+                SeparateLine(),
+                // PostCommentAndReply(),
+              ],
             );
           },
         );

@@ -1,5 +1,6 @@
 import 'package:freezed_annotation/freezed_annotation.dart';
 import 'dart:convert';
+import 'package:together_delivery_app/post/model/meet_location_model.dart';
 
 part 'post_save_response_model.freezed.dart';
 part 'post_save_response_model.g.dart';
@@ -19,7 +20,7 @@ class PostSaveResponseModel with _$PostSaveResponseModel {
     required String categoryCode,
     required int deliveryFee,
     required int minOrderFee,
-    required String location,
+    required MeetLocationModel meetLocation,
     required bool status,
     required DateTime createdAt,
     required DateTime updatedAt,

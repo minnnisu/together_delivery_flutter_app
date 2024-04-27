@@ -16,17 +16,17 @@ class PostInputFormModel with _$PostInputFormModel{
     required String restaurantName,
     required String deliveryFee,
     required String minOrderFee,
-    required String location,
     required List<Asset> images,
-
-
+    required String address,
+    required double latitude,
+    required double longitude,
     required String? titleErrMsg,
     required String? contentErrMsg,
     required String? restaurantCategoryErrMsg,
     required String? restaurantNameErrMsg,
     required String? deliveryFeeErrMsg,
     required String? minOrderFeeErrMsg,
-    required String? locationErrMsg,
+    required String? addressErrMsg,
 
     required PostInputFormFieldType? currentFocusedField,
   }) = _PostInputFormModel;

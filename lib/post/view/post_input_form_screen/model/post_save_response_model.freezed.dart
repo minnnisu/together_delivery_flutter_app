@@ -29,7 +29,7 @@ mixin _$PostSaveResponseModel {
   String get categoryCode => throw _privateConstructorUsedError;
   int get deliveryFee => throw _privateConstructorUsedError;
   int get minOrderFee => throw _privateConstructorUsedError;
-  String get location => throw _privateConstructorUsedError;
+  MeetLocationModel get meetLocation => throw _privateConstructorUsedError;
   bool get status => throw _privateConstructorUsedError;
   DateTime get createdAt => throw _privateConstructorUsedError;
   DateTime get updatedAt => throw _privateConstructorUsedError;
@@ -56,11 +56,13 @@ abstract class $PostSaveResponseModelCopyWith<$Res> {
       String categoryCode,
       int deliveryFee,
       int minOrderFee,
-      String location,
+      MeetLocationModel meetLocation,
       bool status,
       DateTime createdAt,
       DateTime updatedAt,
       List<PostImage> postImages});
+
+  $MeetLocationModelCopyWith<$Res> get meetLocation;
 }
 
 /// @nodoc
@@ -85,7 +87,7 @@ class _$PostSaveResponseModelCopyWithImpl<$Res,
     Object? categoryCode = null,
     Object? deliveryFee = null,
     Object? minOrderFee = null,
-    Object? location = null,
+    Object? meetLocation = null,
     Object? status = null,
     Object? createdAt = null,
     Object? updatedAt = null,
@@ -124,10 +126,10 @@ class _$PostSaveResponseModelCopyWithImpl<$Res,
           ? _value.minOrderFee
           : minOrderFee // ignore: cast_nullable_to_non_nullable
               as int,
-      location: null == location
-          ? _value.location
-          : location // ignore: cast_nullable_to_non_nullable
-              as String,
+      meetLocation: null == meetLocation
+          ? _value.meetLocation
+          : meetLocation // ignore: cast_nullable_to_non_nullable
+              as MeetLocationModel,
       status: null == status
           ? _value.status
           : status // ignore: cast_nullable_to_non_nullable
@@ -145,6 +147,14 @@ class _$PostSaveResponseModelCopyWithImpl<$Res,
           : postImages // ignore: cast_nullable_to_non_nullable
               as List<PostImage>,
     ) as $Val);
+  }
+
+  @override
+  @pragma('vm:prefer-inline')
+  $MeetLocationModelCopyWith<$Res> get meetLocation {
+    return $MeetLocationModelCopyWith<$Res>(_value.meetLocation, (value) {
+      return _then(_value.copyWith(meetLocation: value) as $Val);
+    });
   }
 }
 
@@ -166,11 +176,14 @@ abstract class _$$PostSaveResponseModelImplCopyWith<$Res>
       String categoryCode,
       int deliveryFee,
       int minOrderFee,
-      String location,
+      MeetLocationModel meetLocation,
       bool status,
       DateTime createdAt,
       DateTime updatedAt,
       List<PostImage> postImages});
+
+  @override
+  $MeetLocationModelCopyWith<$Res> get meetLocation;
 }
 
 /// @nodoc
@@ -193,7 +206,7 @@ class __$$PostSaveResponseModelImplCopyWithImpl<$Res>
     Object? categoryCode = null,
     Object? deliveryFee = null,
     Object? minOrderFee = null,
-    Object? location = null,
+    Object? meetLocation = null,
     Object? status = null,
     Object? createdAt = null,
     Object? updatedAt = null,
@@ -232,10 +245,10 @@ class __$$PostSaveResponseModelImplCopyWithImpl<$Res>
           ? _value.minOrderFee
           : minOrderFee // ignore: cast_nullable_to_non_nullable
               as int,
-      location: null == location
-          ? _value.location
-          : location // ignore: cast_nullable_to_non_nullable
-              as String,
+      meetLocation: null == meetLocation
+          ? _value.meetLocation
+          : meetLocation // ignore: cast_nullable_to_non_nullable
+              as MeetLocationModel,
       status: null == status
           ? _value.status
           : status // ignore: cast_nullable_to_non_nullable
@@ -268,7 +281,7 @@ class _$PostSaveResponseModelImpl implements _PostSaveResponseModel {
       required this.categoryCode,
       required this.deliveryFee,
       required this.minOrderFee,
-      required this.location,
+      required this.meetLocation,
       required this.status,
       required this.createdAt,
       required this.updatedAt,
@@ -295,7 +308,7 @@ class _$PostSaveResponseModelImpl implements _PostSaveResponseModel {
   @override
   final int minOrderFee;
   @override
-  final String location;
+  final MeetLocationModel meetLocation;
   @override
   final bool status;
   @override
@@ -312,7 +325,7 @@ class _$PostSaveResponseModelImpl implements _PostSaveResponseModel {
 
   @override
   String toString() {
-    return 'PostSaveResponseModel(id: $id, username: $username, title: $title, content: $content, restaurantName: $restaurantName, categoryCode: $categoryCode, deliveryFee: $deliveryFee, minOrderFee: $minOrderFee, location: $location, status: $status, createdAt: $createdAt, updatedAt: $updatedAt, postImages: $postImages)';
+    return 'PostSaveResponseModel(id: $id, username: $username, title: $title, content: $content, restaurantName: $restaurantName, categoryCode: $categoryCode, deliveryFee: $deliveryFee, minOrderFee: $minOrderFee, meetLocation: $meetLocation, status: $status, createdAt: $createdAt, updatedAt: $updatedAt, postImages: $postImages)';
   }
 
   @override
@@ -333,8 +346,8 @@ class _$PostSaveResponseModelImpl implements _PostSaveResponseModel {
                 other.deliveryFee == deliveryFee) &&
             (identical(other.minOrderFee, minOrderFee) ||
                 other.minOrderFee == minOrderFee) &&
-            (identical(other.location, location) ||
-                other.location == location) &&
+            (identical(other.meetLocation, meetLocation) ||
+                other.meetLocation == meetLocation) &&
             (identical(other.status, status) || other.status == status) &&
             (identical(other.createdAt, createdAt) ||
                 other.createdAt == createdAt) &&
@@ -356,7 +369,7 @@ class _$PostSaveResponseModelImpl implements _PostSaveResponseModel {
       categoryCode,
       deliveryFee,
       minOrderFee,
-      location,
+      meetLocation,
       status,
       createdAt,
       updatedAt,
@@ -387,7 +400,7 @@ abstract class _PostSaveResponseModel implements PostSaveResponseModel {
       required final String categoryCode,
       required final int deliveryFee,
       required final int minOrderFee,
-      required final String location,
+      required final MeetLocationModel meetLocation,
       required final bool status,
       required final DateTime createdAt,
       required final DateTime updatedAt,
@@ -413,7 +426,7 @@ abstract class _PostSaveResponseModel implements PostSaveResponseModel {
   @override
   int get minOrderFee;
   @override
-  String get location;
+  MeetLocationModel get meetLocation;
   @override
   bool get status;
   @override

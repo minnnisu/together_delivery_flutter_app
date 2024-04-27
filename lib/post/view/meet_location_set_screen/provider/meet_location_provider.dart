@@ -2,15 +2,19 @@ import 'dart:async';
 
 import 'package:flutter_naver_map/flutter_naver_map.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:together_delivery_app/post/view/meet_location_set_screen/model/meet_location_model.dart';
+import 'package:together_delivery_app/post/model/meet_location_model.dart';
 
 import '../model/reverse_geocoding_response.dart';
 import 'meet_location_repository.dart';
 
+typedef InfoWindowInfo = ({
+  NInfoWindow InfoWindowInfo,
+  MeetLocationModel meetLocation,
+});
+
 final meetLocationProvider =
     StateNotifierProvider<MeetLocationNotifier, MeetLocationModel>((ref) {
-  final meetLocationSetRepository =
-      ref.watch(meetLocationSetRepositoryProvider);
+  final meetLocationSetRepository = ref.watch(meetLocationRepositoryProvider);
 
   return MeetLocationNotifier(
     meetLocationSetRepository: meetLocationSetRepository,
@@ -26,7 +30,7 @@ class MeetLocationNotifier extends StateNotifier<MeetLocationModel> {
       : super(MeetLocationModel(
           latitude: 0,
           longitude: 0,
-          roadAddr: "",
+          address: "",
         ));
 
   void onMapReady(NaverMapController _controller) async {
@@ -35,7 +39,7 @@ class MeetLocationNotifier extends StateNotifier<MeetLocationModel> {
     mapControllerCompleter.complete(controller); // Completer에 지도 컨트롤러 완료 신호 전송
   }
 
-  Future<NInfoWindow> onMapTapped(NLatLng latLng) async {
+  Future<InfoWindowInfo> onMapTapped(NLatLng latLng) async {
     final marker = NMarker(id: '1', position: latLng);
     controller.addOverlay(marker);
 
@@ -43,16 +47,22 @@ class MeetLocationNotifier extends StateNotifier<MeetLocationModel> {
         await meetLocationSetRepository.getReverseGeocoding(latLng);
 
     final touchedLocation = getRoadAddr(reverseGeocodingResponse);
-    state = state.copyWith(roadAddr: touchedLocation);
 
     final onMarkerInfoWindow =
         NInfoWindow.onMarker(id: "1", text: touchedLocation);
     marker.openInfoWindow(onMarkerInfoWindow);
-    return onMarkerInfoWindow;
+    return (
+      InfoWindowInfo: onMarkerInfoWindow,
+      meetLocation: MeetLocationModel(
+        address: touchedLocation,
+        latitude: latLng.latitude,
+        longitude: latLng.longitude,
+      )
+    );
   }
 
   String getRoadAddr(ReverseGeocodingResponse reverseGeocodingResponse) {
-    if (reverseGeocodingResponse.results.length < 1) {
+    if (reverseGeocodingResponse.results.isEmpty) {
       return "";
     }
 

@@ -7,6 +7,7 @@ import 'package:together_delivery_app/common/const/errorCode.dart';
 import 'package:together_delivery_app/common/const/restaurantCategory.dart';
 import 'package:together_delivery_app/common/exception/SuccessFailure.dart';
 import 'package:together_delivery_app/common/exception/customException.dart';
+import 'package:together_delivery_app/post/model/meet_location_model.dart';
 import 'package:together_delivery_app/post/view/post_input_form_screen/const/post_input_form_field_type.dart';
 import 'package:together_delivery_app/post/view/post_input_form_screen/model/post_input_form_model.dart';
 import 'package:together_delivery_app/post/view/post_input_form_screen/model/post_save_request_model.dart';
@@ -14,10 +15,10 @@ import 'package:http_parser/http_parser.dart';
 import 'package:together_delivery_app/post/repository/postRepository.dart';
 import 'package:together_delivery_app/post/view/post_input_form_screen/model/post_save_response_model.dart';
 
-
 typedef ValidationResult = ({bool isValid, String? message});
 
-final postInputFormProvider = StateNotifierProvider<PostInputFormNotifier, PostInputFormModel>(
+final postInputFormProvider = StateNotifierProvider.autoDispose<
+    PostInputFormNotifier, PostInputFormModel>(
   (ref) {
     final PostRepository postRepository = ref.watch(postRepositoryProvider);
 
@@ -30,14 +31,16 @@ class PostInputFormNotifier extends StateNotifier<PostInputFormModel> {
 
   PostInputFormNotifier(this.postRepository)
       : super(
-    PostInputFormModel(
+          const PostInputFormModel(
             title: "",
             content: "",
             restaurantCategory: RestaurantCategory.AMERICAN_FOOD,
             restaurantName: "",
             deliveryFee: "",
             minOrderFee: "",
-            location: "",
+            address: "",
+            latitude: 0.0,
+            longitude: 0.0,
             images: <Asset>[],
             titleErrMsg: null,
             contentErrMsg: null,
@@ -45,7 +48,7 @@ class PostInputFormNotifier extends StateNotifier<PostInputFormModel> {
             restaurantNameErrMsg: null,
             deliveryFeeErrMsg: null,
             minOrderFeeErrMsg: null,
-            locationErrMsg: null,
+            addressErrMsg: null,
             currentFocusedField: null,
           ),
         );
@@ -54,29 +57,27 @@ class PostInputFormNotifier extends StateNotifier<PostInputFormModel> {
     return RestaurantCategory.values;
   }
 
-  Object? getFieldValue(PostInputFormFieldType type) {
-    if (type == PostInputFormFieldType.title) {
-      return state.title;
+  Object getFieldValue(PostInputFormFieldType type) {
+    switch (type) {
+      case PostInputFormFieldType.title:
+        return state.title;
+      case PostInputFormFieldType.content:
+        return state.content;
+      case PostInputFormFieldType.restaurantCategory:
+        return state.restaurantCategory;
+      case PostInputFormFieldType.restaurantName:
+        return state.restaurantName;
+      case PostInputFormFieldType.deliveryFee:
+        return state.deliveryFee;
+      case PostInputFormFieldType.minOrderFee:
+        return state.minOrderFee;
+      case PostInputFormFieldType.address:
+        return state.address;
+      case PostInputFormFieldType.latitude:
+        return state.latitude;
+      case PostInputFormFieldType.longitude:
+        return state.longitude;
     }
-    if (type == PostInputFormFieldType.content) {
-      return state.content;
-    }
-    if (type == PostInputFormFieldType.restaurantCategory) {
-      return state.restaurantCategory;
-    }
-    if (type == PostInputFormFieldType.restaurantName) {
-      return state.restaurantName;
-    }
-    if (type == PostInputFormFieldType.deliveryFee) {
-      return state.deliveryFee;
-    }
-    if (type == PostInputFormFieldType.minOrderFee) {
-      return state.minOrderFee;
-    }
-    if (type == PostInputFormFieldType.location) {
-      return state.location;
-    }
-    return null;
   }
 
   void updateFieldValue(PostInputFormFieldType type, Object value) {
@@ -98,35 +99,37 @@ class PostInputFormNotifier extends StateNotifier<PostInputFormModel> {
     if (type == PostInputFormFieldType.minOrderFee) {
       state = state.copyWith(minOrderFee: value as String);
     }
-    if (type == PostInputFormFieldType.location) {
-      state = state.copyWith(location: value as String);
+    if (type == PostInputFormFieldType.address) {
+      state = state.copyWith(address: value as String);
+    }
+    if (type == PostInputFormFieldType.latitude) {
+      state = state.copyWith(latitude: value as double);
+    }
+    if (type == PostInputFormFieldType.longitude) {
+      state = state.copyWith(longitude: value as double);
     }
   }
 
   String? getFieldErrorValue(PostInputFormFieldType type) {
-    if (type == PostInputFormFieldType.title) {
-      return state.titleErrMsg;
+    switch (type) {
+      case PostInputFormFieldType.title:
+        return state.titleErrMsg;
+      case PostInputFormFieldType.content:
+        return state.contentErrMsg;
+      case PostInputFormFieldType.restaurantCategory:
+        return state.restaurantCategoryErrMsg;
+      case PostInputFormFieldType.restaurantName:
+        return state.restaurantNameErrMsg;
+      case PostInputFormFieldType.deliveryFee:
+        return state.deliveryFeeErrMsg;
+      case PostInputFormFieldType.minOrderFee:
+        return state.minOrderFeeErrMsg;
+      case PostInputFormFieldType.address:
+        return state.addressErrMsg;
+      case PostInputFormFieldType.latitude:
+      case PostInputFormFieldType.longitude:
+        return "";
     }
-    if (type == PostInputFormFieldType.content) {
-      return state.contentErrMsg;
-    }
-    if (type == PostInputFormFieldType.restaurantCategory) {
-      return state.restaurantCategoryErrMsg;
-    }
-    if (type == PostInputFormFieldType.restaurantName) {
-      return state.restaurantNameErrMsg;
-    }
-    if (type == PostInputFormFieldType.deliveryFee) {
-      return state.deliveryFeeErrMsg;
-    }
-    if (type == PostInputFormFieldType.minOrderFee) {
-      return state.minOrderFeeErrMsg;
-    }
-    if (type == PostInputFormFieldType.location) {
-      return state.location;
-    }
-
-    return null;
   }
 
   void updateFieldErrorValue(PostInputFormFieldType type, String? value) {
@@ -148,8 +151,8 @@ class PostInputFormNotifier extends StateNotifier<PostInputFormModel> {
     if (type == PostInputFormFieldType.minOrderFee) {
       state = state.copyWith(minOrderFeeErrMsg: value);
     }
-    if (type == PostInputFormFieldType.location) {
-      state = state.copyWith(locationErrMsg: value);
+    if (type == PostInputFormFieldType.address) {
+      state = state.copyWith(addressErrMsg: value);
     }
   }
 
@@ -159,7 +162,8 @@ class PostInputFormNotifier extends StateNotifier<PostInputFormModel> {
       return;
     }
 
-    if (state.currentFocusedField == PostInputFormFieldType.restaurantCategory) {
+    if (state.currentFocusedField ==
+        PostInputFormFieldType.restaurantCategory) {
       state = state.copyWith(currentFocusedField: type);
       return;
     }
@@ -185,34 +189,44 @@ class PostInputFormNotifier extends StateNotifier<PostInputFormModel> {
     state = state.copyWith(currentFocusedField: type);
   }
 
-  ValidationResult validate(PostInputFormFieldType type, String value) {
+  ValidationResult validate(PostInputFormFieldType type, Object value) {
     final onlyNumberRegExp = RegExp(r'^[0-9]+$');
 
+    if (type == PostInputFormFieldType.restaurantCategory ||
+        type == PostInputFormFieldType.restaurantName ||
+        type == PostInputFormFieldType.latitude ||
+        type == PostInputFormFieldType.longitude) {
+      return (isValid: true, message: null);
+    }
+
     if (type == PostInputFormFieldType.title) {
-      if (value.isEmpty) {
+      String typedValue = value as String;
+      if (typedValue.isEmpty) {
         return (isValid: false, message: '제목을 입력해주세요');
       }
-      if (value.length < 2 || value.length > 20) {
+      if (typedValue.length < 2 || typedValue.length > 20) {
         return (isValid: false, message: '제목은 2글자 이상 20글자 이하로만 입력 가능합니다.');
       }
       return (isValid: true, message: null);
     }
 
     if (type == PostInputFormFieldType.content) {
-      if (value.isEmpty) {
+      String typedValue = value as String;
+      if (typedValue.isEmpty) {
         return (isValid: false, message: '본문을 입력해주세요');
       }
-      if (value.length < 2 || value.length > 100) {
+      if (typedValue.length < 2 || typedValue.length > 100) {
         return (isValid: false, message: '제목은 2글자 이상 20글자 이하로만 입력 가능합니다.');
       }
       return (isValid: true, message: null);
     }
 
     if (type == PostInputFormFieldType.deliveryFee) {
-      if (value.isEmpty) {
+      String typedValue = value as String;
+      if (typedValue.isEmpty) {
         return (isValid: false, message: '배달비를 입력해주세요');
       }
-      if (!onlyNumberRegExp.hasMatch(value)) {
+      if (!onlyNumberRegExp.hasMatch(typedValue)) {
         return (
           isValid: false,
           message: '배달비는 숫자만 가능합니다.',
@@ -220,7 +234,7 @@ class PostInputFormNotifier extends StateNotifier<PostInputFormModel> {
       }
 
       try {
-        if (int.parse(value) < 0 || int.parse(value) > 10000) {
+        if (int.parse(typedValue) < 0 || int.parse(typedValue) > 10000) {
           return (isValid: false, message: '배달비는 10,000원이하로만 입력이 가능합니다.');
         }
       } catch (e) {
@@ -233,10 +247,11 @@ class PostInputFormNotifier extends StateNotifier<PostInputFormModel> {
     }
 
     if (type == PostInputFormFieldType.minOrderFee) {
-      if (value.isEmpty) {
+      String typedValue = value as String;
+      if (typedValue.isEmpty) {
         return (isValid: false, message: '최소주문금액을 입력해주세요');
       }
-      if (!onlyNumberRegExp.hasMatch(value)) {
+      if (!onlyNumberRegExp.hasMatch(typedValue)) {
         return (
           isValid: false,
           message: '최소주문금액은 숫자만 가능합니다.',
@@ -244,7 +259,7 @@ class PostInputFormNotifier extends StateNotifier<PostInputFormModel> {
       }
 
       try {
-        if (int.parse(value) < 0 || int.parse(value) > 100000) {
+        if (int.parse(typedValue) < 0 || int.parse(typedValue) > 100000) {
           return (isValid: false, message: '제목은 100,000이하로만 입력 가능합니다.');
         }
       } catch (e) {
@@ -256,9 +271,10 @@ class PostInputFormNotifier extends StateNotifier<PostInputFormModel> {
       return (isValid: true, message: null);
     }
 
-    if (type == PostInputFormFieldType.location) {
-      if (value.isEmpty) {
-        return (isValid: false, message: '본문을 입력해주세요');
+    if (type == PostInputFormFieldType.address) {
+      String typedValue = value as String;
+      if (typedValue.isEmpty) {
+        return (isValid: false, message: '만남장소를 지정해주세요');
       }
       return (isValid: true, message: null);
     }
@@ -350,17 +366,13 @@ class PostInputFormNotifier extends StateNotifier<PostInputFormModel> {
     List<Asset> images = state.images;
     images.removeAt(index);
     state = state.copyWith(images: images);
-    print(state.images.length);
   }
 
   bool checkAllFieldValid() {
     for (var fieldType in PostInputFormFieldType.values) {
-      if (fieldType == PostInputFormFieldType.restaurantCategory || fieldType == PostInputFormFieldType.restaurantName) continue;
-
       ValidationResult validationResult =
-          validate(fieldType, getFieldValue(fieldType) as String);
+          validate(fieldType, getFieldValue(fieldType));
       if (!validationResult.isValid) {
-        print(validationResult.message);
         updateFieldErrorValue(fieldType, validationResult.message!);
         return false;
       }
@@ -377,11 +389,8 @@ class PostInputFormNotifier extends StateNotifier<PostInputFormModel> {
       ByteData byteData = await state.images[i].getByteData();
       List<int> imageData = byteData.buffer.asUint8List();
 
-      images.add(MultipartFile.fromBytes(
-        imageData,
-        filename: 'image$i.jpg',
-        contentType: MediaType('image', 'jpeg')
-      ));
+      images.add(MultipartFile.fromBytes(imageData,
+          filename: 'image$i.jpg', contentType: MediaType('image', 'jpeg')));
     }
 
     return images;
@@ -389,7 +398,8 @@ class PostInputFormNotifier extends StateNotifier<PostInputFormModel> {
 
   Future<Result<PostSaveResponseModel, Exception>> registerPost() async {
     if (!checkAllFieldValid()) {
-      return Failure(CustomException(errorCode: ErrorCode.NOT_VALID_INPUT_FORM_ERROR));
+      return Failure(
+          CustomException(errorCode: ErrorCode.NOT_VALID_INPUT_FORM_ERROR));
     }
 
     PostSaveRequestModel postSaveRequestModel = PostSaveRequestModel(
@@ -399,11 +409,17 @@ class PostInputFormNotifier extends StateNotifier<PostInputFormModel> {
       restaurantName: state.restaurantName,
       deliveryFee: int.parse(state.deliveryFee),
       minOrderFee: int.parse(state.minOrderFee),
-      location: state.location,
+      meetLocation: MeetLocationModel(
+          address: state.address,
+          latitude: state.latitude,
+          longitude: state.longitude),
     );
 
+    print("위도: ${state.latitude}, 경도:${state.longitude}");
+
     List<MultipartFile> images = await convertImageToFormData();
-    final result = await postRepository.savePostDetail(postSaveRequestModel, images);
+    final result =
+        await postRepository.savePostDetail(postSaveRequestModel, images);
     return result;
   }
 }

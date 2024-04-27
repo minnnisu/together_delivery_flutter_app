@@ -17,7 +17,8 @@ _$PostDetailResponseModelImpl _$$PostDetailResponseModelImplFromJson(
       categoryCode: json['categoryCode'] as String,
       deliveryFee: json['deliveryFee'] as int,
       minOrderFee: json['minOrderFee'] as int,
-      location: json['location'] as String,
+      meetLocation: MeetLocationModel.fromJson(
+          json['meetLocation'] as Map<String, dynamic>),
       status: json['status'] as bool,
       createdAt: json['createdAt'] as String,
       updatedAt: json['updatedAt'] as String,
@@ -37,7 +38,7 @@ Map<String, dynamic> _$$PostDetailResponseModelImplToJson(
       'categoryCode': instance.categoryCode,
       'deliveryFee': instance.deliveryFee,
       'minOrderFee': instance.minOrderFee,
-      'location': instance.location,
+      'meetLocation': instance.meetLocation,
       'status': instance.status,
       'createdAt': instance.createdAt,
       'updatedAt': instance.updatedAt,
@@ -47,12 +48,12 @@ Map<String, dynamic> _$$PostDetailResponseModelImplToJson(
 _$ImageImpl _$$ImageImplFromJson(Map<String, dynamic> json) => _$ImageImpl(
       id: json['id'] as int,
       imageName: json['imageName'] as String,
-      createdAt: json['createdAt'] as String,
+      createdAt: DateTime.parse(json['createdAt'] as String),
     );
 
 Map<String, dynamic> _$$ImageImplToJson(_$ImageImpl instance) =>
     <String, dynamic>{
       'id': instance.id,
       'imageName': instance.imageName,
-      'createdAt': instance.createdAt,
+      'createdAt': instance.createdAt.toIso8601String(),
     };
