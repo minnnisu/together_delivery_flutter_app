@@ -16,6 +16,7 @@ import 'package:together_delivery_app/post/view/post_input_form_screen/model/pos
 import 'package:together_delivery_app/post/view/post_input_form_screen/provider/post_input_form_provider.dart';
 import 'package:together_delivery_app/post/view/post_input_form_screen/widget/post_dropdown_input_field.dart';
 import 'package:together_delivery_app/post/view/post_input_form_screen/widget/post_image_input_field.dart';
+import 'package:together_delivery_app/post/view/post_input_form_screen/widget/post_input_form_submit_btn.dart';
 import 'package:together_delivery_app/post/view/post_input_form_screen/widget/post_number_input_field.dart';
 import 'package:together_delivery_app/post/view/post_input_form_screen/widget/post_text_input_field.dart';
 
@@ -83,46 +84,13 @@ class PostInputForm extends ConsumerWidget {
                 errorText: postEditModel.deliveryFeeErrMsg),
           ],
         ),
-        MeetLocationInputField( marginBottomSize: 12,),
-        PostImageInputField( marginBottomSize: 12,),
-        TextButton(
-          onPressed: () async {
-            final result =
-                await ref.read(postInputFormProvider.notifier).registerPost();
-
-            if (result is Success) {
-              final newPostId =
-                  (result as Success<PostSaveResponseModel, Exception>)
-                      .value
-                      .id;
-              Navigator.pushReplacementNamed(context, '/postDetail',
-                  arguments: newPostId);
-            }
-
-            if (result is Failure) {
-              Failure<PostSaveResponseModel, Exception> failure =
-                  (result as Failure<PostSaveResponseModel, Exception>);
-              if (failure.exception is CustomException) {
-                if ((failure.exception as CustomException).errorCode ==
-                    ErrorCode.NOT_VALID_INPUT_FORM_ERROR) {
-                  ScaffoldMessenger.of(context).showSnackBar(
-                    const SnackBar(
-                      content: Text("입력한 값들이 유효하지 않습니다."),
-                      duration: Duration(seconds: 8),
-                      margin: EdgeInsets.all(20),
-                      behavior: SnackBarBehavior
-                          .floating, //  required when writing margin
-                    ),
-                  );
-                  return;
-                }
-              }
-
-              print(failure.exception);
-            }
-          },
-          child: Text("등록"),
+        MeetLocationInputField(
+          marginBottomSize: 12,
         ),
+        PostImageInputField(
+          marginBottomSize: 12,
+        ),
+        PostInputFormSubmitBtn(),
       ],
     );
   }
