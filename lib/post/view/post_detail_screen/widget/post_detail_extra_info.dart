@@ -4,6 +4,8 @@ import 'package:together_delivery_app/common/const/restaurantCategory.dart';
 import 'package:together_delivery_app/post/view/post_detail_screen/model/post_detail_response_model.dart';
 import 'package:together_delivery_app/post/view/post_detail_screen/provider/post_detail_provider.dart';
 
+import '../../../../common/const/const.dart';
+
 class PostDetailExtraInfo extends ConsumerWidget {
   const PostDetailExtraInfo({super.key});
 
@@ -12,52 +14,68 @@ class PostDetailExtraInfo extends ConsumerWidget {
     final postDetailModel =
         ref.watch(postDetailProvider) as PostDetailResponseModel;
 
-    return PostDetailExtraRowWrapper(
-      [
-        PostDetailExtraRow(
-          [
-            PostDetailExtraInfoItem(
-              itemKey: "카테고리",
-              itemValue: RestaurantCategory.getCategoryFromString(
-                      postDetailModel.categoryCode)
-                  .name,
-            ),
-            PostDetailExtraInfoItem(
-              itemKey: "가게이름",
-              itemValue: postDetailModel.restaurantName,
-            ),
-            PostDetailExtraInfoItem(
-              itemKey: "최소배달금액",
-              itemValue: "${postDetailModel.minOrderFee}원",
-            ),
-          ],
-        ),
-        PostDetailExtraRow(
-          [
-            PostDetailExtraInfoItem(
-              itemKey: "배달비",
-              itemValue: "${postDetailModel.deliveryFee}원",
-            ),
-            PostDetailExtraInfoItem(
-              itemKey: "만남장소",
-              itemValue: postDetailModel.meetLocation.address,
-            ),
-          ],
-        ),
-      ],
+    return Padding(
+      padding: const EdgeInsets.only(top: 10),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          Text(
+            "가게 정보",
+            style: TextStyle(fontSize: 16, fontWeight: FontWeight.w600),
+          ),
+          PostDetailExtraWrapper(
+            [
+              PostDetailExtraRow(
+                [
+                  PostDetailExtraInfoItem(
+                    itemKey: "음식종류",
+                    itemValue: RestaurantCategory.getCategoryFromString(
+                            postDetailModel.categoryCode)
+                        .name,
+                  ),
+                  PostDetailExtraInfoItem(
+                    itemKey: "최소배달금액",
+                    itemValue: "${postDetailModel.minOrderFee}원",
+                  ),
+                ],
+              ),
+              PostDetailExtraRow(
+                [
+                  PostDetailExtraInfoItem(
+                    itemKey: "가게이름",
+                    itemValue: postDetailModel.restaurantName,
+                  ),
+                  PostDetailExtraInfoItem(
+                    itemKey: "배달비",
+                    itemValue: "${postDetailModel.deliveryFee}원",
+                  ),
+                ],
+              ),
+            ],
+          ),
+        ],
+      ),
     );
   }
 }
 
-class PostDetailExtraRowWrapper extends StatelessWidget {
+class PostDetailExtraWrapper extends StatelessWidget {
   final List<PostDetailExtraRow> postExtraRows;
 
-  const PostDetailExtraRowWrapper(this.postExtraRows, {super.key});
+  const PostDetailExtraWrapper(this.postExtraRows, {super.key});
 
   @override
   Widget build(BuildContext context) {
     return Container(
-      padding: EdgeInsets.only(top: 10),
+      padding: EdgeInsets.only(bottom: 4),
+      decoration: BoxDecoration(
+        border: Border(
+          bottom: BorderSide(
+            color: Color(borderGreyColor),
+            width: 0.9,
+          ),
+        ),
+      ),
       child: Row(
           crossAxisAlignment: CrossAxisAlignment.start,
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
