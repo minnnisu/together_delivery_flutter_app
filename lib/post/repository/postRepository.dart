@@ -11,7 +11,7 @@ import 'package:together_delivery_app/post/view/post_input_form_screen/model/pos
 import '../view/post_input_form_screen/model/post_save_request_model.dart';
 
 final postRepositoryProvider = Provider<PostRepository>((ref) {
-  final dio = ref.read(dioProvider);
+  final dio = ref.watch(dioProvider);
   return PostRepository(dio);
 });
 

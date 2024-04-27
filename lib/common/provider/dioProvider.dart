@@ -10,7 +10,6 @@ import 'package:together_delivery_app/user/provider/authNotifier.dart';
 
 import '../secureStore/secureStore.dart';
 
-
 final dioProvider = Provider<Dio>((ref) {
   final dio = Dio();
 
@@ -47,16 +46,6 @@ class CustomInterceptor extends Interceptor {
       });
     }
 
-    // if (options.headers['refreshToken'] == 'true') {
-    //   // refreshToken이 필요한 요청
-    //   options.headers.remove('refreshToken');
-    //
-    //   final refreshToken = await storage.read(key: refreshTokenKey);
-    //   options.headers.addAll({
-    //     'authorization': 'Bearer $refreshToken',
-    //   });
-    // }
-
     super.onRequest(options, handler);
   }
 
@@ -87,10 +76,17 @@ class CustomInterceptor extends Interceptor {
         await storage.write(key: accessTokenKey, value: accessToken);
 
         Dio dio = Dio();
-        // 원래 보내려던 요청 재전송
+
+        if (options.data is FormData) {
+          options.data = (options.data as FormData).clone();
+
+          final newResponse = await dio.fetch(options);
+          print("원래 요청 전송");
+          return handler.resolve(newResponse);
+        }
+
         final newResponse = await dio.fetch(options);
         print("원래 요청 전송");
-
         return handler.resolve(newResponse);
       } catch (e) {
         print("에러 내용: ${e.toString()}");
