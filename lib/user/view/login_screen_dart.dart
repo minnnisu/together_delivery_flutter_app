@@ -4,24 +4,35 @@ import 'package:flutter/widgets.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:together_delivery_app/common/widgets/inputField.dart';
 import 'package:together_delivery_app/common/widgets/submitBtn.dart';
+import 'package:together_delivery_app/user/const/loginType.dart';
 import 'package:together_delivery_app/user/provider/loginNotifier.dart';
 
 class LoginScreen extends StatefulWidget {
-  const LoginScreen({super.key});
+  final LoginType loginType;
+  const LoginScreen({super.key, this.loginType = LoginType.normal});
 
   @override
   State<LoginScreen> createState() => _LoginScreenState();
 }
 
 class _LoginScreenState extends State<LoginScreen> {
+
   @override
   Widget build(BuildContext context) {
+    LoginType loginType = widget.loginType;
+    // if (ModalRoute.of(context)!.settings.arguments is LoginType) {
+    //   loginType = ModalRoute.of(context)!.settings.arguments as LoginType;
+    // }
+
     return Scaffold(
       appBar: AppBar(
         automaticallyImplyLeading: false,
         actions: [
-          IconButton(
-              onPressed: () => Navigator.pop(context), icon: Icon(Icons.close))
+          loginType == LoginType.normal
+              ? IconButton(
+                  onPressed: () => Navigator.pop(context),
+                  icon: Icon(Icons.close))
+              : Container(),
         ],
       ),
       body: SafeArea(
@@ -31,7 +42,7 @@ class _LoginScreenState extends State<LoginScreen> {
             children: [
               Logo(),
               Expanded(
-                child: LoginForm(),
+                child: LoginForm(loginType),
               ),
             ],
           ),
@@ -43,8 +54,9 @@ class _LoginScreenState extends State<LoginScreen> {
 
 class LoginForm extends ConsumerWidget {
   final formKey = GlobalKey<FormState>();
+  final loginType;
 
-  LoginForm({super.key});
+  LoginForm(this.loginType, {super.key});
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
@@ -92,7 +104,8 @@ class LoginForm extends ConsumerWidget {
               ],
             ),
             SubmitBtn(
-                btnName: "로그인", onPressed: () => _submitForm(context, ref)),
+                btnName: "로그인",
+                onPressed: () => _submitForm(context, ref, loginType)),
             Padding(
               padding: const EdgeInsets.all(16.0),
               child: Row(
@@ -136,7 +149,8 @@ class LoginForm extends ConsumerWidget {
   }
 
   // TODO: Provider로 옮기기
-  Future<void> _submitForm(BuildContext context, WidgetRef ref) async {
+  Future<void> _submitForm(
+      BuildContext context, WidgetRef ref, LoginType loginType) async {
     var loginRead = ref.read(loginProvider.notifier);
 
     final formKeyState = formKey.currentState!;
@@ -152,7 +166,12 @@ class LoginForm extends ConsumerWidget {
             content: Text('로그인을 성공하였습니다.'),
           ),
         );
-        Navigator.pop(context);
+
+        if (loginType == LoginType.first_page_login) {
+          Navigator.pushReplacementNamed(context, '/home');
+        } else {
+          Navigator.pop(context);
+        }
       }
     }
   }

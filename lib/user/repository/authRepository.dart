@@ -57,7 +57,7 @@ class AuthRepository {
         apiUrls.tokenRefresh,
         options: Options(
           headers: {
-            'Authorization': 'Bearer $accessToken',
+            'Authorization':  'Bearer $accessToken',
             'Authorization-refresh': 'Bearer $refreshToken',
           },
         ),
