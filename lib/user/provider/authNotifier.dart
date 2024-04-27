@@ -7,7 +7,20 @@ import 'package:together_delivery_app/user/model/user/userModel.dart';
 import 'package:together_delivery_app/user/repository/authRepository.dart';
 import 'package:together_delivery_app/user/repository/userMeRepository.dart';
 
+import '../../common/exception/customException.dart';
 import '../model/token/tokenResponse.dart';
+
+final authProvider = StateNotifierProvider<AuthNotifier, UserModelBase?>((ref) {
+  final authRepository = ref.watch(authRepositoryProvider);
+  final userMeRepository = ref.watch(userMeRepositoryProvider);
+  final storage = ref.watch(secureStorageProvider);
+
+  return AuthNotifier(
+    authRepository: authRepository,
+    userMeRepository: userMeRepository,
+    storage: storage,
+  );
+});
 
 class AuthNotifier extends StateNotifier<UserModelBase?> {
   final AuthRepository authRepository;
@@ -53,6 +66,11 @@ class AuthNotifier extends StateNotifier<UserModelBase?> {
     }
   }
 
+  Future<UserModelBase> autoLogin() async {
+    final userResponse = await userMeRepository.getUserInfo();
+    return userResponse;
+  }
+
   Future<TokenResponse> token() async {
     return await authRepository.token();
   }
@@ -69,16 +87,8 @@ class AuthNotifier extends StateNotifier<UserModelBase?> {
       storage.delete(key: refreshTokenKey),
     ]);
   }
+
+  void updateUserModel(UserModelBase userModelBase) {
+    state = userModelBase;
+  }
 }
-
-final authProvider = StateNotifierProvider<AuthNotifier, UserModelBase?>((ref) {
-  final authRepository = ref.watch(authRepositoryProvider);
-  final userMeRepository = ref.watch(userMeRepositoryProvider);
-  final storage = ref.watch(secureStorageProvider);
-
-  return AuthNotifier(
-    authRepository: authRepository,
-    userMeRepository: userMeRepository,
-    storage: storage,
-  );
-});
