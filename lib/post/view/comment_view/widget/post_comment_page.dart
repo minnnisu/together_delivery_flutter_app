@@ -22,21 +22,29 @@ class PostCommentPageState extends ConsumerState<PostCommentPage> {
     final commentPage = ref.watch(commentPageProvider);
     final commentListModel = ref.watch(commentProvider);
     print(commentPage.status.name);
-    return Column(
-      children: [
-        ListView.builder(
-          scrollDirection: Axis.vertical,
-          shrinkWrap: true,
-          physics: NeverScrollableScrollPhysics(),
-          itemCount: commentListModel.length,
-          itemBuilder: (context, index) => PostComment(index),
-        ),
-        commentPage.status == CommentPageStatusType.Loading
-            ? PostCommentLoading()
-            : commentPage.status == CommentPageStatusType.Error
-            ? PostCommentError()
-            : Container(),
-      ],
+    return Padding(
+      padding: const EdgeInsets.symmetric(vertical: 10, horizontal: 20),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          Padding(
+            padding: EdgeInsets.symmetric(vertical: 10)
+,            child: Text("댓글", style: TextStyle(fontSize: 16, fontWeight: FontWeight.w600),),
+          ),
+          ListView.builder(
+            scrollDirection: Axis.vertical,
+            shrinkWrap: true,
+            physics: NeverScrollableScrollPhysics(),
+            itemCount: commentListModel.length,
+            itemBuilder: (context, index) => PostComment(index),
+          ),
+          commentPage.status == CommentPageStatusType.Loading
+              ? PostCommentLoading()
+              : commentPage.status == CommentPageStatusType.Error
+              ? PostCommentError()
+              : Container(),
+        ],
+      ),
     );
   }
 }

@@ -43,7 +43,10 @@ class CommentPageNotifier extends StateNotifier<CommentPageModel> {
       }
       state = state.copyWith(currentPage: state.currentPage + 1);
     } catch (error) {
-      state = state.copyWith(status: CommentPageStatusType.Error);
+      state = state.copyWith(
+        status: CommentPageStatusType.Error,
+        bottomMessage: "댓글을 불러오는 과정에서 문제가 발생하였습니다.",
+      );
     }
   }
 
@@ -51,8 +54,7 @@ class CommentPageNotifier extends StateNotifier<CommentPageModel> {
     try {
       commentRead.removeAllComment();
       state = state.copyWith(status: CommentPageStatusType.Loading);
-      final response =
-          await commentRepository.getCommentList(1, postId);
+      final response = await commentRepository.getCommentList(1, postId);
       final metaData = response.metaData;
       final comments = response.comments;
 
@@ -65,7 +67,10 @@ class CommentPageNotifier extends StateNotifier<CommentPageModel> {
       }
       state = state.copyWith(currentPage: 1);
     } catch (error) {
-      state = state.copyWith(status: CommentPageStatusType.Error);
+      state = state.copyWith(
+        status: CommentPageStatusType.Error,
+        bottomMessage: "댓글을 불러오는 과정에서 문제가 발생하였습니다.",
+      );
     }
   }
 }

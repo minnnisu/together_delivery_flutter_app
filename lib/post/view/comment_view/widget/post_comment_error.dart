@@ -7,6 +7,7 @@ class PostCommentError extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    return Text(ref.watch(commentPageProvider).bottomMessage);
+    return Center(child: Text(ref.watch(commentPageProvider).bottomMessage, style: TextStyle(color: Color(
+        0xff777777)),),);
   }
 }

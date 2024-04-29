@@ -11,7 +11,7 @@ class PostComment extends ConsumerWidget {
     final commentModel = ref.watch(commentProvider);
 
     return Container(
-      margin: EdgeInsets.only(bottom: 10),
+      margin: EdgeInsets.only(bottom: 16),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
