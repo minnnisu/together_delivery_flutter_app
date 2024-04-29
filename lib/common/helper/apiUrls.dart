@@ -10,6 +10,10 @@ class apiUrls {
 
   static const String postDetailPostImage = baseUrl + '/images/post';
 
+
+  static const String commentGet = baseUrl + '/api/comment';
+
+
   static const String userRegister = baseUrl + "/auth/signup";
 
   static const String usernameDuplicationCheck = baseUrl + "/auth/check/username";
@@ -25,6 +29,8 @@ class apiUrls {
   static const String userInfoGetPath = "/api/user";
 
   static const String userInfoGet = baseUrl + "/api/user";
+
+
 
   static const String reverseGeocoding = "https://naveropenapi.apigw.ntruss.com/map-reversegeocode/v2/gc";
 
