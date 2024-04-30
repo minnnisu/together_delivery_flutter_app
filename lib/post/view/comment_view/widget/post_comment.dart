@@ -1,6 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:together_delivery_app/post/view/comment_view/provider/comment_provider.dart';
+import 'package:together_delivery_app/post/view/comment_view/provider/comment_page_provider.dart';
 import 'package:together_delivery_app/post/view/comment_view/widget/post_comment_header.dart';
 class PostComment extends ConsumerWidget {
   final int commentIndex;
@@ -8,7 +8,7 @@ class PostComment extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final commentModel = ref.watch(commentProvider);
+    final commentModel = ref.watch(commentPageProvider);
 
     return Container(
       margin: EdgeInsets.only(bottom: 16),
@@ -18,7 +18,7 @@ class PostComment extends ConsumerWidget {
           PostCommentHeader(commentIndex),
           Container(
             padding: EdgeInsets.only(top: 6),
-            child: Text(commentModel[commentIndex].content),
+            child: Text(commentModel.comments[commentIndex].comment.content),
           ),
         ],
       ),

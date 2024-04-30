@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:together_delivery_app/post/view/comment_view/provider/comment_page_provider.dart';
-import 'package:together_delivery_app/post/view/comment_view/provider/comment_provider.dart';
 import 'package:together_delivery_app/post/view/comment_view/widget/post_comment_page.dart';
 import 'package:together_delivery_app/post/view/post_detail_screen/widget/post_detail.dart';
 import 'package:together_delivery_app/post/view/post_detail_screen/model/post_detail_request_model.dart';
@@ -65,12 +64,12 @@ class PostDetailScreenBodyState extends ConsumerState<PostDetailScreenBody> {
   }
 
   Future<void> fetchFirstPage() async {
-    await ref.read(commentPageProvider.notifier).fetchFirstPage(widget.postId);
+    await ref.read(commentPageProvider.notifier).fetchPage(widget.postId);
   }
 
   @override
   Widget build(BuildContext context) {
-    print("개수 :${ref.watch(commentProvider).length}");
+    print("개수 :${ref.watch(commentPageProvider).comments.length}");
 
     return ref
         .watch(postDetailLoadProvider(PostDetailRequest(postId: widget.postId)))

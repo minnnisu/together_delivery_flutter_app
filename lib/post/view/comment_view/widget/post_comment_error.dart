@@ -7,7 +7,7 @@ class PostCommentError extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    return Center(child: Text(ref.watch(commentPageProvider).bottomMessage, style: TextStyle(color: Color(
+    return Center(child: Text("댓글을 불러오는 과정에서 오류가 발생하였습니다.", style: TextStyle(color: Color(
         0xff777777)),),);
   }
 }

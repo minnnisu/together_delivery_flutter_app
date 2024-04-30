@@ -11,7 +11,7 @@ _$CommentResponseModelImpl _$$CommentResponseModelImplFromJson(
     _$CommentResponseModelImpl(
       metaData: MetaData.fromJson(json['metaData'] as Map<String, dynamic>),
       comments: (json['comments'] as List<dynamic>)
-          .map((e) => CommentModel.fromJson(e as Map<String, dynamic>))
+          .map((e) => Comment.fromJson(e as Map<String, dynamic>))
           .toList(),
     );
 
@@ -22,14 +22,27 @@ Map<String, dynamic> _$$CommentResponseModelImplToJson(
       'comments': instance.comments,
     };
 
-_$MetaDataImpl _$$MetaDataImplFromJson(Map<String, dynamic> json) =>
-    _$MetaDataImpl(
-      totalPage: json['totalPage'] as int,
-      currentPage: json['currentPage'] as int,
+_$CommentImpl _$$CommentImplFromJson(Map<String, dynamic> json) =>
+    _$CommentImpl(
+      comment: CommentBody.fromJson(json['comment'] as Map<String, dynamic>),
+      reply: Reply.fromJson(json['reply'] as Map<String, dynamic>),
     );
 
-Map<String, dynamic> _$$MetaDataImplToJson(_$MetaDataImpl instance) =>
+Map<String, dynamic> _$$CommentImplToJson(_$CommentImpl instance) =>
     <String, dynamic>{
-      'totalPage': instance.totalPage,
-      'currentPage': instance.currentPage,
+      'comment': instance.comment,
+      'reply': instance.reply,
+    };
+
+_$ReplyImpl _$$ReplyImplFromJson(Map<String, dynamic> json) => _$ReplyImpl(
+      metaData: MetaData.fromJson(json['metaData'] as Map<String, dynamic>),
+      replies: (json['replies'] as List<dynamic>)
+          .map((e) => ReplyBody.fromJson(e as Map<String, dynamic>))
+          .toList(),
+    );
+
+Map<String, dynamic> _$$ReplyImplToJson(_$ReplyImpl instance) =>
+    <String, dynamic>{
+      'metaData': instance.metaData,
+      'replies': instance.replies,
     };
