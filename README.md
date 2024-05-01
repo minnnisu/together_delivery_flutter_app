@@ -1,16 +1,11 @@
-# together_delivery_app
+# 대학생을 위한 한번에 배달 어플리케이션
 
-A new Flutter project.
+## 제작 동기
+- 학교가 위치한 곳 주위에 다양한 음식점들의 부족으로 인해 대학생들 사이에서 배달의 수요가 많음
+- 하지만 지속적인 물가상승으로 인해 증가하는 배달비는 학생들에게 부담이 됨
+- 또한 높은 최소 주문 금액으로 인해 한끼보다 더 많은 양의 음식을 주문해야하는 경우 발생
+- 결과적으로 이로인해 대학생들을 혼자서 배달음식을 시켜먹기 부담스러운 상황 초래
+- **학생들이 보다 저렴한 배달비로 원하는 만큼의 음식을 주문하기 위한 해결방안이 필요함**
 
-## Getting Started
-
-This project is a starting point for a Flutter application.
-
-A few resources to get you started if this is your first Flutter project:
-
-- [Lab: Write your first Flutter app](https://docs.flutter.dev/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://docs.flutter.dev/cookbook)
-
-For help getting started with Flutter development, view the
-[online documentation](https://docs.flutter.dev/), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+## 목표
+동시간대에 함께 배달음식을 주문하고 싶은 대학생들을 모아주는 앱 기반 어플리케이션을 제작
