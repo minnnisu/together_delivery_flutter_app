@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:together_delivery_app/post/view/comment_view/provider/comment_page_provider.dart';
-import 'package:together_delivery_app/post/view/comment_view/widget/post_comment_page.dart';
+import 'package:together_delivery_app/post/view/comment_view/widget/comment/post_comment_page.dart';
+import 'package:together_delivery_app/post/view/comment_view/widget/common/comment_reply_input.dart';
 import 'package:together_delivery_app/post/view/post_detail_screen/widget/post_detail.dart';
 import 'package:together_delivery_app/post/view/post_detail_screen/model/post_detail_request_model.dart';
 import 'package:together_delivery_app/post/view/post_detail_screen/provider/post_detail_load_provider.dart';
@@ -41,7 +42,6 @@ class PostDetailScreenBodyState extends ConsumerState<PostDetailScreenBody> {
 
   @override
   void initState() {
-
     WidgetsBinding.instance.addPostFrameCallback((_) {
       // init이 완료되고 실행
       if (mounted) {
@@ -77,14 +77,21 @@ class PostDetailScreenBodyState extends ConsumerState<PostDetailScreenBody> {
           loading: () => const CircularProgressIndicator(),
           error: (err, stack) => Text('Error: $err'),
           data: (data) {
-            return ListView(
-              controller: _controller,
-              scrollDirection: Axis.vertical,
-              shrinkWrap: true,
+            return Column(
               children: [
-                PostDetail(),
-                SeparateLine(),
-                PostCommentPage(),
+                Expanded(
+                  child: ListView(
+                    controller: _controller,
+                    scrollDirection: Axis.vertical,
+                    shrinkWrap: true,
+                    children: [
+                      PostDetail(),
+                      SeparateLine(),
+                      PostCommentPage(),
+                    ],
+                  ),
+                ),
+                CommentReplyInput(),
               ],
             );
           },

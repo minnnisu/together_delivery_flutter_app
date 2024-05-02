@@ -1,0 +1,4 @@
+enum CommentReplyHeaderType{
+  Comment,
+  Reply,
+}

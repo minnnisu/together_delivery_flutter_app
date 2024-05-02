@@ -12,7 +12,7 @@ class SeparateLine extends StatelessWidget {
         border: Border(
           bottom: BorderSide(
             color: Color(borderGreyColor),
-            width: 5,
+            width: 10,
           ),
         ),
       ),
