@@ -57,14 +57,17 @@ class PostDetailScreenBodyState extends ConsumerState<PostDetailScreenBody> {
   // scroll position 변화를 감지하는 함수
   void _scrollListener() async {
     // scroll position이 최하단에 도달했는지 확인
-    if (scrollController.position.pixels == scrollController.position.maxScrollExtent) {
+    if (scrollController.position.pixels ==
+        scrollController.position.maxScrollExtent) {
       // 최하단에 도달하면 특정 이벤트 실행
       await fetchPage();
     }
   }
 
   Future<void> fetchPage() async {
-    await ref.read(commentPageProvider.notifier).fetchPage(widget.postId);
+    if (mounted) {
+      await ref.read(commentPageProvider.notifier).fetchPage(widget.postId);
+    }
   }
 
   @override

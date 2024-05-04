@@ -120,9 +120,15 @@ class CommentReplyInputNotifier extends StateNotifier<CommentReplyInputModel> {
       false;
     }
 
-    // 서버에 데이터 보내는 로직 수행
+    try {
+      final response = await commentRepository.updateComment(CommentUpdateRequestModel(
+          commentId: commentModifyInput.commentId, content: state.content));
+      commentPageRead.updateComment(response);
 
-    return false;
+      return true;
+    } on CustomException catch (e) {
+      return false;
+    }
   }
 
   Future<bool> _sendReplyAppendInput() async {
