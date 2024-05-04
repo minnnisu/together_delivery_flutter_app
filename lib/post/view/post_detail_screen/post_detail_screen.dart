@@ -38,17 +38,17 @@ class PostDetailScreenBody extends ConsumerStatefulWidget {
 }
 
 class PostDetailScreenBodyState extends ConsumerState<PostDetailScreenBody> {
-  final ScrollController _controller = ScrollController();
+  final ScrollController scrollController = ScrollController();
 
   @override
   void initState() {
     WidgetsBinding.instance.addPostFrameCallback((_) {
       // init이 완료되고 실행
       if (mounted) {
-        fetchFirstPage();
+        fetchPage();
       }
     });
-    _controller.addListener(
+    scrollController.addListener(
         _scrollListener); //scroll position 변화를 감지 및 _scrollListener 함수 호출
 
     super.initState();
@@ -57,20 +57,18 @@ class PostDetailScreenBodyState extends ConsumerState<PostDetailScreenBody> {
   // scroll position 변화를 감지하는 함수
   void _scrollListener() async {
     // scroll position이 최하단에 도달했는지 확인
-    if (_controller.position.pixels == _controller.position.maxScrollExtent) {
+    if (scrollController.position.pixels == scrollController.position.maxScrollExtent) {
       // 최하단에 도달하면 특정 이벤트 실행
-      await ref.read(commentPageProvider.notifier).fetchPage(widget.postId);
+      await fetchPage();
     }
   }
 
-  Future<void> fetchFirstPage() async {
+  Future<void> fetchPage() async {
     await ref.read(commentPageProvider.notifier).fetchPage(widget.postId);
   }
 
   @override
   Widget build(BuildContext context) {
-    print("개수 :${ref.watch(commentPageProvider).comments.length}");
-
     return ref
         .watch(postDetailLoadProvider(PostDetailRequest(postId: widget.postId)))
         .when(
@@ -81,7 +79,7 @@ class PostDetailScreenBodyState extends ConsumerState<PostDetailScreenBody> {
               children: [
                 Expanded(
                   child: ListView(
-                    controller: _controller,
+                    controller: scrollController,
                     scrollDirection: Axis.vertical,
                     shrinkWrap: true,
                     children: [
@@ -91,7 +89,9 @@ class PostDetailScreenBodyState extends ConsumerState<PostDetailScreenBody> {
                     ],
                   ),
                 ),
-                CommentReplyInput(),
+                CommentReplyInput(
+                  postId: widget.postId,
+                ),
               ],
             );
           },
@@ -100,7 +100,7 @@ class PostDetailScreenBodyState extends ConsumerState<PostDetailScreenBody> {
 
   @override
   void dispose() {
-    _controller.dispose();
+    scrollController.dispose();
     super.dispose();
   }
 }

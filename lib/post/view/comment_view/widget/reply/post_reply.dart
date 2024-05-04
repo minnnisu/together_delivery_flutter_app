@@ -25,7 +25,7 @@ class PostReply extends ConsumerWidget {
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           PostCommentHeader(
-            index: replyIndex,
+            id: reply.replyId!,
             creator: reply.creator,
             createdAt: reply.createdAt,
             commentReplyHeaderType: CommentReplyHeaderType.Reply,

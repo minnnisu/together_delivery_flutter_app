@@ -4,5 +4,5 @@ enum ErrorCode{
   NotValidAccessTokenError,
   ExpiredAccessTokenError,
   UserNotFoundError,
-  InternalServerError,
+  InternalServerError, NoSuchPostError, NoSuchCommentError, DeletedCommentError, NotTheAuthorOfTheComment,
 }

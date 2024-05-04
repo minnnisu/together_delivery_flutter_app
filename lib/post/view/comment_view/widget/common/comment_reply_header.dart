@@ -22,14 +22,14 @@ enum CommentReplyHeaderPopUpType {
 }
 
 class PostCommentHeader extends ConsumerWidget {
-  final int index;
+  final int id;
   final String creator;
   final String createdAt;
   final CommentReplyHeaderType commentReplyHeaderType;
 
   const PostCommentHeader({
     super.key,
-    required this.index,
+    required this.id,
     required this.creator,
     required this.createdAt,
     required this.commentReplyHeaderType,
@@ -85,7 +85,7 @@ class PostCommentHeader extends ConsumerWidget {
             commentReplyHeaderType: commentReplyHeaderType,
             creator: creator,
             isMine: isMine,
-            index: index,
+            id: id,
           )
         ],
       ),

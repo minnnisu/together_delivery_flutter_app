@@ -1,5 +1,8 @@
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:together_delivery_app/post/view/comment_view/const/commet_reply_input_type.dart';
+import 'package:together_delivery_app/common/exception/customException.dart';
+import 'package:together_delivery_app/post/view/comment_view/model/comment_save_request_model.dart';
+import 'package:together_delivery_app/post/view/comment_view/model/comment_update_request_model.dart';
+import 'package:together_delivery_app/post/view/comment_view/provider/comment_page_provider.dart';
 import 'package:together_delivery_app/post/view/comment_view/provider/reply_repository.dart';
 
 import '../model/comment_reply_input_model.dart';
@@ -11,45 +14,61 @@ final commentReplyInputProvider = StateNotifierProvider.autoDispose<
     CommentReplyInputNotifier, CommentReplyInputModel>((ref) {
   final commentRepository = ref.watch(commentRepositoryProvider);
   final replyRepository = ref.watch(replyRepositoryProvider);
-  return CommentReplyInputNotifier(commentRepository, replyRepository);
+  final commentPageRead = ref.watch(commentPageProvider.notifier);
+  return CommentReplyInputNotifier(
+    commentRepository: commentRepository,
+    replyRepository: replyRepository,
+    commentPageRead: commentPageRead,
+  );
 });
 
 class CommentReplyInputNotifier extends StateNotifier<CommentReplyInputModel> {
   final CommentRepository commentRepository;
   final ReplyRepository replyRepository;
+  final CommentPageNotifier commentPageRead;
 
-  CommentReplyInputNotifier(
-    this.commentRepository,
-    this.replyRepository,
-  ) : super(const CommentReplyInputModel(
-          commentReplyInputModel: CommentAppendInput(),
+  CommentReplyInputNotifier({
+    required this.commentRepository,
+    required this.replyRepository,
+    required this.commentPageRead,
+  }) : super(const CommentReplyInputModel(
+          commentReplyInputModel: InitStatusInput(),
           placeholder: "댓글 입력",
           content: "",
           errorMessage: "",
         ));
 
-  void updateState(CommentReplyInputModelBase commentReplyInputModelBase) {
+  void updateCommentReplyInputModelBase(
+      CommentReplyInputModelBase commentReplyInputModelBase) {
     state = state.copyWith(commentReplyInputModel: commentReplyInputModelBase);
+    if (commentReplyInputModelBase is CommentAppendInput) {
+      state = state.copyWith(placeholder: "댓글 입력");
+    }
+
+    if (commentReplyInputModelBase is CommentModifyInput) {
+      state = state.copyWith(placeholder: "댓글 수정");
+    }
+
+    if (commentReplyInputModelBase is ReplyAppendInput) {
+      state = state.copyWith(
+          placeholder:
+              "${(commentReplyInputModelBase).targetNickname}의 댓글에 답글 입력");
+    }
+
+    if (commentReplyInputModelBase is ReplyModifyInput) {
+      state = state.copyWith(placeholder: "답글 수정");
+    }
   }
 
   bool _validateDescription(String content) {
     if (content.isEmpty) {
-      state = state.copyWith(errorMessage: '댓글을 입력해주세요.');
+      state = state.copyWith(errorMessage: '댓글 혹은 답글을 입력해주세요.');
       return false;
     }
     if (content.length < 4 || content.length > 30) {
-      state = state.copyWith(errorMessage: '댓글은 2글자 이상 30글자 이하여야 합니다.');
+      state = state.copyWith(errorMessage: '댓글 혹은 답글을 2글자 이상 30글자 이하여야 합니다.');
       return false;
     }
-    return true;
-  }
-
-  bool _validateTargetNickName(String targetNickname) {
-    if (targetNickname.isEmpty) {
-      state = state.copyWith(errorMessage: '댓글을 입력해주세요.');
-      return false;
-    }
-
     return true;
   }
 
@@ -58,16 +77,16 @@ class CommentReplyInputNotifier extends StateNotifier<CommentReplyInputModel> {
   }
 
   Future<bool> sendToServer() async {
-    if (state is CommentAppendInput) {
+    if (state.commentReplyInputModel is CommentAppendInput) {
       return _sendCommentAppendInput();
     }
-    if (state is CommentModifyInput) {
+    if (state.commentReplyInputModel is CommentModifyInput) {
       return _sendCommentModifyInput();
     }
-    if (state is ReplyAppendInput) {
+    if (state.commentReplyInputModel is ReplyAppendInput) {
       return _sendReplyAppendInput();
     }
-    if (state is ReplyModifyInput) {
+    if (state.commentReplyInputModel is ReplyModifyInput) {
       return _sendReplyModifyInput();
     }
 
@@ -75,36 +94,41 @@ class CommentReplyInputNotifier extends StateNotifier<CommentReplyInputModel> {
   }
 
   Future<bool> _sendCommentAppendInput() async {
-    CommentAppendInput commentAppendInput = state as CommentAppendInput;
+    CommentAppendInput commentAppendInput =
+        state.commentReplyInputModel as CommentAppendInput;
     if (!_validateDescription(state.content)) {
       false;
     }
 
-    // 서버에 데이터 보내는 로직 수행
+    try {
+      final response = await commentRepository.saveComment(CommentSaveRequestModel(
+          postId: commentAppendInput.postId, content: state.content));
 
-    // 예외 처리
-    return false;
+      await commentPageRead.addNewComment(commentAppendInput.postId);
+
+    } on CustomException catch (e) {
+      return false;
+    }
+
+    return true;
   }
 
   Future<bool> _sendCommentModifyInput() async {
-    CommentModifyInput commentModifyInput = state as CommentModifyInput;
+    CommentModifyInput commentModifyInput =
+        state.commentReplyInputModel as CommentModifyInput;
     if (!_validateDescription(state.content)) {
       false;
     }
 
     // 서버에 데이터 보내는 로직 수행
 
-    // 예외 처리
     return false;
   }
 
   Future<bool> _sendReplyAppendInput() async {
-    ReplyAppendInput replyAppendInput = state as ReplyAppendInput;
+    ReplyAppendInput replyAppendInput =
+        state.commentReplyInputModel as ReplyAppendInput;
     if (!_validateDescription(state.content)) {
-      false;
-    }
-
-    if (!_validateTargetNickName(replyAppendInput.targetNickname)) {
       false;
     }
 
@@ -115,7 +139,8 @@ class CommentReplyInputNotifier extends StateNotifier<CommentReplyInputModel> {
   }
 
   Future<bool> _sendReplyModifyInput() async {
-    ReplyModifyInput replyModifyInput = state as ReplyModifyInput;
+    ReplyModifyInput replyModifyInput =
+        state.commentReplyInputModel as ReplyModifyInput;
     if (!_validateDescription(state.content)) {
       false;
     }

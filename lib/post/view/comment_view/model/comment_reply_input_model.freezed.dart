@@ -206,13 +206,82 @@ abstract class _CommentReplyInputModel implements CommentReplyInputModel {
 }
 
 /// @nodoc
-mixin _$CommentAppendInput {}
+mixin _$InitStatusInput {}
+
+/// @nodoc
+abstract class $InitStatusInputCopyWith<$Res> {
+  factory $InitStatusInputCopyWith(
+          InitStatusInput value, $Res Function(InitStatusInput) then) =
+      _$InitStatusInputCopyWithImpl<$Res, InitStatusInput>;
+}
+
+/// @nodoc
+class _$InitStatusInputCopyWithImpl<$Res, $Val extends InitStatusInput>
+    implements $InitStatusInputCopyWith<$Res> {
+  _$InitStatusInputCopyWithImpl(this._value, this._then);
+
+  // ignore: unused_field
+  final $Val _value;
+  // ignore: unused_field
+  final $Res Function($Val) _then;
+}
+
+/// @nodoc
+abstract class _$$InitStatusInputImplCopyWith<$Res> {
+  factory _$$InitStatusInputImplCopyWith(_$InitStatusInputImpl value,
+          $Res Function(_$InitStatusInputImpl) then) =
+      __$$InitStatusInputImplCopyWithImpl<$Res>;
+}
+
+/// @nodoc
+class __$$InitStatusInputImplCopyWithImpl<$Res>
+    extends _$InitStatusInputCopyWithImpl<$Res, _$InitStatusInputImpl>
+    implements _$$InitStatusInputImplCopyWith<$Res> {
+  __$$InitStatusInputImplCopyWithImpl(
+      _$InitStatusInputImpl _value, $Res Function(_$InitStatusInputImpl) _then)
+      : super(_value, _then);
+}
+
+/// @nodoc
+
+class _$InitStatusInputImpl implements _InitStatusInput {
+  const _$InitStatusInputImpl();
+
+  @override
+  String toString() {
+    return 'InitStatusInput()';
+  }
+
+  @override
+  bool operator ==(Object other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType && other is _$InitStatusInputImpl);
+  }
+
+  @override
+  int get hashCode => runtimeType.hashCode;
+}
+
+abstract class _InitStatusInput implements InitStatusInput {
+  const factory _InitStatusInput() = _$InitStatusInputImpl;
+}
+
+/// @nodoc
+mixin _$CommentAppendInput {
+  int get postId => throw _privateConstructorUsedError;
+
+  @JsonKey(ignore: true)
+  $CommentAppendInputCopyWith<CommentAppendInput> get copyWith =>
+      throw _privateConstructorUsedError;
+}
 
 /// @nodoc
 abstract class $CommentAppendInputCopyWith<$Res> {
   factory $CommentAppendInputCopyWith(
           CommentAppendInput value, $Res Function(CommentAppendInput) then) =
       _$CommentAppendInputCopyWithImpl<$Res, CommentAppendInput>;
+  @useResult
+  $Res call({int postId});
 }
 
 /// @nodoc
@@ -224,13 +293,30 @@ class _$CommentAppendInputCopyWithImpl<$Res, $Val extends CommentAppendInput>
   final $Val _value;
   // ignore: unused_field
   final $Res Function($Val) _then;
+
+  @pragma('vm:prefer-inline')
+  @override
+  $Res call({
+    Object? postId = null,
+  }) {
+    return _then(_value.copyWith(
+      postId: null == postId
+          ? _value.postId
+          : postId // ignore: cast_nullable_to_non_nullable
+              as int,
+    ) as $Val);
+  }
 }
 
 /// @nodoc
-abstract class _$$CommentAppendInputImplCopyWith<$Res> {
+abstract class _$$CommentAppendInputImplCopyWith<$Res>
+    implements $CommentAppendInputCopyWith<$Res> {
   factory _$$CommentAppendInputImplCopyWith(_$CommentAppendInputImpl value,
           $Res Function(_$CommentAppendInputImpl) then) =
       __$$CommentAppendInputImplCopyWithImpl<$Res>;
+  @override
+  @useResult
+  $Res call({int postId});
 }
 
 /// @nodoc
@@ -240,30 +326,63 @@ class __$$CommentAppendInputImplCopyWithImpl<$Res>
   __$$CommentAppendInputImplCopyWithImpl(_$CommentAppendInputImpl _value,
       $Res Function(_$CommentAppendInputImpl) _then)
       : super(_value, _then);
+
+  @pragma('vm:prefer-inline')
+  @override
+  $Res call({
+    Object? postId = null,
+  }) {
+    return _then(_$CommentAppendInputImpl(
+      postId: null == postId
+          ? _value.postId
+          : postId // ignore: cast_nullable_to_non_nullable
+              as int,
+    ));
+  }
 }
 
 /// @nodoc
 
 class _$CommentAppendInputImpl implements _CommentAppendInput {
-  const _$CommentAppendInputImpl();
+  const _$CommentAppendInputImpl({required this.postId});
+
+  @override
+  final int postId;
 
   @override
   String toString() {
-    return 'CommentAppendInput()';
+    return 'CommentAppendInput(postId: $postId)';
   }
 
   @override
   bool operator ==(Object other) {
     return identical(this, other) ||
-        (other.runtimeType == runtimeType && other is _$CommentAppendInputImpl);
+        (other.runtimeType == runtimeType &&
+            other is _$CommentAppendInputImpl &&
+            (identical(other.postId, postId) || other.postId == postId));
   }
 
   @override
-  int get hashCode => runtimeType.hashCode;
+  int get hashCode => Object.hash(runtimeType, postId);
+
+  @JsonKey(ignore: true)
+  @override
+  @pragma('vm:prefer-inline')
+  _$$CommentAppendInputImplCopyWith<_$CommentAppendInputImpl> get copyWith =>
+      __$$CommentAppendInputImplCopyWithImpl<_$CommentAppendInputImpl>(
+          this, _$identity);
 }
 
 abstract class _CommentAppendInput implements CommentAppendInput {
-  const factory _CommentAppendInput() = _$CommentAppendInputImpl;
+  const factory _CommentAppendInput({required final int postId}) =
+      _$CommentAppendInputImpl;
+
+  @override
+  int get postId;
+  @override
+  @JsonKey(ignore: true)
+  _$$CommentAppendInputImplCopyWith<_$CommentAppendInputImpl> get copyWith =>
+      throw _privateConstructorUsedError;
 }
 
 /// @nodoc

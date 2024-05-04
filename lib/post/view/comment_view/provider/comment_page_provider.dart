@@ -16,17 +16,28 @@ class CommentPageNotifier extends StateNotifier<CommentReplyModel> {
 
   CommentPageNotifier(this.commentRepository)
       : super(const CommentReplyModel(
-    status: CommentPageStatusType.Loading,
+    status: CommentPageStatusType.Success,
     comments: [],
   ));
 
   Future<void> fetchPage(int postId) async {
-    try {
-      if (state.status == CommentPageStatusType.NoMore) {
-        return;
-      }
-      state = state.copyWith(status: CommentPageStatusType.Loading);
+    if (state.status == CommentPageStatusType.NoMore) {
+      return;
+    }
 
+    await _fetchPage(postId);
+  }
+
+  Future<void> addNewComment(int postId) async{
+    await _fetchPage(postId);
+  }
+
+
+  Future<void> _fetchPage(int postId) async {
+    try {
+      if(state.status == CommentPageStatusType.Loading) return;
+
+      state = state.copyWith(status: CommentPageStatusType.Loading);
       int? cursor = state.comments.isNotEmpty ? state.comments.last.comment
           .commentId : null;
 
@@ -47,7 +58,7 @@ class CommentPageNotifier extends StateNotifier<CommentReplyModel> {
       }).toList();
 
       state = state.copyWith(
-        comments: comments,
+        comments: [...state.comments , ...comments],
         status: comments.isEmpty
             ? CommentPageStatusType.NoMore
             : CommentPageStatusType.Success,
@@ -58,6 +69,4 @@ class CommentPageNotifier extends StateNotifier<CommentReplyModel> {
       );
     }
   }
-
-  void addNewComment(CommentSaveResponseModel response) {}
 }

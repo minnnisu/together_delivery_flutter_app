@@ -15,19 +15,31 @@ class CommentReplyInputModel with _$CommentReplyInputModel {
 }
 
 @freezed
-class CommentAppendInput extends CommentReplyInputModelBase with _$CommentAppendInput {
-  const factory CommentAppendInput() = _CommentAppendInput;
+class InitStatusInput extends CommentReplyInputModelBase
+    with _$InitStatusInput {
+  const factory InitStatusInput() = _InitStatusInput;
+}
+
+
+@freezed
+class CommentAppendInput extends CommentReplyInputModelBase
+    with _$CommentAppendInput {
+  const factory CommentAppendInput({
+    required int postId,
+  }) = _CommentAppendInput;
 }
 
 @freezed
-class CommentModifyInput extends CommentReplyInputModelBase with _$CommentModifyInput {
+class CommentModifyInput extends CommentReplyInputModelBase
+    with _$CommentModifyInput {
   const factory CommentModifyInput({
     required int commentId,
   }) = _CommentModifyInput;
 }
 
 @freezed
-class ReplyAppendInput extends CommentReplyInputModelBase with _$ReplyAppendInput {
+class ReplyAppendInput extends CommentReplyInputModelBase
+    with _$ReplyAppendInput {
   const factory ReplyAppendInput({
     required String targetNickname,
     required int commentId,
@@ -35,7 +47,8 @@ class ReplyAppendInput extends CommentReplyInputModelBase with _$ReplyAppendInpu
 }
 
 @freezed
-class ReplyModifyInput extends CommentReplyInputModelBase with _$ReplyModifyInput {
+class ReplyModifyInput extends CommentReplyInputModelBase
+    with _$ReplyModifyInput {
   const factory ReplyModifyInput({
     required int replyId,
   }) = _ReplyModifyInput;

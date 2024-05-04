@@ -32,7 +32,7 @@ class PostComment extends ConsumerWidget {
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           PostCommentHeader(
-            index: commentIndex,
+            id: commentBody.commentId,
             creator: commentBody.creator,
             createdAt: commentBody.createdAt,
             commentReplyHeaderType: CommentReplyHeaderType.Comment,

@@ -10,7 +10,7 @@ import 'comment_reply_header.dart';
 class CommentReplyPopUp extends ConsumerWidget {
   final CommentReplyHeaderType commentReplyHeaderType;
   final bool isMine;
-  final int index;
+  final int id;
   final String creator;
 
   const CommentReplyPopUp({
@@ -18,7 +18,7 @@ class CommentReplyPopUp extends ConsumerWidget {
     required this.commentReplyHeaderType,
     required this.creator,
     required this.isMine,
-    required this.index,
+    required this.id,
   });
 
   @override
@@ -30,19 +30,19 @@ class CommentReplyPopUp extends ConsumerWidget {
         ? PopupMenuButton<CommentReplyHeaderPopUpType>(
             onSelected: (CommentReplyHeaderPopUpType result) {
               if (result == CommentReplyHeaderPopUpType.Append) {
-                commentReplyInputRead.updateState(
-                  ReplyAppendInput(targetNickname: creator, commentId: index),
+                commentReplyInputRead.updateCommentReplyInputModelBase(
+                  ReplyAppendInput(targetNickname: creator, commentId: id),
                 );
               }
 
               if (result == CommentReplyHeaderPopUpType.Modify) {
                 if (commentReplyHeaderType == CommentReplyHeaderType.Comment) {
                   commentReplyInputRead
-                      .updateState(CommentModifyInput(commentId: index));
+                      .updateCommentReplyInputModelBase(CommentModifyInput(commentId: id));
                 }
                 if (commentReplyHeaderType == CommentReplyHeaderType.Reply) {
                   commentReplyInputRead
-                      .updateState(ReplyModifyInput(replyId: index));
+                      .updateCommentReplyInputModelBase(ReplyModifyInput(replyId: id));
                 }
               }
             },
