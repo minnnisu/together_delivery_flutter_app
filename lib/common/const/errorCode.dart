@@ -10,4 +10,6 @@ enum ErrorCode {
   DeletedCommentError,
   NotTheAuthorOfTheComment,
   NoSuchReplyError,
+  DeletedReplyError,
+  NotTheAuthorOfTheReply,
 }

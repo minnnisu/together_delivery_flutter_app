@@ -3,6 +3,7 @@ import 'package:together_delivery_app/common/exception/customException.dart';
 import 'package:together_delivery_app/post/view/comment_view/model/comment_save_request_model.dart';
 import 'package:together_delivery_app/post/view/comment_view/model/comment_update_request_model.dart';
 import 'package:together_delivery_app/post/view/comment_view/model/reply_save_request_model.dart';
+import 'package:together_delivery_app/post/view/comment_view/model/reply_update_request_model.dart';
 import 'package:together_delivery_app/post/view/comment_view/provider/comment_page_provider.dart';
 import 'package:together_delivery_app/post/view/comment_view/provider/reply_repository.dart';
 
@@ -146,7 +147,8 @@ class CommentReplyInputNotifier extends StateNotifier<CommentReplyInputModel> {
         content: state.content,
         commentId: replyAppendInput.commentId,
       ));
-      commentPageRead.addNewReply(replyAppendInput.commentId, replyAppendInput.commentIndex);
+      await commentPageRead.addNewReply(
+          replyAppendInput.commentId, replyAppendInput.commentIndex);
 
       return true;
     } on CustomException catch (e) {
@@ -164,9 +166,23 @@ class CommentReplyInputNotifier extends StateNotifier<CommentReplyInputModel> {
       false;
     }
 
-    // 서버에 데이터 보내는 로직 수행
+    try {
+      final response =
+          await replyRepository.updateReply(ReplyUpdateRequestModel(
+        content: state.content,
+        replyId: replyModifyInput.replyId,
+      ));
 
-    // 예외 처리
-    return false;
+      commentPageRead.updateReply(
+        replyModifyInput.commentIndex,
+        replyModifyInput.replyIndex,
+        replyModifyInput.replyId,
+        response,
+      );
+
+      return true;
+    } on CustomException catch (e) {
+      return false;
+    }
   }
 }

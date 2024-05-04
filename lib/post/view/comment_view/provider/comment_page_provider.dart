@@ -4,20 +4,21 @@ import 'package:together_delivery_app/post/view/comment_view/model/comment_commo
 import 'package:together_delivery_app/post/view/comment_view/model/comment_reply_model.dart';
 import 'package:together_delivery_app/post/view/comment_view/model/comment_update_response_model.dart';
 import 'package:together_delivery_app/post/view/comment_view/model/reply_save_response_model.dart';
+import 'package:together_delivery_app/post/view/comment_view/model/reply_update_response_model.dart';
 import 'package:together_delivery_app/post/view/comment_view/provider/comment_repository.dart';
 import 'package:together_delivery_app/post/view/comment_view/provider/reply_repository.dart';
 
 final commentPageProvider =
-    StateNotifierProvider.autoDispose<CommentPageNotifier, CommentReplyModel>(
+StateNotifierProvider.autoDispose<CommentPageNotifier, CommentReplyModel>(
         (ref) {
-  final commentRepository = ref.watch(commentRepositoryProvider);
-  final replyRepository = ref.watch(replyRepositoryProvider);
+      final commentRepository = ref.watch(commentRepositoryProvider);
+      final replyRepository = ref.watch(replyRepositoryProvider);
 
-  return CommentPageNotifier(
-    commentRepository: commentRepository,
-    replyRepository: replyRepository,
-  );
-});
+      return CommentPageNotifier(
+        commentRepository: commentRepository,
+        replyRepository: replyRepository,
+      );
+    });
 
 class CommentPageNotifier extends StateNotifier<CommentReplyModel> {
   final CommentRepository commentRepository;
@@ -26,9 +27,9 @@ class CommentPageNotifier extends StateNotifier<CommentReplyModel> {
   CommentPageNotifier(
       {required this.commentRepository, required this.replyRepository})
       : super(const CommentReplyModel(
-          status: CommentPageStatusType.Success,
-          comments: [],
-        ));
+    status: CommentPageStatusType.Success,
+    comments: [],
+  ));
 
   Future<void> _fetchComment(int postId) async {
     try {
@@ -40,7 +41,7 @@ class CommentPageNotifier extends StateNotifier<CommentReplyModel> {
           : null;
 
       final commentResponse =
-          await commentRepository.getCommentList(cursor, postId);
+      await commentRepository.getCommentList(cursor, postId);
       final responseComments = commentResponse.comments;
 
       List<Comment> comments = responseComments.map((comment) {
@@ -96,12 +97,14 @@ class CommentPageNotifier extends StateNotifier<CommentReplyModel> {
         comment: comments[commentIndex].comment,
         reply: Reply(
           status: CommentPageStatusType.Success,
-          replies: [...comments[commentIndex].reply.replies, ...response.replies],
+          replies: [
+            ...comments[commentIndex].reply.replies,
+            ...response.replies
+          ],
         ),
       );
 
       state = state.copyWith(comments: comments);
-
     } catch (error) {
       List<Comment> comments = List.from(state.comments);
       comments[commentIndex] = Comment(
@@ -142,7 +145,27 @@ class CommentPageNotifier extends StateNotifier<CommentReplyModel> {
     state = state.copyWith(comments: comments);
   }
 
-  void addNewReply(int commentId, int commentIndex) {
-    _fetchReply(commentId, commentIndex);
+  Future<void> addNewReply(int commentId, int commentIndex) async {
+    await _fetchReply(commentId, commentIndex);
+  }
+
+  void updateReply(int commentIndex, int replyIndex, int replyId,
+      ReplyUpdateResponseModel response) {
+    final updatedReply = state.comments[commentIndex].reply.replies[replyIndex]
+        .copyWith(content: response.content, updatedAt: response.updatedAt,);
+
+    List<ReplyBody> replies = List.of(state.comments[commentIndex].reply.replies);
+    replies[replyIndex] = updatedReply;
+
+    List<Comment> comments = List.from(state.comments);
+    comments[commentIndex] = Comment(
+      comment: comments[commentIndex].comment,
+      reply: Reply(
+        status: CommentPageStatusType.Success,
+        replies: replies
+      ),
+    );
+
+    state = state.copyWith(comments: comments);
   }
 }
