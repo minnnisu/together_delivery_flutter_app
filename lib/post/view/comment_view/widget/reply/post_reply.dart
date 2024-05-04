@@ -19,8 +19,8 @@ class PostReply extends ConsumerWidget {
         .reply
         .replies[replyIndex];
 
-    return Container(
-      padding: EdgeInsets.only(top: 12, left: 30),
+    return Padding(
+      padding: EdgeInsets.only(top: 12, ),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [

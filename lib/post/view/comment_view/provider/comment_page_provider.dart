@@ -9,16 +9,16 @@ import 'package:together_delivery_app/post/view/comment_view/provider/comment_re
 import 'package:together_delivery_app/post/view/comment_view/provider/reply_repository.dart';
 
 final commentPageProvider =
-StateNotifierProvider.autoDispose<CommentPageNotifier, CommentReplyModel>(
+    StateNotifierProvider.autoDispose<CommentPageNotifier, CommentReplyModel>(
         (ref) {
-      final commentRepository = ref.watch(commentRepositoryProvider);
-      final replyRepository = ref.watch(replyRepositoryProvider);
+  final commentRepository = ref.watch(commentRepositoryProvider);
+  final replyRepository = ref.watch(replyRepositoryProvider);
 
-      return CommentPageNotifier(
-        commentRepository: commentRepository,
-        replyRepository: replyRepository,
-      );
-    });
+  return CommentPageNotifier(
+    commentRepository: commentRepository,
+    replyRepository: replyRepository,
+  );
+});
 
 class CommentPageNotifier extends StateNotifier<CommentReplyModel> {
   final CommentRepository commentRepository;
@@ -27,9 +27,9 @@ class CommentPageNotifier extends StateNotifier<CommentReplyModel> {
   CommentPageNotifier(
       {required this.commentRepository, required this.replyRepository})
       : super(const CommentReplyModel(
-    status: CommentPageStatusType.Success,
-    comments: [],
-  ));
+          status: CommentPageStatusType.Success,
+          comments: [],
+        ));
 
   Future<void> _fetchComment(int postId) async {
     try {
@@ -41,7 +41,7 @@ class CommentPageNotifier extends StateNotifier<CommentReplyModel> {
           : null;
 
       final commentResponse =
-      await commentRepository.getCommentList(cursor, postId);
+          await commentRepository.getCommentList(cursor, postId);
       final responseComments = commentResponse.comments;
 
       List<Comment> comments = responseComments.map((comment) {
@@ -49,7 +49,7 @@ class CommentPageNotifier extends StateNotifier<CommentReplyModel> {
           comment: comment.comment,
           reply: Reply(
             replies: comment.reply.replies,
-            status: comment.reply.replies.isEmpty
+            status: comment.reply.replies.length < 5
                 ? CommentPageStatusType.NoMore
                 : CommentPageStatusType.Success,
           ),
@@ -96,7 +96,9 @@ class CommentPageNotifier extends StateNotifier<CommentReplyModel> {
       comments[commentIndex] = Comment(
         comment: comments[commentIndex].comment,
         reply: Reply(
-          status: CommentPageStatusType.Success,
+          status: response.replies.length < 5
+              ? CommentPageStatusType.NoMore
+              : CommentPageStatusType.Success,
           replies: [
             ...comments[commentIndex].reply.replies,
             ...response.replies
@@ -127,11 +129,20 @@ class CommentPageNotifier extends StateNotifier<CommentReplyModel> {
     await _fetchComment(postId);
   }
 
+  Future<void> fetchReply(int commentId, int commentIndex) async {
+    if (state.comments[commentIndex].reply.status == CommentPageStatusType.NoMore) {
+      return;
+    }
+
+    await _fetchReply(commentId, commentIndex);
+  }
+
   Future<void> addNewComment(int postId) async {
     await _fetchComment(postId);
   }
 
-  void updateComment(CommentUpdateResponseModel responseModel, int commentIndex) {
+  void updateComment(
+      CommentUpdateResponseModel responseModel, int commentIndex) {
     var element = state.comments[commentIndex];
     CommentBody comment = element.comment;
     comment = comment.copyWith(
@@ -151,19 +162,20 @@ class CommentPageNotifier extends StateNotifier<CommentReplyModel> {
 
   void updateReply(int commentIndex, int replyIndex, int replyId,
       ReplyUpdateResponseModel response) {
-    final updatedReply = state.comments[commentIndex].reply.replies[replyIndex]
-        .copyWith(content: response.content, updatedAt: response.updatedAt,);
+    final updatedReply =
+        state.comments[commentIndex].reply.replies[replyIndex].copyWith(
+      content: response.content,
+      updatedAt: response.updatedAt,
+    );
 
-    List<ReplyBody> replies = List.of(state.comments[commentIndex].reply.replies);
+    List<ReplyBody> replies =
+        List.of(state.comments[commentIndex].reply.replies);
     replies[replyIndex] = updatedReply;
 
     List<Comment> comments = List.from(state.comments);
     comments[commentIndex] = Comment(
       comment: comments[commentIndex].comment,
-      reply: Reply(
-        status: CommentPageStatusType.Success,
-        replies: replies
-      ),
+      reply: Reply(status: CommentPageStatusType.Success, replies: replies),
     );
 
     state = state.copyWith(comments: comments);
