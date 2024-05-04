@@ -131,8 +131,8 @@ class CommentPageNotifier extends StateNotifier<CommentReplyModel> {
     await _fetchComment(postId);
   }
 
-  void updateComment(CommentUpdateResponseModel responseModel, int commentId) {
-    var element = state.comments[commentId];
+  void updateComment(CommentUpdateResponseModel responseModel, int commentIndex) {
+    var element = state.comments[commentIndex];
     CommentBody comment = element.comment;
     comment = comment.copyWith(
       content: responseModel.content,
@@ -140,7 +140,7 @@ class CommentPageNotifier extends StateNotifier<CommentReplyModel> {
     );
 
     List<Comment> comments = List.from(state.comments);
-    comments[commentId] = comments[commentId].copyWith(comment: comment);
+    comments[commentIndex] = comments[commentIndex].copyWith(comment: comment);
 
     state = state.copyWith(comments: comments);
   }

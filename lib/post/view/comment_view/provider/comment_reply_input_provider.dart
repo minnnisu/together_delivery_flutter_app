@@ -126,7 +126,7 @@ class CommentReplyInputNotifier extends StateNotifier<CommentReplyInputModel> {
       final response = await commentRepository.updateComment(
           CommentUpdateRequestModel(
               commentId: commentModifyInput.commentId, content: state.content));
-      commentPageRead.updateComment(response, commentModifyInput.commentId);
+      commentPageRead.updateComment(response, commentModifyInput.commentIndex);
 
       return true;
     } on CustomException catch (e) {
@@ -154,9 +154,6 @@ class CommentReplyInputNotifier extends StateNotifier<CommentReplyInputModel> {
     } on CustomException catch (e) {
       return false;
     }
-
-    // 예외 처리
-    return false;
   }
 
   Future<bool> _sendReplyModifyInput() async {
