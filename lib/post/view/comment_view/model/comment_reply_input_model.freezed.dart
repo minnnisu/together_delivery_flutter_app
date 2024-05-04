@@ -387,6 +387,7 @@ abstract class _CommentAppendInput implements CommentAppendInput {
 
 /// @nodoc
 mixin _$CommentModifyInput {
+  int get commentIndex => throw _privateConstructorUsedError;
   int get commentId => throw _privateConstructorUsedError;
 
   @JsonKey(ignore: true)
@@ -400,7 +401,7 @@ abstract class $CommentModifyInputCopyWith<$Res> {
           CommentModifyInput value, $Res Function(CommentModifyInput) then) =
       _$CommentModifyInputCopyWithImpl<$Res, CommentModifyInput>;
   @useResult
-  $Res call({int commentId});
+  $Res call({int commentIndex, int commentId});
 }
 
 /// @nodoc
@@ -416,9 +417,14 @@ class _$CommentModifyInputCopyWithImpl<$Res, $Val extends CommentModifyInput>
   @pragma('vm:prefer-inline')
   @override
   $Res call({
+    Object? commentIndex = null,
     Object? commentId = null,
   }) {
     return _then(_value.copyWith(
+      commentIndex: null == commentIndex
+          ? _value.commentIndex
+          : commentIndex // ignore: cast_nullable_to_non_nullable
+              as int,
       commentId: null == commentId
           ? _value.commentId
           : commentId // ignore: cast_nullable_to_non_nullable
@@ -435,7 +441,7 @@ abstract class _$$CommentModifyInputImplCopyWith<$Res>
       __$$CommentModifyInputImplCopyWithImpl<$Res>;
   @override
   @useResult
-  $Res call({int commentId});
+  $Res call({int commentIndex, int commentId});
 }
 
 /// @nodoc
@@ -449,9 +455,14 @@ class __$$CommentModifyInputImplCopyWithImpl<$Res>
   @pragma('vm:prefer-inline')
   @override
   $Res call({
+    Object? commentIndex = null,
     Object? commentId = null,
   }) {
     return _then(_$CommentModifyInputImpl(
+      commentIndex: null == commentIndex
+          ? _value.commentIndex
+          : commentIndex // ignore: cast_nullable_to_non_nullable
+              as int,
       commentId: null == commentId
           ? _value.commentId
           : commentId // ignore: cast_nullable_to_non_nullable
@@ -463,14 +474,17 @@ class __$$CommentModifyInputImplCopyWithImpl<$Res>
 /// @nodoc
 
 class _$CommentModifyInputImpl implements _CommentModifyInput {
-  const _$CommentModifyInputImpl({required this.commentId});
+  const _$CommentModifyInputImpl(
+      {required this.commentIndex, required this.commentId});
 
+  @override
+  final int commentIndex;
   @override
   final int commentId;
 
   @override
   String toString() {
-    return 'CommentModifyInput(commentId: $commentId)';
+    return 'CommentModifyInput(commentIndex: $commentIndex, commentId: $commentId)';
   }
 
   @override
@@ -478,12 +492,14 @@ class _$CommentModifyInputImpl implements _CommentModifyInput {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$CommentModifyInputImpl &&
+            (identical(other.commentIndex, commentIndex) ||
+                other.commentIndex == commentIndex) &&
             (identical(other.commentId, commentId) ||
                 other.commentId == commentId));
   }
 
   @override
-  int get hashCode => Object.hash(runtimeType, commentId);
+  int get hashCode => Object.hash(runtimeType, commentIndex, commentId);
 
   @JsonKey(ignore: true)
   @override
@@ -494,9 +510,12 @@ class _$CommentModifyInputImpl implements _CommentModifyInput {
 }
 
 abstract class _CommentModifyInput implements CommentModifyInput {
-  const factory _CommentModifyInput({required final int commentId}) =
-      _$CommentModifyInputImpl;
+  const factory _CommentModifyInput(
+      {required final int commentIndex,
+      required final int commentId}) = _$CommentModifyInputImpl;
 
+  @override
+  int get commentIndex;
   @override
   int get commentId;
   @override
@@ -507,6 +526,7 @@ abstract class _CommentModifyInput implements CommentModifyInput {
 
 /// @nodoc
 mixin _$ReplyAppendInput {
+  int get commentIndex => throw _privateConstructorUsedError;
   String get targetNickname => throw _privateConstructorUsedError;
   int get commentId => throw _privateConstructorUsedError;
 
@@ -521,7 +541,7 @@ abstract class $ReplyAppendInputCopyWith<$Res> {
           ReplyAppendInput value, $Res Function(ReplyAppendInput) then) =
       _$ReplyAppendInputCopyWithImpl<$Res, ReplyAppendInput>;
   @useResult
-  $Res call({String targetNickname, int commentId});
+  $Res call({int commentIndex, String targetNickname, int commentId});
 }
 
 /// @nodoc
@@ -537,10 +557,15 @@ class _$ReplyAppendInputCopyWithImpl<$Res, $Val extends ReplyAppendInput>
   @pragma('vm:prefer-inline')
   @override
   $Res call({
+    Object? commentIndex = null,
     Object? targetNickname = null,
     Object? commentId = null,
   }) {
     return _then(_value.copyWith(
+      commentIndex: null == commentIndex
+          ? _value.commentIndex
+          : commentIndex // ignore: cast_nullable_to_non_nullable
+              as int,
       targetNickname: null == targetNickname
           ? _value.targetNickname
           : targetNickname // ignore: cast_nullable_to_non_nullable
@@ -561,7 +586,7 @@ abstract class _$$ReplyAppendInputImplCopyWith<$Res>
       __$$ReplyAppendInputImplCopyWithImpl<$Res>;
   @override
   @useResult
-  $Res call({String targetNickname, int commentId});
+  $Res call({int commentIndex, String targetNickname, int commentId});
 }
 
 /// @nodoc
@@ -575,10 +600,15 @@ class __$$ReplyAppendInputImplCopyWithImpl<$Res>
   @pragma('vm:prefer-inline')
   @override
   $Res call({
+    Object? commentIndex = null,
     Object? targetNickname = null,
     Object? commentId = null,
   }) {
     return _then(_$ReplyAppendInputImpl(
+      commentIndex: null == commentIndex
+          ? _value.commentIndex
+          : commentIndex // ignore: cast_nullable_to_non_nullable
+              as int,
       targetNickname: null == targetNickname
           ? _value.targetNickname
           : targetNickname // ignore: cast_nullable_to_non_nullable
@@ -595,8 +625,12 @@ class __$$ReplyAppendInputImplCopyWithImpl<$Res>
 
 class _$ReplyAppendInputImpl implements _ReplyAppendInput {
   const _$ReplyAppendInputImpl(
-      {required this.targetNickname, required this.commentId});
+      {required this.commentIndex,
+      required this.targetNickname,
+      required this.commentId});
 
+  @override
+  final int commentIndex;
   @override
   final String targetNickname;
   @override
@@ -604,7 +638,7 @@ class _$ReplyAppendInputImpl implements _ReplyAppendInput {
 
   @override
   String toString() {
-    return 'ReplyAppendInput(targetNickname: $targetNickname, commentId: $commentId)';
+    return 'ReplyAppendInput(commentIndex: $commentIndex, targetNickname: $targetNickname, commentId: $commentId)';
   }
 
   @override
@@ -612,6 +646,8 @@ class _$ReplyAppendInputImpl implements _ReplyAppendInput {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$ReplyAppendInputImpl &&
+            (identical(other.commentIndex, commentIndex) ||
+                other.commentIndex == commentIndex) &&
             (identical(other.targetNickname, targetNickname) ||
                 other.targetNickname == targetNickname) &&
             (identical(other.commentId, commentId) ||
@@ -619,7 +655,8 @@ class _$ReplyAppendInputImpl implements _ReplyAppendInput {
   }
 
   @override
-  int get hashCode => Object.hash(runtimeType, targetNickname, commentId);
+  int get hashCode =>
+      Object.hash(runtimeType, commentIndex, targetNickname, commentId);
 
   @JsonKey(ignore: true)
   @override
@@ -631,9 +668,12 @@ class _$ReplyAppendInputImpl implements _ReplyAppendInput {
 
 abstract class _ReplyAppendInput implements ReplyAppendInput {
   const factory _ReplyAppendInput(
-      {required final String targetNickname,
+      {required final int commentIndex,
+      required final String targetNickname,
       required final int commentId}) = _$ReplyAppendInputImpl;
 
+  @override
+  int get commentIndex;
   @override
   String get targetNickname;
   @override
@@ -646,6 +686,8 @@ abstract class _ReplyAppendInput implements ReplyAppendInput {
 
 /// @nodoc
 mixin _$ReplyModifyInput {
+  int get commentIndex => throw _privateConstructorUsedError;
+  int get replyIndex => throw _privateConstructorUsedError;
   int get replyId => throw _privateConstructorUsedError;
 
   @JsonKey(ignore: true)
@@ -659,7 +701,7 @@ abstract class $ReplyModifyInputCopyWith<$Res> {
           ReplyModifyInput value, $Res Function(ReplyModifyInput) then) =
       _$ReplyModifyInputCopyWithImpl<$Res, ReplyModifyInput>;
   @useResult
-  $Res call({int replyId});
+  $Res call({int commentIndex, int replyIndex, int replyId});
 }
 
 /// @nodoc
@@ -675,9 +717,19 @@ class _$ReplyModifyInputCopyWithImpl<$Res, $Val extends ReplyModifyInput>
   @pragma('vm:prefer-inline')
   @override
   $Res call({
+    Object? commentIndex = null,
+    Object? replyIndex = null,
     Object? replyId = null,
   }) {
     return _then(_value.copyWith(
+      commentIndex: null == commentIndex
+          ? _value.commentIndex
+          : commentIndex // ignore: cast_nullable_to_non_nullable
+              as int,
+      replyIndex: null == replyIndex
+          ? _value.replyIndex
+          : replyIndex // ignore: cast_nullable_to_non_nullable
+              as int,
       replyId: null == replyId
           ? _value.replyId
           : replyId // ignore: cast_nullable_to_non_nullable
@@ -694,7 +746,7 @@ abstract class _$$ReplyModifyInputImplCopyWith<$Res>
       __$$ReplyModifyInputImplCopyWithImpl<$Res>;
   @override
   @useResult
-  $Res call({int replyId});
+  $Res call({int commentIndex, int replyIndex, int replyId});
 }
 
 /// @nodoc
@@ -708,9 +760,19 @@ class __$$ReplyModifyInputImplCopyWithImpl<$Res>
   @pragma('vm:prefer-inline')
   @override
   $Res call({
+    Object? commentIndex = null,
+    Object? replyIndex = null,
     Object? replyId = null,
   }) {
     return _then(_$ReplyModifyInputImpl(
+      commentIndex: null == commentIndex
+          ? _value.commentIndex
+          : commentIndex // ignore: cast_nullable_to_non_nullable
+              as int,
+      replyIndex: null == replyIndex
+          ? _value.replyIndex
+          : replyIndex // ignore: cast_nullable_to_non_nullable
+              as int,
       replyId: null == replyId
           ? _value.replyId
           : replyId // ignore: cast_nullable_to_non_nullable
@@ -722,14 +784,21 @@ class __$$ReplyModifyInputImplCopyWithImpl<$Res>
 /// @nodoc
 
 class _$ReplyModifyInputImpl implements _ReplyModifyInput {
-  const _$ReplyModifyInputImpl({required this.replyId});
+  const _$ReplyModifyInputImpl(
+      {required this.commentIndex,
+      required this.replyIndex,
+      required this.replyId});
 
+  @override
+  final int commentIndex;
+  @override
+  final int replyIndex;
   @override
   final int replyId;
 
   @override
   String toString() {
-    return 'ReplyModifyInput(replyId: $replyId)';
+    return 'ReplyModifyInput(commentIndex: $commentIndex, replyIndex: $replyIndex, replyId: $replyId)';
   }
 
   @override
@@ -737,11 +806,16 @@ class _$ReplyModifyInputImpl implements _ReplyModifyInput {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$ReplyModifyInputImpl &&
+            (identical(other.commentIndex, commentIndex) ||
+                other.commentIndex == commentIndex) &&
+            (identical(other.replyIndex, replyIndex) ||
+                other.replyIndex == replyIndex) &&
             (identical(other.replyId, replyId) || other.replyId == replyId));
   }
 
   @override
-  int get hashCode => Object.hash(runtimeType, replyId);
+  int get hashCode =>
+      Object.hash(runtimeType, commentIndex, replyIndex, replyId);
 
   @JsonKey(ignore: true)
   @override
@@ -752,9 +826,15 @@ class _$ReplyModifyInputImpl implements _ReplyModifyInput {
 }
 
 abstract class _ReplyModifyInput implements ReplyModifyInput {
-  const factory _ReplyModifyInput({required final int replyId}) =
-      _$ReplyModifyInputImpl;
+  const factory _ReplyModifyInput(
+      {required final int commentIndex,
+      required final int replyIndex,
+      required final int replyId}) = _$ReplyModifyInputImpl;
 
+  @override
+  int get commentIndex;
+  @override
+  int get replyIndex;
   @override
   int get replyId;
   @override

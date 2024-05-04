@@ -33,6 +33,7 @@ class CommentAppendInput extends CommentReplyInputModelBase
 class CommentModifyInput extends CommentReplyInputModelBase
     with _$CommentModifyInput {
   const factory CommentModifyInput({
+    required int commentIndex,
     required int commentId,
   }) = _CommentModifyInput;
 }
@@ -41,6 +42,7 @@ class CommentModifyInput extends CommentReplyInputModelBase
 class ReplyAppendInput extends CommentReplyInputModelBase
     with _$ReplyAppendInput {
   const factory ReplyAppendInput({
+    required int commentIndex,
     required String targetNickname,
     required int commentId,
   }) = _ReplyAppendInput;
@@ -50,6 +52,8 @@ class ReplyAppendInput extends CommentReplyInputModelBase
 class ReplyModifyInput extends CommentReplyInputModelBase
     with _$ReplyModifyInput {
   const factory ReplyModifyInput({
+    required int commentIndex,
+    required int replyIndex,
     required int replyId,
   }) = _ReplyModifyInput;
 }

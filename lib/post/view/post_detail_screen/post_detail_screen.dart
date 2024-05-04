@@ -42,12 +42,12 @@ class PostDetailScreenBodyState extends ConsumerState<PostDetailScreenBody> {
 
   @override
   void initState() {
-    WidgetsBinding.instance.addPostFrameCallback((_) {
-      // init이 완료되고 실행
-      if (mounted) {
-        fetchPage();
-      }
-    });
+    // WidgetsBinding.instance.addPostFrameCallback((_) {
+    //   // init이 완료되고 실행
+    //   if (mounted) {
+    //     fetchPage();
+    //   }
+    // });
     scrollController.addListener(
         _scrollListener); //scroll position 변화를 감지 및 _scrollListener 함수 호출
 
@@ -66,7 +66,7 @@ class PostDetailScreenBodyState extends ConsumerState<PostDetailScreenBody> {
 
   Future<void> fetchPage() async {
     if (mounted) {
-      await ref.read(commentPageProvider.notifier).fetchPage(widget.postId);
+      await ref.read(commentPageProvider.notifier).fetchComment(widget.postId);
     }
   }
 

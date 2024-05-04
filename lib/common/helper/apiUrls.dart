@@ -12,6 +12,11 @@ class apiUrls {
   static const String commentUpdate = baseUrl + '/api/comment';
   static const String commentDelete = baseUrl + '/api/comment';
 
+  static const String replyGet = baseUrl + '/api/reply';
+  static const String replySave = baseUrl + '/api/reply';
+  static const String replyUpdate = baseUrl + '/api/reply';
+  static const String replyDelete = baseUrl + '/api/comment';
+
   static const String userRegister = baseUrl + "/auth/signup";
   static const String usernameDuplicationCheck = baseUrl + "/auth/check/username";
   static const String nicknameDuplicationCheck = baseUrl + "/auth/check/nickname";

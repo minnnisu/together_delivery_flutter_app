@@ -2,39 +2,35 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:together_delivery_app/post/view/comment_view/const/comment_page_status_type.dart';
 import 'package:together_delivery_app/post/view/comment_view/model/comment_common_model.dart';
 import 'package:together_delivery_app/post/view/comment_view/model/comment_reply_model.dart';
-import 'package:together_delivery_app/post/view/comment_view/model/comment_save_response_model.dart';
 import 'package:together_delivery_app/post/view/comment_view/model/comment_update_response_model.dart';
+import 'package:together_delivery_app/post/view/comment_view/model/reply_save_response_model.dart';
 import 'package:together_delivery_app/post/view/comment_view/provider/comment_repository.dart';
+import 'package:together_delivery_app/post/view/comment_view/provider/reply_repository.dart';
 
 final commentPageProvider =
     StateNotifierProvider.autoDispose<CommentPageNotifier, CommentReplyModel>(
         (ref) {
   final commentRepository = ref.watch(commentRepositoryProvider);
-  return CommentPageNotifier(commentRepository);
+  final replyRepository = ref.watch(replyRepositoryProvider);
+
+  return CommentPageNotifier(
+    commentRepository: commentRepository,
+    replyRepository: replyRepository,
+  );
 });
 
 class CommentPageNotifier extends StateNotifier<CommentReplyModel> {
   final CommentRepository commentRepository;
+  final ReplyRepository replyRepository;
 
-  CommentPageNotifier(this.commentRepository)
+  CommentPageNotifier(
+      {required this.commentRepository, required this.replyRepository})
       : super(const CommentReplyModel(
           status: CommentPageStatusType.Success,
           comments: [],
         ));
 
-  Future<void> fetchPage(int postId) async {
-    if (state.status == CommentPageStatusType.NoMore) {
-      return;
-    }
-
-    await _fetchPage(postId);
-  }
-
-  Future<void> addNewComment(int postId) async {
-    await _fetchPage(postId);
-  }
-
-  Future<void> _fetchPage(int postId) async {
+  Future<void> _fetchComment(int postId) async {
     try {
       if (state.status == CommentPageStatusType.Loading) return;
 
@@ -72,21 +68,81 @@ class CommentPageNotifier extends StateNotifier<CommentReplyModel> {
     }
   }
 
-  void updateComment(CommentUpdateResponseModel responseModel) {
-    List<Comment> comments = List.from(state.comments);
-
-    for (int index = 0; index < comments.length; index++) {
-      var element = state.comments[index];
-      CommentBody comment = element.comment;
-      if (comment.commentId == responseModel.commentId) {
-        comment = comment.copyWith(
-          content: responseModel.content,
-          updatedAt: responseModel.updatedAt,
-        );
-
-        comments[index] = comments[index].copyWith(comment: comment);
-      }
+  Future<void> _fetchReply(int commentId, int commentIndex) async {
+    if (state.comments[commentIndex].reply.status ==
+        CommentPageStatusType.Loading) {
+      return;
     }
+
+    try {
+      List<Comment> comments = List.from(state.comments);
+      comments[commentIndex] = Comment(
+        comment: comments[commentIndex].comment,
+        reply: Reply(
+          status: CommentPageStatusType.Loading,
+          replies: comments[commentIndex].reply.replies,
+        ),
+      );
+
+      state = state.copyWith(comments: comments);
+
+      int? cursor = state.comments[commentIndex].reply.replies.isNotEmpty
+          ? state.comments[commentIndex].reply.replies.last.replyId
+          : null;
+
+      final response = await replyRepository.fetchReply(cursor, commentId);
+
+      comments[commentIndex] = Comment(
+        comment: comments[commentIndex].comment,
+        reply: Reply(
+          status: CommentPageStatusType.Success,
+          replies: [...comments[commentIndex].reply.replies, ...response.replies],
+        ),
+      );
+
+      state = state.copyWith(comments: comments);
+
+    } catch (error) {
+      List<Comment> comments = List.from(state.comments);
+      comments[commentIndex] = Comment(
+        comment: comments[commentIndex].comment,
+        reply: Reply(
+          status: CommentPageStatusType.Error,
+          replies: comments[commentIndex].reply.replies,
+        ),
+      );
+
+      state = state.copyWith(comments: comments);
+    }
+  }
+
+  Future<void> fetchComment(int postId) async {
+    if (state.status == CommentPageStatusType.NoMore) {
+      return;
+    }
+
+    await _fetchComment(postId);
+  }
+
+  Future<void> addNewComment(int postId) async {
+    await _fetchComment(postId);
+  }
+
+  void updateComment(CommentUpdateResponseModel responseModel, int commentId) {
+    var element = state.comments[commentId];
+    CommentBody comment = element.comment;
+    comment = comment.copyWith(
+      content: responseModel.content,
+      updatedAt: responseModel.updatedAt,
+    );
+
+    List<Comment> comments = List.from(state.comments);
+    comments[commentId] = comments[commentId].copyWith(comment: comment);
+
     state = state.copyWith(comments: comments);
+  }
+
+  void addNewReply(int commentId, int commentIndex) {
+    _fetchReply(commentId, commentIndex);
   }
 }

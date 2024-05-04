@@ -2,7 +2,9 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:together_delivery_app/common/const/const.dart';
 import 'package:together_delivery_app/post/view/comment_view/const/comment_reply_headerType.dart';
+import 'package:together_delivery_app/post/view/comment_view/model/comment_reply_input_model.dart';
 import 'package:together_delivery_app/post/view/comment_view/provider/comment_page_provider.dart';
+import 'package:together_delivery_app/post/view/comment_view/provider/comment_reply_input_provider.dart';
 import 'package:together_delivery_app/post/view/comment_view/widget/common/comment_reply_header.dart';
 import 'package:together_delivery_app/post/view/comment_view/widget/reply/post_reply.dart';
 
@@ -33,6 +35,7 @@ class PostComment extends ConsumerWidget {
         children: [
           PostCommentHeader(
             id: commentBody.commentId,
+            commentIndex: commentIndex,
             creator: commentBody.creator,
             createdAt: commentBody.createdAt,
             commentReplyHeaderType: CommentReplyHeaderType.Comment,

@@ -26,6 +26,8 @@ class PostReply extends ConsumerWidget {
         children: [
           PostCommentHeader(
             id: reply.replyId!,
+            commentIndex: commentIndex,
+            replyIndex: replyIndex!,
             creator: reply.creator,
             createdAt: reply.createdAt,
             commentReplyHeaderType: CommentReplyHeaderType.Reply,

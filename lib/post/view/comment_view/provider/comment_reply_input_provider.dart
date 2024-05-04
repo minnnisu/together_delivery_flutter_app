@@ -2,6 +2,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:together_delivery_app/common/exception/customException.dart';
 import 'package:together_delivery_app/post/view/comment_view/model/comment_save_request_model.dart';
 import 'package:together_delivery_app/post/view/comment_view/model/comment_update_request_model.dart';
+import 'package:together_delivery_app/post/view/comment_view/model/reply_save_request_model.dart';
 import 'package:together_delivery_app/post/view/comment_view/provider/comment_page_provider.dart';
 import 'package:together_delivery_app/post/view/comment_view/provider/reply_repository.dart';
 
@@ -101,11 +102,11 @@ class CommentReplyInputNotifier extends StateNotifier<CommentReplyInputModel> {
     }
 
     try {
-      final response = await commentRepository.saveComment(CommentSaveRequestModel(
-          postId: commentAppendInput.postId, content: state.content));
+      final response = await commentRepository.saveComment(
+          CommentSaveRequestModel(
+              postId: commentAppendInput.postId, content: state.content));
 
       await commentPageRead.addNewComment(commentAppendInput.postId);
-
     } on CustomException catch (e) {
       return false;
     }
@@ -121,9 +122,10 @@ class CommentReplyInputNotifier extends StateNotifier<CommentReplyInputModel> {
     }
 
     try {
-      final response = await commentRepository.updateComment(CommentUpdateRequestModel(
-          commentId: commentModifyInput.commentId, content: state.content));
-      commentPageRead.updateComment(response);
+      final response = await commentRepository.updateComment(
+          CommentUpdateRequestModel(
+              commentId: commentModifyInput.commentId, content: state.content));
+      commentPageRead.updateComment(response, commentModifyInput.commentId);
 
       return true;
     } on CustomException catch (e) {
@@ -138,7 +140,18 @@ class CommentReplyInputNotifier extends StateNotifier<CommentReplyInputModel> {
       false;
     }
 
-    // 서버에 데이터 보내는 로직 수행
+    try {
+      final response =
+          await commentRepository.addNewReply(ReplySaveRequestModel(
+        content: state.content,
+        commentId: replyAppendInput.commentId,
+      ));
+      commentPageRead.addNewReply(replyAppendInput.commentId, replyAppendInput.commentIndex);
+
+      return true;
+    } on CustomException catch (e) {
+      return false;
+    }
 
     // 예외 처리
     return false;

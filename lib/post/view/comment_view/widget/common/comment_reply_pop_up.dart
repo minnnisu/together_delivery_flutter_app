@@ -9,12 +9,16 @@ import 'comment_reply_header.dart';
 
 class CommentReplyPopUp extends ConsumerWidget {
   final CommentReplyHeaderType commentReplyHeaderType;
+  final int id; // comment or reply id
+  final int commentIndex;
+  final int? replyIndex;
   final bool isMine;
-  final int id;
   final String creator;
 
   const CommentReplyPopUp({
     super.key,
+    required this.commentIndex,
+    this.replyIndex,
     required this.commentReplyHeaderType,
     required this.creator,
     required this.isMine,
@@ -31,18 +35,29 @@ class CommentReplyPopUp extends ConsumerWidget {
             onSelected: (CommentReplyHeaderPopUpType result) {
               if (result == CommentReplyHeaderPopUpType.Append) {
                 commentReplyInputRead.updateCommentReplyInputModelBase(
-                  ReplyAppendInput(targetNickname: creator, commentId: id),
+                  ReplyAppendInput(
+                    targetNickname: creator,
+                    commentId: id,
+                    commentIndex: commentIndex,
+                  ),
                 );
               }
 
               if (result == CommentReplyHeaderPopUpType.Modify) {
                 if (commentReplyHeaderType == CommentReplyHeaderType.Comment) {
                   commentReplyInputRead
-                      .updateCommentReplyInputModelBase(CommentModifyInput(commentId: id));
+                      .updateCommentReplyInputModelBase(CommentModifyInput(
+                    commentId: id,
+                    commentIndex: commentIndex,
+                  ));
                 }
                 if (commentReplyHeaderType == CommentReplyHeaderType.Reply) {
                   commentReplyInputRead
-                      .updateCommentReplyInputModelBase(ReplyModifyInput(replyId: id));
+                      .updateCommentReplyInputModelBase(ReplyModifyInput(
+                    replyId: id,
+                    commentIndex: commentIndex,
+                    replyIndex: replyIndex!,
+                  ));
                 }
               }
             },
