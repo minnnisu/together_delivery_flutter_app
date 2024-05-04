@@ -98,30 +98,4 @@ class CommentRepository {
       throw CustomException(errorCode: ErrorCode.InternalServerError);
     }
   }
-
-  Future<ReplySaveResponseModel> addNewReply(ReplySaveRequestModel replySaveRequestModel) async {
-    try {
-      final response = await dio.post(
-        apiUrls.replySave,
-        options: Options(
-          headers: {
-            'accessToken': 'true',
-          },
-        ),
-        data: replySaveRequestModel.toJson(),
-      );
-
-      return ReplySaveResponseModel.fromJson(response.data);
-    } on DioException catch (e) {
-      if (e.response?.data['errorCode'] == 'UserNotFoundError') {
-        throw CustomException(errorCode: ErrorCode.UserNotFoundError);
-      }
-
-      if (e.response?.data['errorCode'] == 'NoSuchCommentError') {
-        throw CustomException(errorCode: ErrorCode.NoSuchCommentError);
-      }
-
-      throw CustomException(errorCode: ErrorCode.InternalServerError);
-    }
-  }
 }

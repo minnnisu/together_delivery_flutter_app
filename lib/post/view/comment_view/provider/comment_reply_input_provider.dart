@@ -103,9 +103,8 @@ class CommentReplyInputNotifier extends StateNotifier<CommentReplyInputModel> {
     }
 
     try {
-      final response = await commentRepository.saveComment(
-          CommentSaveRequestModel(
-              postId: commentAppendInput.postId, content: state.content));
+      await commentRepository.saveComment(CommentSaveRequestModel(
+          postId: commentAppendInput.postId, content: state.content));
 
       await commentPageRead.addNewComment(commentAppendInput.postId);
     } on CustomException catch (e) {
@@ -142,8 +141,7 @@ class CommentReplyInputNotifier extends StateNotifier<CommentReplyInputModel> {
     }
 
     try {
-      final response =
-          await commentRepository.addNewReply(ReplySaveRequestModel(
+      await replyRepository.saveReply(ReplySaveRequestModel(
         content: state.content,
         commentId: replyAppendInput.commentId,
       ));
