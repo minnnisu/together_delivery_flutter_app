@@ -8,7 +8,6 @@ part 'comment_reply_model.freezed.dart';
 class CommentReplyModel with _$CommentReplyModel {
   const factory CommentReplyModel({
     required CommentPageStatusType status,
-    required MetaData metaData,
     required List<Comment> comments,
   }) = _CommentReplyModel;
 }
@@ -26,7 +25,6 @@ class Comment with _$Comment {
 class Reply with _$Reply {
   const factory Reply({
     required CommentPageStatusType status,
-    required MetaData metaData,
     required List<ReplyBody> replies,
   }) = _Reply;
 }

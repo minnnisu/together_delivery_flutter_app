@@ -35,13 +35,3 @@ class ReplyBody with _$ReplyBody {
 
   factory ReplyBody.fromJson(Map<String, dynamic> json) => _$ReplyBodyFromJson(json);
 }
-
-@freezed
-class MetaData with _$MetaData {
-  const factory MetaData({
-    required int totalPage,
-    required int currentPage,
-  }) = _MetaData;
-
-  factory MetaData.fromJson(Map<String, dynamic> json) => _$MetaDataFromJson(json);
-}

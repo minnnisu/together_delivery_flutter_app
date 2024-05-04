@@ -20,7 +20,6 @@ CommentResponseModel _$CommentResponseModelFromJson(Map<String, dynamic> json) {
 
 /// @nodoc
 mixin _$CommentResponseModel {
-  MetaData get metaData => throw _privateConstructorUsedError;
   List<Comment> get comments => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
@@ -35,9 +34,7 @@ abstract class $CommentResponseModelCopyWith<$Res> {
           $Res Function(CommentResponseModel) then) =
       _$CommentResponseModelCopyWithImpl<$Res, CommentResponseModel>;
   @useResult
-  $Res call({MetaData metaData, List<Comment> comments});
-
-  $MetaDataCopyWith<$Res> get metaData;
+  $Res call({List<Comment> comments});
 }
 
 /// @nodoc
@@ -54,27 +51,14 @@ class _$CommentResponseModelCopyWithImpl<$Res,
   @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? metaData = null,
     Object? comments = null,
   }) {
     return _then(_value.copyWith(
-      metaData: null == metaData
-          ? _value.metaData
-          : metaData // ignore: cast_nullable_to_non_nullable
-              as MetaData,
       comments: null == comments
           ? _value.comments
           : comments // ignore: cast_nullable_to_non_nullable
               as List<Comment>,
     ) as $Val);
-  }
-
-  @override
-  @pragma('vm:prefer-inline')
-  $MetaDataCopyWith<$Res> get metaData {
-    return $MetaDataCopyWith<$Res>(_value.metaData, (value) {
-      return _then(_value.copyWith(metaData: value) as $Val);
-    });
   }
 }
 
@@ -86,10 +70,7 @@ abstract class _$$CommentResponseModelImplCopyWith<$Res>
       __$$CommentResponseModelImplCopyWithImpl<$Res>;
   @override
   @useResult
-  $Res call({MetaData metaData, List<Comment> comments});
-
-  @override
-  $MetaDataCopyWith<$Res> get metaData;
+  $Res call({List<Comment> comments});
 }
 
 /// @nodoc
@@ -103,14 +84,9 @@ class __$$CommentResponseModelImplCopyWithImpl<$Res>
   @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? metaData = null,
     Object? comments = null,
   }) {
     return _then(_$CommentResponseModelImpl(
-      metaData: null == metaData
-          ? _value.metaData
-          : metaData // ignore: cast_nullable_to_non_nullable
-              as MetaData,
       comments: null == comments
           ? _value._comments
           : comments // ignore: cast_nullable_to_non_nullable
@@ -122,15 +98,12 @@ class __$$CommentResponseModelImplCopyWithImpl<$Res>
 /// @nodoc
 @JsonSerializable()
 class _$CommentResponseModelImpl implements _CommentResponseModel {
-  const _$CommentResponseModelImpl(
-      {required this.metaData, required final List<Comment> comments})
+  const _$CommentResponseModelImpl({required final List<Comment> comments})
       : _comments = comments;
 
   factory _$CommentResponseModelImpl.fromJson(Map<String, dynamic> json) =>
       _$$CommentResponseModelImplFromJson(json);
 
-  @override
-  final MetaData metaData;
   final List<Comment> _comments;
   @override
   List<Comment> get comments {
@@ -141,7 +114,7 @@ class _$CommentResponseModelImpl implements _CommentResponseModel {
 
   @override
   String toString() {
-    return 'CommentResponseModel(metaData: $metaData, comments: $comments)';
+    return 'CommentResponseModel(comments: $comments)';
   }
 
   @override
@@ -149,15 +122,13 @@ class _$CommentResponseModelImpl implements _CommentResponseModel {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$CommentResponseModelImpl &&
-            (identical(other.metaData, metaData) ||
-                other.metaData == metaData) &&
             const DeepCollectionEquality().equals(other._comments, _comments));
   }
 
   @JsonKey(ignore: true)
   @override
-  int get hashCode => Object.hash(
-      runtimeType, metaData, const DeepCollectionEquality().hash(_comments));
+  int get hashCode =>
+      Object.hash(runtimeType, const DeepCollectionEquality().hash(_comments));
 
   @JsonKey(ignore: true)
   @override
@@ -176,15 +147,12 @@ class _$CommentResponseModelImpl implements _CommentResponseModel {
 }
 
 abstract class _CommentResponseModel implements CommentResponseModel {
-  const factory _CommentResponseModel(
-      {required final MetaData metaData,
-      required final List<Comment> comments}) = _$CommentResponseModelImpl;
+  const factory _CommentResponseModel({required final List<Comment> comments}) =
+      _$CommentResponseModelImpl;
 
   factory _CommentResponseModel.fromJson(Map<String, dynamic> json) =
       _$CommentResponseModelImpl.fromJson;
 
-  @override
-  MetaData get metaData;
   @override
   List<Comment> get comments;
   @override
@@ -373,7 +341,6 @@ Reply _$ReplyFromJson(Map<String, dynamic> json) {
 
 /// @nodoc
 mixin _$Reply {
-  MetaData get metaData => throw _privateConstructorUsedError;
   List<ReplyBody> get replies => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
@@ -386,9 +353,7 @@ abstract class $ReplyCopyWith<$Res> {
   factory $ReplyCopyWith(Reply value, $Res Function(Reply) then) =
       _$ReplyCopyWithImpl<$Res, Reply>;
   @useResult
-  $Res call({MetaData metaData, List<ReplyBody> replies});
-
-  $MetaDataCopyWith<$Res> get metaData;
+  $Res call({List<ReplyBody> replies});
 }
 
 /// @nodoc
@@ -404,27 +369,14 @@ class _$ReplyCopyWithImpl<$Res, $Val extends Reply>
   @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? metaData = null,
     Object? replies = null,
   }) {
     return _then(_value.copyWith(
-      metaData: null == metaData
-          ? _value.metaData
-          : metaData // ignore: cast_nullable_to_non_nullable
-              as MetaData,
       replies: null == replies
           ? _value.replies
           : replies // ignore: cast_nullable_to_non_nullable
               as List<ReplyBody>,
     ) as $Val);
-  }
-
-  @override
-  @pragma('vm:prefer-inline')
-  $MetaDataCopyWith<$Res> get metaData {
-    return $MetaDataCopyWith<$Res>(_value.metaData, (value) {
-      return _then(_value.copyWith(metaData: value) as $Val);
-    });
   }
 }
 
@@ -435,10 +387,7 @@ abstract class _$$ReplyImplCopyWith<$Res> implements $ReplyCopyWith<$Res> {
       __$$ReplyImplCopyWithImpl<$Res>;
   @override
   @useResult
-  $Res call({MetaData metaData, List<ReplyBody> replies});
-
-  @override
-  $MetaDataCopyWith<$Res> get metaData;
+  $Res call({List<ReplyBody> replies});
 }
 
 /// @nodoc
@@ -452,14 +401,9 @@ class __$$ReplyImplCopyWithImpl<$Res>
   @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? metaData = null,
     Object? replies = null,
   }) {
     return _then(_$ReplyImpl(
-      metaData: null == metaData
-          ? _value.metaData
-          : metaData // ignore: cast_nullable_to_non_nullable
-              as MetaData,
       replies: null == replies
           ? _value._replies
           : replies // ignore: cast_nullable_to_non_nullable
@@ -471,15 +415,12 @@ class __$$ReplyImplCopyWithImpl<$Res>
 /// @nodoc
 @JsonSerializable()
 class _$ReplyImpl implements _Reply {
-  const _$ReplyImpl(
-      {required this.metaData, required final List<ReplyBody> replies})
+  const _$ReplyImpl({required final List<ReplyBody> replies})
       : _replies = replies;
 
   factory _$ReplyImpl.fromJson(Map<String, dynamic> json) =>
       _$$ReplyImplFromJson(json);
 
-  @override
-  final MetaData metaData;
   final List<ReplyBody> _replies;
   @override
   List<ReplyBody> get replies {
@@ -490,7 +431,7 @@ class _$ReplyImpl implements _Reply {
 
   @override
   String toString() {
-    return 'Reply(metaData: $metaData, replies: $replies)';
+    return 'Reply(replies: $replies)';
   }
 
   @override
@@ -498,15 +439,13 @@ class _$ReplyImpl implements _Reply {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$ReplyImpl &&
-            (identical(other.metaData, metaData) ||
-                other.metaData == metaData) &&
             const DeepCollectionEquality().equals(other._replies, _replies));
   }
 
   @JsonKey(ignore: true)
   @override
-  int get hashCode => Object.hash(
-      runtimeType, metaData, const DeepCollectionEquality().hash(_replies));
+  int get hashCode =>
+      Object.hash(runtimeType, const DeepCollectionEquality().hash(_replies));
 
   @JsonKey(ignore: true)
   @override
@@ -523,14 +462,10 @@ class _$ReplyImpl implements _Reply {
 }
 
 abstract class _Reply implements Reply {
-  const factory _Reply(
-      {required final MetaData metaData,
-      required final List<ReplyBody> replies}) = _$ReplyImpl;
+  const factory _Reply({required final List<ReplyBody> replies}) = _$ReplyImpl;
 
   factory _Reply.fromJson(Map<String, dynamic> json) = _$ReplyImpl.fromJson;
 
-  @override
-  MetaData get metaData;
   @override
   List<ReplyBody> get replies;
   @override

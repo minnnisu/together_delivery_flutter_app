@@ -17,7 +17,6 @@ final _privateConstructorUsedError = UnsupportedError(
 /// @nodoc
 mixin _$CommentReplyModel {
   CommentPageStatusType get status => throw _privateConstructorUsedError;
-  MetaData get metaData => throw _privateConstructorUsedError;
   List<Comment> get comments => throw _privateConstructorUsedError;
 
   @JsonKey(ignore: true)
@@ -31,12 +30,7 @@ abstract class $CommentReplyModelCopyWith<$Res> {
           CommentReplyModel value, $Res Function(CommentReplyModel) then) =
       _$CommentReplyModelCopyWithImpl<$Res, CommentReplyModel>;
   @useResult
-  $Res call(
-      {CommentPageStatusType status,
-      MetaData metaData,
-      List<Comment> comments});
-
-  $MetaDataCopyWith<$Res> get metaData;
+  $Res call({CommentPageStatusType status, List<Comment> comments});
 }
 
 /// @nodoc
@@ -53,7 +47,6 @@ class _$CommentReplyModelCopyWithImpl<$Res, $Val extends CommentReplyModel>
   @override
   $Res call({
     Object? status = null,
-    Object? metaData = null,
     Object? comments = null,
   }) {
     return _then(_value.copyWith(
@@ -61,23 +54,11 @@ class _$CommentReplyModelCopyWithImpl<$Res, $Val extends CommentReplyModel>
           ? _value.status
           : status // ignore: cast_nullable_to_non_nullable
               as CommentPageStatusType,
-      metaData: null == metaData
-          ? _value.metaData
-          : metaData // ignore: cast_nullable_to_non_nullable
-              as MetaData,
       comments: null == comments
           ? _value.comments
           : comments // ignore: cast_nullable_to_non_nullable
               as List<Comment>,
     ) as $Val);
-  }
-
-  @override
-  @pragma('vm:prefer-inline')
-  $MetaDataCopyWith<$Res> get metaData {
-    return $MetaDataCopyWith<$Res>(_value.metaData, (value) {
-      return _then(_value.copyWith(metaData: value) as $Val);
-    });
   }
 }
 
@@ -89,13 +70,7 @@ abstract class _$$CommentReplyModelImplCopyWith<$Res>
       __$$CommentReplyModelImplCopyWithImpl<$Res>;
   @override
   @useResult
-  $Res call(
-      {CommentPageStatusType status,
-      MetaData metaData,
-      List<Comment> comments});
-
-  @override
-  $MetaDataCopyWith<$Res> get metaData;
+  $Res call({CommentPageStatusType status, List<Comment> comments});
 }
 
 /// @nodoc
@@ -110,7 +85,6 @@ class __$$CommentReplyModelImplCopyWithImpl<$Res>
   @override
   $Res call({
     Object? status = null,
-    Object? metaData = null,
     Object? comments = null,
   }) {
     return _then(_$CommentReplyModelImpl(
@@ -118,10 +92,6 @@ class __$$CommentReplyModelImplCopyWithImpl<$Res>
           ? _value.status
           : status // ignore: cast_nullable_to_non_nullable
               as CommentPageStatusType,
-      metaData: null == metaData
-          ? _value.metaData
-          : metaData // ignore: cast_nullable_to_non_nullable
-              as MetaData,
       comments: null == comments
           ? _value._comments
           : comments // ignore: cast_nullable_to_non_nullable
@@ -134,15 +104,11 @@ class __$$CommentReplyModelImplCopyWithImpl<$Res>
 
 class _$CommentReplyModelImpl implements _CommentReplyModel {
   const _$CommentReplyModelImpl(
-      {required this.status,
-      required this.metaData,
-      required final List<Comment> comments})
+      {required this.status, required final List<Comment> comments})
       : _comments = comments;
 
   @override
   final CommentPageStatusType status;
-  @override
-  final MetaData metaData;
   final List<Comment> _comments;
   @override
   List<Comment> get comments {
@@ -153,7 +119,7 @@ class _$CommentReplyModelImpl implements _CommentReplyModel {
 
   @override
   String toString() {
-    return 'CommentReplyModel(status: $status, metaData: $metaData, comments: $comments)';
+    return 'CommentReplyModel(status: $status, comments: $comments)';
   }
 
   @override
@@ -162,14 +128,12 @@ class _$CommentReplyModelImpl implements _CommentReplyModel {
         (other.runtimeType == runtimeType &&
             other is _$CommentReplyModelImpl &&
             (identical(other.status, status) || other.status == status) &&
-            (identical(other.metaData, metaData) ||
-                other.metaData == metaData) &&
             const DeepCollectionEquality().equals(other._comments, _comments));
   }
 
   @override
-  int get hashCode => Object.hash(runtimeType, status, metaData,
-      const DeepCollectionEquality().hash(_comments));
+  int get hashCode => Object.hash(
+      runtimeType, status, const DeepCollectionEquality().hash(_comments));
 
   @JsonKey(ignore: true)
   @override
@@ -182,13 +146,10 @@ class _$CommentReplyModelImpl implements _CommentReplyModel {
 abstract class _CommentReplyModel implements CommentReplyModel {
   const factory _CommentReplyModel(
       {required final CommentPageStatusType status,
-      required final MetaData metaData,
       required final List<Comment> comments}) = _$CommentReplyModelImpl;
 
   @override
   CommentPageStatusType get status;
-  @override
-  MetaData get metaData;
   @override
   List<Comment> get comments;
   @override
@@ -356,7 +317,6 @@ abstract class _Comment implements Comment {
 /// @nodoc
 mixin _$Reply {
   CommentPageStatusType get status => throw _privateConstructorUsedError;
-  MetaData get metaData => throw _privateConstructorUsedError;
   List<ReplyBody> get replies => throw _privateConstructorUsedError;
 
   @JsonKey(ignore: true)
@@ -368,12 +328,7 @@ abstract class $ReplyCopyWith<$Res> {
   factory $ReplyCopyWith(Reply value, $Res Function(Reply) then) =
       _$ReplyCopyWithImpl<$Res, Reply>;
   @useResult
-  $Res call(
-      {CommentPageStatusType status,
-      MetaData metaData,
-      List<ReplyBody> replies});
-
-  $MetaDataCopyWith<$Res> get metaData;
+  $Res call({CommentPageStatusType status, List<ReplyBody> replies});
 }
 
 /// @nodoc
@@ -390,7 +345,6 @@ class _$ReplyCopyWithImpl<$Res, $Val extends Reply>
   @override
   $Res call({
     Object? status = null,
-    Object? metaData = null,
     Object? replies = null,
   }) {
     return _then(_value.copyWith(
@@ -398,23 +352,11 @@ class _$ReplyCopyWithImpl<$Res, $Val extends Reply>
           ? _value.status
           : status // ignore: cast_nullable_to_non_nullable
               as CommentPageStatusType,
-      metaData: null == metaData
-          ? _value.metaData
-          : metaData // ignore: cast_nullable_to_non_nullable
-              as MetaData,
       replies: null == replies
           ? _value.replies
           : replies // ignore: cast_nullable_to_non_nullable
               as List<ReplyBody>,
     ) as $Val);
-  }
-
-  @override
-  @pragma('vm:prefer-inline')
-  $MetaDataCopyWith<$Res> get metaData {
-    return $MetaDataCopyWith<$Res>(_value.metaData, (value) {
-      return _then(_value.copyWith(metaData: value) as $Val);
-    });
   }
 }
 
@@ -425,13 +367,7 @@ abstract class _$$ReplyImplCopyWith<$Res> implements $ReplyCopyWith<$Res> {
       __$$ReplyImplCopyWithImpl<$Res>;
   @override
   @useResult
-  $Res call(
-      {CommentPageStatusType status,
-      MetaData metaData,
-      List<ReplyBody> replies});
-
-  @override
-  $MetaDataCopyWith<$Res> get metaData;
+  $Res call({CommentPageStatusType status, List<ReplyBody> replies});
 }
 
 /// @nodoc
@@ -446,7 +382,6 @@ class __$$ReplyImplCopyWithImpl<$Res>
   @override
   $Res call({
     Object? status = null,
-    Object? metaData = null,
     Object? replies = null,
   }) {
     return _then(_$ReplyImpl(
@@ -454,10 +389,6 @@ class __$$ReplyImplCopyWithImpl<$Res>
           ? _value.status
           : status // ignore: cast_nullable_to_non_nullable
               as CommentPageStatusType,
-      metaData: null == metaData
-          ? _value.metaData
-          : metaData // ignore: cast_nullable_to_non_nullable
-              as MetaData,
       replies: null == replies
           ? _value._replies
           : replies // ignore: cast_nullable_to_non_nullable
@@ -470,15 +401,11 @@ class __$$ReplyImplCopyWithImpl<$Res>
 
 class _$ReplyImpl implements _Reply {
   const _$ReplyImpl(
-      {required this.status,
-      required this.metaData,
-      required final List<ReplyBody> replies})
+      {required this.status, required final List<ReplyBody> replies})
       : _replies = replies;
 
   @override
   final CommentPageStatusType status;
-  @override
-  final MetaData metaData;
   final List<ReplyBody> _replies;
   @override
   List<ReplyBody> get replies {
@@ -489,7 +416,7 @@ class _$ReplyImpl implements _Reply {
 
   @override
   String toString() {
-    return 'Reply(status: $status, metaData: $metaData, replies: $replies)';
+    return 'Reply(status: $status, replies: $replies)';
   }
 
   @override
@@ -498,14 +425,12 @@ class _$ReplyImpl implements _Reply {
         (other.runtimeType == runtimeType &&
             other is _$ReplyImpl &&
             (identical(other.status, status) || other.status == status) &&
-            (identical(other.metaData, metaData) ||
-                other.metaData == metaData) &&
             const DeepCollectionEquality().equals(other._replies, _replies));
   }
 
   @override
-  int get hashCode => Object.hash(runtimeType, status, metaData,
-      const DeepCollectionEquality().hash(_replies));
+  int get hashCode => Object.hash(
+      runtimeType, status, const DeepCollectionEquality().hash(_replies));
 
   @JsonKey(ignore: true)
   @override
@@ -517,13 +442,10 @@ class _$ReplyImpl implements _Reply {
 abstract class _Reply implements Reply {
   const factory _Reply(
       {required final CommentPageStatusType status,
-      required final MetaData metaData,
       required final List<ReplyBody> replies}) = _$ReplyImpl;
 
   @override
   CommentPageStatusType get status;
-  @override
-  MetaData get metaData;
   @override
   List<ReplyBody> get replies;
   @override

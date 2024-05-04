@@ -14,7 +14,6 @@ String commentResponseModelToJson(CommentResponseModel data) => json.encode(data
 @freezed
 class CommentResponseModel with _$CommentResponseModel {
   const factory CommentResponseModel({
-    required MetaData metaData,
     required List<Comment> comments,
   }) = _CommentResponseModel;
 
@@ -35,7 +34,6 @@ class Comment with _$Comment {
 @freezed
 class Reply with _$Reply {
   const factory Reply({
-    required MetaData metaData,
     required List<ReplyBody> replies,
   }) = _Reply;
 

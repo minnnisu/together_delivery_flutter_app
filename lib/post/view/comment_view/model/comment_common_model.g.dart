@@ -53,15 +53,3 @@ Map<String, dynamic> _$$ReplyBodyImplToJson(_$ReplyBodyImpl instance) =>
       'deletedAt': instance.deletedAt,
       'replyId': instance.replyId,
     };
-
-_$MetaDataImpl _$$MetaDataImplFromJson(Map<String, dynamic> json) =>
-    _$MetaDataImpl(
-      totalPage: json['totalPage'] as int,
-      currentPage: json['currentPage'] as int,
-    );
-
-Map<String, dynamic> _$$MetaDataImplToJson(_$MetaDataImpl instance) =>
-    <String, dynamic>{
-      'totalPage': instance.totalPage,
-      'currentPage': instance.currentPage,
-    };
