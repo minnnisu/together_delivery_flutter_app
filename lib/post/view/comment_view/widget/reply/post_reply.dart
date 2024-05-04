@@ -20,7 +20,7 @@ class PostReply extends ConsumerWidget {
         .replies[replyIndex];
 
     return Padding(
-      padding: EdgeInsets.only(top: 12, ),
+      padding: EdgeInsets.only(top: 16,),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [

@@ -32,6 +32,16 @@ class CommentReplyPopUp extends ConsumerWidget {
 
     return (commentReplyHeaderType == CommentReplyHeaderType.Comment || isMine)
         ? PopupMenuButton<CommentReplyHeaderPopUpType>(
+            child: Container(
+              height: 36,
+              width: 48,
+              alignment: Alignment.centerRight,
+              child: Icon(
+                Icons.more_vert, size: 16, color: Color(0xff9a9a9a),
+              ),
+            ),
+            color: Color(0xffffffff),
+            surfaceTintColor:  Color(0xffffffff),
             onSelected: (CommentReplyHeaderPopUpType result) {
               if (result == CommentReplyHeaderPopUpType.Append) {
                 commentReplyInputRead.updateCommentReplyInputModelBase(
