@@ -4,11 +4,13 @@ import 'package:together_delivery_app/common/const/errorCode.dart';
 import 'package:together_delivery_app/common/exception/customException.dart';
 import 'package:together_delivery_app/common/helper/apiUrls.dart';
 import 'package:together_delivery_app/common/provider/dioProvider.dart';
+import 'package:together_delivery_app/post/view/comment_view/model/comment_delete_response_model.dart';
 import 'package:together_delivery_app/post/view/comment_view/model/comment_response_model.dart';
 import 'package:together_delivery_app/post/view/comment_view/model/comment_save_request_model.dart';
 import 'package:together_delivery_app/post/view/comment_view/model/comment_save_response_model.dart';
 import 'package:together_delivery_app/post/view/comment_view/model/comment_update_request_model.dart';
 import 'package:together_delivery_app/post/view/comment_view/model/comment_update_response_model.dart';
+import 'package:together_delivery_app/post/view/comment_view/model/reply_delete_response_model.dart';
 import 'package:together_delivery_app/post/view/comment_view/model/reply_save_request_model.dart';
 import 'package:together_delivery_app/post/view/comment_view/model/reply_save_response_model.dart';
 
@@ -26,12 +28,12 @@ class CommentRepository {
     try {
       Map<String, dynamic> queryParameters = {};
       queryParameters['postId'] = postId;
-      if(cursor != null) {
+      if (cursor != null) {
         queryParameters['cursor'] = cursor;
       }
 
-      final response = await dio.get(apiUrls.commentGet,
-          queryParameters: queryParameters);
+      final response =
+          await dio.get(apiUrls.commentGet, queryParameters: queryParameters);
       return CommentResponseModel.fromJson(response.data);
     } on DioException catch (e) {
       throw CustomException(errorCode: ErrorCode.InternalServerError);
@@ -78,6 +80,39 @@ class CommentRepository {
       );
 
       return CommentUpdateResponseModel.fromJson(response.data);
+    } on DioException catch (e) {
+      if (e.response?.data['errorCode'] == 'UserNotFoundError') {
+        throw CustomException(errorCode: ErrorCode.UserNotFoundError);
+      }
+
+      if (e.response?.data['errorCode'] == 'NoSuchCommentError') {
+        throw CustomException(errorCode: ErrorCode.NoSuchCommentError);
+      }
+
+      if (e.response?.data['errorCode'] == 'DeletedCommentError') {
+        throw CustomException(errorCode: ErrorCode.DeletedCommentError);
+      }
+
+      if (e.response?.data['errorCode'] == 'NotTheAuthorOfTheComment') {
+        throw CustomException(errorCode: ErrorCode.NotTheAuthorOfTheComment);
+      }
+
+      throw CustomException(errorCode: ErrorCode.InternalServerError);
+    }
+  }
+
+  Future<CommentDeleteResponseModel> deleteComment(int commentId) async {
+    try {
+      final response = await dio.delete(
+        "${apiUrls.commentDelete}/$commentId",
+        options: Options(
+          headers: {
+            'accessToken': 'true',
+          },
+        ),
+      );
+      print(response.data);
+      return CommentDeleteResponseModel.fromJson(response.data);
     } on DioException catch (e) {
       if (e.response?.data['errorCode'] == 'UserNotFoundError') {
         throw CustomException(errorCode: ErrorCode.UserNotFoundError);
