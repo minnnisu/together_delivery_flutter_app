@@ -37,13 +37,15 @@ class CommentReplyPopUp extends ConsumerWidget {
               width: 48,
               alignment: Alignment.centerRight,
               child: Icon(
-                Icons.more_vert, size: 16, color: Color(0xff9a9a9a),
+                Icons.more_vert,
+                size: 16,
+                color: Color(0xff9a9a9a),
               ),
             ),
             color: Color(0xffffffff),
-            surfaceTintColor:  Color(0xffffffff),
-            onSelected: (CommentReplyHeaderPopUpType result) {
-              if (result == CommentReplyHeaderPopUpType.Append) {
+            surfaceTintColor: Color(0xffffffff),
+            onSelected: (CommentReplyHeaderPopUpType type) {
+              if (type == CommentReplyHeaderPopUpType.Append) {
                 commentReplyInputRead.updateCommentReplyInputModelBase(
                   ReplyAppendInput(
                     targetNickname: creator,
@@ -53,7 +55,7 @@ class CommentReplyPopUp extends ConsumerWidget {
                 );
               }
 
-              if (result == CommentReplyHeaderPopUpType.Modify) {
+              if (type == CommentReplyHeaderPopUpType.Modify) {
                 if (commentReplyHeaderType == CommentReplyHeaderType.Comment) {
                   commentReplyInputRead
                       .updateCommentReplyInputModelBase(CommentModifyInput(
@@ -68,6 +70,22 @@ class CommentReplyPopUp extends ConsumerWidget {
                     commentIndex: commentIndex,
                     replyIndex: replyIndex!,
                   ));
+                }
+              }
+
+              if (type == CommentReplyHeaderPopUpType.Delete) {
+                if (commentReplyHeaderType == CommentReplyHeaderType.Comment) {
+                  commentReplyInputRead.deleteComment(
+                    id,
+                    commentIndex,
+                  );
+                }
+                if (commentReplyHeaderType == CommentReplyHeaderType.Reply) {
+                  commentReplyInputRead.deleteReply(
+                    id,
+                    commentIndex,
+                    replyIndex!,
+                  );
                 }
               }
             },

@@ -1,8 +1,10 @@
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:together_delivery_app/post/view/comment_view/const/comment_page_status_type.dart';
 import 'package:together_delivery_app/post/view/comment_view/model/comment_common_model.dart';
+import 'package:together_delivery_app/post/view/comment_view/model/comment_delete_response_model.dart';
 import 'package:together_delivery_app/post/view/comment_view/model/comment_reply_model.dart';
 import 'package:together_delivery_app/post/view/comment_view/model/comment_update_response_model.dart';
+import 'package:together_delivery_app/post/view/comment_view/model/reply_delete_response_model.dart';
 import 'package:together_delivery_app/post/view/comment_view/model/reply_save_response_model.dart';
 import 'package:together_delivery_app/post/view/comment_view/model/reply_update_response_model.dart';
 import 'package:together_delivery_app/post/view/comment_view/provider/comment_repository.dart';
@@ -170,6 +172,40 @@ class CommentPageNotifier extends StateNotifier<CommentReplyModel> {
 
     List<ReplyBody> replies =
         List.of(state.comments[commentIndex].reply.replies);
+    replies[replyIndex] = updatedReply;
+
+    List<Comment> comments = List.from(state.comments);
+    comments[commentIndex] = Comment(
+      comment: comments[commentIndex].comment,
+      reply: Reply(status: CommentPageStatusType.Success, replies: replies),
+    );
+
+    state = state.copyWith(comments: comments);
+  }
+
+  void deleteComment(CommentDeleteResponseModel responseModel, int commentId, int commentIndex) {
+    var element = state.comments[commentIndex];
+    CommentBody comment = element.comment;
+    comment = comment.copyWith(
+      content: "삭제된 댓글입니다.",
+      deletedAt: responseModel.deletedAt
+    );
+
+    List<Comment> comments = List.from(state.comments);
+    comments[commentIndex] = comments[commentIndex].copyWith(comment: comment);
+
+    state = state.copyWith(comments: comments);
+  }
+
+  void deleteReply(ReplyDeleteResponseModel responseModel, int commentIndex, int replyId, int replyIndex) {
+    final updatedReply =
+    state.comments[commentIndex].reply.replies[replyIndex].copyWith(
+      content: "삭제된 답글입니다.",
+      updatedAt: responseModel.deletedAt,
+    );
+
+    List<ReplyBody> replies =
+    List.of(state.comments[commentIndex].reply.replies);
     replies[replyIndex] = updatedReply;
 
     List<Comment> comments = List.from(state.comments);

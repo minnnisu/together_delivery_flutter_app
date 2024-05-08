@@ -1,7 +1,9 @@
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:together_delivery_app/common/exception/customException.dart';
+import 'package:together_delivery_app/post/view/comment_view/model/comment_delete_response_model.dart';
 import 'package:together_delivery_app/post/view/comment_view/model/comment_save_request_model.dart';
 import 'package:together_delivery_app/post/view/comment_view/model/comment_update_request_model.dart';
+import 'package:together_delivery_app/post/view/comment_view/model/reply_delete_response_model.dart';
 import 'package:together_delivery_app/post/view/comment_view/model/reply_save_request_model.dart';
 import 'package:together_delivery_app/post/view/comment_view/model/reply_update_request_model.dart';
 import 'package:together_delivery_app/post/view/comment_view/provider/comment_page_provider.dart';
@@ -179,5 +181,18 @@ class CommentReplyInputNotifier extends StateNotifier<CommentReplyInputModel> {
     } on CustomException catch (e) {
       return false;
     }
+  }
+
+  Future<void> deleteComment(int commentId, int commentIndex) async {
+    CommentDeleteResponseModel responseModel =
+        await commentRepository.deleteComment(commentId);
+    commentPageRead.deleteComment(responseModel, commentId, commentIndex);
+  }
+
+  Future<void> deleteReply(
+      int replyId, int commentIndex, int replyIndex) async {
+    ReplyDeleteResponseModel responseModel =
+        await replyRepository.deleteReply(replyId);
+    commentPageRead.deleteReply(responseModel, commentIndex,  replyId, replyIndex);
   }
 }

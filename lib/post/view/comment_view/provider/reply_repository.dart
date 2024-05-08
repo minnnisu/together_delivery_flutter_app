@@ -5,6 +5,7 @@ import 'package:together_delivery_app/common/exception/customException.dart';
 import 'package:together_delivery_app/common/helper/apiUrls.dart';
 import 'package:together_delivery_app/common/provider/dioProvider.dart';
 import 'package:together_delivery_app/post/view/comment_view/model/comment_response_model.dart';
+import 'package:together_delivery_app/post/view/comment_view/model/reply_delete_response_model.dart';
 import 'package:together_delivery_app/post/view/comment_view/model/reply_response_model.dart';
 import 'package:together_delivery_app/post/view/comment_view/model/reply_save_request_model.dart';
 import 'package:together_delivery_app/post/view/comment_view/model/reply_save_response_model.dart';
@@ -25,12 +26,12 @@ class ReplyRepository {
     try {
       Map<String, dynamic> queryParameters = {};
       queryParameters['commentId'] = commentId;
-      if(cursor != null) {
+      if (cursor != null) {
         queryParameters['cursor'] = cursor;
       }
 
-      final response = await dio.get(apiUrls.replyGet,
-          queryParameters: queryParameters);
+      final response =
+          await dio.get(apiUrls.replyGet, queryParameters: queryParameters);
       return ReplyResponseModel.fromJson(response.data);
     } on DioException catch (e) {
       if (e.response?.data['errorCode'] == 'NoSuchCommentError') {
@@ -45,7 +46,8 @@ class ReplyRepository {
     }
   }
 
-  Future<ReplySaveResponseModel> saveReply(ReplySaveRequestModel replySaveRequestModel) async {
+  Future<ReplySaveResponseModel> saveReply(
+      ReplySaveRequestModel replySaveRequestModel) async {
     try {
       final response = await dio.post(
         apiUrls.replySave,
@@ -71,7 +73,8 @@ class ReplyRepository {
     }
   }
 
-  Future<ReplyUpdateResponseModel> updateReply(ReplyUpdateRequestModel replyUpdateRequestModel)async {
+  Future<ReplyUpdateResponseModel> updateReply(
+      ReplyUpdateRequestModel replyUpdateRequestModel) async {
     try {
       final response = await dio.patch(
         apiUrls.replyUpdate,
@@ -84,6 +87,38 @@ class ReplyRepository {
       );
 
       return ReplyUpdateResponseModel.fromJson(response.data);
+    } on DioException catch (e) {
+      if (e.response?.data['errorCode'] == 'UserNotFoundError') {
+        throw CustomException(errorCode: ErrorCode.UserNotFoundError);
+      }
+
+      if (e.response?.data['errorCode'] == 'NoSuchReplyError') {
+        throw CustomException(errorCode: ErrorCode.NoSuchReplyError);
+      }
+      if (e.response?.data['errorCode'] == 'DeletedReplyError') {
+        throw CustomException(errorCode: ErrorCode.DeletedReplyError);
+      }
+
+      if (e.response?.data['errorCode'] == 'NotTheAuthorOfTheReply') {
+        throw CustomException(errorCode: ErrorCode.NotTheAuthorOfTheReply);
+      }
+
+      throw CustomException(errorCode: ErrorCode.InternalServerError);
+    }
+  }
+
+  Future<ReplyDeleteResponseModel> deleteReply(int replyId) async {
+    try {
+      final response = await dio.delete(
+        "${apiUrls.replyDelete}/$replyId",
+        options: Options(
+          headers: {
+            'accessToken': 'true',
+          },
+        ),
+      );
+
+      return ReplyDeleteResponseModel.fromJson(response.data);
     } on DioException catch (e) {
       if (e.response?.data['errorCode'] == 'UserNotFoundError') {
         throw CustomException(errorCode: ErrorCode.UserNotFoundError);

@@ -15,7 +15,7 @@ class apiUrls {
   static const String replyGet = baseUrl + '/api/reply';
   static const String replySave = baseUrl + '/api/reply';
   static const String replyUpdate = baseUrl + '/api/reply';
-  static const String replyDelete = baseUrl + '/api/comment';
+  static const String replyDelete = baseUrl + '/api/reply';
 
   static const String userRegister = baseUrl + "/auth/signup";
   static const String usernameDuplicationCheck = baseUrl + "/auth/check/username";
