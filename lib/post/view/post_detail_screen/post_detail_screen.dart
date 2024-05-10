@@ -17,7 +17,7 @@ class _PostDetailScreenState extends State<PostDetailScreen> {
     final postId = ModalRoute.of(context)!.settings.arguments as int;
     return Scaffold(
       appBar: AppBar(
-        title: Text("배달게시물"),
+        title: Text("배달 게시물"),
       ),
       body: PostDetailScreenBody(postId),
     );

@@ -14,17 +14,21 @@ class PostContent extends ConsumerWidget {
     ref.watch(postDetailProvider) as PostDetailResponseModel;
 
     return Container(
-      padding: EdgeInsets.only(bottom: 10),
-      decoration: BoxDecoration(
-        border: Border(
-          bottom: BorderSide(
-            color: Color(borderGreyColor),
-            width: 0.9,
-          ),
-        ),
-      ),
+      padding: EdgeInsets.only(top: 16),
       width: double.infinity,
-      child: Text(postDetailModel.content),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          Text(
+            "가게 정보",
+            style: TextStyle(fontSize: 16, fontWeight: FontWeight.w600),
+          ),
+          Padding(
+            padding: const EdgeInsets.symmetric(vertical: 6),
+            child: Text(postDetailModel.content),
+          ),
+        ],
+      ),
     );
   }
 }

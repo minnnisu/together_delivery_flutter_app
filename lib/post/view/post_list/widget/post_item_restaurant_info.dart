@@ -60,7 +60,7 @@ class PostItemRestaurantInfo extends StatelessWidget {
                     Container(
                         width: 90,
                         child: Text("최소 주문금액", style: TextStyle(color: Color(0xff9b9b9b)))),
-                    Text(post.deliveryFee.toString() + "원")
+                    Text(post.minOrderFee.toString() + "원")
                   ],
                 ),
               ],

@@ -6,6 +6,7 @@ import 'package:together_delivery_app/post/view/post_detail_screen/widget/post_d
 import 'package:together_delivery_app/post/view/post_detail_screen/widget/post_detail_extra_info.dart';
 import 'package:together_delivery_app/post/view/post_detail_screen/widget/post_detail_image.dart';
 import 'package:together_delivery_app/post/view/post_detail_screen/widget/post_detail_meet_location.dart';
+import 'package:together_delivery_app/post/view/post_detail_screen/widget/post_detail_restaurantName.dart';
 import 'package:together_delivery_app/post/view/post_detail_screen/widget/post_header.dart';
 
 class PostDetail extends ConsumerWidget {
@@ -25,8 +26,9 @@ class PostDetail extends ConsumerWidget {
         mainAxisSize: MainAxisSize.min,
         children: [
           PostDetailHeader(),
-          PostContent(),
+          PostDetailRestaurantName(),
           PostDetailExtraInfo(),
+          PostContent(),
           PostDetailMeetLocation(),
           PostDetailImage(),
         ],
