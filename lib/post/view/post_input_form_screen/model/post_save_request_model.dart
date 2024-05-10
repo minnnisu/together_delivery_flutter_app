@@ -12,7 +12,6 @@ String postSaveRequestModelToJson(PostSaveRequestModel data) => json.encode(data
 @freezed
 class PostSaveRequestModel with _$PostSaveRequestModel {
   const factory PostSaveRequestModel({
-    required String title,
     required String content,
     required String restaurantName,
     required String categoryCode,

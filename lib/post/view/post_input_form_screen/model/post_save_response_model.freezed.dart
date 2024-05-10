@@ -23,7 +23,6 @@ PostSaveResponseModel _$PostSaveResponseModelFromJson(
 mixin _$PostSaveResponseModel {
   int get id => throw _privateConstructorUsedError;
   String get username => throw _privateConstructorUsedError;
-  String get title => throw _privateConstructorUsedError;
   String get content => throw _privateConstructorUsedError;
   String get restaurantName => throw _privateConstructorUsedError;
   String get categoryCode => throw _privateConstructorUsedError;
@@ -50,7 +49,6 @@ abstract class $PostSaveResponseModelCopyWith<$Res> {
   $Res call(
       {int id,
       String username,
-      String title,
       String content,
       String restaurantName,
       String categoryCode,
@@ -81,7 +79,6 @@ class _$PostSaveResponseModelCopyWithImpl<$Res,
   $Res call({
     Object? id = null,
     Object? username = null,
-    Object? title = null,
     Object? content = null,
     Object? restaurantName = null,
     Object? categoryCode = null,
@@ -101,10 +98,6 @@ class _$PostSaveResponseModelCopyWithImpl<$Res,
       username: null == username
           ? _value.username
           : username // ignore: cast_nullable_to_non_nullable
-              as String,
-      title: null == title
-          ? _value.title
-          : title // ignore: cast_nullable_to_non_nullable
               as String,
       content: null == content
           ? _value.content
@@ -170,7 +163,6 @@ abstract class _$$PostSaveResponseModelImplCopyWith<$Res>
   $Res call(
       {int id,
       String username,
-      String title,
       String content,
       String restaurantName,
       String categoryCode,
@@ -200,7 +192,6 @@ class __$$PostSaveResponseModelImplCopyWithImpl<$Res>
   $Res call({
     Object? id = null,
     Object? username = null,
-    Object? title = null,
     Object? content = null,
     Object? restaurantName = null,
     Object? categoryCode = null,
@@ -220,10 +211,6 @@ class __$$PostSaveResponseModelImplCopyWithImpl<$Res>
       username: null == username
           ? _value.username
           : username // ignore: cast_nullable_to_non_nullable
-              as String,
-      title: null == title
-          ? _value.title
-          : title // ignore: cast_nullable_to_non_nullable
               as String,
       content: null == content
           ? _value.content
@@ -275,7 +262,6 @@ class _$PostSaveResponseModelImpl implements _PostSaveResponseModel {
   const _$PostSaveResponseModelImpl(
       {required this.id,
       required this.username,
-      required this.title,
       required this.content,
       required this.restaurantName,
       required this.categoryCode,
@@ -295,8 +281,6 @@ class _$PostSaveResponseModelImpl implements _PostSaveResponseModel {
   final int id;
   @override
   final String username;
-  @override
-  final String title;
   @override
   final String content;
   @override
@@ -325,7 +309,7 @@ class _$PostSaveResponseModelImpl implements _PostSaveResponseModel {
 
   @override
   String toString() {
-    return 'PostSaveResponseModel(id: $id, username: $username, title: $title, content: $content, restaurantName: $restaurantName, categoryCode: $categoryCode, deliveryFee: $deliveryFee, minOrderFee: $minOrderFee, meetLocation: $meetLocation, status: $status, createdAt: $createdAt, updatedAt: $updatedAt, postImages: $postImages)';
+    return 'PostSaveResponseModel(id: $id, username: $username, content: $content, restaurantName: $restaurantName, categoryCode: $categoryCode, deliveryFee: $deliveryFee, minOrderFee: $minOrderFee, meetLocation: $meetLocation, status: $status, createdAt: $createdAt, updatedAt: $updatedAt, postImages: $postImages)';
   }
 
   @override
@@ -336,7 +320,6 @@ class _$PostSaveResponseModelImpl implements _PostSaveResponseModel {
             (identical(other.id, id) || other.id == id) &&
             (identical(other.username, username) ||
                 other.username == username) &&
-            (identical(other.title, title) || other.title == title) &&
             (identical(other.content, content) || other.content == content) &&
             (identical(other.restaurantName, restaurantName) ||
                 other.restaurantName == restaurantName) &&
@@ -363,7 +346,6 @@ class _$PostSaveResponseModelImpl implements _PostSaveResponseModel {
       runtimeType,
       id,
       username,
-      title,
       content,
       restaurantName,
       categoryCode,
@@ -394,7 +376,6 @@ abstract class _PostSaveResponseModel implements PostSaveResponseModel {
   const factory _PostSaveResponseModel(
       {required final int id,
       required final String username,
-      required final String title,
       required final String content,
       required final String restaurantName,
       required final String categoryCode,
@@ -413,8 +394,6 @@ abstract class _PostSaveResponseModel implements PostSaveResponseModel {
   int get id;
   @override
   String get username;
-  @override
-  String get title;
   @override
   String get content;
   @override

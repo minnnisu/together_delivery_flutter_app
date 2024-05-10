@@ -10,6 +10,7 @@ _$MeetLocationModelImpl _$$MeetLocationModelImplFromJson(
         Map<String, dynamic> json) =>
     _$MeetLocationModelImpl(
       address: json['address'] as String,
+      shortAddress: json['shortAddress'] as String,
       latitude: (json['latitude'] as num).toDouble(),
       longitude: (json['longitude'] as num).toDouble(),
     );
@@ -18,6 +19,7 @@ Map<String, dynamic> _$$MeetLocationModelImplToJson(
         _$MeetLocationModelImpl instance) =>
     <String, dynamic>{
       'address': instance.address,
+      'shortAddress': instance.shortAddress,
       'latitude': instance.latitude,
       'longitude': instance.longitude,
     };

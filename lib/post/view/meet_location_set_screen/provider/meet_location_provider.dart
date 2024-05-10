@@ -28,9 +28,10 @@ class MeetLocationNotifier extends StateNotifier<MeetLocationModel> {
 
   MeetLocationNotifier({required this.meetLocationSetRepository})
       : super(MeetLocationModel(
+          shortAddress: "",
+          address: "",
           latitude: 0,
           longitude: 0,
-          address: "",
         ));
 
   void onMapReady(NaverMapController _controller) async {
@@ -54,6 +55,7 @@ class MeetLocationNotifier extends StateNotifier<MeetLocationModel> {
     return (
       InfoWindowInfo: onMarkerInfoWindow,
       meetLocation: MeetLocationModel(
+        shortAddress: "",
         address: touchedLocation,
         latitude: latLng.latitude,
         longitude: latLng.longitude,

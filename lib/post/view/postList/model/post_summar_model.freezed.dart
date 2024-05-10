@@ -22,14 +22,12 @@ PostSummaryModel _$PostSummaryModelFromJson(Map<String, dynamic> json) {
 mixin _$PostSummaryModel {
   int get id => throw _privateConstructorUsedError;
   String get nickname => throw _privateConstructorUsedError;
-  String get title => throw _privateConstructorUsedError;
   String get content => throw _privateConstructorUsedError;
   String get categoryCode => throw _privateConstructorUsedError;
   int get deliveryFee => throw _privateConstructorUsedError;
   int get minOrderFee => throw _privateConstructorUsedError;
-  String get createdAt => throw _privateConstructorUsedError;
   bool get status => throw _privateConstructorUsedError;
-  String get updatedAt => throw _privateConstructorUsedError;
+  String get createdAt => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
@@ -46,14 +44,12 @@ abstract class $PostSummaryModelCopyWith<$Res> {
   $Res call(
       {int id,
       String nickname,
-      String title,
       String content,
       String categoryCode,
       int deliveryFee,
       int minOrderFee,
-      String createdAt,
       bool status,
-      String updatedAt});
+      String createdAt});
 }
 
 /// @nodoc
@@ -71,14 +67,12 @@ class _$PostSummaryModelCopyWithImpl<$Res, $Val extends PostSummaryModel>
   $Res call({
     Object? id = null,
     Object? nickname = null,
-    Object? title = null,
     Object? content = null,
     Object? categoryCode = null,
     Object? deliveryFee = null,
     Object? minOrderFee = null,
-    Object? createdAt = null,
     Object? status = null,
-    Object? updatedAt = null,
+    Object? createdAt = null,
   }) {
     return _then(_value.copyWith(
       id: null == id
@@ -88,10 +82,6 @@ class _$PostSummaryModelCopyWithImpl<$Res, $Val extends PostSummaryModel>
       nickname: null == nickname
           ? _value.nickname
           : nickname // ignore: cast_nullable_to_non_nullable
-              as String,
-      title: null == title
-          ? _value.title
-          : title // ignore: cast_nullable_to_non_nullable
               as String,
       content: null == content
           ? _value.content
@@ -109,17 +99,13 @@ class _$PostSummaryModelCopyWithImpl<$Res, $Val extends PostSummaryModel>
           ? _value.minOrderFee
           : minOrderFee // ignore: cast_nullable_to_non_nullable
               as int,
-      createdAt: null == createdAt
-          ? _value.createdAt
-          : createdAt // ignore: cast_nullable_to_non_nullable
-              as String,
       status: null == status
           ? _value.status
           : status // ignore: cast_nullable_to_non_nullable
               as bool,
-      updatedAt: null == updatedAt
-          ? _value.updatedAt
-          : updatedAt // ignore: cast_nullable_to_non_nullable
+      createdAt: null == createdAt
+          ? _value.createdAt
+          : createdAt // ignore: cast_nullable_to_non_nullable
               as String,
     ) as $Val);
   }
@@ -136,14 +122,12 @@ abstract class _$$PostSummaryModelImplCopyWith<$Res>
   $Res call(
       {int id,
       String nickname,
-      String title,
       String content,
       String categoryCode,
       int deliveryFee,
       int minOrderFee,
-      String createdAt,
       bool status,
-      String updatedAt});
+      String createdAt});
 }
 
 /// @nodoc
@@ -159,14 +143,12 @@ class __$$PostSummaryModelImplCopyWithImpl<$Res>
   $Res call({
     Object? id = null,
     Object? nickname = null,
-    Object? title = null,
     Object? content = null,
     Object? categoryCode = null,
     Object? deliveryFee = null,
     Object? minOrderFee = null,
-    Object? createdAt = null,
     Object? status = null,
-    Object? updatedAt = null,
+    Object? createdAt = null,
   }) {
     return _then(_$PostSummaryModelImpl(
       id: null == id
@@ -176,10 +158,6 @@ class __$$PostSummaryModelImplCopyWithImpl<$Res>
       nickname: null == nickname
           ? _value.nickname
           : nickname // ignore: cast_nullable_to_non_nullable
-              as String,
-      title: null == title
-          ? _value.title
-          : title // ignore: cast_nullable_to_non_nullable
               as String,
       content: null == content
           ? _value.content
@@ -197,17 +175,13 @@ class __$$PostSummaryModelImplCopyWithImpl<$Res>
           ? _value.minOrderFee
           : minOrderFee // ignore: cast_nullable_to_non_nullable
               as int,
-      createdAt: null == createdAt
-          ? _value.createdAt
-          : createdAt // ignore: cast_nullable_to_non_nullable
-              as String,
       status: null == status
           ? _value.status
           : status // ignore: cast_nullable_to_non_nullable
               as bool,
-      updatedAt: null == updatedAt
-          ? _value.updatedAt
-          : updatedAt // ignore: cast_nullable_to_non_nullable
+      createdAt: null == createdAt
+          ? _value.createdAt
+          : createdAt // ignore: cast_nullable_to_non_nullable
               as String,
     ));
   }
@@ -221,14 +195,12 @@ class _$PostSummaryModelImpl
   const _$PostSummaryModelImpl(
       {required this.id,
       required this.nickname,
-      required this.title,
       required this.content,
       required this.categoryCode,
       required this.deliveryFee,
       required this.minOrderFee,
-      required this.createdAt,
       required this.status,
-      required this.updatedAt});
+      required this.createdAt});
 
   factory _$PostSummaryModelImpl.fromJson(Map<String, dynamic> json) =>
       _$$PostSummaryModelImplFromJson(json);
@@ -238,8 +210,6 @@ class _$PostSummaryModelImpl
   @override
   final String nickname;
   @override
-  final String title;
-  @override
   final String content;
   @override
   final String categoryCode;
@@ -248,15 +218,13 @@ class _$PostSummaryModelImpl
   @override
   final int minOrderFee;
   @override
-  final String createdAt;
-  @override
   final bool status;
   @override
-  final String updatedAt;
+  final String createdAt;
 
   @override
   String toString({DiagnosticLevel minLevel = DiagnosticLevel.info}) {
-    return 'PostSummaryModel(id: $id, nickname: $nickname, title: $title, content: $content, categoryCode: $categoryCode, deliveryFee: $deliveryFee, minOrderFee: $minOrderFee, createdAt: $createdAt, status: $status, updatedAt: $updatedAt)';
+    return 'PostSummaryModel(id: $id, nickname: $nickname, content: $content, categoryCode: $categoryCode, deliveryFee: $deliveryFee, minOrderFee: $minOrderFee, status: $status, createdAt: $createdAt)';
   }
 
   @override
@@ -266,14 +234,12 @@ class _$PostSummaryModelImpl
       ..add(DiagnosticsProperty('type', 'PostSummaryModel'))
       ..add(DiagnosticsProperty('id', id))
       ..add(DiagnosticsProperty('nickname', nickname))
-      ..add(DiagnosticsProperty('title', title))
       ..add(DiagnosticsProperty('content', content))
       ..add(DiagnosticsProperty('categoryCode', categoryCode))
       ..add(DiagnosticsProperty('deliveryFee', deliveryFee))
       ..add(DiagnosticsProperty('minOrderFee', minOrderFee))
-      ..add(DiagnosticsProperty('createdAt', createdAt))
       ..add(DiagnosticsProperty('status', status))
-      ..add(DiagnosticsProperty('updatedAt', updatedAt));
+      ..add(DiagnosticsProperty('createdAt', createdAt));
   }
 
   @override
@@ -284,7 +250,6 @@ class _$PostSummaryModelImpl
             (identical(other.id, id) || other.id == id) &&
             (identical(other.nickname, nickname) ||
                 other.nickname == nickname) &&
-            (identical(other.title, title) || other.title == title) &&
             (identical(other.content, content) || other.content == content) &&
             (identical(other.categoryCode, categoryCode) ||
                 other.categoryCode == categoryCode) &&
@@ -292,17 +257,15 @@ class _$PostSummaryModelImpl
                 other.deliveryFee == deliveryFee) &&
             (identical(other.minOrderFee, minOrderFee) ||
                 other.minOrderFee == minOrderFee) &&
-            (identical(other.createdAt, createdAt) ||
-                other.createdAt == createdAt) &&
             (identical(other.status, status) || other.status == status) &&
-            (identical(other.updatedAt, updatedAt) ||
-                other.updatedAt == updatedAt));
+            (identical(other.createdAt, createdAt) ||
+                other.createdAt == createdAt));
   }
 
   @JsonKey(ignore: true)
   @override
-  int get hashCode => Object.hash(runtimeType, id, nickname, title, content,
-      categoryCode, deliveryFee, minOrderFee, createdAt, status, updatedAt);
+  int get hashCode => Object.hash(runtimeType, id, nickname, content,
+      categoryCode, deliveryFee, minOrderFee, status, createdAt);
 
   @JsonKey(ignore: true)
   @override
@@ -323,14 +286,12 @@ abstract class _PostSummaryModel implements PostSummaryModel {
   const factory _PostSummaryModel(
       {required final int id,
       required final String nickname,
-      required final String title,
       required final String content,
       required final String categoryCode,
       required final int deliveryFee,
       required final int minOrderFee,
-      required final String createdAt,
       required final bool status,
-      required final String updatedAt}) = _$PostSummaryModelImpl;
+      required final String createdAt}) = _$PostSummaryModelImpl;
 
   factory _PostSummaryModel.fromJson(Map<String, dynamic> json) =
       _$PostSummaryModelImpl.fromJson;
@@ -340,8 +301,6 @@ abstract class _PostSummaryModel implements PostSummaryModel {
   @override
   String get nickname;
   @override
-  String get title;
-  @override
   String get content;
   @override
   String get categoryCode;
@@ -350,11 +309,9 @@ abstract class _PostSummaryModel implements PostSummaryModel {
   @override
   int get minOrderFee;
   @override
-  String get createdAt;
-  @override
   bool get status;
   @override
-  String get updatedAt;
+  String get createdAt;
   @override
   @JsonKey(ignore: true)
   _$$PostSummaryModelImplCopyWith<_$PostSummaryModelImpl> get copyWith =>

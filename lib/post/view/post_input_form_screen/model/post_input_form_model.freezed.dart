@@ -25,6 +25,7 @@ mixin _$PostInputFormModel {
   String get minOrderFee => throw _privateConstructorUsedError;
   List<Asset> get images => throw _privateConstructorUsedError;
   String get address => throw _privateConstructorUsedError;
+  String get shortAddress => throw _privateConstructorUsedError;
   double get latitude => throw _privateConstructorUsedError;
   double get longitude => throw _privateConstructorUsedError;
   String? get titleErrMsg => throw _privateConstructorUsedError;
@@ -57,6 +58,7 @@ abstract class $PostInputFormModelCopyWith<$Res> {
       String minOrderFee,
       List<Asset> images,
       String address,
+      String shortAddress,
       double latitude,
       double longitude,
       String? titleErrMsg,
@@ -90,6 +92,7 @@ class _$PostInputFormModelCopyWithImpl<$Res, $Val extends PostInputFormModel>
     Object? minOrderFee = null,
     Object? images = null,
     Object? address = null,
+    Object? shortAddress = null,
     Object? latitude = null,
     Object? longitude = null,
     Object? titleErrMsg = freezed,
@@ -133,6 +136,10 @@ class _$PostInputFormModelCopyWithImpl<$Res, $Val extends PostInputFormModel>
       address: null == address
           ? _value.address
           : address // ignore: cast_nullable_to_non_nullable
+              as String,
+      shortAddress: null == shortAddress
+          ? _value.shortAddress
+          : shortAddress // ignore: cast_nullable_to_non_nullable
               as String,
       latitude: null == latitude
           ? _value.latitude
@@ -195,6 +202,7 @@ abstract class _$$PostInputFormModelImplCopyWith<$Res>
       String minOrderFee,
       List<Asset> images,
       String address,
+      String shortAddress,
       double latitude,
       double longitude,
       String? titleErrMsg,
@@ -226,6 +234,7 @@ class __$$PostInputFormModelImplCopyWithImpl<$Res>
     Object? minOrderFee = null,
     Object? images = null,
     Object? address = null,
+    Object? shortAddress = null,
     Object? latitude = null,
     Object? longitude = null,
     Object? titleErrMsg = freezed,
@@ -269,6 +278,10 @@ class __$$PostInputFormModelImplCopyWithImpl<$Res>
       address: null == address
           ? _value.address
           : address // ignore: cast_nullable_to_non_nullable
+              as String,
+      shortAddress: null == shortAddress
+          ? _value.shortAddress
+          : shortAddress // ignore: cast_nullable_to_non_nullable
               as String,
       latitude: null == latitude
           ? _value.latitude
@@ -328,6 +341,7 @@ class _$PostInputFormModelImpl
       required this.minOrderFee,
       required this.images,
       required this.address,
+      required this.shortAddress,
       required this.latitude,
       required this.longitude,
       required this.titleErrMsg,
@@ -356,6 +370,8 @@ class _$PostInputFormModelImpl
   @override
   final String address;
   @override
+  final String shortAddress;
+  @override
   final double latitude;
   @override
   final double longitude;
@@ -378,7 +394,7 @@ class _$PostInputFormModelImpl
 
   @override
   String toString({DiagnosticLevel minLevel = DiagnosticLevel.info}) {
-    return 'PostInputFormModel(title: $title, content: $content, restaurantCategory: $restaurantCategory, restaurantName: $restaurantName, deliveryFee: $deliveryFee, minOrderFee: $minOrderFee, images: $images, address: $address, latitude: $latitude, longitude: $longitude, titleErrMsg: $titleErrMsg, contentErrMsg: $contentErrMsg, restaurantCategoryErrMsg: $restaurantCategoryErrMsg, restaurantNameErrMsg: $restaurantNameErrMsg, deliveryFeeErrMsg: $deliveryFeeErrMsg, minOrderFeeErrMsg: $minOrderFeeErrMsg, addressErrMsg: $addressErrMsg, currentFocusedField: $currentFocusedField)';
+    return 'PostInputFormModel(title: $title, content: $content, restaurantCategory: $restaurantCategory, restaurantName: $restaurantName, deliveryFee: $deliveryFee, minOrderFee: $minOrderFee, images: $images, address: $address, shortAddress: $shortAddress, latitude: $latitude, longitude: $longitude, titleErrMsg: $titleErrMsg, contentErrMsg: $contentErrMsg, restaurantCategoryErrMsg: $restaurantCategoryErrMsg, restaurantNameErrMsg: $restaurantNameErrMsg, deliveryFeeErrMsg: $deliveryFeeErrMsg, minOrderFeeErrMsg: $minOrderFeeErrMsg, addressErrMsg: $addressErrMsg, currentFocusedField: $currentFocusedField)';
   }
 
   @override
@@ -394,6 +410,7 @@ class _$PostInputFormModelImpl
       ..add(DiagnosticsProperty('minOrderFee', minOrderFee))
       ..add(DiagnosticsProperty('images', images))
       ..add(DiagnosticsProperty('address', address))
+      ..add(DiagnosticsProperty('shortAddress', shortAddress))
       ..add(DiagnosticsProperty('latitude', latitude))
       ..add(DiagnosticsProperty('longitude', longitude))
       ..add(DiagnosticsProperty('titleErrMsg', titleErrMsg))
@@ -424,6 +441,8 @@ class _$PostInputFormModelImpl
                 other.minOrderFee == minOrderFee) &&
             const DeepCollectionEquality().equals(other.images, images) &&
             (identical(other.address, address) || other.address == address) &&
+            (identical(other.shortAddress, shortAddress) ||
+                other.shortAddress == shortAddress) &&
             (identical(other.latitude, latitude) ||
                 other.latitude == latitude) &&
             (identical(other.longitude, longitude) ||
@@ -448,26 +467,28 @@ class _$PostInputFormModelImpl
   }
 
   @override
-  int get hashCode => Object.hash(
-      runtimeType,
-      title,
-      content,
-      restaurantCategory,
-      restaurantName,
-      deliveryFee,
-      minOrderFee,
-      const DeepCollectionEquality().hash(images),
-      address,
-      latitude,
-      longitude,
-      titleErrMsg,
-      contentErrMsg,
-      restaurantCategoryErrMsg,
-      restaurantNameErrMsg,
-      deliveryFeeErrMsg,
-      minOrderFeeErrMsg,
-      addressErrMsg,
-      currentFocusedField);
+  int get hashCode => Object.hashAll([
+        runtimeType,
+        title,
+        content,
+        restaurantCategory,
+        restaurantName,
+        deliveryFee,
+        minOrderFee,
+        const DeepCollectionEquality().hash(images),
+        address,
+        shortAddress,
+        latitude,
+        longitude,
+        titleErrMsg,
+        contentErrMsg,
+        restaurantCategoryErrMsg,
+        restaurantNameErrMsg,
+        deliveryFeeErrMsg,
+        minOrderFeeErrMsg,
+        addressErrMsg,
+        currentFocusedField
+      ]);
 
   @JsonKey(ignore: true)
   @override
@@ -487,6 +508,7 @@ abstract class _PostInputFormModel implements PostInputFormModel {
           required final String minOrderFee,
           required final List<Asset> images,
           required final String address,
+          required final String shortAddress,
           required final double latitude,
           required final double longitude,
           required final String? titleErrMsg,
@@ -515,6 +537,8 @@ abstract class _PostInputFormModel implements PostInputFormModel {
   List<Asset> get images;
   @override
   String get address;
+  @override
+  String get shortAddress;
   @override
   double get latitude;
   @override

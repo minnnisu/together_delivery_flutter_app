@@ -10,14 +10,12 @@ class PostSummaryModel with _$PostSummaryModel{
   const factory PostSummaryModel({
     required int id,
     required String nickname,
-    required String title,
     required String content,
     required String categoryCode,
     required int deliveryFee,
     required int minOrderFee,
-    required String createdAt,
     required bool status,
-    required String updatedAt,
+    required String createdAt,
   }) = _PostSummaryModel;
 
   factory PostSummaryModel.fromJson(Map<String, dynamic> json) =>

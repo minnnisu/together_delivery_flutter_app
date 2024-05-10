@@ -23,7 +23,6 @@ PostDetailResponseModel _$PostDetailResponseModelFromJson(
 mixin _$PostDetailResponseModel {
   int get id => throw _privateConstructorUsedError;
   String get nickname => throw _privateConstructorUsedError;
-  String get title => throw _privateConstructorUsedError;
   String get content => throw _privateConstructorUsedError;
   String get restaurantName => throw _privateConstructorUsedError;
   String get categoryCode => throw _privateConstructorUsedError;
@@ -50,7 +49,6 @@ abstract class $PostDetailResponseModelCopyWith<$Res> {
   $Res call(
       {int id,
       String nickname,
-      String title,
       String content,
       String restaurantName,
       String categoryCode,
@@ -81,7 +79,6 @@ class _$PostDetailResponseModelCopyWithImpl<$Res,
   $Res call({
     Object? id = null,
     Object? nickname = null,
-    Object? title = null,
     Object? content = null,
     Object? restaurantName = null,
     Object? categoryCode = null,
@@ -101,10 +98,6 @@ class _$PostDetailResponseModelCopyWithImpl<$Res,
       nickname: null == nickname
           ? _value.nickname
           : nickname // ignore: cast_nullable_to_non_nullable
-              as String,
-      title: null == title
-          ? _value.title
-          : title // ignore: cast_nullable_to_non_nullable
               as String,
       content: null == content
           ? _value.content
@@ -170,7 +163,6 @@ abstract class _$$PostDetailResponseModelImplCopyWith<$Res>
   $Res call(
       {int id,
       String nickname,
-      String title,
       String content,
       String restaurantName,
       String categoryCode,
@@ -201,7 +193,6 @@ class __$$PostDetailResponseModelImplCopyWithImpl<$Res>
   $Res call({
     Object? id = null,
     Object? nickname = null,
-    Object? title = null,
     Object? content = null,
     Object? restaurantName = null,
     Object? categoryCode = null,
@@ -221,10 +212,6 @@ class __$$PostDetailResponseModelImplCopyWithImpl<$Res>
       nickname: null == nickname
           ? _value.nickname
           : nickname // ignore: cast_nullable_to_non_nullable
-              as String,
-      title: null == title
-          ? _value.title
-          : title // ignore: cast_nullable_to_non_nullable
               as String,
       content: null == content
           ? _value.content
@@ -276,7 +263,6 @@ class _$PostDetailResponseModelImpl implements _PostDetailResponseModel {
   const _$PostDetailResponseModelImpl(
       {required this.id,
       required this.nickname,
-      required this.title,
       required this.content,
       required this.restaurantName,
       required this.categoryCode,
@@ -296,8 +282,6 @@ class _$PostDetailResponseModelImpl implements _PostDetailResponseModel {
   final int id;
   @override
   final String nickname;
-  @override
-  final String title;
   @override
   final String content;
   @override
@@ -326,7 +310,7 @@ class _$PostDetailResponseModelImpl implements _PostDetailResponseModel {
 
   @override
   String toString() {
-    return 'PostDetailResponseModel(id: $id, nickname: $nickname, title: $title, content: $content, restaurantName: $restaurantName, categoryCode: $categoryCode, deliveryFee: $deliveryFee, minOrderFee: $minOrderFee, meetLocation: $meetLocation, status: $status, createdAt: $createdAt, updatedAt: $updatedAt, images: $images)';
+    return 'PostDetailResponseModel(id: $id, nickname: $nickname, content: $content, restaurantName: $restaurantName, categoryCode: $categoryCode, deliveryFee: $deliveryFee, minOrderFee: $minOrderFee, meetLocation: $meetLocation, status: $status, createdAt: $createdAt, updatedAt: $updatedAt, images: $images)';
   }
 
   @override
@@ -337,7 +321,6 @@ class _$PostDetailResponseModelImpl implements _PostDetailResponseModel {
             (identical(other.id, id) || other.id == id) &&
             (identical(other.nickname, nickname) ||
                 other.nickname == nickname) &&
-            (identical(other.title, title) || other.title == title) &&
             (identical(other.content, content) || other.content == content) &&
             (identical(other.restaurantName, restaurantName) ||
                 other.restaurantName == restaurantName) &&
@@ -363,7 +346,6 @@ class _$PostDetailResponseModelImpl implements _PostDetailResponseModel {
       runtimeType,
       id,
       nickname,
-      title,
       content,
       restaurantName,
       categoryCode,
@@ -394,7 +376,6 @@ abstract class _PostDetailResponseModel implements PostDetailResponseModel {
   const factory _PostDetailResponseModel(
       {required final int id,
       required final String nickname,
-      required final String title,
       required final String content,
       required final String restaurantName,
       required final String categoryCode,
@@ -413,8 +394,6 @@ abstract class _PostDetailResponseModel implements PostDetailResponseModel {
   int get id;
   @override
   String get nickname;
-  @override
-  String get title;
   @override
   String get content;
   @override

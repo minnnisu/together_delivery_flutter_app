@@ -18,6 +18,7 @@ class PostInputFormModel with _$PostInputFormModel{
     required String minOrderFee,
     required List<Asset> images,
     required String address,
+    required String shortAddress,
     required double latitude,
     required double longitude,
     required String? titleErrMsg,

@@ -39,6 +39,7 @@ class PostInputFormNotifier extends StateNotifier<PostInputFormModel> {
             deliveryFee: "",
             minOrderFee: "",
             address: "",
+            shortAddress: "",
             latitude: 0.0,
             longitude: 0.0,
             images: <Asset>[],
@@ -403,7 +404,6 @@ class PostInputFormNotifier extends StateNotifier<PostInputFormModel> {
     }
 
     PostSaveRequestModel postSaveRequestModel = PostSaveRequestModel(
-      title: state.title,
       content: state.content,
       categoryCode: describeEnum(state.restaurantCategory),
       restaurantName: state.restaurantName,
@@ -411,6 +411,7 @@ class PostInputFormNotifier extends StateNotifier<PostInputFormModel> {
       minOrderFee: int.parse(state.minOrderFee),
       meetLocation: MeetLocationModel(
           address: state.address,
+          shortAddress: state.shortAddress,
           latitude: state.latitude,
           longitude: state.longitude),
     );

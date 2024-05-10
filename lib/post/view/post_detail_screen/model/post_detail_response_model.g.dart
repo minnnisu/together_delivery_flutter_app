@@ -11,7 +11,6 @@ _$PostDetailResponseModelImpl _$$PostDetailResponseModelImplFromJson(
     _$PostDetailResponseModelImpl(
       id: json['id'] as int,
       nickname: json['nickname'] as String,
-      title: json['title'] as String,
       content: json['content'] as String,
       restaurantName: json['restaurantName'] as String,
       categoryCode: json['categoryCode'] as String,
@@ -32,7 +31,6 @@ Map<String, dynamic> _$$PostDetailResponseModelImplToJson(
     <String, dynamic>{
       'id': instance.id,
       'nickname': instance.nickname,
-      'title': instance.title,
       'content': instance.content,
       'restaurantName': instance.restaurantName,
       'categoryCode': instance.categoryCode,

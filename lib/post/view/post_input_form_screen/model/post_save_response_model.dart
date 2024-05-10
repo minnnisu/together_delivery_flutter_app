@@ -14,7 +14,6 @@ class PostSaveResponseModel with _$PostSaveResponseModel {
   const factory PostSaveResponseModel({
     required int id,
     required String username,
-    required String title,
     required String content,
     required String restaurantName,
     required String categoryCode,

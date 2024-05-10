@@ -14,13 +14,6 @@ class PostItem extends StatelessWidget {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        Text(
-          post.title,
-          style: const TextStyle(
-            fontWeight: FontWeight.bold,
-            fontSize: 15,
-          ),
-        ),
         Container(
           padding: const EdgeInsets.only(bottom: 5),
           child: Text(post.content),
