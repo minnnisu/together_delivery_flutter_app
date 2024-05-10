@@ -23,9 +23,11 @@ mixin _$PostSummaryModel {
   int get id => throw _privateConstructorUsedError;
   String get nickname => throw _privateConstructorUsedError;
   String get content => throw _privateConstructorUsedError;
+  String get restaurantName => throw _privateConstructorUsedError;
   String get categoryCode => throw _privateConstructorUsedError;
   int get deliveryFee => throw _privateConstructorUsedError;
   int get minOrderFee => throw _privateConstructorUsedError;
+  MeetLocationModel get meetLocation => throw _privateConstructorUsedError;
   bool get status => throw _privateConstructorUsedError;
   String get createdAt => throw _privateConstructorUsedError;
 
@@ -45,11 +47,15 @@ abstract class $PostSummaryModelCopyWith<$Res> {
       {int id,
       String nickname,
       String content,
+      String restaurantName,
       String categoryCode,
       int deliveryFee,
       int minOrderFee,
+      MeetLocationModel meetLocation,
       bool status,
       String createdAt});
+
+  $MeetLocationModelCopyWith<$Res> get meetLocation;
 }
 
 /// @nodoc
@@ -68,9 +74,11 @@ class _$PostSummaryModelCopyWithImpl<$Res, $Val extends PostSummaryModel>
     Object? id = null,
     Object? nickname = null,
     Object? content = null,
+    Object? restaurantName = null,
     Object? categoryCode = null,
     Object? deliveryFee = null,
     Object? minOrderFee = null,
+    Object? meetLocation = null,
     Object? status = null,
     Object? createdAt = null,
   }) {
@@ -87,6 +95,10 @@ class _$PostSummaryModelCopyWithImpl<$Res, $Val extends PostSummaryModel>
           ? _value.content
           : content // ignore: cast_nullable_to_non_nullable
               as String,
+      restaurantName: null == restaurantName
+          ? _value.restaurantName
+          : restaurantName // ignore: cast_nullable_to_non_nullable
+              as String,
       categoryCode: null == categoryCode
           ? _value.categoryCode
           : categoryCode // ignore: cast_nullable_to_non_nullable
@@ -99,6 +111,10 @@ class _$PostSummaryModelCopyWithImpl<$Res, $Val extends PostSummaryModel>
           ? _value.minOrderFee
           : minOrderFee // ignore: cast_nullable_to_non_nullable
               as int,
+      meetLocation: null == meetLocation
+          ? _value.meetLocation
+          : meetLocation // ignore: cast_nullable_to_non_nullable
+              as MeetLocationModel,
       status: null == status
           ? _value.status
           : status // ignore: cast_nullable_to_non_nullable
@@ -108,6 +124,14 @@ class _$PostSummaryModelCopyWithImpl<$Res, $Val extends PostSummaryModel>
           : createdAt // ignore: cast_nullable_to_non_nullable
               as String,
     ) as $Val);
+  }
+
+  @override
+  @pragma('vm:prefer-inline')
+  $MeetLocationModelCopyWith<$Res> get meetLocation {
+    return $MeetLocationModelCopyWith<$Res>(_value.meetLocation, (value) {
+      return _then(_value.copyWith(meetLocation: value) as $Val);
+    });
   }
 }
 
@@ -123,11 +147,16 @@ abstract class _$$PostSummaryModelImplCopyWith<$Res>
       {int id,
       String nickname,
       String content,
+      String restaurantName,
       String categoryCode,
       int deliveryFee,
       int minOrderFee,
+      MeetLocationModel meetLocation,
       bool status,
       String createdAt});
+
+  @override
+  $MeetLocationModelCopyWith<$Res> get meetLocation;
 }
 
 /// @nodoc
@@ -144,9 +173,11 @@ class __$$PostSummaryModelImplCopyWithImpl<$Res>
     Object? id = null,
     Object? nickname = null,
     Object? content = null,
+    Object? restaurantName = null,
     Object? categoryCode = null,
     Object? deliveryFee = null,
     Object? minOrderFee = null,
+    Object? meetLocation = null,
     Object? status = null,
     Object? createdAt = null,
   }) {
@@ -163,6 +194,10 @@ class __$$PostSummaryModelImplCopyWithImpl<$Res>
           ? _value.content
           : content // ignore: cast_nullable_to_non_nullable
               as String,
+      restaurantName: null == restaurantName
+          ? _value.restaurantName
+          : restaurantName // ignore: cast_nullable_to_non_nullable
+              as String,
       categoryCode: null == categoryCode
           ? _value.categoryCode
           : categoryCode // ignore: cast_nullable_to_non_nullable
@@ -175,6 +210,10 @@ class __$$PostSummaryModelImplCopyWithImpl<$Res>
           ? _value.minOrderFee
           : minOrderFee // ignore: cast_nullable_to_non_nullable
               as int,
+      meetLocation: null == meetLocation
+          ? _value.meetLocation
+          : meetLocation // ignore: cast_nullable_to_non_nullable
+              as MeetLocationModel,
       status: null == status
           ? _value.status
           : status // ignore: cast_nullable_to_non_nullable
@@ -196,9 +235,11 @@ class _$PostSummaryModelImpl
       {required this.id,
       required this.nickname,
       required this.content,
+      required this.restaurantName,
       required this.categoryCode,
       required this.deliveryFee,
       required this.minOrderFee,
+      required this.meetLocation,
       required this.status,
       required this.createdAt});
 
@@ -212,11 +253,15 @@ class _$PostSummaryModelImpl
   @override
   final String content;
   @override
+  final String restaurantName;
+  @override
   final String categoryCode;
   @override
   final int deliveryFee;
   @override
   final int minOrderFee;
+  @override
+  final MeetLocationModel meetLocation;
   @override
   final bool status;
   @override
@@ -224,7 +269,7 @@ class _$PostSummaryModelImpl
 
   @override
   String toString({DiagnosticLevel minLevel = DiagnosticLevel.info}) {
-    return 'PostSummaryModel(id: $id, nickname: $nickname, content: $content, categoryCode: $categoryCode, deliveryFee: $deliveryFee, minOrderFee: $minOrderFee, status: $status, createdAt: $createdAt)';
+    return 'PostSummaryModel(id: $id, nickname: $nickname, content: $content, restaurantName: $restaurantName, categoryCode: $categoryCode, deliveryFee: $deliveryFee, minOrderFee: $minOrderFee, meetLocation: $meetLocation, status: $status, createdAt: $createdAt)';
   }
 
   @override
@@ -235,9 +280,11 @@ class _$PostSummaryModelImpl
       ..add(DiagnosticsProperty('id', id))
       ..add(DiagnosticsProperty('nickname', nickname))
       ..add(DiagnosticsProperty('content', content))
+      ..add(DiagnosticsProperty('restaurantName', restaurantName))
       ..add(DiagnosticsProperty('categoryCode', categoryCode))
       ..add(DiagnosticsProperty('deliveryFee', deliveryFee))
       ..add(DiagnosticsProperty('minOrderFee', minOrderFee))
+      ..add(DiagnosticsProperty('meetLocation', meetLocation))
       ..add(DiagnosticsProperty('status', status))
       ..add(DiagnosticsProperty('createdAt', createdAt));
   }
@@ -251,12 +298,16 @@ class _$PostSummaryModelImpl
             (identical(other.nickname, nickname) ||
                 other.nickname == nickname) &&
             (identical(other.content, content) || other.content == content) &&
+            (identical(other.restaurantName, restaurantName) ||
+                other.restaurantName == restaurantName) &&
             (identical(other.categoryCode, categoryCode) ||
                 other.categoryCode == categoryCode) &&
             (identical(other.deliveryFee, deliveryFee) ||
                 other.deliveryFee == deliveryFee) &&
             (identical(other.minOrderFee, minOrderFee) ||
                 other.minOrderFee == minOrderFee) &&
+            (identical(other.meetLocation, meetLocation) ||
+                other.meetLocation == meetLocation) &&
             (identical(other.status, status) || other.status == status) &&
             (identical(other.createdAt, createdAt) ||
                 other.createdAt == createdAt));
@@ -264,8 +315,18 @@ class _$PostSummaryModelImpl
 
   @JsonKey(ignore: true)
   @override
-  int get hashCode => Object.hash(runtimeType, id, nickname, content,
-      categoryCode, deliveryFee, minOrderFee, status, createdAt);
+  int get hashCode => Object.hash(
+      runtimeType,
+      id,
+      nickname,
+      content,
+      restaurantName,
+      categoryCode,
+      deliveryFee,
+      minOrderFee,
+      meetLocation,
+      status,
+      createdAt);
 
   @JsonKey(ignore: true)
   @override
@@ -287,9 +348,11 @@ abstract class _PostSummaryModel implements PostSummaryModel {
       {required final int id,
       required final String nickname,
       required final String content,
+      required final String restaurantName,
       required final String categoryCode,
       required final int deliveryFee,
       required final int minOrderFee,
+      required final MeetLocationModel meetLocation,
       required final bool status,
       required final String createdAt}) = _$PostSummaryModelImpl;
 
@@ -303,11 +366,15 @@ abstract class _PostSummaryModel implements PostSummaryModel {
   @override
   String get content;
   @override
+  String get restaurantName;
+  @override
   String get categoryCode;
   @override
   int get deliveryFee;
   @override
   int get minOrderFee;
+  @override
+  MeetLocationModel get meetLocation;
   @override
   bool get status;
   @override
