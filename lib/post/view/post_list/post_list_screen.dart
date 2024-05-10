@@ -1,9 +1,9 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:infinite_scroll_pagination/infinite_scroll_pagination.dart';
-import 'package:together_delivery_app/post/view/postList/model/post_summar_model.dart';
 import 'package:together_delivery_app/post/util/postUtil.dart';
-import 'package:together_delivery_app/post/view/postList/widget/postLisItem.dart';
+import 'package:together_delivery_app/post/view/post_list/model/post_summar_model.dart';
+import 'package:together_delivery_app/post/view/post_list/widget/post_list_item.dart';
 
 class PostListScreen extends StatefulWidget {
   const PostListScreen({super.key});

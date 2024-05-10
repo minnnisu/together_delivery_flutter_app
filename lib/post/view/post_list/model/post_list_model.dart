@@ -1,7 +1,7 @@
-import 'package:together_delivery_app/post/view/postList/model/post_list_meta_data_model.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:flutter/foundation.dart';
-import 'package:together_delivery_app/post/view/postList/model/post_summar_model.dart';
+import 'package:together_delivery_app/post/view/post_list/model/post_list_meta_data_model.dart';
+import 'package:together_delivery_app/post/view/post_list/model/post_summar_model.dart';
 
 part 'post_list_model.freezed.dart';
 part 'post_list_model.g.dart';
