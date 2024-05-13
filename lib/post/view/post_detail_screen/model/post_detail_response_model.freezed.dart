@@ -23,7 +23,7 @@ PostDetailResponseModel _$PostDetailResponseModelFromJson(
 mixin _$PostDetailResponseModel {
   int get id => throw _privateConstructorUsedError;
   String get nickname => throw _privateConstructorUsedError;
-  String get content => throw _privateConstructorUsedError;
+  String? get content => throw _privateConstructorUsedError;
   String get restaurantName => throw _privateConstructorUsedError;
   String get categoryCode => throw _privateConstructorUsedError;
   int get deliveryFee => throw _privateConstructorUsedError;
@@ -49,7 +49,7 @@ abstract class $PostDetailResponseModelCopyWith<$Res> {
   $Res call(
       {int id,
       String nickname,
-      String content,
+      String? content,
       String restaurantName,
       String categoryCode,
       int deliveryFee,
@@ -79,7 +79,7 @@ class _$PostDetailResponseModelCopyWithImpl<$Res,
   $Res call({
     Object? id = null,
     Object? nickname = null,
-    Object? content = null,
+    Object? content = freezed,
     Object? restaurantName = null,
     Object? categoryCode = null,
     Object? deliveryFee = null,
@@ -99,10 +99,10 @@ class _$PostDetailResponseModelCopyWithImpl<$Res,
           ? _value.nickname
           : nickname // ignore: cast_nullable_to_non_nullable
               as String,
-      content: null == content
+      content: freezed == content
           ? _value.content
           : content // ignore: cast_nullable_to_non_nullable
-              as String,
+              as String?,
       restaurantName: null == restaurantName
           ? _value.restaurantName
           : restaurantName // ignore: cast_nullable_to_non_nullable
@@ -163,7 +163,7 @@ abstract class _$$PostDetailResponseModelImplCopyWith<$Res>
   $Res call(
       {int id,
       String nickname,
-      String content,
+      String? content,
       String restaurantName,
       String categoryCode,
       int deliveryFee,
@@ -193,7 +193,7 @@ class __$$PostDetailResponseModelImplCopyWithImpl<$Res>
   $Res call({
     Object? id = null,
     Object? nickname = null,
-    Object? content = null,
+    Object? content = freezed,
     Object? restaurantName = null,
     Object? categoryCode = null,
     Object? deliveryFee = null,
@@ -213,10 +213,10 @@ class __$$PostDetailResponseModelImplCopyWithImpl<$Res>
           ? _value.nickname
           : nickname // ignore: cast_nullable_to_non_nullable
               as String,
-      content: null == content
+      content: freezed == content
           ? _value.content
           : content // ignore: cast_nullable_to_non_nullable
-              as String,
+              as String?,
       restaurantName: null == restaurantName
           ? _value.restaurantName
           : restaurantName // ignore: cast_nullable_to_non_nullable
@@ -283,7 +283,7 @@ class _$PostDetailResponseModelImpl implements _PostDetailResponseModel {
   @override
   final String nickname;
   @override
-  final String content;
+  final String? content;
   @override
   final String restaurantName;
   @override
@@ -376,7 +376,7 @@ abstract class _PostDetailResponseModel implements PostDetailResponseModel {
   const factory _PostDetailResponseModel(
       {required final int id,
       required final String nickname,
-      required final String content,
+      required final String? content,
       required final String restaurantName,
       required final String categoryCode,
       required final int deliveryFee,
@@ -395,7 +395,7 @@ abstract class _PostDetailResponseModel implements PostDetailResponseModel {
   @override
   String get nickname;
   @override
-  String get content;
+  String? get content;
   @override
   String get restaurantName;
   @override

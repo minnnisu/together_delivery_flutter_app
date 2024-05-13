@@ -20,12 +20,12 @@ class PostContent extends ConsumerWidget {
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           Text(
-            "가게 정보",
+            "작성자의 글",
             style: TextStyle(fontSize: 16, fontWeight: FontWeight.w600),
           ),
           Padding(
             padding: const EdgeInsets.symmetric(vertical: 6),
-            child: Text(postDetailModel.content),
+            child: Text(postDetailModel.content!),
           ),
         ],
       ),

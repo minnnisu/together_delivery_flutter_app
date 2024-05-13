@@ -33,65 +33,105 @@ class PostInputForm extends ConsumerWidget {
     return ListView(
       padding: const EdgeInsets.symmetric(horizontal: 16.0, vertical: 20),
       children: [
-        PostTextInputField(
-            type: PostInputFormFieldType.title,
-            fieldName: "제목",
-            hintText: "제목을 입력해주세요.",
-            marginBottomSize: 12,
-            errorText: postEditModel.titleErrMsg),
-        PostTextInputField(
-          type: PostInputFormFieldType.content,
-          fieldName: "내용",
-          hintText: "내용을 입력해주세요.",
-          maxLines: 5,
-          marginBottomSize: 12,
-          errorText: postEditModel.contentErrMsg,
+        PostInputCategoryWrapper(
+            categoryName: "가게 정보",
+            childrenWidget: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Row(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    PostDropdownInputField(
+                      type: PostInputFormFieldType.restaurantCategory,
+                      width: screenWidth * 0.45,
+                      fieldName: "카테고리",
+                      marginBottomSize: 16,
+                    ),
+                    PostTextInputField(
+                      type: PostInputFormFieldType.restaurantName,
+                      width: screenWidth * 0.45,
+                      fieldName: "가게이름",
+                      hintText: "한끼 치킨",
+                      marginBottomSize: 16,
+                      errorText: postEditModel.restaurantNameErrMsg,
+                    ),
+                  ],
+                ),
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    PostNumberInputField(
+                      type: PostInputFormFieldType.minOrderFee,
+                      width: screenWidth * 0.45,
+                      fieldName: "최소주문금액",
+                      marginBottomSize: 16,
+                      errorText: postEditModel.minOrderFeeErrMsg,
+                    ),
+                    PostNumberInputField(
+                      type: PostInputFormFieldType.deliveryFee,
+                      width: screenWidth * 0.45,
+                      fieldName: "배달비",
+                      marginBottomSize: 12,
+                      errorText: postEditModel.deliveryFeeErrMsg,
+                    ),
+                  ],
+                ),
+              ],
+            )),
+        PostInputCategoryWrapper(
+          categoryName: "만남 장소",
+          childrenWidget: MeetLocationInputField(
+            marginBottomSize: 6,
+          ),
         ),
-        Row(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-          children: [
-            PostDropdownInputField(
-              type: PostInputFormFieldType.restaurantCategory,
-              width: screenWidth * 0.45,
-              fieldName: "카테고리",
-              marginBottomSize: 12,
-            ),
-            PostTextInputField(
-              type: PostInputFormFieldType.restaurantName,
-              width: screenWidth * 0.45,
-              fieldName: "가게이름",
-              hintText: "한끼 치킨",
-              marginBottomSize: 12,
-            ),
-          ],
-        ),
-        Row(
-          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            PostNumberInputField(
-                type: PostInputFormFieldType.minOrderFee,
-                width: screenWidth * 0.45,
-                fieldName: "최소배달금액",
+        PostInputCategoryWrapper(
+          categoryName: "추가 정보",
+          childrenWidget: Column(
+            children: [
+              PostTextInputField(
+                type: PostInputFormFieldType.content,
+                fieldName: "내용",
+                hintText: "내용을 입력해주세요.",
+                maxLines: 5,
                 marginBottomSize: 12,
-                errorText: postEditModel.minOrderFeeErrMsg),
-            PostNumberInputField(
-                type: PostInputFormFieldType.deliveryFee,
-                width: screenWidth * 0.45,
-                fieldName: "배달비",
-                marginBottomSize: 12,
-                errorText: postEditModel.deliveryFeeErrMsg),
-          ],
-        ),
-        MeetLocationInputField(
-          marginBottomSize: 12,
-        ),
-        PostImageInputField(
-          marginBottomSize: 12,
+                errorText: postEditModel.contentErrMsg,
+              ),
+              PostImageInputField(
+                marginBottomSize: 16,
+              ),
+            ],
+          ),
         ),
         PostInputFormSubmitBtn(),
       ],
+    );
+  }
+}
+
+class PostInputCategoryWrapper extends StatelessWidget {
+  final String categoryName;
+  final Widget childrenWidget;
+
+  const PostInputCategoryWrapper(
+      {required this.categoryName, required this.childrenWidget, super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    return Padding(
+      padding: const EdgeInsets.only(bottom: 8),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          Padding(
+            padding: const EdgeInsets.only(bottom: 8),
+            child: Text(categoryName,
+                style: TextStyle(fontSize: 20, fontWeight: FontWeight.w600)),
+          ),
+          childrenWidget
+        ],
+      ),
     );
   }
 }

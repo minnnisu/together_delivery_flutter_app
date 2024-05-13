@@ -22,7 +22,7 @@ PostSummaryModel _$PostSummaryModelFromJson(Map<String, dynamic> json) {
 mixin _$PostSummaryModel {
   int get id => throw _privateConstructorUsedError;
   String get nickname => throw _privateConstructorUsedError;
-  String get content => throw _privateConstructorUsedError;
+  String? get content => throw _privateConstructorUsedError;
   String get restaurantName => throw _privateConstructorUsedError;
   String get categoryCode => throw _privateConstructorUsedError;
   int get deliveryFee => throw _privateConstructorUsedError;
@@ -46,7 +46,7 @@ abstract class $PostSummaryModelCopyWith<$Res> {
   $Res call(
       {int id,
       String nickname,
-      String content,
+      String? content,
       String restaurantName,
       String categoryCode,
       int deliveryFee,
@@ -73,7 +73,7 @@ class _$PostSummaryModelCopyWithImpl<$Res, $Val extends PostSummaryModel>
   $Res call({
     Object? id = null,
     Object? nickname = null,
-    Object? content = null,
+    Object? content = freezed,
     Object? restaurantName = null,
     Object? categoryCode = null,
     Object? deliveryFee = null,
@@ -91,10 +91,10 @@ class _$PostSummaryModelCopyWithImpl<$Res, $Val extends PostSummaryModel>
           ? _value.nickname
           : nickname // ignore: cast_nullable_to_non_nullable
               as String,
-      content: null == content
+      content: freezed == content
           ? _value.content
           : content // ignore: cast_nullable_to_non_nullable
-              as String,
+              as String?,
       restaurantName: null == restaurantName
           ? _value.restaurantName
           : restaurantName // ignore: cast_nullable_to_non_nullable
@@ -146,7 +146,7 @@ abstract class _$$PostSummaryModelImplCopyWith<$Res>
   $Res call(
       {int id,
       String nickname,
-      String content,
+      String? content,
       String restaurantName,
       String categoryCode,
       int deliveryFee,
@@ -172,7 +172,7 @@ class __$$PostSummaryModelImplCopyWithImpl<$Res>
   $Res call({
     Object? id = null,
     Object? nickname = null,
-    Object? content = null,
+    Object? content = freezed,
     Object? restaurantName = null,
     Object? categoryCode = null,
     Object? deliveryFee = null,
@@ -190,10 +190,10 @@ class __$$PostSummaryModelImplCopyWithImpl<$Res>
           ? _value.nickname
           : nickname // ignore: cast_nullable_to_non_nullable
               as String,
-      content: null == content
+      content: freezed == content
           ? _value.content
           : content // ignore: cast_nullable_to_non_nullable
-              as String,
+              as String?,
       restaurantName: null == restaurantName
           ? _value.restaurantName
           : restaurantName // ignore: cast_nullable_to_non_nullable
@@ -251,7 +251,7 @@ class _$PostSummaryModelImpl
   @override
   final String nickname;
   @override
-  final String content;
+  final String? content;
   @override
   final String restaurantName;
   @override
@@ -347,7 +347,7 @@ abstract class _PostSummaryModel implements PostSummaryModel {
   const factory _PostSummaryModel(
       {required final int id,
       required final String nickname,
-      required final String content,
+      required final String? content,
       required final String restaurantName,
       required final String categoryCode,
       required final int deliveryFee,
@@ -364,7 +364,7 @@ abstract class _PostSummaryModel implements PostSummaryModel {
   @override
   String get nickname;
   @override
-  String get content;
+  String? get content;
   @override
   String get restaurantName;
   @override

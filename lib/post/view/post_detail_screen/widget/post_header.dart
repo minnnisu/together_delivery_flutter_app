@@ -5,6 +5,7 @@ import 'package:together_delivery_app/common/const/const.dart';
 import 'package:together_delivery_app/common/util/dataConvertor.dart';
 import 'package:together_delivery_app/post/view/post_detail_screen/model/post_detail_response_model.dart'
     as post_detail_response_model;
+import 'package:together_delivery_app/post/view/post_detail_screen/widget/post_header_pop_up.dart';
 import 'package:together_delivery_app/post/view/post_detail_screen/widget/post_status.dart';
 import 'package:together_delivery_app/post/view/post_detail_screen/provider/post_detail_provider.dart';
 
@@ -15,14 +16,6 @@ class PostDetailHeader extends ConsumerWidget {
   Widget build(BuildContext context, WidgetRef ref) {
     return Container(
       padding: EdgeInsets.symmetric(vertical: 10),
-      decoration: BoxDecoration(
-        border: Border(
-          bottom: BorderSide(
-            color: Color(borderGreyColor),
-            width: 0.9,
-          ),
-        ),
-      ),
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
@@ -86,6 +79,11 @@ class PostDetailHeaderRight extends ConsumerWidget {
   Widget build(BuildContext context, WidgetRef ref) {
     final postDetailModel = ref.watch(postDetailProvider)
         as post_detail_response_model.PostDetailResponseModel;
-    return postDetailModel.status ? PostActiveStatus() : PostInactiveStatus();
+    return Row(
+      children: [
+        postDetailModel.status ? PostActiveStatus() : PostInactiveStatus(),
+        PostHeaderPopUp(postDetailModel.id)
+      ],
+    );
   }
 }

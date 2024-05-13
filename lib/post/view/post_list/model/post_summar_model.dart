@@ -11,7 +11,7 @@ class PostSummaryModel with _$PostSummaryModel{
   const factory PostSummaryModel({
     required int id,
     required String nickname,
-    required String content,
+    required String? content,
     required String restaurantName,
     required String categoryCode,
     required int deliveryFee,

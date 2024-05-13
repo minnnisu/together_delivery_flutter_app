@@ -9,6 +9,6 @@ class PostItemContent extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Text(post.content);
+    return Text(post.content!);
   }
 }

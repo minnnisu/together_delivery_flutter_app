@@ -28,7 +28,7 @@ class PostImageInputField extends ConsumerWidget {
           },
           child: Container(
             width: screenWidth,
-            padding: EdgeInsets.only(bottom: 6),
+            padding: EdgeInsets.only(bottom: 10),
             child: Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
@@ -46,53 +46,56 @@ class PostImageInputField extends ConsumerWidget {
             ),
           ),
         ),
-        GridView.builder(
-          shrinkWrap: true,
-          physics: NeverScrollableScrollPhysics(),
-          gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-              crossAxisCount: 5, crossAxisSpacing: 5, mainAxisSpacing: 5),
-          itemCount: postEditModel.images.length,
-          itemBuilder: (context, index) {
-            Asset asset = postEditModel.images[index];
-            return Stack(
-              children: [
-                Container(
-                  width: 300,
-                  height: 300,
-                  decoration: BoxDecoration(
-                    image: DecorationImage(
-                      image: AssetThumbImageProvider(
-                        asset,
-                        width: 300,
-                        height: 300,
+        Padding(
+          padding: EdgeInsets.only(bottom: marginBottomSize),
+          child: GridView.builder(
+            shrinkWrap: true,
+            physics: NeverScrollableScrollPhysics(),
+            gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+                crossAxisCount: 5, crossAxisSpacing: 5, mainAxisSpacing: 5),
+            itemCount: postEditModel.images.length,
+            itemBuilder: (context, index) {
+              Asset asset = postEditModel.images[index];
+              return Stack(
+                children: [
+                  Container(
+                    width: 300,
+                    height: 300,
+                    decoration: BoxDecoration(
+                      image: DecorationImage(
+                        image: AssetThumbImageProvider(
+                          asset,
+                          width: 300,
+                          height: 300,
+                        ),
+                        fit: BoxFit.cover,
                       ),
-                      fit: BoxFit.cover,
                     ),
                   ),
-                ),
-                Positioned(
-                  left: -10,
-                  top: -10,
-                  child: IconButton(
-                    style: ButtonStyle(
-                      foregroundColor:
-                          MaterialStateProperty.all<Color>(Color(0xff000000)),
-                      backgroundColor:
-                          MaterialStateProperty.all<Color>(Color(0xffffffff)),
+                  Positioned(
+                    left: -10,
+                    top: -10,
+                    child: IconButton(
+                      style: ButtonStyle(
+                        foregroundColor:
+                            MaterialStateProperty.all<Color>(Color(0xff000000)),
+                        backgroundColor:
+                            MaterialStateProperty.all<Color>(Color(0xffffffff)),
+                      ),
+                      padding: EdgeInsets.zero,
+                      // 패딩 설정
+                      constraints: BoxConstraints(),
+                      // constraints
+                      onPressed: () => ref
+                          .read(postInputFormProvider.notifier)
+                          .deleteAssets(index),
+                      icon: Icon(Icons.close),
                     ),
-                    padding: EdgeInsets.zero,
-                    // 패딩 설정
-                    constraints: BoxConstraints(),
-                    // constraints
-                    onPressed: () => ref
-                        .read(postInputFormProvider.notifier)
-                        .deleteAssets(index),
-                    icon: Icon(Icons.close),
-                  ),
-                )
-              ],
-            );
-          },
+                  )
+                ],
+              );
+            },
+          ),
         ),
       ],
     );

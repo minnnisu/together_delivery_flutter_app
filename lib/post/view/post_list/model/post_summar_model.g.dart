@@ -11,7 +11,7 @@ _$PostSummaryModelImpl _$$PostSummaryModelImplFromJson(
     _$PostSummaryModelImpl(
       id: json['id'] as int,
       nickname: json['nickname'] as String,
-      content: json['content'] as String,
+      content: json['content'] as String?,
       restaurantName: json['restaurantName'] as String,
       categoryCode: json['categoryCode'] as String,
       deliveryFee: json['deliveryFee'] as int,

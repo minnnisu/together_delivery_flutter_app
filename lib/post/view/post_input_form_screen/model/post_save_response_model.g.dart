@@ -11,7 +11,7 @@ _$PostSaveResponseModelImpl _$$PostSaveResponseModelImplFromJson(
     _$PostSaveResponseModelImpl(
       id: json['id'] as int,
       username: json['username'] as String,
-      content: json['content'] as String,
+      content: json['content'] as String?,
       restaurantName: json['restaurantName'] as String,
       categoryCode: json['categoryCode'] as String,
       deliveryFee: json['deliveryFee'] as int,

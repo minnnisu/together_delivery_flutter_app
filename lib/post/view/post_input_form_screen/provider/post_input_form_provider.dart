@@ -7,6 +7,8 @@ import 'package:together_delivery_app/common/const/errorCode.dart';
 import 'package:together_delivery_app/common/const/restaurantCategory.dart';
 import 'package:together_delivery_app/common/exception/SuccessFailure.dart';
 import 'package:together_delivery_app/common/exception/customException.dart';
+import 'package:together_delivery_app/common/util/money_convertor.dart';
+import 'package:together_delivery_app/common/validator/input_validation_result_model.dart';
 import 'package:together_delivery_app/post/model/meet_location_model.dart';
 import 'package:together_delivery_app/post/view/post_input_form_screen/const/post_input_form_field_type.dart';
 import 'package:together_delivery_app/post/view/post_input_form_screen/model/post_input_form_model.dart';
@@ -14,8 +16,7 @@ import 'package:together_delivery_app/post/view/post_input_form_screen/model/pos
 import 'package:http_parser/http_parser.dart';
 import 'package:together_delivery_app/post/repository/postRepository.dart';
 import 'package:together_delivery_app/post/view/post_input_form_screen/model/post_save_response_model.dart';
-
-typedef ValidationResult = ({bool isValid, String? message});
+import 'package:together_delivery_app/post/view/post_input_form_screen/post_input_validator.dart';
 
 final postInputFormProvider = StateNotifierProvider.autoDispose<
     PostInputFormNotifier, PostInputFormModel>(
@@ -32,24 +33,21 @@ class PostInputFormNotifier extends StateNotifier<PostInputFormModel> {
   PostInputFormNotifier(this.postRepository)
       : super(
           const PostInputFormModel(
-            title: "",
-            content: "",
             restaurantCategory: RestaurantCategory.AMERICAN_FOOD,
             restaurantName: "",
             deliveryFee: "",
             minOrderFee: "",
-            address: "",
-            shortAddress: "",
-            latitude: 0.0,
-            longitude: 0.0,
+            content: "",
+            meetLocation: null,
+            addressDescription: "",
             images: <Asset>[],
-            titleErrMsg: null,
-            contentErrMsg: null,
             restaurantCategoryErrMsg: null,
             restaurantNameErrMsg: null,
             deliveryFeeErrMsg: null,
+            contentErrMsg: null,
             minOrderFeeErrMsg: null,
-            addressErrMsg: null,
+            meetLocationErrMsg: null,
+            addressDescriptionErrMsg: null,
             currentFocusedField: null,
           ),
         );
@@ -58,36 +56,32 @@ class PostInputFormNotifier extends StateNotifier<PostInputFormModel> {
     return RestaurantCategory.values;
   }
 
-  Object getFieldValue(PostInputFormFieldType type) {
+  Object? getFieldValue(PostInputFormFieldType type) {
     switch (type) {
-      case PostInputFormFieldType.title:
-        return state.title;
-      case PostInputFormFieldType.content:
-        return state.content;
       case PostInputFormFieldType.restaurantCategory:
         return state.restaurantCategory;
+
       case PostInputFormFieldType.restaurantName:
         return state.restaurantName;
+
       case PostInputFormFieldType.deliveryFee:
         return state.deliveryFee;
+
       case PostInputFormFieldType.minOrderFee:
         return state.minOrderFee;
-      case PostInputFormFieldType.address:
-        return state.address;
-      case PostInputFormFieldType.latitude:
-        return state.latitude;
-      case PostInputFormFieldType.longitude:
-        return state.longitude;
+
+      case PostInputFormFieldType.content:
+        return state.content;
+
+      case PostInputFormFieldType.meetLocation:
+        return state.meetLocation;
+
+      case PostInputFormFieldType.addressDescription:
+        return state.addressDescription;
     }
   }
 
-  void updateFieldValue(PostInputFormFieldType type, Object value) {
-    if (type == PostInputFormFieldType.title) {
-      state = state.copyWith(title: value as String);
-    }
-    if (type == PostInputFormFieldType.content) {
-      state = state.copyWith(content: value as String);
-    }
+  void updateFieldValue(PostInputFormFieldType type, Object? value) {
     if (type == PostInputFormFieldType.restaurantCategory) {
       state = state.copyWith(restaurantCategory: value as RestaurantCategory);
     }
@@ -100,46 +94,46 @@ class PostInputFormNotifier extends StateNotifier<PostInputFormModel> {
     if (type == PostInputFormFieldType.minOrderFee) {
       state = state.copyWith(minOrderFee: value as String);
     }
-    if (type == PostInputFormFieldType.address) {
-      state = state.copyWith(address: value as String);
+    if (type == PostInputFormFieldType.minOrderFee) {
+      state = state.copyWith(minOrderFee: value as String);
     }
-    if (type == PostInputFormFieldType.latitude) {
-      state = state.copyWith(latitude: value as double);
+    if (type == PostInputFormFieldType.content) {
+      state = state.copyWith(content: value as String);
     }
-    if (type == PostInputFormFieldType.longitude) {
-      state = state.copyWith(longitude: value as double);
+    if (type == PostInputFormFieldType.meetLocation) {
+      state = state.copyWith(meetLocation: value as MeetLocationModel?);
+    }
+    if (type == PostInputFormFieldType.addressDescription) {
+      state = state.copyWith(addressDescription: value as String);
     }
   }
 
-  String? getFieldErrorValue(PostInputFormFieldType type) {
+  Object? getFieldErrorValue(PostInputFormFieldType type) {
     switch (type) {
-      case PostInputFormFieldType.title:
-        return state.titleErrMsg;
-      case PostInputFormFieldType.content:
-        return state.contentErrMsg;
       case PostInputFormFieldType.restaurantCategory:
         return state.restaurantCategoryErrMsg;
+
       case PostInputFormFieldType.restaurantName:
         return state.restaurantNameErrMsg;
+
       case PostInputFormFieldType.deliveryFee:
         return state.deliveryFeeErrMsg;
+
       case PostInputFormFieldType.minOrderFee:
         return state.minOrderFeeErrMsg;
-      case PostInputFormFieldType.address:
-        return state.addressErrMsg;
-      case PostInputFormFieldType.latitude:
-      case PostInputFormFieldType.longitude:
-        return "";
+
+      case PostInputFormFieldType.content:
+        return state.contentErrMsg;
+
+      case PostInputFormFieldType.meetLocation:
+        return state.meetLocationErrMsg;
+
+      case PostInputFormFieldType.addressDescription:
+        return state.addressDescriptionErrMsg;
     }
   }
 
   void updateFieldErrorValue(PostInputFormFieldType type, String? value) {
-    if (type == PostInputFormFieldType.title) {
-      state = state.copyWith(titleErrMsg: value);
-    }
-    if (type == PostInputFormFieldType.content) {
-      state = state.copyWith(contentErrMsg: value);
-    }
     if (type == PostInputFormFieldType.restaurantCategory) {
       state = state.copyWith(restaurantCategoryErrMsg: value);
     }
@@ -152,8 +146,14 @@ class PostInputFormNotifier extends StateNotifier<PostInputFormModel> {
     if (type == PostInputFormFieldType.minOrderFee) {
       state = state.copyWith(minOrderFeeErrMsg: value);
     }
-    if (type == PostInputFormFieldType.address) {
-      state = state.copyWith(addressErrMsg: value);
+    if (type == PostInputFormFieldType.content) {
+      state = state.copyWith(contentErrMsg: value);
+    }
+    if (type == PostInputFormFieldType.meetLocation) {
+      state = state.copyWith(meetLocationErrMsg: value);
+    }
+    if (type == PostInputFormFieldType.addressDescription) {
+      state = state.copyWith(addressDescriptionErrMsg: value);
     }
   }
 
@@ -177,8 +177,8 @@ class PostInputFormNotifier extends StateNotifier<PostInputFormModel> {
     }
 
     if (state.currentFocusedField != type) {
-      ValidationResult validationResult =
-          validate(state.currentFocusedField!, value);
+      InputValidationResultModel validationResult =
+          PostInputValidator().validate(state.currentFocusedField!, value);
       if (!validationResult.isValid) {
         updateFieldErrorValue(
             state.currentFocusedField!, validationResult.message!);
@@ -188,99 +188,6 @@ class PostInputFormNotifier extends StateNotifier<PostInputFormModel> {
     }
 
     state = state.copyWith(currentFocusedField: type);
-  }
-
-  ValidationResult validate(PostInputFormFieldType type, Object value) {
-    final onlyNumberRegExp = RegExp(r'^[0-9]+$');
-
-    if (type == PostInputFormFieldType.restaurantCategory ||
-        type == PostInputFormFieldType.restaurantName ||
-        type == PostInputFormFieldType.latitude ||
-        type == PostInputFormFieldType.longitude) {
-      return (isValid: true, message: null);
-    }
-
-    if (type == PostInputFormFieldType.title) {
-      String typedValue = value as String;
-      if (typedValue.isEmpty) {
-        return (isValid: false, message: '제목을 입력해주세요');
-      }
-      if (typedValue.length < 2 || typedValue.length > 20) {
-        return (isValid: false, message: '제목은 2글자 이상 20글자 이하로만 입력 가능합니다.');
-      }
-      return (isValid: true, message: null);
-    }
-
-    if (type == PostInputFormFieldType.content) {
-      String typedValue = value as String;
-      if (typedValue.isEmpty) {
-        return (isValid: false, message: '본문을 입력해주세요');
-      }
-      if (typedValue.length < 2 || typedValue.length > 100) {
-        return (isValid: false, message: '제목은 2글자 이상 20글자 이하로만 입력 가능합니다.');
-      }
-      return (isValid: true, message: null);
-    }
-
-    if (type == PostInputFormFieldType.deliveryFee) {
-      String typedValue = value as String;
-      if (typedValue.isEmpty) {
-        return (isValid: false, message: '배달비를 입력해주세요');
-      }
-      if (!onlyNumberRegExp.hasMatch(typedValue)) {
-        return (
-          isValid: false,
-          message: '배달비는 숫자만 가능합니다.',
-        );
-      }
-
-      try {
-        if (int.parse(typedValue) < 0 || int.parse(typedValue) > 10000) {
-          return (isValid: false, message: '배달비는 10,000원이하로만 입력이 가능합니다.');
-        }
-      } catch (e) {
-        return (
-          isValid: false,
-          message: '배달비는 숫자만 가능합니다.',
-        );
-      }
-      return (isValid: true, message: null);
-    }
-
-    if (type == PostInputFormFieldType.minOrderFee) {
-      String typedValue = value as String;
-      if (typedValue.isEmpty) {
-        return (isValid: false, message: '최소주문금액을 입력해주세요');
-      }
-      if (!onlyNumberRegExp.hasMatch(typedValue)) {
-        return (
-          isValid: false,
-          message: '최소주문금액은 숫자만 가능합니다.',
-        );
-      }
-
-      try {
-        if (int.parse(typedValue) < 0 || int.parse(typedValue) > 100000) {
-          return (isValid: false, message: '제목은 100,000이하로만 입력 가능합니다.');
-        }
-      } catch (e) {
-        return (
-          isValid: false,
-          message: '최소주문금액은 숫자만 가능합니다.',
-        );
-      }
-      return (isValid: true, message: null);
-    }
-
-    if (type == PostInputFormFieldType.address) {
-      String typedValue = value as String;
-      if (typedValue.isEmpty) {
-        return (isValid: false, message: '만남장소를 지정해주세요');
-      }
-      return (isValid: true, message: null);
-    }
-
-    return (isValid: false, message: "존재하지 않은 필드입니다.");
   }
 
   Future<void> loadAssets(BuildContext context) async {
@@ -371,11 +278,13 @@ class PostInputFormNotifier extends StateNotifier<PostInputFormModel> {
 
   bool checkAllFieldValid() {
     for (var fieldType in PostInputFormFieldType.values) {
-      ValidationResult validationResult =
-          validate(fieldType, getFieldValue(fieldType));
+      InputValidationResultModel validationResult =
+          PostInputValidator().validate(fieldType, getFieldValue(fieldType));
       if (!validationResult.isValid) {
         updateFieldErrorValue(fieldType, validationResult.message!);
         return false;
+      } else {
+        updateFieldErrorValue(state.currentFocusedField!, null);
       }
     }
 
@@ -404,19 +313,18 @@ class PostInputFormNotifier extends StateNotifier<PostInputFormModel> {
     }
 
     PostSaveRequestModel postSaveRequestModel = PostSaveRequestModel(
-      content: state.content,
-      categoryCode: describeEnum(state.restaurantCategory),
+      categoryCode: state.restaurantCategory.name,
       restaurantName: state.restaurantName,
-      deliveryFee: int.parse(state.deliveryFee),
-      minOrderFee: int.parse(state.minOrderFee),
+      minOrderFee: int.parse(MoneyConvertor.removeCommasFromNumber(state.minOrderFee)),
+      deliveryFee: int.parse(MoneyConvertor.removeCommasFromNumber(state.deliveryFee)),
       meetLocation: MeetLocationModel(
-          address: state.address,
-          shortAddress: state.shortAddress,
-          latitude: state.latitude,
-          longitude: state.longitude),
+        address: state.meetLocation!.address,
+        shortAddress: state.addressDescription,
+        latitude: state.meetLocation!.latitude,
+        longitude: state.meetLocation!.longitude,
+      ),
+      content: state.content != "" ? state.content : null,
     );
-
-    print("위도: ${state.latitude}, 경도:${state.longitude}");
 
     List<MultipartFile> images = await convertImageToFormData();
     final result =

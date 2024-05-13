@@ -19,7 +19,7 @@ class PostItem extends StatelessWidget {
       children: [
         PostItemHeader(post),
         PostItemRestaurantInfo(post),
-        PostItemContent(post),
+        post.content != null ? PostItemContent(post) : Container(),
       ],
     );
   }

@@ -16,8 +16,8 @@ enum RestaurantCategory{
   FAST_FOOD("패스트푸드"),
   ETC("기타");
 
-  final String name;
-  const RestaurantCategory(this.name);
+  final String korean;
+  const RestaurantCategory(this.korean);
 
   static RestaurantCategory getCategoryFromString(String categoryString) {
     switch (categoryString) {

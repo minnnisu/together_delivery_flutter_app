@@ -30,7 +30,7 @@ class PostDetailResponseModel extends PostDetailResponseModelBase with _$PostDet
   const factory PostDetailResponseModel({
     required int id,
     required String nickname,
-    required String content,
+    required String? content,
     required String restaurantName,
     required String categoryCode,
     required int deliveryFee,

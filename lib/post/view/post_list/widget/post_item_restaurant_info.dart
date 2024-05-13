@@ -1,5 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:together_delivery_app/common/const/restaurantCategory.dart';
+import 'package:together_delivery_app/common/util/money_convertor.dart';
 
 import '../model/post_summar_model.dart';
 
@@ -29,7 +30,7 @@ class PostItemRestaurantInfo extends StatelessWidget {
                       width: 80,
                       child: Text("카테고리", style: TextStyle(color: Color(0xff9b9b9b)))),
                   Text(RestaurantCategory.getCategoryFromString(post.categoryCode)
-                      .name),
+                      .korean),
                 ],
               ),
             ),
@@ -52,7 +53,7 @@ class PostItemRestaurantInfo extends StatelessWidget {
                     Container(
                         width: 80,
                         child: Text("최소 배달 팁", style: TextStyle(color: Color(0xff9b9b9b)))),
-                    Text(post.deliveryFee.toString() + "원")
+                    Text(MoneyConvertor.addCommasToNumber(post.deliveryFee)+ "원")
                   ],
                 ),
                 Row(
@@ -60,7 +61,7 @@ class PostItemRestaurantInfo extends StatelessWidget {
                     Container(
                         width: 90,
                         child: Text("최소 주문금액", style: TextStyle(color: Color(0xff9b9b9b)))),
-                    Text(post.minOrderFee.toString() + "원")
+                    Text(MoneyConvertor.addCommasToNumber(post.minOrderFee) + "원")
                   ],
                 ),
               ],

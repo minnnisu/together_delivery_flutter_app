@@ -41,7 +41,7 @@ class PostDetailScreenBodyState extends ConsumerState<PostDetailScreenBody> {
     return ref
         .watch(postDetailLoadProvider(PostDetailRequest(postId: widget.postId)))
         .when(
-          loading: () => const CircularProgressIndicator(),
+          loading: () => Center(child: const CircularProgressIndicator()),
           error: (err, stack) => Text('Error: $err'),
           data: (data) {
             return Column(

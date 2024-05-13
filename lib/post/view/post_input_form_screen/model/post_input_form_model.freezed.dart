@@ -16,25 +16,22 @@ final _privateConstructorUsedError = UnsupportedError(
 
 /// @nodoc
 mixin _$PostInputFormModel {
-  String get title => throw _privateConstructorUsedError;
-  String get content => throw _privateConstructorUsedError;
   RestaurantCategory get restaurantCategory =>
       throw _privateConstructorUsedError;
   String get restaurantName => throw _privateConstructorUsedError;
   String get deliveryFee => throw _privateConstructorUsedError;
   String get minOrderFee => throw _privateConstructorUsedError;
+  String get content => throw _privateConstructorUsedError;
+  MeetLocationModel? get meetLocation => throw _privateConstructorUsedError;
+  String get addressDescription => throw _privateConstructorUsedError;
   List<Asset> get images => throw _privateConstructorUsedError;
-  String get address => throw _privateConstructorUsedError;
-  String get shortAddress => throw _privateConstructorUsedError;
-  double get latitude => throw _privateConstructorUsedError;
-  double get longitude => throw _privateConstructorUsedError;
-  String? get titleErrMsg => throw _privateConstructorUsedError;
-  String? get contentErrMsg => throw _privateConstructorUsedError;
   String? get restaurantCategoryErrMsg => throw _privateConstructorUsedError;
   String? get restaurantNameErrMsg => throw _privateConstructorUsedError;
   String? get deliveryFeeErrMsg => throw _privateConstructorUsedError;
   String? get minOrderFeeErrMsg => throw _privateConstructorUsedError;
-  String? get addressErrMsg => throw _privateConstructorUsedError;
+  String? get contentErrMsg => throw _privateConstructorUsedError;
+  String? get meetLocationErrMsg => throw _privateConstructorUsedError;
+  String? get addressDescriptionErrMsg => throw _privateConstructorUsedError;
   PostInputFormFieldType? get currentFocusedField =>
       throw _privateConstructorUsedError;
 
@@ -50,25 +47,24 @@ abstract class $PostInputFormModelCopyWith<$Res> {
       _$PostInputFormModelCopyWithImpl<$Res, PostInputFormModel>;
   @useResult
   $Res call(
-      {String title,
-      String content,
-      RestaurantCategory restaurantCategory,
+      {RestaurantCategory restaurantCategory,
       String restaurantName,
       String deliveryFee,
       String minOrderFee,
+      String content,
+      MeetLocationModel? meetLocation,
+      String addressDescription,
       List<Asset> images,
-      String address,
-      String shortAddress,
-      double latitude,
-      double longitude,
-      String? titleErrMsg,
-      String? contentErrMsg,
       String? restaurantCategoryErrMsg,
       String? restaurantNameErrMsg,
       String? deliveryFeeErrMsg,
       String? minOrderFeeErrMsg,
-      String? addressErrMsg,
+      String? contentErrMsg,
+      String? meetLocationErrMsg,
+      String? addressDescriptionErrMsg,
       PostInputFormFieldType? currentFocusedField});
+
+  $MeetLocationModelCopyWith<$Res>? get meetLocation;
 }
 
 /// @nodoc
@@ -84,35 +80,24 @@ class _$PostInputFormModelCopyWithImpl<$Res, $Val extends PostInputFormModel>
   @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? title = null,
-    Object? content = null,
     Object? restaurantCategory = null,
     Object? restaurantName = null,
     Object? deliveryFee = null,
     Object? minOrderFee = null,
+    Object? content = null,
+    Object? meetLocation = freezed,
+    Object? addressDescription = null,
     Object? images = null,
-    Object? address = null,
-    Object? shortAddress = null,
-    Object? latitude = null,
-    Object? longitude = null,
-    Object? titleErrMsg = freezed,
-    Object? contentErrMsg = freezed,
     Object? restaurantCategoryErrMsg = freezed,
     Object? restaurantNameErrMsg = freezed,
     Object? deliveryFeeErrMsg = freezed,
     Object? minOrderFeeErrMsg = freezed,
-    Object? addressErrMsg = freezed,
+    Object? contentErrMsg = freezed,
+    Object? meetLocationErrMsg = freezed,
+    Object? addressDescriptionErrMsg = freezed,
     Object? currentFocusedField = freezed,
   }) {
     return _then(_value.copyWith(
-      title: null == title
-          ? _value.title
-          : title // ignore: cast_nullable_to_non_nullable
-              as String,
-      content: null == content
-          ? _value.content
-          : content // ignore: cast_nullable_to_non_nullable
-              as String,
       restaurantCategory: null == restaurantCategory
           ? _value.restaurantCategory
           : restaurantCategory // ignore: cast_nullable_to_non_nullable
@@ -129,34 +114,22 @@ class _$PostInputFormModelCopyWithImpl<$Res, $Val extends PostInputFormModel>
           ? _value.minOrderFee
           : minOrderFee // ignore: cast_nullable_to_non_nullable
               as String,
+      content: null == content
+          ? _value.content
+          : content // ignore: cast_nullable_to_non_nullable
+              as String,
+      meetLocation: freezed == meetLocation
+          ? _value.meetLocation
+          : meetLocation // ignore: cast_nullable_to_non_nullable
+              as MeetLocationModel?,
+      addressDescription: null == addressDescription
+          ? _value.addressDescription
+          : addressDescription // ignore: cast_nullable_to_non_nullable
+              as String,
       images: null == images
           ? _value.images
           : images // ignore: cast_nullable_to_non_nullable
               as List<Asset>,
-      address: null == address
-          ? _value.address
-          : address // ignore: cast_nullable_to_non_nullable
-              as String,
-      shortAddress: null == shortAddress
-          ? _value.shortAddress
-          : shortAddress // ignore: cast_nullable_to_non_nullable
-              as String,
-      latitude: null == latitude
-          ? _value.latitude
-          : latitude // ignore: cast_nullable_to_non_nullable
-              as double,
-      longitude: null == longitude
-          ? _value.longitude
-          : longitude // ignore: cast_nullable_to_non_nullable
-              as double,
-      titleErrMsg: freezed == titleErrMsg
-          ? _value.titleErrMsg
-          : titleErrMsg // ignore: cast_nullable_to_non_nullable
-              as String?,
-      contentErrMsg: freezed == contentErrMsg
-          ? _value.contentErrMsg
-          : contentErrMsg // ignore: cast_nullable_to_non_nullable
-              as String?,
       restaurantCategoryErrMsg: freezed == restaurantCategoryErrMsg
           ? _value.restaurantCategoryErrMsg
           : restaurantCategoryErrMsg // ignore: cast_nullable_to_non_nullable
@@ -173,15 +146,35 @@ class _$PostInputFormModelCopyWithImpl<$Res, $Val extends PostInputFormModel>
           ? _value.minOrderFeeErrMsg
           : minOrderFeeErrMsg // ignore: cast_nullable_to_non_nullable
               as String?,
-      addressErrMsg: freezed == addressErrMsg
-          ? _value.addressErrMsg
-          : addressErrMsg // ignore: cast_nullable_to_non_nullable
+      contentErrMsg: freezed == contentErrMsg
+          ? _value.contentErrMsg
+          : contentErrMsg // ignore: cast_nullable_to_non_nullable
+              as String?,
+      meetLocationErrMsg: freezed == meetLocationErrMsg
+          ? _value.meetLocationErrMsg
+          : meetLocationErrMsg // ignore: cast_nullable_to_non_nullable
+              as String?,
+      addressDescriptionErrMsg: freezed == addressDescriptionErrMsg
+          ? _value.addressDescriptionErrMsg
+          : addressDescriptionErrMsg // ignore: cast_nullable_to_non_nullable
               as String?,
       currentFocusedField: freezed == currentFocusedField
           ? _value.currentFocusedField
           : currentFocusedField // ignore: cast_nullable_to_non_nullable
               as PostInputFormFieldType?,
     ) as $Val);
+  }
+
+  @override
+  @pragma('vm:prefer-inline')
+  $MeetLocationModelCopyWith<$Res>? get meetLocation {
+    if (_value.meetLocation == null) {
+      return null;
+    }
+
+    return $MeetLocationModelCopyWith<$Res>(_value.meetLocation!, (value) {
+      return _then(_value.copyWith(meetLocation: value) as $Val);
+    });
   }
 }
 
@@ -194,25 +187,25 @@ abstract class _$$PostInputFormModelImplCopyWith<$Res>
   @override
   @useResult
   $Res call(
-      {String title,
-      String content,
-      RestaurantCategory restaurantCategory,
+      {RestaurantCategory restaurantCategory,
       String restaurantName,
       String deliveryFee,
       String minOrderFee,
+      String content,
+      MeetLocationModel? meetLocation,
+      String addressDescription,
       List<Asset> images,
-      String address,
-      String shortAddress,
-      double latitude,
-      double longitude,
-      String? titleErrMsg,
-      String? contentErrMsg,
       String? restaurantCategoryErrMsg,
       String? restaurantNameErrMsg,
       String? deliveryFeeErrMsg,
       String? minOrderFeeErrMsg,
-      String? addressErrMsg,
+      String? contentErrMsg,
+      String? meetLocationErrMsg,
+      String? addressDescriptionErrMsg,
       PostInputFormFieldType? currentFocusedField});
+
+  @override
+  $MeetLocationModelCopyWith<$Res>? get meetLocation;
 }
 
 /// @nodoc
@@ -226,35 +219,24 @@ class __$$PostInputFormModelImplCopyWithImpl<$Res>
   @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? title = null,
-    Object? content = null,
     Object? restaurantCategory = null,
     Object? restaurantName = null,
     Object? deliveryFee = null,
     Object? minOrderFee = null,
+    Object? content = null,
+    Object? meetLocation = freezed,
+    Object? addressDescription = null,
     Object? images = null,
-    Object? address = null,
-    Object? shortAddress = null,
-    Object? latitude = null,
-    Object? longitude = null,
-    Object? titleErrMsg = freezed,
-    Object? contentErrMsg = freezed,
     Object? restaurantCategoryErrMsg = freezed,
     Object? restaurantNameErrMsg = freezed,
     Object? deliveryFeeErrMsg = freezed,
     Object? minOrderFeeErrMsg = freezed,
-    Object? addressErrMsg = freezed,
+    Object? contentErrMsg = freezed,
+    Object? meetLocationErrMsg = freezed,
+    Object? addressDescriptionErrMsg = freezed,
     Object? currentFocusedField = freezed,
   }) {
     return _then(_$PostInputFormModelImpl(
-      title: null == title
-          ? _value.title
-          : title // ignore: cast_nullable_to_non_nullable
-              as String,
-      content: null == content
-          ? _value.content
-          : content // ignore: cast_nullable_to_non_nullable
-              as String,
       restaurantCategory: null == restaurantCategory
           ? _value.restaurantCategory
           : restaurantCategory // ignore: cast_nullable_to_non_nullable
@@ -271,34 +253,22 @@ class __$$PostInputFormModelImplCopyWithImpl<$Res>
           ? _value.minOrderFee
           : minOrderFee // ignore: cast_nullable_to_non_nullable
               as String,
+      content: null == content
+          ? _value.content
+          : content // ignore: cast_nullable_to_non_nullable
+              as String,
+      meetLocation: freezed == meetLocation
+          ? _value.meetLocation
+          : meetLocation // ignore: cast_nullable_to_non_nullable
+              as MeetLocationModel?,
+      addressDescription: null == addressDescription
+          ? _value.addressDescription
+          : addressDescription // ignore: cast_nullable_to_non_nullable
+              as String,
       images: null == images
           ? _value.images
           : images // ignore: cast_nullable_to_non_nullable
               as List<Asset>,
-      address: null == address
-          ? _value.address
-          : address // ignore: cast_nullable_to_non_nullable
-              as String,
-      shortAddress: null == shortAddress
-          ? _value.shortAddress
-          : shortAddress // ignore: cast_nullable_to_non_nullable
-              as String,
-      latitude: null == latitude
-          ? _value.latitude
-          : latitude // ignore: cast_nullable_to_non_nullable
-              as double,
-      longitude: null == longitude
-          ? _value.longitude
-          : longitude // ignore: cast_nullable_to_non_nullable
-              as double,
-      titleErrMsg: freezed == titleErrMsg
-          ? _value.titleErrMsg
-          : titleErrMsg // ignore: cast_nullable_to_non_nullable
-              as String?,
-      contentErrMsg: freezed == contentErrMsg
-          ? _value.contentErrMsg
-          : contentErrMsg // ignore: cast_nullable_to_non_nullable
-              as String?,
       restaurantCategoryErrMsg: freezed == restaurantCategoryErrMsg
           ? _value.restaurantCategoryErrMsg
           : restaurantCategoryErrMsg // ignore: cast_nullable_to_non_nullable
@@ -315,9 +285,17 @@ class __$$PostInputFormModelImplCopyWithImpl<$Res>
           ? _value.minOrderFeeErrMsg
           : minOrderFeeErrMsg // ignore: cast_nullable_to_non_nullable
               as String?,
-      addressErrMsg: freezed == addressErrMsg
-          ? _value.addressErrMsg
-          : addressErrMsg // ignore: cast_nullable_to_non_nullable
+      contentErrMsg: freezed == contentErrMsg
+          ? _value.contentErrMsg
+          : contentErrMsg // ignore: cast_nullable_to_non_nullable
+              as String?,
+      meetLocationErrMsg: freezed == meetLocationErrMsg
+          ? _value.meetLocationErrMsg
+          : meetLocationErrMsg // ignore: cast_nullable_to_non_nullable
+              as String?,
+      addressDescriptionErrMsg: freezed == addressDescriptionErrMsg
+          ? _value.addressDescriptionErrMsg
+          : addressDescriptionErrMsg // ignore: cast_nullable_to_non_nullable
               as String?,
       currentFocusedField: freezed == currentFocusedField
           ? _value.currentFocusedField
@@ -333,30 +311,23 @@ class _$PostInputFormModelImpl
     with DiagnosticableTreeMixin
     implements _PostInputFormModel {
   const _$PostInputFormModelImpl(
-      {required this.title,
-      required this.content,
-      required this.restaurantCategory,
+      {required this.restaurantCategory,
       required this.restaurantName,
       required this.deliveryFee,
       required this.minOrderFee,
+      required this.content,
+      required this.meetLocation,
+      required this.addressDescription,
       required this.images,
-      required this.address,
-      required this.shortAddress,
-      required this.latitude,
-      required this.longitude,
-      required this.titleErrMsg,
-      required this.contentErrMsg,
       required this.restaurantCategoryErrMsg,
       required this.restaurantNameErrMsg,
       required this.deliveryFeeErrMsg,
       required this.minOrderFeeErrMsg,
-      required this.addressErrMsg,
+      required this.contentErrMsg,
+      required this.meetLocationErrMsg,
+      required this.addressDescriptionErrMsg,
       required this.currentFocusedField});
 
-  @override
-  final String title;
-  @override
-  final String content;
   @override
   final RestaurantCategory restaurantCategory;
   @override
@@ -366,19 +337,13 @@ class _$PostInputFormModelImpl
   @override
   final String minOrderFee;
   @override
+  final String content;
+  @override
+  final MeetLocationModel? meetLocation;
+  @override
+  final String addressDescription;
+  @override
   final List<Asset> images;
-  @override
-  final String address;
-  @override
-  final String shortAddress;
-  @override
-  final double latitude;
-  @override
-  final double longitude;
-  @override
-  final String? titleErrMsg;
-  @override
-  final String? contentErrMsg;
   @override
   final String? restaurantCategoryErrMsg;
   @override
@@ -388,13 +353,17 @@ class _$PostInputFormModelImpl
   @override
   final String? minOrderFeeErrMsg;
   @override
-  final String? addressErrMsg;
+  final String? contentErrMsg;
+  @override
+  final String? meetLocationErrMsg;
+  @override
+  final String? addressDescriptionErrMsg;
   @override
   final PostInputFormFieldType? currentFocusedField;
 
   @override
   String toString({DiagnosticLevel minLevel = DiagnosticLevel.info}) {
-    return 'PostInputFormModel(title: $title, content: $content, restaurantCategory: $restaurantCategory, restaurantName: $restaurantName, deliveryFee: $deliveryFee, minOrderFee: $minOrderFee, images: $images, address: $address, shortAddress: $shortAddress, latitude: $latitude, longitude: $longitude, titleErrMsg: $titleErrMsg, contentErrMsg: $contentErrMsg, restaurantCategoryErrMsg: $restaurantCategoryErrMsg, restaurantNameErrMsg: $restaurantNameErrMsg, deliveryFeeErrMsg: $deliveryFeeErrMsg, minOrderFeeErrMsg: $minOrderFeeErrMsg, addressErrMsg: $addressErrMsg, currentFocusedField: $currentFocusedField)';
+    return 'PostInputFormModel(restaurantCategory: $restaurantCategory, restaurantName: $restaurantName, deliveryFee: $deliveryFee, minOrderFee: $minOrderFee, content: $content, meetLocation: $meetLocation, addressDescription: $addressDescription, images: $images, restaurantCategoryErrMsg: $restaurantCategoryErrMsg, restaurantNameErrMsg: $restaurantNameErrMsg, deliveryFeeErrMsg: $deliveryFeeErrMsg, minOrderFeeErrMsg: $minOrderFeeErrMsg, contentErrMsg: $contentErrMsg, meetLocationErrMsg: $meetLocationErrMsg, addressDescriptionErrMsg: $addressDescriptionErrMsg, currentFocusedField: $currentFocusedField)';
   }
 
   @override
@@ -402,25 +371,23 @@ class _$PostInputFormModelImpl
     super.debugFillProperties(properties);
     properties
       ..add(DiagnosticsProperty('type', 'PostInputFormModel'))
-      ..add(DiagnosticsProperty('title', title))
-      ..add(DiagnosticsProperty('content', content))
       ..add(DiagnosticsProperty('restaurantCategory', restaurantCategory))
       ..add(DiagnosticsProperty('restaurantName', restaurantName))
       ..add(DiagnosticsProperty('deliveryFee', deliveryFee))
       ..add(DiagnosticsProperty('minOrderFee', minOrderFee))
+      ..add(DiagnosticsProperty('content', content))
+      ..add(DiagnosticsProperty('meetLocation', meetLocation))
+      ..add(DiagnosticsProperty('addressDescription', addressDescription))
       ..add(DiagnosticsProperty('images', images))
-      ..add(DiagnosticsProperty('address', address))
-      ..add(DiagnosticsProperty('shortAddress', shortAddress))
-      ..add(DiagnosticsProperty('latitude', latitude))
-      ..add(DiagnosticsProperty('longitude', longitude))
-      ..add(DiagnosticsProperty('titleErrMsg', titleErrMsg))
-      ..add(DiagnosticsProperty('contentErrMsg', contentErrMsg))
       ..add(DiagnosticsProperty(
           'restaurantCategoryErrMsg', restaurantCategoryErrMsg))
       ..add(DiagnosticsProperty('restaurantNameErrMsg', restaurantNameErrMsg))
       ..add(DiagnosticsProperty('deliveryFeeErrMsg', deliveryFeeErrMsg))
       ..add(DiagnosticsProperty('minOrderFeeErrMsg', minOrderFeeErrMsg))
-      ..add(DiagnosticsProperty('addressErrMsg', addressErrMsg))
+      ..add(DiagnosticsProperty('contentErrMsg', contentErrMsg))
+      ..add(DiagnosticsProperty('meetLocationErrMsg', meetLocationErrMsg))
+      ..add(DiagnosticsProperty(
+          'addressDescriptionErrMsg', addressDescriptionErrMsg))
       ..add(DiagnosticsProperty('currentFocusedField', currentFocusedField));
   }
 
@@ -429,8 +396,6 @@ class _$PostInputFormModelImpl
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$PostInputFormModelImpl &&
-            (identical(other.title, title) || other.title == title) &&
-            (identical(other.content, content) || other.content == content) &&
             (identical(other.restaurantCategory, restaurantCategory) ||
                 other.restaurantCategory == restaurantCategory) &&
             (identical(other.restaurantName, restaurantName) ||
@@ -439,18 +404,12 @@ class _$PostInputFormModelImpl
                 other.deliveryFee == deliveryFee) &&
             (identical(other.minOrderFee, minOrderFee) ||
                 other.minOrderFee == minOrderFee) &&
+            (identical(other.content, content) || other.content == content) &&
+            (identical(other.meetLocation, meetLocation) ||
+                other.meetLocation == meetLocation) &&
+            (identical(other.addressDescription, addressDescription) ||
+                other.addressDescription == addressDescription) &&
             const DeepCollectionEquality().equals(other.images, images) &&
-            (identical(other.address, address) || other.address == address) &&
-            (identical(other.shortAddress, shortAddress) ||
-                other.shortAddress == shortAddress) &&
-            (identical(other.latitude, latitude) ||
-                other.latitude == latitude) &&
-            (identical(other.longitude, longitude) ||
-                other.longitude == longitude) &&
-            (identical(other.titleErrMsg, titleErrMsg) ||
-                other.titleErrMsg == titleErrMsg) &&
-            (identical(other.contentErrMsg, contentErrMsg) ||
-                other.contentErrMsg == contentErrMsg) &&
             (identical(
                     other.restaurantCategoryErrMsg, restaurantCategoryErrMsg) ||
                 other.restaurantCategoryErrMsg == restaurantCategoryErrMsg) &&
@@ -460,35 +419,36 @@ class _$PostInputFormModelImpl
                 other.deliveryFeeErrMsg == deliveryFeeErrMsg) &&
             (identical(other.minOrderFeeErrMsg, minOrderFeeErrMsg) ||
                 other.minOrderFeeErrMsg == minOrderFeeErrMsg) &&
-            (identical(other.addressErrMsg, addressErrMsg) ||
-                other.addressErrMsg == addressErrMsg) &&
+            (identical(other.contentErrMsg, contentErrMsg) ||
+                other.contentErrMsg == contentErrMsg) &&
+            (identical(other.meetLocationErrMsg, meetLocationErrMsg) ||
+                other.meetLocationErrMsg == meetLocationErrMsg) &&
+            (identical(
+                    other.addressDescriptionErrMsg, addressDescriptionErrMsg) ||
+                other.addressDescriptionErrMsg == addressDescriptionErrMsg) &&
             (identical(other.currentFocusedField, currentFocusedField) ||
                 other.currentFocusedField == currentFocusedField));
   }
 
   @override
-  int get hashCode => Object.hashAll([
-        runtimeType,
-        title,
-        content,
-        restaurantCategory,
-        restaurantName,
-        deliveryFee,
-        minOrderFee,
-        const DeepCollectionEquality().hash(images),
-        address,
-        shortAddress,
-        latitude,
-        longitude,
-        titleErrMsg,
-        contentErrMsg,
-        restaurantCategoryErrMsg,
-        restaurantNameErrMsg,
-        deliveryFeeErrMsg,
-        minOrderFeeErrMsg,
-        addressErrMsg,
-        currentFocusedField
-      ]);
+  int get hashCode => Object.hash(
+      runtimeType,
+      restaurantCategory,
+      restaurantName,
+      deliveryFee,
+      minOrderFee,
+      content,
+      meetLocation,
+      addressDescription,
+      const DeepCollectionEquality().hash(images),
+      restaurantCategoryErrMsg,
+      restaurantNameErrMsg,
+      deliveryFeeErrMsg,
+      minOrderFeeErrMsg,
+      contentErrMsg,
+      meetLocationErrMsg,
+      addressDescriptionErrMsg,
+      currentFocusedField);
 
   @JsonKey(ignore: true)
   @override
@@ -500,31 +460,24 @@ class _$PostInputFormModelImpl
 
 abstract class _PostInputFormModel implements PostInputFormModel {
   const factory _PostInputFormModel(
-          {required final String title,
-          required final String content,
-          required final RestaurantCategory restaurantCategory,
+          {required final RestaurantCategory restaurantCategory,
           required final String restaurantName,
           required final String deliveryFee,
           required final String minOrderFee,
+          required final String content,
+          required final MeetLocationModel? meetLocation,
+          required final String addressDescription,
           required final List<Asset> images,
-          required final String address,
-          required final String shortAddress,
-          required final double latitude,
-          required final double longitude,
-          required final String? titleErrMsg,
-          required final String? contentErrMsg,
           required final String? restaurantCategoryErrMsg,
           required final String? restaurantNameErrMsg,
           required final String? deliveryFeeErrMsg,
           required final String? minOrderFeeErrMsg,
-          required final String? addressErrMsg,
+          required final String? contentErrMsg,
+          required final String? meetLocationErrMsg,
+          required final String? addressDescriptionErrMsg,
           required final PostInputFormFieldType? currentFocusedField}) =
       _$PostInputFormModelImpl;
 
-  @override
-  String get title;
-  @override
-  String get content;
   @override
   RestaurantCategory get restaurantCategory;
   @override
@@ -534,19 +487,13 @@ abstract class _PostInputFormModel implements PostInputFormModel {
   @override
   String get minOrderFee;
   @override
+  String get content;
+  @override
+  MeetLocationModel? get meetLocation;
+  @override
+  String get addressDescription;
+  @override
   List<Asset> get images;
-  @override
-  String get address;
-  @override
-  String get shortAddress;
-  @override
-  double get latitude;
-  @override
-  double get longitude;
-  @override
-  String? get titleErrMsg;
-  @override
-  String? get contentErrMsg;
   @override
   String? get restaurantCategoryErrMsg;
   @override
@@ -556,7 +503,11 @@ abstract class _PostInputFormModel implements PostInputFormModel {
   @override
   String? get minOrderFeeErrMsg;
   @override
-  String? get addressErrMsg;
+  String? get contentErrMsg;
+  @override
+  String? get meetLocationErrMsg;
+  @override
+  String? get addressDescriptionErrMsg;
   @override
   PostInputFormFieldType? get currentFocusedField;
   @override

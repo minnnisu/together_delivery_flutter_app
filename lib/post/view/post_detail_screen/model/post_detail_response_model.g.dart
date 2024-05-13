@@ -11,7 +11,7 @@ _$PostDetailResponseModelImpl _$$PostDetailResponseModelImplFromJson(
     _$PostDetailResponseModelImpl(
       id: json['id'] as int,
       nickname: json['nickname'] as String,
-      content: json['content'] as String,
+      content: json['content'] as String?,
       restaurantName: json['restaurantName'] as String,
       categoryCode: json['categoryCode'] as String,
       deliveryFee: json['deliveryFee'] as int,

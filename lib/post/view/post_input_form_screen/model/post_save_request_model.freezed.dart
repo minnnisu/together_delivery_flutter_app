@@ -20,7 +20,7 @@ PostSaveRequestModel _$PostSaveRequestModelFromJson(Map<String, dynamic> json) {
 
 /// @nodoc
 mixin _$PostSaveRequestModel {
-  String get content => throw _privateConstructorUsedError;
+  String? get content => throw _privateConstructorUsedError;
   String get restaurantName => throw _privateConstructorUsedError;
   String get categoryCode => throw _privateConstructorUsedError;
   int get deliveryFee => throw _privateConstructorUsedError;
@@ -40,7 +40,7 @@ abstract class $PostSaveRequestModelCopyWith<$Res> {
       _$PostSaveRequestModelCopyWithImpl<$Res, PostSaveRequestModel>;
   @useResult
   $Res call(
-      {String content,
+      {String? content,
       String restaurantName,
       String categoryCode,
       int deliveryFee,
@@ -64,7 +64,7 @@ class _$PostSaveRequestModelCopyWithImpl<$Res,
   @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? content = null,
+    Object? content = freezed,
     Object? restaurantName = null,
     Object? categoryCode = null,
     Object? deliveryFee = null,
@@ -72,10 +72,10 @@ class _$PostSaveRequestModelCopyWithImpl<$Res,
     Object? meetLocation = null,
   }) {
     return _then(_value.copyWith(
-      content: null == content
+      content: freezed == content
           ? _value.content
           : content // ignore: cast_nullable_to_non_nullable
-              as String,
+              as String?,
       restaurantName: null == restaurantName
           ? _value.restaurantName
           : restaurantName // ignore: cast_nullable_to_non_nullable
@@ -117,7 +117,7 @@ abstract class _$$PostSaveRequestModelImplCopyWith<$Res>
   @override
   @useResult
   $Res call(
-      {String content,
+      {String? content,
       String restaurantName,
       String categoryCode,
       int deliveryFee,
@@ -139,7 +139,7 @@ class __$$PostSaveRequestModelImplCopyWithImpl<$Res>
   @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? content = null,
+    Object? content = freezed,
     Object? restaurantName = null,
     Object? categoryCode = null,
     Object? deliveryFee = null,
@@ -147,10 +147,10 @@ class __$$PostSaveRequestModelImplCopyWithImpl<$Res>
     Object? meetLocation = null,
   }) {
     return _then(_$PostSaveRequestModelImpl(
-      content: null == content
+      content: freezed == content
           ? _value.content
           : content // ignore: cast_nullable_to_non_nullable
-              as String,
+              as String?,
       restaurantName: null == restaurantName
           ? _value.restaurantName
           : restaurantName // ignore: cast_nullable_to_non_nullable
@@ -190,7 +190,7 @@ class _$PostSaveRequestModelImpl implements _PostSaveRequestModel {
       _$$PostSaveRequestModelImplFromJson(json);
 
   @override
-  final String content;
+  final String? content;
   @override
   final String restaurantName;
   @override
@@ -248,7 +248,7 @@ class _$PostSaveRequestModelImpl implements _PostSaveRequestModel {
 
 abstract class _PostSaveRequestModel implements PostSaveRequestModel {
   const factory _PostSaveRequestModel(
-          {required final String content,
+          {required final String? content,
           required final String restaurantName,
           required final String categoryCode,
           required final int deliveryFee,
@@ -260,7 +260,7 @@ abstract class _PostSaveRequestModel implements PostSaveRequestModel {
       _$PostSaveRequestModelImpl.fromJson;
 
   @override
-  String get content;
+  String? get content;
   @override
   String get restaurantName;
   @override

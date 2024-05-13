@@ -1,6 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:together_delivery_app/common/const/restaurantCategory.dart';
+import 'package:together_delivery_app/common/util/money_convertor.dart';
 import 'package:together_delivery_app/post/view/post_detail_screen/model/post_detail_response_model.dart';
 import 'package:together_delivery_app/post/view/post_detail_screen/provider/post_detail_provider.dart';
 
@@ -41,7 +42,7 @@ class PostDetailExtraInfo extends ConsumerWidget {
                                 style: TextStyle(color: Color(0xff9b9b9b)))),
                         Text(RestaurantCategory.getCategoryFromString(
                                 postDetailModel.categoryCode)
-                            .name),
+                            .korean),
                       ],
                     ),
                   ),
@@ -54,7 +55,7 @@ class PostDetailExtraInfo extends ConsumerWidget {
                               width: 80,
                               child: Text("최소 배달 팁",
                                   style: TextStyle(color: Color(0xff9b9b9b)))),
-                          Text(postDetailModel.deliveryFee.toString() + "원")
+                          Text(MoneyConvertor.addCommasToNumber(postDetailModel.deliveryFee) + "원")
                         ],
                       ),
                       Row(
@@ -63,7 +64,7 @@ class PostDetailExtraInfo extends ConsumerWidget {
                               width: 90,
                               child: Text("최소 주문금액",
                                   style: TextStyle(color: Color(0xff9b9b9b)))),
-                          Text(postDetailModel.minOrderFee.toString() + "원")
+                          Text(MoneyConvertor.addCommasToNumber(postDetailModel.minOrderFee) + "원")
                         ],
                       ),
                     ],

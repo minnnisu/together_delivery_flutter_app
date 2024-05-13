@@ -5,7 +5,7 @@ import 'package:together_delivery_app/post/view/post_list/model/post_list_model.
 class PostUtil{
   Future<PostListModel> getPostList(int page) async {
     Dio dio = Dio();
-    Response response = await dio.get(apiUrls.postGet + '?page=$page');
+    final response = await dio.get(apiUrls.postGet, queryParameters: {"page": page});
     return PostListModel.fromJson(response.data);
   }
 }
