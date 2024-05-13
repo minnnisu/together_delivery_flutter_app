@@ -53,9 +53,9 @@ class _PostListScreenState extends State<PostListScreen> {
         child: PagedListView<int, PostSummaryModel>.separated(
           pagingController: _pagingController,
           builderDelegate: PagedChildBuilderDelegate<PostSummaryModel>(
-            noItemsFoundIndicatorBuilder: (context) => Text("데이터가 없습니다."),
+            noItemsFoundIndicatorBuilder: (context) => Center(child: Text("게시물이 없습니다.", textAlign: TextAlign.center,),),
             firstPageErrorIndicatorBuilder: (context) =>
-                Text("데이터를 불러오는 중 오류가 발생하였습니다"),
+                Center(child: Text("게시물을 불러오는 과정에서\n 오류가 발생하였습니다.", textAlign: TextAlign.center,)),
             animateTransitions: true,
             itemBuilder: (context, item, index) => PostListItem(
               item,

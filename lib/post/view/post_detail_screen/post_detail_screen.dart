@@ -42,7 +42,7 @@ class PostDetailScreenBodyState extends ConsumerState<PostDetailScreenBody> {
         .watch(postDetailLoadProvider(PostDetailRequest(postId: widget.postId)))
         .when(
           loading: () => Center(child: const CircularProgressIndicator()),
-          error: (err, stack) => Text('Error: $err'),
+          error: (err, stack) => Center(child: Text("게시물을 불러오는 과정에서\n 오류가 발생하였습니다.", textAlign: TextAlign.center,)),
           data: (data) {
             return Column(
               children: [
