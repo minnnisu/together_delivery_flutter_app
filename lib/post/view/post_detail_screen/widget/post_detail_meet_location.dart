@@ -49,7 +49,7 @@ class PostDetailMeetLocation extends ConsumerWidget {
             ),
           ),
           Container(
-            height: 150,
+            height: 200,
             child: NaverMap(
               options: NaverMapViewOptions(
                   locationButtonEnable: false,
