@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:together_delivery_app/chat/view/chat_room_list_screen.dart';
 import 'package:together_delivery_app/post/view/post_list/post_list_screen.dart';
 import 'package:together_delivery_app/user/model/user/userModel.dart';
 import 'package:together_delivery_app/user/view/user_info_screen.dart';
@@ -12,6 +13,7 @@ class MainView extends StatefulWidget {
 
 List<String> appBarTitle = [
   "게시글",
+  "채팅",
   "내정보",
 ];
 
@@ -19,6 +21,7 @@ class _MainViewState extends State<MainView> {
   int _selectedIndex = 0;
   static const List<Widget> _widgetOptions = <Widget>[
     PostListScreen(),
+    ChatRoomListScreen(),
     UserInfoScreen(),
   ];
 
@@ -63,6 +66,10 @@ class _MainViewState extends State<MainView> {
           BottomNavigationBarItem(
             icon: Icon(Icons.home),
             label: '홈',
+          ),
+          BottomNavigationBarItem(
+            icon: Icon(Icons.chat),
+            label: '채팅',
           ),
           BottomNavigationBarItem(
             icon: Icon(Icons.account_circle_rounded),
