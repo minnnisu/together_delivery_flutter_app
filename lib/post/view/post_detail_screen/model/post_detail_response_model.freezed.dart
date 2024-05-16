@@ -32,7 +32,7 @@ mixin _$PostDetailResponseModel {
   bool get status => throw _privateConstructorUsedError;
   String get createdAt => throw _privateConstructorUsedError;
   String get updatedAt => throw _privateConstructorUsedError;
-  List<Image> get images => throw _privateConstructorUsedError;
+  List<PostImage> get images => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
@@ -58,7 +58,7 @@ abstract class $PostDetailResponseModelCopyWith<$Res> {
       bool status,
       String createdAt,
       String updatedAt,
-      List<Image> images});
+      List<PostImage> images});
 
   $MeetLocationModelCopyWith<$Res> get meetLocation;
 }
@@ -138,7 +138,7 @@ class _$PostDetailResponseModelCopyWithImpl<$Res,
       images: null == images
           ? _value.images
           : images // ignore: cast_nullable_to_non_nullable
-              as List<Image>,
+              as List<PostImage>,
     ) as $Val);
   }
 
@@ -172,7 +172,7 @@ abstract class _$$PostDetailResponseModelImplCopyWith<$Res>
       bool status,
       String createdAt,
       String updatedAt,
-      List<Image> images});
+      List<PostImage> images});
 
   @override
   $MeetLocationModelCopyWith<$Res> get meetLocation;
@@ -252,7 +252,7 @@ class __$$PostDetailResponseModelImplCopyWithImpl<$Res>
       images: null == images
           ? _value._images
           : images // ignore: cast_nullable_to_non_nullable
-              as List<Image>,
+              as List<PostImage>,
     ));
   }
 }
@@ -272,7 +272,7 @@ class _$PostDetailResponseModelImpl implements _PostDetailResponseModel {
       required this.status,
       required this.createdAt,
       required this.updatedAt,
-      required final List<Image> images})
+      required final List<PostImage> images})
       : _images = images;
 
   factory _$PostDetailResponseModelImpl.fromJson(Map<String, dynamic> json) =>
@@ -300,9 +300,9 @@ class _$PostDetailResponseModelImpl implements _PostDetailResponseModel {
   final String createdAt;
   @override
   final String updatedAt;
-  final List<Image> _images;
+  final List<PostImage> _images;
   @override
-  List<Image> get images {
+  List<PostImage> get images {
     if (_images is EqualUnmodifiableListView) return _images;
     // ignore: implicit_dynamic_type
     return EqualUnmodifiableListView(_images);
@@ -385,7 +385,7 @@ abstract class _PostDetailResponseModel implements PostDetailResponseModel {
       required final bool status,
       required final String createdAt,
       required final String updatedAt,
-      required final List<Image> images}) = _$PostDetailResponseModelImpl;
+      required final List<PostImage> images}) = _$PostDetailResponseModelImpl;
 
   factory _PostDetailResponseModel.fromJson(Map<String, dynamic> json) =
       _$PostDetailResponseModelImpl.fromJson;
@@ -413,40 +413,41 @@ abstract class _PostDetailResponseModel implements PostDetailResponseModel {
   @override
   String get updatedAt;
   @override
-  List<Image> get images;
+  List<PostImage> get images;
   @override
   @JsonKey(ignore: true)
   _$$PostDetailResponseModelImplCopyWith<_$PostDetailResponseModelImpl>
       get copyWith => throw _privateConstructorUsedError;
 }
 
-Image _$ImageFromJson(Map<String, dynamic> json) {
-  return _Image.fromJson(json);
+PostImage _$PostImageFromJson(Map<String, dynamic> json) {
+  return _PostImage.fromJson(json);
 }
 
 /// @nodoc
-mixin _$Image {
+mixin _$PostImage {
   int get id => throw _privateConstructorUsedError;
   String get imageName => throw _privateConstructorUsedError;
   DateTime get createdAt => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
-  $ImageCopyWith<Image> get copyWith => throw _privateConstructorUsedError;
+  $PostImageCopyWith<PostImage> get copyWith =>
+      throw _privateConstructorUsedError;
 }
 
 /// @nodoc
-abstract class $ImageCopyWith<$Res> {
-  factory $ImageCopyWith(Image value, $Res Function(Image) then) =
-      _$ImageCopyWithImpl<$Res, Image>;
+abstract class $PostImageCopyWith<$Res> {
+  factory $PostImageCopyWith(PostImage value, $Res Function(PostImage) then) =
+      _$PostImageCopyWithImpl<$Res, PostImage>;
   @useResult
   $Res call({int id, String imageName, DateTime createdAt});
 }
 
 /// @nodoc
-class _$ImageCopyWithImpl<$Res, $Val extends Image>
-    implements $ImageCopyWith<$Res> {
-  _$ImageCopyWithImpl(this._value, this._then);
+class _$PostImageCopyWithImpl<$Res, $Val extends PostImage>
+    implements $PostImageCopyWith<$Res> {
+  _$PostImageCopyWithImpl(this._value, this._then);
 
   // ignore: unused_field
   final $Val _value;
@@ -478,21 +479,22 @@ class _$ImageCopyWithImpl<$Res, $Val extends Image>
 }
 
 /// @nodoc
-abstract class _$$ImageImplCopyWith<$Res> implements $ImageCopyWith<$Res> {
-  factory _$$ImageImplCopyWith(
-          _$ImageImpl value, $Res Function(_$ImageImpl) then) =
-      __$$ImageImplCopyWithImpl<$Res>;
+abstract class _$$PostImageImplCopyWith<$Res>
+    implements $PostImageCopyWith<$Res> {
+  factory _$$PostImageImplCopyWith(
+          _$PostImageImpl value, $Res Function(_$PostImageImpl) then) =
+      __$$PostImageImplCopyWithImpl<$Res>;
   @override
   @useResult
   $Res call({int id, String imageName, DateTime createdAt});
 }
 
 /// @nodoc
-class __$$ImageImplCopyWithImpl<$Res>
-    extends _$ImageCopyWithImpl<$Res, _$ImageImpl>
-    implements _$$ImageImplCopyWith<$Res> {
-  __$$ImageImplCopyWithImpl(
-      _$ImageImpl _value, $Res Function(_$ImageImpl) _then)
+class __$$PostImageImplCopyWithImpl<$Res>
+    extends _$PostImageCopyWithImpl<$Res, _$PostImageImpl>
+    implements _$$PostImageImplCopyWith<$Res> {
+  __$$PostImageImplCopyWithImpl(
+      _$PostImageImpl _value, $Res Function(_$PostImageImpl) _then)
       : super(_value, _then);
 
   @pragma('vm:prefer-inline')
@@ -502,7 +504,7 @@ class __$$ImageImplCopyWithImpl<$Res>
     Object? imageName = null,
     Object? createdAt = null,
   }) {
-    return _then(_$ImageImpl(
+    return _then(_$PostImageImpl(
       id: null == id
           ? _value.id
           : id // ignore: cast_nullable_to_non_nullable
@@ -521,12 +523,12 @@ class __$$ImageImplCopyWithImpl<$Res>
 
 /// @nodoc
 @JsonSerializable()
-class _$ImageImpl implements _Image {
-  const _$ImageImpl(
+class _$PostImageImpl implements _PostImage {
+  const _$PostImageImpl(
       {required this.id, required this.imageName, required this.createdAt});
 
-  factory _$ImageImpl.fromJson(Map<String, dynamic> json) =>
-      _$$ImageImplFromJson(json);
+  factory _$PostImageImpl.fromJson(Map<String, dynamic> json) =>
+      _$$PostImageImplFromJson(json);
 
   @override
   final int id;
@@ -537,14 +539,14 @@ class _$ImageImpl implements _Image {
 
   @override
   String toString() {
-    return 'Image(id: $id, imageName: $imageName, createdAt: $createdAt)';
+    return 'PostImage(id: $id, imageName: $imageName, createdAt: $createdAt)';
   }
 
   @override
   bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$ImageImpl &&
+            other is _$PostImageImpl &&
             (identical(other.id, id) || other.id == id) &&
             (identical(other.imageName, imageName) ||
                 other.imageName == imageName) &&
@@ -559,24 +561,25 @@ class _$ImageImpl implements _Image {
   @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
-  _$$ImageImplCopyWith<_$ImageImpl> get copyWith =>
-      __$$ImageImplCopyWithImpl<_$ImageImpl>(this, _$identity);
+  _$$PostImageImplCopyWith<_$PostImageImpl> get copyWith =>
+      __$$PostImageImplCopyWithImpl<_$PostImageImpl>(this, _$identity);
 
   @override
   Map<String, dynamic> toJson() {
-    return _$$ImageImplToJson(
+    return _$$PostImageImplToJson(
       this,
     );
   }
 }
 
-abstract class _Image implements Image {
-  const factory _Image(
+abstract class _PostImage implements PostImage {
+  const factory _PostImage(
       {required final int id,
       required final String imageName,
-      required final DateTime createdAt}) = _$ImageImpl;
+      required final DateTime createdAt}) = _$PostImageImpl;
 
-  factory _Image.fromJson(Map<String, dynamic> json) = _$ImageImpl.fromJson;
+  factory _PostImage.fromJson(Map<String, dynamic> json) =
+      _$PostImageImpl.fromJson;
 
   @override
   int get id;
@@ -586,6 +589,6 @@ abstract class _Image implements Image {
   DateTime get createdAt;
   @override
   @JsonKey(ignore: true)
-  _$$ImageImplCopyWith<_$ImageImpl> get copyWith =>
+  _$$PostImageImplCopyWith<_$PostImageImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }

@@ -5,6 +5,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:together_delivery_app/common/helper/apiUrls.dart';
 import 'package:together_delivery_app/post/view/post_detail_screen/model/post_detail_response_model.dart'
     as pdrm;
+import 'package:together_delivery_app/post/view/post_detail_screen/model/post_detail_response_model.dart';
 
 import '../provider/post_detail_provider.dart';
 
@@ -16,11 +17,14 @@ class PostDetailImage extends ConsumerWidget {
     final screenWidth = MediaQuery.of(context).size.width;
     final imagePadding = 10.0;
     final imageSize = (screenWidth - (imagePadding * 8)) / 4;
-
-    final PostDetailResponseModel =
+    final postDetailResponseModel =
         ref.watch(postDetailProvider) as pdrm.PostDetailResponseModel;
 
-    return PostDetailResponseModel.images.isNotEmpty
+    int getImageIndex(pdrm.PostImage postImage) {
+      return postDetailResponseModel.images.indexOf(postImage);
+    }
+
+    return postDetailResponseModel.images.isNotEmpty
         ? Container(
             padding: EdgeInsets.symmetric(vertical: 10),
             child: Column(
@@ -34,39 +38,43 @@ class PostDetailImage extends ConsumerWidget {
                   ),
                 ),
                 Wrap(
-                    children: PostDetailResponseModel.images.map((image) {
+                    children: postDetailResponseModel.images.map((image) {
                   return Padding(
-                    padding: EdgeInsets.only(right: imagePadding, bottom: imagePadding,),
-                    child: SmallImagePreview(
-                      url: "${apiUrls.postDetailPostImage}/${image.imageName}",
-                      width: imageSize,
+                    padding: EdgeInsets.only(
+                      right: imagePadding,
+                      bottom: imagePadding,
+                    ),
+                    child: GestureDetector(
+                      onTap: () => Navigator.pushNamed(
+                        context,
+                        '/postDetail/image',
+                        arguments: PostBigImageScreenArguments(
+                            index: getImageIndex(image),
+                            images: postDetailResponseModel.images),
+                      ),
+                      child: SmallImagePreview(
+                        url:
+                            "${apiUrls.postDetailPostImage}/${image.imageName}",
+                        width: imageSize,
+                      ),
                     ),
                   );
                 }).toList()),
-                // CarouselSlider.builder(
-                //   options: CarouselOptions(
-                //     height: 400,
-                //     viewportFraction: 1,
-                //     initialPage: 0,
-                //     enableInfiniteScroll: false,
-                //     scrollDirection: Axis.horizontal,
-                //   ),
-                //   itemCount: PostDetailResponseModel.images.length,
-                //   itemBuilder: (context, index, realIndex) {
-                //     return Container(
-                //       child: Image.network(
-                //         width: screenWidth,
-                //         fit:  BoxFit.cover,
-                //         "${apiUrls.postDetailPostImage}/${PostDetailResponseModel.images[index].imageName}",
-                //       ),
-                //     );
-                //   },
-                // ),
               ],
             ),
           )
         : Container();
   }
+}
+
+class PostBigImageScreenArguments {
+  final int index;
+  final List<PostImage> images;
+
+  PostBigImageScreenArguments({
+    required this.index,
+    required this.images,
+  });
 }
 
 class SmallImagePreview extends ConsumerWidget {
