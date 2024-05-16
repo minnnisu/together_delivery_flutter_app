@@ -22,7 +22,7 @@ _$PostDetailResponseModelImpl _$$PostDetailResponseModelImplFromJson(
       createdAt: json['createdAt'] as String,
       updatedAt: json['updatedAt'] as String,
       images: (json['images'] as List<dynamic>)
-          .map((e) => Image.fromJson(e as Map<String, dynamic>))
+          .map((e) => PostImage.fromJson(e as Map<String, dynamic>))
           .toList(),
     );
 
@@ -43,13 +43,14 @@ Map<String, dynamic> _$$PostDetailResponseModelImplToJson(
       'images': instance.images,
     };
 
-_$ImageImpl _$$ImageImplFromJson(Map<String, dynamic> json) => _$ImageImpl(
+_$PostImageImpl _$$PostImageImplFromJson(Map<String, dynamic> json) =>
+    _$PostImageImpl(
       id: json['id'] as int,
       imageName: json['imageName'] as String,
       createdAt: DateTime.parse(json['createdAt'] as String),
     );
 
-Map<String, dynamic> _$$ImageImplToJson(_$ImageImpl instance) =>
+Map<String, dynamic> _$$PostImageImplToJson(_$PostImageImpl instance) =>
     <String, dynamic>{
       'id': instance.id,
       'imageName': instance.imageName,

@@ -39,19 +39,19 @@ class PostDetailResponseModel extends PostDetailResponseModelBase with _$PostDet
     required bool status,
     required String createdAt,
     required String updatedAt,
-    required List<Image> images,
+    required List<PostImage> images,
   }) = _PostDetailResponseModel;
 
   factory PostDetailResponseModel.fromJson(Map<String, dynamic> json) => _$PostDetailResponseModelFromJson(json);
 }
 
 @freezed
-class Image with _$Image {
-  const factory Image({
+class PostImage with _$PostImage {
+  const factory PostImage({
     required int id,
     required String imageName,
     required DateTime createdAt,
-  }) = _Image;
+  }) = _PostImage;
 
-  factory Image.fromJson(Map<String, dynamic> json) => _$ImageFromJson(json);
+  factory PostImage.fromJson(Map<String, dynamic> json) => _$PostImageFromJson(json);
 }
