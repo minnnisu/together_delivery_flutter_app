@@ -16,22 +16,23 @@ import '../../user/provider/authNotifier.dart';
 
 // 채팅 목록을 저장할 리스트
 List<ChatMessage> chatMessageList = [];
-int chatRoomId = 1;
 
-class ChatRoomListScreen extends ConsumerStatefulWidget {
-  const ChatRoomListScreen({super.key});
+class ChatRoomScreen extends ConsumerStatefulWidget {
+  final int chatRoomId;
+
+  const ChatRoomScreen(this.chatRoomId, {super.key});
 
   @override
-  ConsumerState<ChatRoomListScreen> createState() => _ChatRoomListScreenState();
+  ConsumerState<ChatRoomScreen> createState() => _ChatRoomScreenState();
 }
 
-class _ChatRoomListScreenState extends ConsumerState<ChatRoomListScreen> {
+class _ChatRoomScreenState extends ConsumerState<ChatRoomScreen> {
   StompClient? stompClient;
   ScrollController scrollController = ScrollController();
 
   void onConnect(StompClient stompClient, StompFrame frame) {
     stompClient.subscribe(
-      destination: '/topic/chat/room/$chatRoomId',
+      destination: '/topic/chat/room/${widget.chatRoomId}',
       callback: (frame) {
         Map<String, dynamic> response = json.decode(frame.body!);
         final chatMessage = ChatMessage.createChatMessage(response);
@@ -83,11 +84,14 @@ class _ChatRoomListScreenState extends ConsumerState<ChatRoomListScreen> {
       return Center(child: CircularProgressIndicator());
     }
 
-    return Column(
-      children: [
-        ChatMessageList(chatMessageList: chatMessageList),
-        ChatRoomInputField(stompClient: stompClient),
-      ],
+    return Scaffold(
+      appBar: AppBar(title: Text("채팅"),),
+      body: Column(
+        children: [
+          ChatMessageList(chatMessageList: chatMessageList),
+          ChatRoomInputField(stompClient: stompClient, chatRoomId: widget.chatRoomId),
+        ],
+      ),
     );
   }
 }

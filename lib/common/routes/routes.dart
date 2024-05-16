@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:together_delivery_app/chat/view/chat_room_screen.dart';
 import 'package:together_delivery_app/common/view/main_screen.dart';
 import 'package:together_delivery_app/common/view/main_view.dart';
 import 'package:together_delivery_app/post/view/meet_location_set_screen/meet_location_screen.dart';
@@ -15,4 +16,6 @@ final routes = {
   '/login': (BuildContext content) => LoginScreen(),
   '/newPost': (BuildContext context) => PostInputFormScreen(),
   '/location/set': (BuildContext context) => MeetLocationScreen(),
+  '/chat/room' : (BuildContext context) => ChatRoomScreen(
+      ModalRoute.of(context)!.settings.arguments as int),
 };

@@ -9,9 +9,11 @@ import 'package:together_delivery_app/user/provider/authNotifier.dart';
 
 class ChatRoomInputField extends ConsumerWidget {
   final StompClient? stompClient;
+  final int chatRoomId;
 
   const ChatRoomInputField({
     required this.stompClient,
+    required this.chatRoomId,
     super.key,
   });
 
@@ -78,7 +80,7 @@ class ChatRoomInputField extends ConsumerWidget {
       destination: '/app/chat/message', // 전송할 destination
       body: json.encode({
         "type": "TALK",
-        "chatRoomId": 1,
+        "chatRoomId": chatRoomId,
         "username": userModel.username,
         "deleteTargetChatMessageId": null,
         "message": message,
