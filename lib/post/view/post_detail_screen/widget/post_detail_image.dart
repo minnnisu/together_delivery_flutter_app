@@ -21,10 +21,10 @@ class PostDetailImage extends ConsumerWidget {
         ref.watch(postDetailProvider) as pdrm.PostDetailResponseModel;
 
     int getImageIndex(pdrm.PostImage postImage) {
-      return postDetailResponseModel.images.indexOf(postImage);
+      return postDetailResponseModel.post.images.indexOf(postImage);
     }
 
-    return postDetailResponseModel.images.isNotEmpty
+    return postDetailResponseModel.post.images.isNotEmpty
         ? Container(
             padding: EdgeInsets.symmetric(vertical: 10),
             child: Column(
@@ -38,7 +38,7 @@ class PostDetailImage extends ConsumerWidget {
                   ),
                 ),
                 Wrap(
-                    children: postDetailResponseModel.images.map((image) {
+                    children: postDetailResponseModel.post.images.map((image) {
                   return Padding(
                     padding: EdgeInsets.only(
                       right: imagePadding,
@@ -50,7 +50,7 @@ class PostDetailImage extends ConsumerWidget {
                         '/postDetail/image',
                         arguments: PostBigImageScreenArguments(
                             index: getImageIndex(image),
-                            images: postDetailResponseModel.images),
+                            images: postDetailResponseModel.post.images),
                       ),
                       child: SmallImagePreview(
                         url:

@@ -14,7 +14,7 @@ class PostDetailRestaurantName extends ConsumerWidget {
 
     return Padding(
       padding: const EdgeInsets.only(top: 6),
-      child: Text(postDetailModel.restaurantName, style: TextStyle(fontSize: 18, fontWeight: FontWeight.w700),),
+      child: Text(postDetailModel.post.restaurantName, style: TextStyle(fontSize: 18, fontWeight: FontWeight.w700),),
     );
   }
 }

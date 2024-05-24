@@ -28,6 +28,28 @@ class PostDetailResponseModelError extends PostDetailResponseModelBase {
 @freezed
 class PostDetailResponseModel extends PostDetailResponseModelBase with _$PostDetailResponseModel {
   const factory PostDetailResponseModel({
+    required Post post,
+    required ChatRoom chatRoom,
+  }) = _PostDetailResponseModel;
+
+  factory PostDetailResponseModel.fromJson(Map<String, dynamic> json) => _$PostDetailResponseModelFromJson(json);
+}
+
+@freezed
+class ChatRoom with _$ChatRoom {
+  const factory ChatRoom({
+    required int id,
+    required String createdAt,
+    required dynamic deletedAt,
+    required bool isChatRoomMember,
+  }) = _ChatRoom;
+
+  factory ChatRoom.fromJson(Map<String, dynamic> json) => _$ChatRoomFromJson(json);
+}
+
+@freezed
+class Post with _$Post {
+  const factory Post({
     required int id,
     required String nickname,
     required String? content,
@@ -35,14 +57,27 @@ class PostDetailResponseModel extends PostDetailResponseModelBase with _$PostDet
     required String categoryCode,
     required int deliveryFee,
     required int minOrderFee,
-    required MeetLocationModel meetLocation,
+    required MeetLocation meetLocation,
     required bool status,
+    required List<PostImage> images,
     required String createdAt,
     required String updatedAt,
-    required List<PostImage> images,
-  }) = _PostDetailResponseModel;
+    required bool isPostCreator,
+  }) = _Post;
 
-  factory PostDetailResponseModel.fromJson(Map<String, dynamic> json) => _$PostDetailResponseModelFromJson(json);
+  factory Post.fromJson(Map<String, dynamic> json) => _$PostFromJson(json);
+}
+
+@freezed
+class MeetLocation with _$MeetLocation {
+  const factory MeetLocation({
+    required String address,
+    required String shortAddress,
+    required double latitude,
+    required double longitude,
+  }) = _MeetLocation;
+
+  factory MeetLocation.fromJson(Map<String, dynamic> json) => _$MeetLocationFromJson(json);
 }
 
 @freezed

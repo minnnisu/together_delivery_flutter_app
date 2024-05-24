@@ -41,7 +41,7 @@ class PostDetailExtraInfo extends ConsumerWidget {
                             child: Text("카테고리",
                                 style: TextStyle(color: Color(0xff9b9b9b)))),
                         Text(RestaurantCategory.getCategoryFromString(
-                                postDetailModel.categoryCode)
+                                postDetailModel.post.categoryCode)
                             .korean),
                       ],
                     ),
@@ -55,7 +55,7 @@ class PostDetailExtraInfo extends ConsumerWidget {
                               width: 80,
                               child: Text("최소 배달 팁",
                                   style: TextStyle(color: Color(0xff9b9b9b)))),
-                          Text(MoneyConvertor.addCommasToNumber(postDetailModel.deliveryFee) + "원")
+                          Text(MoneyConvertor.addCommasToNumber(postDetailModel.post.deliveryFee) + "원")
                         ],
                       ),
                       Row(
@@ -64,7 +64,7 @@ class PostDetailExtraInfo extends ConsumerWidget {
                               width: 90,
                               child: Text("최소 주문금액",
                                   style: TextStyle(color: Color(0xff9b9b9b)))),
-                          Text(MoneyConvertor.addCommasToNumber(postDetailModel.minOrderFee) + "원")
+                          Text(MoneyConvertor.addCommasToNumber(postDetailModel.post.minOrderFee) + "원")
                         ],
                       ),
                     ],

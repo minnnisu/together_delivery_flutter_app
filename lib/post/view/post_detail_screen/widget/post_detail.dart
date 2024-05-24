@@ -30,7 +30,7 @@ class PostDetail extends ConsumerWidget {
           PostDetailHeader(),
           PostDetailRestaurantName(),
           PostDetailExtraInfo(),
-          (ref.watch(postDetailProvider) as PostDetailResponseModel).content !=
+          (ref.watch(postDetailProvider) as PostDetailResponseModel).post.content !=
                   null
               ? PostContent()
               : Container(),

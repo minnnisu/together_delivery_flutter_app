@@ -5,7 +5,8 @@ import 'package:together_delivery_app/common/const/const.dart';
 import 'package:together_delivery_app/common/util/dataConvertor.dart';
 import 'package:together_delivery_app/post/view/post_detail_screen/model/post_detail_response_model.dart'
     as post_detail_response_model;
-import 'package:together_delivery_app/post/view/post_detail_screen/widget/post_header_pop_up.dart';
+import 'package:together_delivery_app/post/view/post_detail_screen/widget/post_header_pop_up/post_header_pop_up_base.dart';
+import 'package:together_delivery_app/post/view/post_detail_screen/widget/post_header_pop_up/post_header_pop_up_me.dart';
 import 'package:together_delivery_app/post/view/post_detail_screen/widget/post_status.dart';
 import 'package:together_delivery_app/post/view/post_detail_screen/provider/post_detail_provider.dart';
 
@@ -50,7 +51,7 @@ class PostDetailHeaderLeft extends ConsumerWidget {
             Padding(
               padding: EdgeInsets.only(bottom: 3),
               child: Text(
-                postDetailResponseModel.nickname,
+                postDetailResponseModel.post.nickname,
                 style: TextStyle(
                   fontWeight: FontWeight.w600,
                   fontSize: 14,
@@ -58,7 +59,7 @@ class PostDetailHeaderLeft extends ConsumerWidget {
               ),
             ),
             Text(
-              DateConvertor.formatDateTime(postDetailResponseModel.createdAt),
+              DateConvertor.formatDateTime(postDetailResponseModel.post.createdAt),
               style: TextStyle(
                 color: Color(0xff9a9a9a),
                 fontWeight: FontWeight.w600,
@@ -81,8 +82,8 @@ class PostDetailHeaderRight extends ConsumerWidget {
         as post_detail_response_model.PostDetailResponseModel;
     return Row(
       children: [
-        postDetailModel.status ? PostActiveStatus() : PostInactiveStatus(),
-        PostHeaderPopUp(postDetailModel.id)
+        postDetailModel.post.status ? PostActiveStatus() : PostInactiveStatus(),
+        PostHeaderPopUpMe(),
       ],
     );
   }

@@ -25,7 +25,7 @@ class PostContent extends ConsumerWidget {
           ),
           Padding(
             padding: const EdgeInsets.symmetric(vertical: 6),
-            child: Text(postDetailModel.content!),
+            child: Text(postDetailModel.post.content!),
           ),
         ],
       ),

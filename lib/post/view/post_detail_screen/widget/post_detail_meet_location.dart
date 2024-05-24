@@ -17,8 +17,8 @@ class PostDetailMeetLocation extends ConsumerWidget {
     final postDetailResponseModel =
         ref.watch(postDetailProvider) as PostDetailResponseModel;
     final meetLocationLatLng = NLatLng(
-        postDetailResponseModel.meetLocation.latitude,
-        postDetailResponseModel.meetLocation.longitude);
+        postDetailResponseModel.post.meetLocation.latitude,
+        postDetailResponseModel.post.meetLocation.longitude);
 
     return Container(
       padding: EdgeInsets.symmetric(vertical: 16),
@@ -38,11 +38,11 @@ class PostDetailMeetLocation extends ConsumerWidget {
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
                 Text(
-                  postDetailResponseModel.meetLocation.shortAddress,
+                  postDetailResponseModel.post.meetLocation.shortAddress,
                   style: TextStyle(fontSize: 14),
                 ),
                 Text(
-                  postDetailResponseModel.meetLocation.address,
+                  postDetailResponseModel.post  .meetLocation.address,
                   style: TextStyle(fontSize: 14,color: Color(0xff9b9b9b)),
                 ),
               ],
