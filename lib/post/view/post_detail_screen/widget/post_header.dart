@@ -7,6 +7,7 @@ import 'package:together_delivery_app/post/view/post_detail_screen/model/post_de
     as post_detail_response_model;
 import 'package:together_delivery_app/post/view/post_detail_screen/widget/post_header_pop_up/post_header_pop_up_base.dart';
 import 'package:together_delivery_app/post/view/post_detail_screen/widget/post_header_pop_up/post_header_pop_up_me.dart';
+import 'package:together_delivery_app/post/view/post_detail_screen/widget/post_header_pop_up/post_header_pop_up_other.dart';
 import 'package:together_delivery_app/post/view/post_detail_screen/widget/post_status.dart';
 import 'package:together_delivery_app/post/view/post_detail_screen/provider/post_detail_provider.dart';
 
@@ -80,10 +81,13 @@ class PostDetailHeaderRight extends ConsumerWidget {
   Widget build(BuildContext context, WidgetRef ref) {
     final postDetailModel = ref.watch(postDetailProvider)
         as post_detail_response_model.PostDetailResponseModel;
+
     return Row(
       children: [
         postDetailModel.post.status ? PostActiveStatus() : PostInactiveStatus(),
-        PostHeaderPopUpMe(),
+        postDetailModel.post.isPostCreator ?
+        PostHeaderPopUpMe():
+        PostHeaderPopUpOther(),
       ],
     );
   }
