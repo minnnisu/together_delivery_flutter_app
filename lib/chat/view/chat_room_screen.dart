@@ -85,11 +85,24 @@ class _ChatRoomScreenState extends ConsumerState<ChatRoomScreen> {
     }
 
     return Scaffold(
-      appBar: AppBar(title: Text("채팅"),),
+      appBar: AppBar(
+        title: Text("채팅방"),
+        actions: [
+          IconButton(
+            icon: Icon(Icons.search),
+            onPressed: () {},
+          ),
+          IconButton(
+            icon: Icon(Icons.menu),
+            onPressed: () {},
+          ),
+        ],
+      ),
       body: Column(
         children: [
           ChatMessageList(chatMessageList: chatMessageList),
-          ChatRoomInputField(stompClient: stompClient, chatRoomId: widget.chatRoomId),
+          ChatRoomInputField(
+              stompClient: stompClient, chatRoomId: widget.chatRoomId),
         ],
       ),
     );
