@@ -10,7 +10,7 @@ class ChatEnterMessageWidget extends StatelessWidget {
     return Row(
       mainAxisAlignment: MainAxisAlignment.center,
       children: [
-        Container(color: Color(0xffc2c2c2), child: Text("${chatMessage.sender}님 초대되었습니다."))
+        Container(color: Color(0xffc2c2c2), child: Text("${chatMessage.message}"))
       ],
     );
   }
