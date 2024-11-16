@@ -50,20 +50,9 @@ class PostInputFormSubmitBtn extends ConsumerWidget {
             if (failure.exception is CustomException) {
               if ((failure.exception as CustomException).errorCode ==
                   ErrorCode.NOT_VALID_INPUT_FORM_ERROR) {
-                ScaffoldMessenger.of(context).showSnackBar(
-                  const SnackBar(
-                    content: Text("입력한 값들이 유효하지 않습니다."),
-                    duration: Duration(seconds: 8),
-                    margin: EdgeInsets.all(20),
-                    behavior: SnackBarBehavior
-                        .floating, //  required when writing margin
-                  ),
-                );
                 return;
               }
             }
-
-            print(failure.exception);
           }
         },
         child: Text(

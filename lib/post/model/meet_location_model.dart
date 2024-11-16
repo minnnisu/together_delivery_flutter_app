@@ -9,6 +9,7 @@ part 'meet_location_model.g.dart';
 class MeetLocationModel with _$MeetLocationModel {
   const factory MeetLocationModel({
     required String address,
+    required String shortAddress,
     required double latitude,
     required double longitude,
   }) = _MeetLocationModel;

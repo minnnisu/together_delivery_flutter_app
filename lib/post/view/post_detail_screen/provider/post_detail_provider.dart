@@ -1,6 +1,7 @@
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:together_delivery_app/post/view/post_detail_screen/model/post_detail_response_model.dart';
 import 'package:together_delivery_app/post/repository/postRepository.dart';
+import 'package:together_delivery_app/user/model/user/userModel.dart';
 
 final postDetailProvider =
     StateNotifierProvider.autoDispose<PostDetailNotifier, PostDetailResponseModelBase>(

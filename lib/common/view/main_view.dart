@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:together_delivery_app/post/view/postList/postListScreen.dart';
+import 'package:together_delivery_app/chat/view/chat_room_screen.dart';
+import 'package:together_delivery_app/post/view/post_list/post_list_screen.dart';
 import 'package:together_delivery_app/user/model/user/userModel.dart';
 import 'package:together_delivery_app/user/view/user_info_screen.dart';
 
@@ -30,11 +31,10 @@ class _MainViewState extends State<MainView> {
 
   @override
   Widget build(BuildContext context) {
-    if(ModalRoute.of(context)!.settings.arguments is UserModel) {
-      UserModel userModel = ModalRoute.of(context)!.settings.arguments as UserModel;
-
+    if (ModalRoute.of(context)!.settings.arguments is UserModel) {
+      UserModel userModel =
+          ModalRoute.of(context)!.settings.arguments as UserModel;
     }
-
 
     return Scaffold(
       appBar: AppBar(
@@ -52,8 +52,11 @@ class _MainViewState extends State<MainView> {
       ),
       floatingActionButton: _selectedIndex == 0
           ? FloatingActionButton(
+        shape: CircleBorder(),
+              elevation: 0,
+              backgroundColor: Color(0xffdedddd),
               onPressed: () => Navigator.pushNamed(context, "/newPost"),
-              child: const Icon(Icons.add),
+              child: Icon(Icons.add),
             )
           : null,
       bottomNavigationBar: BottomNavigationBar(
@@ -63,12 +66,17 @@ class _MainViewState extends State<MainView> {
             label: '홈',
           ),
           BottomNavigationBarItem(
-            icon: Icon(Icons.account_circle_outlined),
+            icon: Icon(Icons.account_circle_rounded),
             label: '계정',
           ),
         ],
         currentIndex: _selectedIndex,
-        selectedItemColor: Colors.amber[800],
+        selectedFontSize: 12,
+        selectedLabelStyle: TextStyle(fontWeight: FontWeight.w600),
+        selectedItemColor: Color(0xff3d3d3d),
+        unselectedFontSize: 12,
+        unselectedLabelStyle: TextStyle(fontWeight: FontWeight.w600),
+        unselectedItemColor: Color(0xffa6a6a6),
         onTap: _onItemTapped,
       ),
     );

@@ -77,7 +77,7 @@ class PostDropdownInputField extends ConsumerWidget {
                       (RestaurantCategory value) {
                     return DropdownMenuItem<RestaurantCategory>(
                       value: value,
-                      child: Text(value.name),
+                      child: Text(value.korean),
                     );
                   }).toList(),
             ),

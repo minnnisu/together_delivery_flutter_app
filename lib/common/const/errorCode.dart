@@ -12,4 +12,5 @@ enum ErrorCode {
   NoSuchReplyError,
   DeletedReplyError,
   NotTheAuthorOfTheReply,
+  AlreadyExistChatRoomError,
 }

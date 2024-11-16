@@ -21,6 +21,7 @@ MeetLocationModel _$MeetLocationModelFromJson(Map<String, dynamic> json) {
 /// @nodoc
 mixin _$MeetLocationModel {
   String get address => throw _privateConstructorUsedError;
+  String get shortAddress => throw _privateConstructorUsedError;
   double get latitude => throw _privateConstructorUsedError;
   double get longitude => throw _privateConstructorUsedError;
 
@@ -36,7 +37,8 @@ abstract class $MeetLocationModelCopyWith<$Res> {
           MeetLocationModel value, $Res Function(MeetLocationModel) then) =
       _$MeetLocationModelCopyWithImpl<$Res, MeetLocationModel>;
   @useResult
-  $Res call({String address, double latitude, double longitude});
+  $Res call(
+      {String address, String shortAddress, double latitude, double longitude});
 }
 
 /// @nodoc
@@ -53,6 +55,7 @@ class _$MeetLocationModelCopyWithImpl<$Res, $Val extends MeetLocationModel>
   @override
   $Res call({
     Object? address = null,
+    Object? shortAddress = null,
     Object? latitude = null,
     Object? longitude = null,
   }) {
@@ -60,6 +63,10 @@ class _$MeetLocationModelCopyWithImpl<$Res, $Val extends MeetLocationModel>
       address: null == address
           ? _value.address
           : address // ignore: cast_nullable_to_non_nullable
+              as String,
+      shortAddress: null == shortAddress
+          ? _value.shortAddress
+          : shortAddress // ignore: cast_nullable_to_non_nullable
               as String,
       latitude: null == latitude
           ? _value.latitude
@@ -81,7 +88,8 @@ abstract class _$$MeetLocationModelImplCopyWith<$Res>
       __$$MeetLocationModelImplCopyWithImpl<$Res>;
   @override
   @useResult
-  $Res call({String address, double latitude, double longitude});
+  $Res call(
+      {String address, String shortAddress, double latitude, double longitude});
 }
 
 /// @nodoc
@@ -96,6 +104,7 @@ class __$$MeetLocationModelImplCopyWithImpl<$Res>
   @override
   $Res call({
     Object? address = null,
+    Object? shortAddress = null,
     Object? latitude = null,
     Object? longitude = null,
   }) {
@@ -103,6 +112,10 @@ class __$$MeetLocationModelImplCopyWithImpl<$Res>
       address: null == address
           ? _value.address
           : address // ignore: cast_nullable_to_non_nullable
+              as String,
+      shortAddress: null == shortAddress
+          ? _value.shortAddress
+          : shortAddress // ignore: cast_nullable_to_non_nullable
               as String,
       latitude: null == latitude
           ? _value.latitude
@@ -120,7 +133,10 @@ class __$$MeetLocationModelImplCopyWithImpl<$Res>
 @JsonSerializable()
 class _$MeetLocationModelImpl implements _MeetLocationModel {
   const _$MeetLocationModelImpl(
-      {required this.address, required this.latitude, required this.longitude});
+      {required this.address,
+      required this.shortAddress,
+      required this.latitude,
+      required this.longitude});
 
   factory _$MeetLocationModelImpl.fromJson(Map<String, dynamic> json) =>
       _$$MeetLocationModelImplFromJson(json);
@@ -128,13 +144,15 @@ class _$MeetLocationModelImpl implements _MeetLocationModel {
   @override
   final String address;
   @override
+  final String shortAddress;
+  @override
   final double latitude;
   @override
   final double longitude;
 
   @override
   String toString() {
-    return 'MeetLocationModel(address: $address, latitude: $latitude, longitude: $longitude)';
+    return 'MeetLocationModel(address: $address, shortAddress: $shortAddress, latitude: $latitude, longitude: $longitude)';
   }
 
   @override
@@ -143,6 +161,8 @@ class _$MeetLocationModelImpl implements _MeetLocationModel {
         (other.runtimeType == runtimeType &&
             other is _$MeetLocationModelImpl &&
             (identical(other.address, address) || other.address == address) &&
+            (identical(other.shortAddress, shortAddress) ||
+                other.shortAddress == shortAddress) &&
             (identical(other.latitude, latitude) ||
                 other.latitude == latitude) &&
             (identical(other.longitude, longitude) ||
@@ -151,7 +171,8 @@ class _$MeetLocationModelImpl implements _MeetLocationModel {
 
   @JsonKey(ignore: true)
   @override
-  int get hashCode => Object.hash(runtimeType, address, latitude, longitude);
+  int get hashCode =>
+      Object.hash(runtimeType, address, shortAddress, latitude, longitude);
 
   @JsonKey(ignore: true)
   @override
@@ -171,6 +192,7 @@ class _$MeetLocationModelImpl implements _MeetLocationModel {
 abstract class _MeetLocationModel implements MeetLocationModel {
   const factory _MeetLocationModel(
       {required final String address,
+      required final String shortAddress,
       required final double latitude,
       required final double longitude}) = _$MeetLocationModelImpl;
 
@@ -179,6 +201,8 @@ abstract class _MeetLocationModel implements MeetLocationModel {
 
   @override
   String get address;
+  @override
+  String get shortAddress;
   @override
   double get latitude;
   @override

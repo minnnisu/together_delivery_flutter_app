@@ -9,8 +9,7 @@ part of 'post_save_request_model.dart';
 _$PostSaveRequestModelImpl _$$PostSaveRequestModelImplFromJson(
         Map<String, dynamic> json) =>
     _$PostSaveRequestModelImpl(
-      title: json['title'] as String,
-      content: json['content'] as String,
+      content: json['content'] as String?,
       restaurantName: json['restaurantName'] as String,
       categoryCode: json['categoryCode'] as String,
       deliveryFee: json['deliveryFee'] as int,
@@ -22,7 +21,6 @@ _$PostSaveRequestModelImpl _$$PostSaveRequestModelImplFromJson(
 Map<String, dynamic> _$$PostSaveRequestModelImplToJson(
         _$PostSaveRequestModelImpl instance) =>
     <String, dynamic>{
-      'title': instance.title,
       'content': instance.content,
       'restaurantName': instance.restaurantName,
       'categoryCode': instance.categoryCode,

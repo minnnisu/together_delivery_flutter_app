@@ -11,8 +11,7 @@ _$PostSaveResponseModelImpl _$$PostSaveResponseModelImplFromJson(
     _$PostSaveResponseModelImpl(
       id: json['id'] as int,
       username: json['username'] as String,
-      title: json['title'] as String,
-      content: json['content'] as String,
+      content: json['content'] as String?,
       restaurantName: json['restaurantName'] as String,
       categoryCode: json['categoryCode'] as String,
       deliveryFee: json['deliveryFee'] as int,
@@ -32,7 +31,6 @@ Map<String, dynamic> _$$PostSaveResponseModelImplToJson(
     <String, dynamic>{
       'id': instance.id,
       'username': instance.username,
-      'title': instance.title,
       'content': instance.content,
       'restaurantName': instance.restaurantName,
       'categoryCode': instance.categoryCode,

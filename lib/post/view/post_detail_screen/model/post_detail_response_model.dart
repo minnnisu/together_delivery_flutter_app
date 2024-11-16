@@ -28,31 +28,65 @@ class PostDetailResponseModelError extends PostDetailResponseModelBase {
 @freezed
 class PostDetailResponseModel extends PostDetailResponseModelBase with _$PostDetailResponseModel {
   const factory PostDetailResponseModel({
-    required int id,
-    required String nickname,
-    required String title,
-    required String content,
-    required String restaurantName,
-    required String categoryCode,
-    required int deliveryFee,
-    required int minOrderFee,
-    required MeetLocationModel meetLocation,
-    required bool status,
-    required String createdAt,
-    required String updatedAt,
-    required List<Image> images,
+    required Post post,
+    required ChatRoom chatRoom,
   }) = _PostDetailResponseModel;
 
   factory PostDetailResponseModel.fromJson(Map<String, dynamic> json) => _$PostDetailResponseModelFromJson(json);
 }
 
 @freezed
-class Image with _$Image {
-  const factory Image({
+class ChatRoom with _$ChatRoom {
+  const factory ChatRoom({
+    required int id,
+    required String createdAt,
+    required dynamic deletedAt,
+    required bool isChatRoomMember,
+  }) = _ChatRoom;
+
+  factory ChatRoom.fromJson(Map<String, dynamic> json) => _$ChatRoomFromJson(json);
+}
+
+@freezed
+class Post with _$Post {
+  const factory Post({
+    required int id,
+    required String nickname,
+    required String? content,
+    required String restaurantName,
+    required String categoryCode,
+    required int deliveryFee,
+    required int minOrderFee,
+    required MeetLocation meetLocation,
+    required bool status,
+    required List<PostImage> images,
+    required String createdAt,
+    required String updatedAt,
+    required bool isPostCreator,
+  }) = _Post;
+
+  factory Post.fromJson(Map<String, dynamic> json) => _$PostFromJson(json);
+}
+
+@freezed
+class MeetLocation with _$MeetLocation {
+  const factory MeetLocation({
+    required String address,
+    required String shortAddress,
+    required double latitude,
+    required double longitude,
+  }) = _MeetLocation;
+
+  factory MeetLocation.fromJson(Map<String, dynamic> json) => _$MeetLocationFromJson(json);
+}
+
+@freezed
+class PostImage with _$PostImage {
+  const factory PostImage({
     required int id,
     required String imageName,
     required DateTime createdAt,
-  }) = _Image;
+  }) = _PostImage;
 
-  factory Image.fromJson(Map<String, dynamic> json) => _$ImageFromJson(json);
+  factory PostImage.fromJson(Map<String, dynamic> json) => _$PostImageFromJson(json);
 }

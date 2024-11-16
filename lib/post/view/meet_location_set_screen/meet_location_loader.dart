@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_naver_map/flutter_naver_map.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:geolocator/geolocator.dart';
+import 'package:together_delivery_app/post/model/meet_location_model.dart';
 import 'package:together_delivery_app/post/view/meet_location_set_screen/provider/current_location_load_provider.dart';
 import 'package:together_delivery_app/post/view/meet_location_set_screen/provider/meet_location_provider.dart';
 import 'package:together_delivery_app/post/view/post_input_form_screen/const/post_input_form_field_type.dart';
@@ -13,30 +14,31 @@ class MeetLocationLoader extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     return ref.watch(currentLocationLoadProvider).when(
-          data: (data) {
-            return MeetLocation(currentLocation: data.currentLocation);
-          },
-          error: (error, stackTrace) {
-            Position currentLocation = Position(
-              latitude: 37.5665,
-              // Seoul latitude
-              longitude: 126.9780,
-              // Seoul longitude
-              accuracy: 0.0,
-              altitude: 0.0,
-              heading: 0.0,
-              speed: 0.0,
-              speedAccuracy: 0.0,
-              timestamp: DateTime.now(),
-              altitudeAccuracy: 0.0,
-              headingAccuracy: 0.0,
-            );
-            return MeetLocation(currentLocation: currentLocation);
-          },
-          loading: () => const Center(
-            child: CircularProgressIndicator(),
-          ),
+      data: (data) {
+        return MeetLocation(currentLocation: data.currentLocation);
+      },
+      error: (error, stackTrace) {
+        Position currentLocation = Position(
+          latitude: 37.5665,
+          // Seoul latitude
+          longitude: 126.9780,
+          // Seoul longitude
+          accuracy: 0.0,
+          altitude: 0.0,
+          heading: 0.0,
+          speed: 0.0,
+          speedAccuracy: 0.0,
+          timestamp: DateTime.now(),
+          altitudeAccuracy: 0.0,
+          headingAccuracy: 0.0,
         );
+        return MeetLocation(currentLocation: currentLocation);
+      },
+      loading: () =>
+      const Center(
+        child: CircularProgressIndicator(),
+      ),
+    );
   }
 }
 
@@ -71,28 +73,29 @@ class _NaverMap extends ConsumerWidget {
           // 심볼 탭 이벤트 소비 여부 설정
           initialCameraPosition: NCameraPosition(
               target:
-                  NLatLng(currentLocation.latitude, currentLocation.longitude),
+              NLatLng(currentLocation.latitude, currentLocation.longitude),
               zoom: 16)),
       onMapReady: (controller) async {
         meetLocationSetRead.onMapReady(controller);
       },
       onMapTapped: (point, latLng) async {
         final targetInfoWindowInfo =
-            await meetLocationSetRead.onMapTapped(latLng);
+        await meetLocationSetRead.onMapTapped(latLng);
+        final postInputWatch = ref.read(postInputFormProvider.notifier);
+        postInputWatch.updateFieldErrorValue(PostInputFormFieldType.meetLocation, null);
+
         targetInfoWindowInfo.InfoWindowInfo.setOnTapListener(
-          (overlay) {
+              (overlay) {
+            final meetLocationModel = MeetLocationModel(
+                address: targetInfoWindowInfo.meetLocation.address,
+                shortAddress: "",
+                latitude: targetInfoWindowInfo.meetLocation.latitude,
+                longitude: targetInfoWindowInfo.meetLocation.longitude);
+
             ref.watch(postInputFormProvider.notifier).updateFieldValue(
-                  PostInputFormFieldType.address,
-                  targetInfoWindowInfo.meetLocation.address,
-                );
-            ref.watch(postInputFormProvider.notifier).updateFieldValue(
-              PostInputFormFieldType.latitude,
-              targetInfoWindowInfo.meetLocation.latitude,
-            );
-            ref.watch(postInputFormProvider.notifier).updateFieldValue(
-              PostInputFormFieldType.longitude,
-              targetInfoWindowInfo.meetLocation.longitude,
-            );
+              PostInputFormFieldType.meetLocation,
+                meetLocationModel);
+
             Navigator.pop(context);
           },
         );

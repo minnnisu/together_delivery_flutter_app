@@ -1,5 +1,9 @@
 import 'package:flutter/cupertino.dart';
+import 'package:flutter/material.dart';
+import 'package:flutter/widgets.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:together_delivery_app/post/view/post_input_form_screen/const/post_input_form_field_type.dart';
+import 'package:together_delivery_app/post/view/post_input_form_screen/widget/post_text_input_field.dart';
 
 import '../provider/post_input_form_provider.dart';
 
@@ -10,43 +14,81 @@ class MeetLocationInputField extends ConsumerWidget {
 
   const MeetLocationInputField(
       {super.key,
-        this.marginBottomSize = 0,
-        this.errorText,
-        this.width = double.infinity});
+      this.marginBottomSize = 0,
+      this.errorText,
+      this.width = double.infinity});
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final postEditModel = ref.watch(postInputFormProvider);
+    final postInputModel = ref.watch(postInputFormProvider);
+    final PostInputRead = ref.read(postInputFormProvider.notifier);
 
     return Container(
       width: width,
+      padding: EdgeInsets.only(bottom: 6),
       margin: EdgeInsets.only(bottom: marginBottomSize),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           Padding(
-            padding: EdgeInsets.only(bottom: 6),
-            child: Text(
-              "만남장소",
-              style: const TextStyle(
-                fontWeight: FontWeight.w600,
-                fontSize: 16,
-              ),
+            padding: const EdgeInsets.only(bottom: 6),
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                Text(
+                  "주소",
+                  style: const TextStyle(
+                    fontSize: 16,
+                    fontWeight: FontWeight.w600,
+                  ),
+                ),
+                GestureDetector(
+                  onTap: () {
+                    if (postInputModel.meetLocation == null) {
+                      Navigator.pushNamed(context, '/location/set');
+                    } else {
+                      PostInputRead.updateFieldValue(
+                          PostInputFormFieldType.meetLocation, null);
+                    }
+                  },
+                  child: Text(
+                    postInputModel.meetLocation == null ? "추가" : "삭제",
+                    textAlign: TextAlign.end,
+                    style: TextStyle(fontSize: 16, color: Color(0xff874CCC)),
+                  ),
+                ),
+              ],
             ),
           ),
-          GestureDetector(onTap:() => Navigator.pushNamed(context, '/location/set'),
-            child: Container(
-              width: width,
-              padding: EdgeInsets.symmetric(vertical: 12, horizontal: 12),
-              decoration: BoxDecoration(
-                  border: Border.all(
-                    color: Color(0xffd5d5d5),
-                    width: 0.9,
-                  ),
-                  borderRadius: BorderRadius.all(Radius.circular(10))),
-              child: Text(postEditModel.address, style: TextStyle(fontSize: 16),),
+          postInputModel.meetLocationErrMsg != null
+              ? Text(
+            postInputModel.meetLocationErrMsg!,
+            style: TextStyle(
+              color: Color(0xffcc4747),
             ),
           )
+              : Container(),
+          postInputModel.meetLocation != null
+              ? Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Padding(
+                      padding: const EdgeInsets.only(bottom: 12),
+                      child: Text(
+                        postInputModel.meetLocation!.address,
+                        style: TextStyle(fontSize: 16),
+                      ),
+                    ),
+                    PostTextInputField(
+                      type: PostInputFormFieldType.addressDescription,
+                      fieldName: "위치 설명",
+                      hintText: "예) 한끼 빌라 앞",
+                      marginBottomSize: 12,
+                      errorText: postInputModel.addressDescriptionErrMsg,
+                    ),
+                  ],
+                )
+              : Container(),
         ],
       ),
     );

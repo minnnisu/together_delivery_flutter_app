@@ -13,7 +13,7 @@ class _PostInputFormScreenState extends State<PostInputFormScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title: Text("게시물 등록"), centerTitle: true,),
+      appBar: AppBar(title: Text("게시물 등록")),
       body: PostInputForm(),
     );
   }

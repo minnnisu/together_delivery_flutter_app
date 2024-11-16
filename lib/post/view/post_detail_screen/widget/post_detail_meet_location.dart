@@ -17,18 +17,11 @@ class PostDetailMeetLocation extends ConsumerWidget {
     final postDetailResponseModel =
         ref.watch(postDetailProvider) as PostDetailResponseModel;
     final meetLocationLatLng = NLatLng(
-        postDetailResponseModel.meetLocation.latitude,
-        postDetailResponseModel.meetLocation.longitude);
+        postDetailResponseModel.post.meetLocation.latitude,
+        postDetailResponseModel.post.meetLocation.longitude);
 
     return Container(
-      padding: EdgeInsets.symmetric(vertical: 10),
-      decoration: BoxDecoration(
-        border: Border(
-          bottom: BorderSide(
-            color: Color(borderGreyColor),
-          ),
-        ),
-      ),
+      padding: EdgeInsets.symmetric(vertical: 16),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
@@ -41,13 +34,22 @@ class PostDetailMeetLocation extends ConsumerWidget {
           ),
           Container(
             padding: EdgeInsets.only(bottom: 10),
-            child: Text(
-              postDetailResponseModel.meetLocation.address,
-              style: TextStyle(fontSize: 14),
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                Text(
+                  postDetailResponseModel.post.meetLocation.shortAddress,
+                  style: TextStyle(fontSize: 14),
+                ),
+                Text(
+                  postDetailResponseModel.post  .meetLocation.address,
+                  style: TextStyle(fontSize: 14,color: Color(0xff9b9b9b)),
+                ),
+              ],
             ),
           ),
           Container(
-            height: 150,
+            height: 200,
             child: NaverMap(
               options: NaverMapViewOptions(
                   locationButtonEnable: false,
