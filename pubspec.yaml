@@ -30,8 +30,8 @@ dependencies:
   cached_network_image: ^3.3.1
   multi_image_picker_plus: ^0.0.4
   http_parser: ^4.0.2
-  carousel_slider: ^4.2.1
-  flutter_naver_map: ^1.2.2
+  carousel_slider: ^5.0.0
+  flutter_naver_map: ^1.2.3
   flutter_dotenv: ^5.1.0
   geolocator: ^11.0.0
   stomp_dart_client: ^2.0.0
