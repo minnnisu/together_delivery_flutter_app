@@ -1,3 +1,5 @@
+// TODO: Deprecated
+
 enum HttpFailure {
   DuplicatedUserNameError,
   NotEqualPasswordAndPasswordCheck,

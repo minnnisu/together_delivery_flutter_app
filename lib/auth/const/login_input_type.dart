@@ -1,0 +1,4 @@
+enum LoginInputType{
+  username,
+  password
+}

@@ -36,6 +36,7 @@ dependencies:
   geolocator: ^11.0.0
   stomp_dart_client: ^2.0.0
   photo_view: ^0.15.0
+  fluttertoast: ^8.2.4
 
 dev_dependencies:
   flutter_test:
@@ -54,25 +55,12 @@ flutter:
   assets:
     - assets/
     - assets/config/.env
-  fonts:
-    - family: Pretendard
-      fonts:
-        - asset: assets/fonts/Pretendard-Thin.ttf
-          weight: 100
-        - asset: assets/fonts/Pretendard-ExtraLight.ttf
-          weight: 200
-        - asset: assets/fonts/Pretendard-Light.ttf
-          weight: 300
-        - asset: assets/fonts/Pretendard-Regular.ttf
-          weight: 400
-        - asset: assets/fonts/Pretendard-Medium.ttf
-          weight: 500
-        - asset: assets/fonts/Pretendard-SemiBold.ttf
-          weight: 600
-        - asset: assets/fonts/Pretendard-Bold.ttf
-          weight: 700
-        - asset: assets/fonts/Pretendard-ExtraBold.ttf
-          weight: 800
-        - asset: assets/fonts/Pretendard-Black.ttf
-          weight: 900
+    - assets/lottie/
 
+  fonts:
+    - family: pretendard
+      fonts:
+        - asset: assets/font/PretendardVariable.ttf
+    - family: HancomMalangMalang
+      fonts:
+        - asset: assets/font/HancomMalangMalang-Regular.ttf

@@ -2,7 +2,10 @@ import 'package:flutter/material.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:flutter_naver_map/flutter_naver_map.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:together_delivery_app/common/config/color/app_color.dart';
 import 'package:together_delivery_app/common/routes/routes.dart';
+
+import 'common/config/text_theme/custom_text_theme.dart';
 
 // 지도 초기화하기
 Future<void> _initialize() async {
@@ -27,13 +30,22 @@ class MyApp extends StatelessWidget {
   // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
+    final textTheme = Theme.of(context).textTheme;
+
     return MaterialApp(
       debugShowCheckedModeBanner: false,
-      title: 'Flutter Demo',
+      title: 'Together Delivery App',
       theme: ThemeData(
-        colorScheme: ColorScheme.fromSeed(seedColor: Color(0xffc9c9c9)),
-        fontFamily: 'Pretendard',
-        useMaterial3: true,
+        textTheme: customTextTheme,
+        fontFamily: "pretendard",
+        appBarTheme: AppBarTheme(
+          color: Colors.white,
+          centerTitle: true,
+          titleTextStyle: textTheme.headlineSmall!
+              .copyWith(color: AppColor.black, fontWeight: FontWeight.w600),
+        ),
+        primaryColor: const Color(0xFFD11D5C),
+        scaffoldBackgroundColor: Colors.white,
       ),
       routes: routes,
     );

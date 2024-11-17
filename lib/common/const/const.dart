@@ -1,3 +1,5 @@
+// TODO: Deprecated
+
 /// access token key for secure storage
 const accessTokenKey = 'access_token';
 

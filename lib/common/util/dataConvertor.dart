@@ -1,6 +1,5 @@
 class DateConvertor{
-  static String formatTimeAgo(String dateTimeString) {
-    DateTime dateTime = DateTime.parse(dateTimeString);
+  static String formatTimeAgo(DateTime dateTime) {
     DateTime now = DateTime.now();
     Duration difference = now.difference(dateTime);
     int minutes = difference.inMinutes;
