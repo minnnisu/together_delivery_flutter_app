@@ -37,6 +37,7 @@ dependencies:
   stomp_dart_client: ^2.0.0
   photo_view: ^0.15.0
   fluttertoast: ^8.2.4
+  lottie: ^3.1.2
 
 dev_dependencies:
   flutter_test:

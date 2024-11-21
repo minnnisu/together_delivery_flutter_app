@@ -5,7 +5,7 @@ import '../model/model/login/login_request_model.dart';
 import '../model/model/login/login_response_model.dart';
 import '../model/state/login_input_state/login_input_state.dart';
 import '../repository/auth_repository.dart';
-import '../repository/auth_repository_Impl.dart';
+import '../repository/auth_repository_impl.dart';
 import 'login_result.dart';
 
 final loginViewModelProvider =

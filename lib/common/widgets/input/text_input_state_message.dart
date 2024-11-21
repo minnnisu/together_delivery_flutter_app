@@ -11,7 +11,7 @@ class TextInputStateMessage extends StatelessWidget {
   Widget build(BuildContext context) {
     return Text(
       message,
-      style: Theme.of(context).textTheme.bodyMedium!.copyWith(
+      style: Theme.of(context).textTheme.bodySmall!.copyWith(
         color: isSuccess ? Color(0xFF196DE9) : Color(0xFFFF5252),
       ),
     );

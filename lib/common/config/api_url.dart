@@ -1,9 +1,11 @@
-class ApiUrl{
-  static var baseUrl = 'http://10.0.2.2:8080' ;
+class ApiUrl {
+  // static var baseUrl = 'http://192.168.0.56:8080' ;
+  static var baseUrl = 'http://10.0.2.2:8080';
 
   static var login = "$baseUrl/login";
-  static var signup = "$baseUrl/api/auth/signup";
-  static var nicknameDuplicationCheck = "$baseUrl/api/auth/nickname/duplicationCheck";
+  static var signup = "$baseUrl/auth/signup";
+  static var userIdDuplicationCheck = "$baseUrl/auth/check/username";
+  static var nicknameDuplicationCheck = "$baseUrl/auth/check/nickname";
   static var userInfoGet = "$baseUrl/api/user";
   static var tokenReissue = "$baseUrl/api/auth/refreshToken";
 

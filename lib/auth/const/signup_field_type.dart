@@ -1,10 +1,9 @@
 enum SignupFieldType {
-  username,
+  userId,
   password,
   passwordCheck,
   name,
   nickname,
   email,
-  telephone,
   college;
 }

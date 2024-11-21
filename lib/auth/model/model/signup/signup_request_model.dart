@@ -1,53 +1,65 @@
 import 'dart:convert';
-import 'dart:ffi';
+
+SignupRequestModel userIdDuplicationCheckRequestModelFromJson(String str) => SignupRequestModel.fromJson(json.decode(str));
+
+String userIdDuplicationCheckRequestModelToJson(SignupRequestModel data) => json.encode(data.toJson());
 
 class SignupRequestModel {
-  final String accessToken;
-  final String snsType;
-  final String nickname;
-  final String email;
-  final double weight;
+  String username;
+  String password;
+  String passwordCheck;
+  String name;
+  String nickname;
+  String email;
+  String college;
 
   SignupRequestModel({
-    required this.accessToken,
-    required this.snsType,
+    required this.username,
+    required this.password,
+    required this.passwordCheck,
+    required this.name,
     required this.nickname,
     required this.email,
-    required this.weight,
+    required this.college,
   });
 
   SignupRequestModel copyWith({
-    String? accessToken,
-    String? snsType,
+    String? username,
+    String? password,
+    String? passwordCheck,
+    String? name,
     String? nickname,
     String? email,
-    double? weight,
+    String? telephone,
+    String? college,
   }) =>
       SignupRequestModel(
-        accessToken: accessToken ?? this.accessToken,
-        snsType: snsType ?? this.snsType,
+        username: username ?? this.username,
+        password: password ?? this.password,
+        passwordCheck: passwordCheck ?? this.passwordCheck,
+        name: name ?? this.name,
         nickname: nickname ?? this.nickname,
         email: email ?? this.email,
-        weight: weight ?? this.weight,
+        college: college ?? this.college,
       );
 
-  factory SignupRequestModel.fromRawJson(String str) => SignupRequestModel.fromJson(json.decode(str));
-
-  String toRawJson() => json.encode(toJson());
-
   factory SignupRequestModel.fromJson(Map<String, dynamic> json) => SignupRequestModel(
-    accessToken: json["accessToken"],
-    snsType: json["snsType"],
+    username: json["username"],
+    password: json["password"],
+    passwordCheck: json["passwordCheck"],
+    name: json["name"],
     nickname: json["nickname"],
     email: json["email"],
-    weight: json["weight"],
+    college: json["college"],
   );
 
   Map<String, dynamic> toJson() => {
-    "accessToken": accessToken,
-    "snsType": snsType,
+    "username": username,
+    "password": password,
+    "passwordCheck": passwordCheck,
+    "name": name,
     "nickname": nickname,
     "email": email,
-    "weight": weight,
+    "college": college,
   };
 }

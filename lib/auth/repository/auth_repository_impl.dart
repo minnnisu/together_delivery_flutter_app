@@ -1,5 +1,7 @@
 import 'package:dio/dio.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:together_delivery_app/auth/model/model/signup/user_id_duplication_check_request_model.dart';
+import 'package:together_delivery_app/auth/model/model/signup/user_id_duplication_check_response_model.dart';
 
 import '../../common/config/api_url.dart';
 import '../../common/const/token_type.dart';
@@ -38,32 +40,48 @@ class AuthRepositoryImpl extends AuthRepository {
     return LoginResponseModel.fromJson(response.data);
   }
 
-  // @override
-  // Future<NicknameDuplicationCheckResponseModel> checkNicknameDuplication(
-  //     NicknameDuplicationCheckRequestModel requestModel) async {
-  //   var response = await _apiService.getPostApiResponse(
-  //     ApiUrl.nicknameDuplicationCheck,
-  //     headers: {'content-Type': 'application/json'},
-  //     data: requestModel,
-  //   );
-  //
-  //   return NicknameDuplicationCheckResponseModel.fromJson(response.data);
-  // }
+  @override
+  Future<NicknameDuplicationCheckResponseModel> checkNicknameDuplication(nickname) async {
+    NicknameDuplicationCheckRequestModel requestModel = NicknameDuplicationCheckRequestModel(nickname: nickname);
 
-  // @override
-  // Future<SignupResponseModel> signup(SignupRequestModel requestModel) async {
-  //   var response = await _apiService.getPostApiResponse(
-  //     ApiUrl.signup,
-  //     data: requestModel,
-  //     headers: {'content-Type': 'application/json'},
-  //   );
-  //
-  //   return SignupResponseModel.fromJson(response.data);
-  // }
+    var response = await _apiService.getPostApiResponse(
+      ApiUrl.nicknameDuplicationCheck,
+      headers: {'content-Type': 'application/json'},
+      data: requestModel,
+    );
+
+    return NicknameDuplicationCheckResponseModel.fromJson(response.data);
+  }
+
+  @override
+  Future<UserIdDuplicationCheckResponseModel> checkUserIdDuplication(userId) async {
+    UserIdDuplicationCheckRequestModel requestModel = UserIdDuplicationCheckRequestModel(username: userId);
+
+    var response = await _apiService.getPostApiResponse(
+      ApiUrl.userIdDuplicationCheck,
+      headers: {'content-Type': 'application/json'},
+      data: requestModel,
+    );
+
+    return UserIdDuplicationCheckResponseModel.fromJson(response.data);
+  }
+
+  @override
+  Future<SignupResponseModel> signup(SignupRequestModel requestModel) async {
+    var response = await _apiService.getPostApiResponse(
+      ApiUrl.signup,
+      data: requestModel,
+      headers: {'content-Type': 'application/json'},
+    );
+
+    return SignupResponseModel.fromJson(response.data);
+  }
 
   @override
   Future<void> saveToken(String accessToken, String refreshToken) async {
     await _localService.save(TokenType.accessToken.name, accessToken);
     await _localService.save(TokenType.refreshToken.name, refreshToken);
   }
+
+
 }

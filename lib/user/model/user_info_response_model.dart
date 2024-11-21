@@ -9,7 +9,6 @@ class UserInfoResponseModel {
   String name;
   String nickname;
   String email;
-  String telephone;
   String college;
 
   UserInfoResponseModel({
@@ -17,7 +16,6 @@ class UserInfoResponseModel {
     required this.name,
     required this.nickname,
     required this.email,
-    required this.telephone,
     required this.college,
   });
 
@@ -34,7 +32,6 @@ class UserInfoResponseModel {
         name: name ?? this.name,
         nickname: nickname ?? this.nickname,
         email: email ?? this.email,
-        telephone: telephone ?? this.telephone,
         college: college ?? this.college,
       );
 
@@ -43,7 +40,6 @@ class UserInfoResponseModel {
     name: json["name"],
     nickname: json["nickname"],
     email: json["email"],
-    telephone: json["telephone"],
     college: json["college"],
   );
 
@@ -52,7 +48,6 @@ class UserInfoResponseModel {
     "name": name,
     "nickname": nickname,
     "email": email,
-    "telephone": telephone,
     "college": college,
   };
 }
