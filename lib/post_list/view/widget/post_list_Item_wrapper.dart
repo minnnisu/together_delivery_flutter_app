@@ -1,4 +1,5 @@
 import 'package:flutter/cupertino.dart';
+import 'package:together_delivery_app/common/routes/routes.dart';
 import 'package:together_delivery_app/post_list/view/widget/post_item.dart';
 
 class PostListItemWrapper extends StatelessWidget {
@@ -12,7 +13,7 @@ class PostListItemWrapper extends StatelessWidget {
   Widget build(BuildContext context) {
     return GestureDetector(
       onTap: () {
-        Navigator.pushNamed(context, '/postDetail', arguments: postId);
+        Navigator.pushNamed(context, RoutesName.postDetail, arguments: postId);
       },
       child: Container(
         margin: const EdgeInsets.symmetric(horizontal: 10),

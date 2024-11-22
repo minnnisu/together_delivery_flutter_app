@@ -29,8 +29,7 @@ class DateConvertor{
     }
   }
 
-  static String formatDateTime(String dateTimeString) {
-    DateTime dateTime = DateTime.parse(dateTimeString);
+  static String formatDateTime(DateTime dateTime) {
     String year = dateTime.year != DateTime.now().year ?
     dateTime.year.toString().substring(2) + "/": '';
     String month = dateTime.month.toString().padLeft(2, '0');
