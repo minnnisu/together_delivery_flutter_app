@@ -1,8 +1,9 @@
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:together_delivery_app/post_list/model/api/post_list_response.dart';
-import 'package:together_delivery_app/post_list/model/state/post_list_state.dart';
-import 'package:together_delivery_app/post_list/repository/post_repository.dart';
-import 'package:together_delivery_app/post_list/repository/post_repository_Impl.dart';
+
+import '../../repository/post_repository.dart';
+import '../../repository/post_repository_Impl.dart';
+import '../model/api/post_list_response.dart';
+import '../model/state/post_list_state.dart';
 
 final postListViewModelProvider =
 StateNotifierProvider<PostListViewModel, PostListState>((ref) {

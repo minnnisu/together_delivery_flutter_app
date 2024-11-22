@@ -3,10 +3,10 @@ import 'package:together_delivery_app/auth/view/login/login_view.dart';
 import 'package:together_delivery_app/auth/view/signup/signup_view.dart';
 import 'package:together_delivery_app/auth/view/signup_success/signup_success_view.dart';
 import 'package:together_delivery_app/main/main_view.dart';
-import 'package:together_delivery_app/post_detail/view/post_detail_view.dart';
 import 'package:together_delivery_app/splash/view/splash_view.dart';
 
-import '../../post_big_image_screen/post_big_image_view.dart';
+import '../../post/post_big_image_screen/post_big_image_view.dart';
+import '../../post/post_detail/view/post_detail_view.dart';
 
 final routes = {
   '/': (BuildContext content) => SplashView(),

@@ -1,12 +1,12 @@
 import 'package:dio/dio.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:together_delivery_app/common/service/authentication_network_api_service.dart';
-import 'package:together_delivery_app/post_list/model/api/post_list_response.dart';
-import 'package:together_delivery_app/post_list/repository/post_repository.dart';
+import 'package:together_delivery_app/post/repository/post_repository.dart';
 
 import '../../common/config/api_url.dart';
 import '../../common/service/api_service.dart';
-import '../../post_detail/model/post_detail_response_model.dart';
+import '../post_detail/model/post_detail_response_model.dart';
+import '../post_list/model/api/post_list_response.dart';
 
 final postRepositoryImplProvider = Provider<PostRepository>(
   (ref) {

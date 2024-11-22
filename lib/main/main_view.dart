@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:together_delivery_app/post_list/view/post_list_view.dart';
+
+import '../post/post_list/view/post_list_view.dart';
 
 class MainView extends StatefulWidget {
   const MainView({super.key});

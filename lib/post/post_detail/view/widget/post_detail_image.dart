@@ -2,7 +2,8 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:together_delivery_app/common/config/api_url.dart';
-import 'package:together_delivery_app/post_detail/model/post_detail_response_model.dart';
+
+import '../../model/post_detail_response_model.dart';
 
 class PostDetailImage extends ConsumerWidget {
   final List<PostImage> images;

@@ -1,7 +1,7 @@
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:together_delivery_app/post_list/repository/post_repository.dart';
 
-import '../../post_list/repository/post_repository_Impl.dart';
+import '../../repository/post_repository.dart';
+import '../../repository/post_repository_Impl.dart';
 import '../model/post_detail_response_model.dart';
 
 final postDetailLoadViewModel = AsyncNotifierProvider.family<

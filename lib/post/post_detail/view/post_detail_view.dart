@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:together_delivery_app/post_detail/view/widget/post_detail.dart';
-import 'package:together_delivery_app/post_detail/view_model/post_detail_load_view_model.dart';
+import 'package:together_delivery_app/post/post_detail/view/widget/post_detail.dart';
+
+import '../view_model/post_detail_load_view_model.dart';
 
 class PostDetailView extends ConsumerStatefulWidget {
   const PostDetailView({super.key});
