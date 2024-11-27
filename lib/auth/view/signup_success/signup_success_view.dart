@@ -42,7 +42,7 @@ class _SignupSuccessViewState extends State<SignupSuccessView> {
                     ),
                     SizedBox(height: 14),
                     Text(
-                      "저희 서비스에 가입해주셔서 감사합니다.\n오늘도 즐거운 플로깅 되세요!",
+                      "저희 서비스에 가입해주셔서 감사합니다.\n오늘도 즐거운 식사 되세요!",
                       textAlign: TextAlign.center,
                       style: Theme.of(context)
                           .textTheme
