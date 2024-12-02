@@ -11,6 +11,7 @@ class TextInputField extends StatelessWidget {
   final bool isSuccess;
   final String statusMessage;
   final bool isPassword;
+  final int? maxLines;
 
   const TextInputField(
       {super.key,
@@ -19,7 +20,8 @@ class TextInputField extends StatelessWidget {
       this.onChanged,
       this.isPassword = false,
       required this.isSuccess,
-      required this.statusMessage});
+      required this.statusMessage,
+      this.maxLines = 1});
 
   @override
   Widget build(BuildContext context) {
@@ -32,6 +34,7 @@ class TextInputField extends StatelessWidget {
           hintText: hintText,
           onChanged: onChanged,
           isPassword: isPassword,
+          maxLines: maxLines,
         ),
         SizedBox(height: 9),
         TextInputStateMessage(

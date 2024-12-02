@@ -1,5 +1,5 @@
 class ApiUrl {
-  // static var baseUrl = 'http://192.168.0.56:8080' ;
+  // static var baseUrl = 'http://192.168.0.55:8080' ;
   static var baseUrl = 'http://10.0.2.2:8080';
 
   static var login = "$baseUrl/login";
@@ -13,6 +13,7 @@ class ApiUrl {
   static var postDetailGet = baseUrl + "/api/post";
   static var postDetailPost = baseUrl + '/api/post';
   static var postDetailPostImage = baseUrl + '/images/post';
+  static var postCreate = baseUrl + "/api/post";
 
   static var chatRoomCreate = baseUrl + '/api/chat/room';
 
@@ -21,4 +22,6 @@ class ApiUrl {
   static var logout = baseUrl + "/auth/logout";
   static var tokenRefresh = baseUrl + "/auth/refreshToken";
   static var userInfoGetPath = "/api/auth";
+
+  static var reverseGeocoding = 'https://naveropenapi.apigw.ntruss.com/map-reversegeocode/v2/gc';
 }

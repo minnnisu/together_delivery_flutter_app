@@ -22,6 +22,37 @@ class _PostDetailViewState extends ConsumerState<PostDetailView> {
       appBar: AppBar(
         title: Text("게시글"),
         centerTitle: true,
+        actions: [
+          PopupMenuButton<String>(
+            onSelected: (value) {
+              // 선택된 메뉴에 따른 작업
+              if (value == 'delete') {
+                print('delete 선택');
+              } else if (value == 'edit') {
+                print('edit 선택');
+              } else if (value == 'chat') {
+                print('chat 선택');
+              }
+            },
+            itemBuilder: (BuildContext context) {
+              return [
+                PopupMenuItem(
+                  value: 'delete',
+                  child: Text('삭제'),
+                ),
+                PopupMenuItem(
+                  value: 'edit',
+                  child: Text('수정'),
+                ),
+                PopupMenuItem(
+                  value: 'chat',
+                  child: Text('채팅방 입장'),
+                ),
+              ];
+            },
+            icon: Icon(Icons.more_vert), // "더보기" 아이콘
+          ),
+        ],
       ),
       body: watch.when(
         data: (data) {

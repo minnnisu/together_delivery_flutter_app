@@ -1,28 +1,28 @@
 import 'dart:convert';
 
-PostDetailResponseModel postDetailResponseModelFromJson(String str) => PostDetailResponseModel.fromJson(json.decode(str));
+PostCreateResponseModel postCreateResponseModelFromJson(String str) => PostCreateResponseModel.fromJson(json.decode(str));
 
-String postDetailResponseModelToJson(PostDetailResponseModel data) => json.encode(data.toJson());
+String postCreateResponseModelToJson(PostCreateResponseModel data) => json.encode(data.toJson());
 
-class PostDetailResponseModel {
+class PostCreateResponseModel {
   Post post;
   ChatRoom chatRoom;
 
-  PostDetailResponseModel({
+  PostCreateResponseModel({
     required this.post,
     required this.chatRoom,
   });
 
-  PostDetailResponseModel copyWith({
+  PostCreateResponseModel copyWith({
     Post? post,
     ChatRoom? chatRoom,
   }) =>
-      PostDetailResponseModel(
+      PostCreateResponseModel(
         post: post ?? this.post,
         chatRoom: chatRoom ?? this.chatRoom,
       );
 
-  factory PostDetailResponseModel.fromJson(Map<String, dynamic> json) => PostDetailResponseModel(
+  factory PostCreateResponseModel.fromJson(Map<String, dynamic> json) => PostCreateResponseModel(
     post: Post.fromJson(json["post"]),
     chatRoom: ChatRoom.fromJson(json["chatRoom"]),
   );
@@ -35,79 +35,71 @@ class PostDetailResponseModel {
 
 class ChatRoom {
   int id;
+  String creatorUsername;
   DateTime createdAt;
-  dynamic deletedAt;
-  bool isChatRoomMember;
 
   ChatRoom({
     required this.id,
+    required this.creatorUsername,
     required this.createdAt,
-    required this.deletedAt,
-    required this.isChatRoomMember,
   });
 
   ChatRoom copyWith({
     int? id,
+    String? creatorUsername,
     DateTime? createdAt,
-    dynamic deletedAt,
-    bool? isChatRoomMember,
   }) =>
       ChatRoom(
         id: id ?? this.id,
+        creatorUsername: creatorUsername ?? this.creatorUsername,
         createdAt: createdAt ?? this.createdAt,
-        deletedAt: deletedAt ?? this.deletedAt,
-        isChatRoomMember: isChatRoomMember ?? this.isChatRoomMember,
       );
 
   factory ChatRoom.fromJson(Map<String, dynamic> json) => ChatRoom(
     id: json["id"],
+    creatorUsername: json["creatorUsername"],
     createdAt: DateTime.parse(json["createdAt"]),
-    deletedAt: json["deletedAt"],
-    isChatRoomMember: json["isChatRoomMember"],
   );
 
   Map<String, dynamic> toJson() => {
     "id": id,
+    "creatorUsername": creatorUsername,
     "createdAt": createdAt.toIso8601String(),
-    "deletedAt": deletedAt,
-    "isChatRoomMember": isChatRoomMember,
   };
 }
 
 class Post {
   int id;
-  String nickname;
-  String? content;
+  String username;
+  String content;
   String restaurantName;
   String categoryCode;
   int deliveryFee;
   int minOrderFee;
   MeetLocation meetLocation;
   bool status;
-  List<PostImage> images;
   DateTime createdAt;
   DateTime updatedAt;
-  bool isPostCreator;
+  List<dynamic> postImages;
 
   Post({
     required this.id,
-    required this.nickname,
-    this.content,
+    required this.username,
+    required this.content,
     required this.restaurantName,
     required this.categoryCode,
     required this.deliveryFee,
     required this.minOrderFee,
     required this.meetLocation,
     required this.status,
-    required this.images,
     required this.createdAt,
     required this.updatedAt,
-    required this.isPostCreator,
+    required this.postImages,
   });
 
   Post copyWith({
     int? id,
-    String? nickname,
+    String? username,
     String? content,
     String? restaurantName,
     String? categoryCode,
@@ -115,14 +107,13 @@ class Post {
     int? minOrderFee,
     MeetLocation? meetLocation,
     bool? status,
-    List<PostImage>? images,
     DateTime? createdAt,
     DateTime? updatedAt,
-    bool? isPostCreator,
+    List<dynamic>? postImages,
   }) =>
       Post(
         id: id ?? this.id,
-        nickname: nickname ?? this.nickname,
+        username: username ?? this.username,
         content: content ?? this.content,
         restaurantName: restaurantName ?? this.restaurantName,
         categoryCode: categoryCode ?? this.categoryCode,
@@ -130,15 +121,14 @@ class Post {
         minOrderFee: minOrderFee ?? this.minOrderFee,
         meetLocation: meetLocation ?? this.meetLocation,
         status: status ?? this.status,
-        images: images ?? this.images,
         createdAt: createdAt ?? this.createdAt,
         updatedAt: updatedAt ?? this.updatedAt,
-        isPostCreator: isPostCreator ?? this.isPostCreator,
+        postImages: postImages ?? this.postImages,
       );
 
   factory Post.fromJson(Map<String, dynamic> json) => Post(
     id: json["id"],
-    nickname: json["nickname"],
+    username: json["username"],
     content: json["content"],
     restaurantName: json["restaurantName"],
     categoryCode: json["categoryCode"],
@@ -146,15 +136,14 @@ class Post {
     minOrderFee: json["minOrderFee"],
     meetLocation: MeetLocation.fromJson(json["meetLocation"]),
     status: json["status"],
-    images: List<PostImage>.from(json["images"].map((x) => PostImage.fromJson(x))),
     createdAt: DateTime.parse(json["createdAt"]),
     updatedAt: DateTime.parse(json["updatedAt"]),
-    isPostCreator: json["isPostCreator"],
+    postImages: List<dynamic>.from(json["postImages"].map((x) => x)),
   );
 
   Map<String, dynamic> toJson() => {
     "id": id,
-    "nickname": nickname,
+    "username": username,
     "content": content,
     "restaurantName": restaurantName,
     "categoryCode": categoryCode,
@@ -162,51 +151,15 @@ class Post {
     "minOrderFee": minOrderFee,
     "meetLocation": meetLocation.toJson(),
     "status": status,
-    "images": List<dynamic>.from(images.map((x) => x.toJson())),
     "createdAt": createdAt.toIso8601String(),
     "updatedAt": updatedAt.toIso8601String(),
-    "isPostCreator": isPostCreator,
-  };
-}
-
-class PostImage {
-  int id;
-  String imageName;
-  DateTime createdAt;
-
-  PostImage({
-    required this.id,
-    required this.imageName,
-    required this.createdAt,
-  });
-
-  PostImage copyWith({
-    int? id,
-    String? imageName,
-    DateTime? createdAt,
-  }) =>
-      PostImage(
-        id: id ?? this.id,
-        imageName: imageName ?? this.imageName,
-        createdAt: createdAt ?? this.createdAt,
-      );
-
-  factory PostImage.fromJson(Map<String, dynamic> json) => PostImage(
-    id: json["id"],
-    imageName: json["imageName"],
-    createdAt: DateTime.parse(json["createdAt"]),
-  );
-
-  Map<String, dynamic> toJson() => {
-    "id": id,
-    "imageName": imageName,
-    "createdAt": createdAt.toIso8601String(),
+    "postImages": List<dynamic>.from(postImages.map((x) => x)),
   };
 }
 
 class MeetLocation {
   String address;
-  dynamic shortAddress;
+  String shortAddress;
   double latitude;
   double longitude;
 
@@ -219,7 +172,7 @@ class MeetLocation {
 
   MeetLocation copyWith({
     String? address,
-    dynamic shortAddress,
+    String? shortAddress,
     double? latitude,
     double? longitude,
   }) =>

@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:together_delivery_app/common/routes/routes.dart';
 
 import '../post/post_list/view/post_list_view.dart';
 
@@ -48,7 +49,7 @@ class _MainViewState extends State<MainView> {
         shape: CircleBorder(),
               elevation: 0,
               backgroundColor: Color(0xffdedddd),
-              onPressed: () => Navigator.pushNamed(context, "/newPost"),
+              onPressed: () => Navigator.pushNamed(context, RoutesName.newPostCreate),
               child: Icon(Icons.add),
             )
           : null,

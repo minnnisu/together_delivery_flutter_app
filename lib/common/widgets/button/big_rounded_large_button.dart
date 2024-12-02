@@ -17,22 +17,25 @@ class BigRoundedLargeButton extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return GestureDetector(
-      onTap: onTap,
-      child: Container(
-        padding: EdgeInsets.symmetric(vertical: 14),
-        width: double.infinity,
-        decoration: BoxDecoration(
-          color: isActivate ? AppColor.primaryColor : AppColor.gray60,
-          borderRadius: BorderRadius.circular(23),
-        ),
-        child: Text(
-          buttonName,
-          textAlign: TextAlign.center,
-          style: Theme.of(context).textTheme.bodyMedium!.copyWith(
-                color: AppColor.white,
-                fontWeight: FontWeight.bold,
-              ),
+    return Padding(
+      padding: const EdgeInsets.only(top: 14),
+      child: GestureDetector(
+        onTap: onTap,
+        child: Container(
+          padding: EdgeInsets.symmetric(vertical: 14),
+          width: double.infinity,
+          decoration: BoxDecoration(
+            color: isActivate ? AppColor.primaryColor : AppColor.gray60,
+            borderRadius: BorderRadius.circular(23),
+          ),
+          child: Text(
+            buttonName,
+            textAlign: TextAlign.center,
+            style: Theme.of(context).textTheme.bodyMedium!.copyWith(
+                  color: AppColor.white,
+                  fontWeight: FontWeight.bold,
+                ),
+          ),
         ),
       ),
     );
