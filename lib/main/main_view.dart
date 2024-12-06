@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:together_delivery_app/common/routes/routes.dart';
+import 'package:together_delivery_app/user/view/my_account_view.dart';
 
 import '../post/post_list/view/post_list_view.dart';
 
@@ -10,15 +11,24 @@ class MainView extends StatefulWidget {
   State<MainView> createState() => _MainViewState();
 }
 
-List<String> appBarTitle = [
-  "게시글",
-  // "내정보",
+List<AppBar?> appBar = [
+  AppBar(
+    title: Text(
+      "게시글",
+      style: TextStyle(
+        fontWeight: FontWeight.w600,
+      ),
+    ),
+    centerTitle: true,
+  ),
+  null
 ];
 
 class _MainViewState extends State<MainView> {
   int _selectedIndex = 0;
   static const List<Widget> _widgetOptions = <Widget>[
     PostListView(),
+    MyAccountView(),
     // UserInfoScreen(),
   ];
 
@@ -31,25 +41,18 @@ class _MainViewState extends State<MainView> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: Text(
-          appBarTitle[_selectedIndex],
-          style: TextStyle(
-            fontWeight: FontWeight.w600,
-          ),
-        ),
-        centerTitle: true,
-      ),
+      appBar: appBar[_selectedIndex],
       body: Container(
         width: double.infinity,
         child: _widgetOptions.elementAt(_selectedIndex),
       ),
       floatingActionButton: _selectedIndex == 0
           ? FloatingActionButton(
-        shape: CircleBorder(),
+              shape: CircleBorder(),
               elevation: 0,
               backgroundColor: Color(0xffdedddd),
-              onPressed: () => Navigator.pushNamed(context, RoutesName.newPostCreate),
+              onPressed: () =>
+                  Navigator.pushNamed(context, RoutesName.newPostCreate),
               child: Icon(Icons.add),
             )
           : null,

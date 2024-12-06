@@ -2,8 +2,8 @@ import 'package:dio/dio.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:together_delivery_app/auth/model/model/signup/user_id_duplication_check_request_model.dart';
 import 'package:together_delivery_app/auth/model/model/signup/user_id_duplication_check_response_model.dart';
-import 'package:together_delivery_app/auth/model/model/user_info/user_info_response_model.dart';
 import 'package:together_delivery_app/common/service/authentication_network_api_service.dart';
+import 'package:together_delivery_app/user/model/user_info_response_model.dart';
 
 import '../../common/config/api_url.dart';
 import '../../common/const/token_type.dart';
