@@ -27,7 +27,12 @@ enum ErrorCode {
 
   // 토큰 관련 에러
   TokenReissueError("재로그인이 필요합니다."),
-  NoTokenError("재로그인이 필요합니다.")
+  NoTokenError("재로그인이 필요합니다."),
+
+  // 채팅방 에러
+  NoSuchChatRoomError("존재하지 않은 채팅방입니다."),
+  ClosedPostError("채팅방에 입장할 수 없습니다."),
+  AlreadyExistChatRoomMemberError(null),
   ;
 
   const ErrorCode(this.message);

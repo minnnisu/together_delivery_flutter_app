@@ -16,6 +16,11 @@ class ApiUrl {
   static var postCreate = baseUrl + "/api/post";
 
   static var chatRoomCreate = baseUrl + '/api/chat/room';
+  static var ChatRoomAccessCheck1 = baseUrl + '/api/chat/room/';
+  static var ChatRoomAccessCheck2 = '/access';
+  static var ChatRoomEnter1 = baseUrl + '/api/chat/room/';
+  static var ChatRoomEnter2 = '/enter';
+  static var chatMessageListGet = baseUrl + '/api/chat/message';
 
   static var userRegister = baseUrl + "/auth/signup";
   static var usernameDuplicationCheck = baseUrl + "/auth/check/username";

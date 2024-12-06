@@ -2,9 +2,12 @@ import 'package:dio/dio.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:together_delivery_app/auth/model/model/signup/user_id_duplication_check_request_model.dart';
 import 'package:together_delivery_app/auth/model/model/signup/user_id_duplication_check_response_model.dart';
+import 'package:together_delivery_app/auth/model/model/user_info/user_info_response_model.dart';
+import 'package:together_delivery_app/common/service/authentication_network_api_service.dart';
 
 import '../../common/config/api_url.dart';
 import '../../common/const/token_type.dart';
+import '../../common/const/user_info.dart';
 import '../../common/service/api_service.dart';
 import '../../common/service/local_service.dart';
 import '../../common/service/network_api_service.dart';
@@ -21,15 +24,17 @@ final authRepositoryImplProvider = Provider<AuthRepository>(
   (ref) {
     final localService = ref.watch(secureLocalServiceImplProvider);
     final apiService = ref.watch(networkApiServiceProvider);
-    return AuthRepositoryImpl(apiService, localService);
+    final authenticationApiService = ref.watch(authenticationNetworkApiServiceProvider);
+    return AuthRepositoryImpl(apiService, localService ,authenticationApiService);
   },
 );
 
 class AuthRepositoryImpl extends AuthRepository {
   final ApiService _apiService;
   final LocalService _localService;
+  final ApiService _authenticationApiService;
 
-  AuthRepositoryImpl(this._apiService, this._localService);
+  AuthRepositoryImpl(this._apiService, this._localService, this._authenticationApiService);
 
   @override
   Future<LoginResponseModel> login(LoginRequestModel requestModel) async {
@@ -83,5 +88,19 @@ class AuthRepositoryImpl extends AuthRepository {
     await _localService.save(TokenType.refreshToken.name, refreshToken);
   }
 
+  @override
+  Future<void> saveUsername(String username) async {
+    await _localService.save(UserInfo.username.name, username);
+  }
 
+  @override
+  Future<void> saveNickname(String nickname) async {
+    await _localService.save(UserInfo.nickname.name, nickname);
+  }
+
+  @override
+  Future<UserInfoResponseModel> getUserInfo() async{
+    var response = await _authenticationApiService.getGetApiResponse(ApiUrl.userInfoGet);
+    return UserInfoResponseModel.fromJson(response.data);
+  }
 }

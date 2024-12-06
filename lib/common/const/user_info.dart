@@ -1,0 +1,4 @@
+enum UserInfo {
+  username,
+  nickname,
+}

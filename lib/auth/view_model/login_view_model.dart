@@ -31,8 +31,12 @@ class LoginViewModel extends StateNotifier<LoginInputState> {
           await authRepository.login(loginRequestModel);
 
       // 서비스 토큰 저장
-      authRepository.saveToken(
+      await authRepository.saveToken(
           responseModel.accessToken, responseModel.refreshToken);
+
+      var userInfoResponseModel = await authRepository.getUserInfo();
+      await authRepository.saveUsername(userInfoResponseModel.username);
+      await authRepository.saveNickname(userInfoResponseModel.nickname);
 
       return LoginResult.success();
     } on CustomException catch (e) {
