@@ -31,4 +31,9 @@ class PostDetailViewModel {
   Future<void> _enterChatRoom(chatRoomId) async {
     await postRepository.enterChatRoom(chatRoomId.toString());
   }
+
+  Future<bool> togglePostStatus(String postId) async{
+    var postStatusToggleResponseModel = await postRepository.togglePostStatus(postId);
+    return postStatusToggleResponseModel.status;
+  }
 }

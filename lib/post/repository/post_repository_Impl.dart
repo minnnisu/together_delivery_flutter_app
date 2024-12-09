@@ -2,6 +2,7 @@ import 'package:dio/dio.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:together_delivery_app/common/service/authentication_network_api_service.dart';
 import 'package:together_delivery_app/post/post_detail/model/chat_room_access_response_model.dart';
+import 'package:together_delivery_app/post/post_detail/model/post_status_toggle_response_model.dart';
 import 'package:together_delivery_app/post/repository/post_repository.dart';
 
 import '../../common/config/api_url.dart';
@@ -49,4 +50,12 @@ class PostRepositoryImpl extends PostRepository {
     var response = await _apiService.getPostApiResponse("${ApiUrl.ChatRoomEnter1}$chatRoomId${ApiUrl.ChatRoomEnter2}");
     return ChatRoomEnterResponseModel.fromJson(response.data);
   }
+
+  @override
+  Future<PostStatusToggleResponseModel> togglePostStatus(String postId) async {
+    var response = await _apiService.getPostApiResponse("${ApiUrl.postStatusToggle1}$postId${ApiUrl.postStatusToggle2}");
+    return PostStatusToggleResponseModel.fromJson(response.data);
+  }
+
+
 }

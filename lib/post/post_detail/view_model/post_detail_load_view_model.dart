@@ -17,5 +17,11 @@ class PostDetailLoadViewModel extends FamilyAsyncNotifier<PostDetailResponseMode
     postRepository = ref.watch(postRepositoryImplProvider);
     return await postRepository.getPostDetail(arg);
   }
+
+  void togglePostStatus(bool status){
+    var currentModel = state.value;
+    currentModel = currentModel?.copyWith(post: currentModel.post.copyWith(status: status));
+    state = AsyncData(currentModel!);
+  }
 }
 
