@@ -10,8 +10,7 @@ environment:
 dependencies:
   flutter:
     sdk: flutter
-
-
+  flutter_svg: ^2.0.0
   cupertino_icons: ^1.0.6
   dio: ^5.4.1
   flutter_provider: ^2.1.0
@@ -36,6 +35,8 @@ dependencies:
   geolocator: ^11.0.0
   stomp_dart_client: ^2.0.0
   photo_view: ^0.15.0
+  fluttertoast: ^8.2.4
+  lottie: ^3.1.2
 
 dev_dependencies:
   flutter_test:
@@ -54,25 +55,30 @@ flutter:
   assets:
     - assets/
     - assets/config/.env
+    - assets/lottie/
+    - assets/icon/
+
   fonts:
     - family: Pretendard
       fonts:
-        - asset: assets/fonts/Pretendard-Thin.ttf
-          weight: 100
-        - asset: assets/fonts/Pretendard-ExtraLight.ttf
-          weight: 200
-        - asset: assets/fonts/Pretendard-Light.ttf
-          weight: 300
-        - asset: assets/fonts/Pretendard-Regular.ttf
-          weight: 400
-        - asset: assets/fonts/Pretendard-Medium.ttf
-          weight: 500
-        - asset: assets/fonts/Pretendard-SemiBold.ttf
-          weight: 600
-        - asset: assets/fonts/Pretendard-Bold.ttf
-          weight: 700
-        - asset: assets/fonts/Pretendard-ExtraBold.ttf
-          weight: 800
-        - asset: assets/fonts/Pretendard-Black.ttf
+        - asset: assets/font/Pretendard-Black.ttf
           weight: 900
-
+        - asset: assets/font/Pretendard-Bold.ttf
+          weight: 700
+        - asset: assets/font/Pretendard-ExtraBold.ttf
+          weight: 800
+        - asset: assets/font/Pretendard-ExtraLight.ttf
+          weight: 200
+        - asset: assets/font/Pretendard-Light.ttf
+          weight: 300
+        - asset: assets/font/Pretendard-Medium.ttf
+          weight: 500
+        - asset: assets/font/Pretendard-Regular.ttf
+          weight: 400
+        - asset: assets/font/Pretendard-SemiBold.ttf
+          weight: 600
+        - asset: assets/font/Pretendard-Thin.ttf
+          weight: 100
+    - family: HancomMalangMalang
+      fonts:
+        - asset: assets/font/HancomMalangMalang-Regular.ttf
