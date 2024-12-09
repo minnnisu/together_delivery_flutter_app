@@ -3,7 +3,7 @@ import 'package:together_delivery_app/auth/view/login/login_view.dart';
 import 'package:together_delivery_app/auth/view/signup/signup_view.dart';
 import 'package:together_delivery_app/auth/view/signup_success/signup_success_view.dart';
 import 'package:together_delivery_app/chat/view/chat_room_view.dart';
-import 'package:together_delivery_app/main/main_view.dart';
+import 'package:together_delivery_app/main/view/main_view.dart';
 import 'package:together_delivery_app/post/new_post_create/view/new_post_create_view.dart';
 import 'package:together_delivery_app/splash/view/splash_view.dart';
 
