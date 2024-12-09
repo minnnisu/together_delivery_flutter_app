@@ -1,4 +1,5 @@
 import 'package:together_delivery_app/post/post_detail/model/chat_room_enter_response_model.dart';
+import 'package:together_delivery_app/post/post_detail/model/post_status_toggle_response_model.dart';
 
 import '../post_detail/model/chat_room_access_response_model.dart';
 import '../post_detail/model/post_detail_response_model.dart';
@@ -12,4 +13,6 @@ abstract class PostRepository {
   Future<ChatRoomAccessResponseModel> checkChatRoomAccessValid(String chatRoomId);
 
   Future<ChatRoomEnterResponseModel> enterChatRoom(String chatRoomId);
+
+  Future<PostStatusToggleResponseModel> togglePostStatus(String postId);
 }
