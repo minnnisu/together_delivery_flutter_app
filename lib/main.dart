@@ -39,7 +39,9 @@ class MyApp extends StatelessWidget {
         textTheme: customTextTheme,
         fontFamily: "pretendard",
         appBarTheme: AppBarTheme(
-          color: Colors.white,
+          color: AppColor.white,
+          scrolledUnderElevation: 0,
+          elevation: 0,
           centerTitle: true,
           titleTextStyle: textTheme.headlineSmall!
               .copyWith(color: AppColor.black, fontWeight: FontWeight.w600),
