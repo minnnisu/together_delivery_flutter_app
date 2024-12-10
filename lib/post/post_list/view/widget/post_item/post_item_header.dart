@@ -3,9 +3,9 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:together_delivery_app/common/config/color/app_color.dart';
 import 'package:together_delivery_app/common/util/dataConvertor.dart';
+import 'package:together_delivery_app/post/post_list/view/widget/post_item/post_status.dart';
 
-import '../../../post_detail/view/widget/post_status.dart';
-import '../../model/api/post_list_response.dart';
+import '../../../model/api/post_list_response.dart';
 
 class PostItemHeader extends ConsumerWidget {
   final Post post;

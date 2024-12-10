@@ -1,6 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:together_delivery_app/common/routes/routes.dart';
-import 'package:together_delivery_app/post/post_list/view/widget/post_item.dart';
+import 'package:together_delivery_app/post/post_list/view/widget/post_item/post_item.dart';
 
 class PostListItemWrapper extends StatelessWidget {
   final PostItem postItem;

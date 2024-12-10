@@ -4,7 +4,7 @@ import 'package:together_delivery_app/common/config/color/app_color.dart';
 import 'package:together_delivery_app/common/const/restaurantCategory.dart';
 import 'package:together_delivery_app/common/util/money_convertor.dart';
 
-import '../../model/api/post_list_response.dart';
+import '../../../model/api/post_list_response.dart';
 
 
 class PostItemRestaurantInfo extends StatelessWidget {

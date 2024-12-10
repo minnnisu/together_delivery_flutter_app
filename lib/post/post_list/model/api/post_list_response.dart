@@ -5,60 +5,25 @@ PostListResponse postListResponseFromJson(String str) => PostListResponse.fromJs
 String postListResponseToJson(PostListResponse data) => json.encode(data.toJson());
 
 class PostListResponse {
-  MetaData metaData;
   List<Post> posts;
 
   PostListResponse({
-    required this.metaData,
     required this.posts,
   });
 
   PostListResponse copyWith({
-    MetaData? metaData,
     List<Post>? posts,
   }) =>
       PostListResponse(
-        metaData: metaData ?? this.metaData,
         posts: posts ?? this.posts,
       );
 
   factory PostListResponse.fromJson(Map<String, dynamic> json) => PostListResponse(
-    metaData: MetaData.fromJson(json["metaData"]),
     posts: List<Post>.from(json["posts"].map((x) => Post.fromJson(x))),
   );
 
   Map<String, dynamic> toJson() => {
-    "metaData": metaData.toJson(),
     "posts": List<dynamic>.from(posts.map((x) => x.toJson())),
-  };
-}
-
-class MetaData {
-  int totalPage;
-  int currentPage;
-
-  MetaData({
-    required this.totalPage,
-    required this.currentPage,
-  });
-
-  MetaData copyWith({
-    int? totalPage,
-    int? currentPage,
-  }) =>
-      MetaData(
-        totalPage: totalPage ?? this.totalPage,
-        currentPage: currentPage ?? this.currentPage,
-      );
-
-  factory MetaData.fromJson(Map<String, dynamic> json) => MetaData(
-    totalPage: json["totalPage"],
-    currentPage: json["currentPage"],
-  );
-
-  Map<String, dynamic> toJson() => {
-    "totalPage": totalPage,
-    "currentPage": currentPage,
   };
 }
 

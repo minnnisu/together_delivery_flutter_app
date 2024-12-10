@@ -24,10 +24,19 @@ class PostRepositoryImpl extends PostRepository {
   PostRepositoryImpl(this._apiService);
 
   @override
-  Future<PostListResponse> getPostList(String page) async {
+  Future<PostListResponse> getPostList(int? cursor, String category) async {
+    var queryParameters = <String, dynamic>{};
+    if(cursor != null) {
+      queryParameters.addAll({"cursor": cursor.toString()});
+    }
+
+    if(category != 'ALL') {
+      queryParameters.addAll({"category": category});
+    }
+
     Response<dynamic> response = await _apiService.getGetApiResponse(
         ApiUrl.postGet,
-        queryParameters: Map.of({"page": page}));
+        queryParameters: queryParameters);
     return PostListResponse.fromJson(response.data);
   }
 

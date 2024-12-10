@@ -16,7 +16,7 @@ class PostListViewModel extends StateNotifier<PostListState> {
 
   PostListViewModel(super.state, this.postListRepository);
 
-  Future<PostListResponse> getPostList(int page) async{
-    return await postListRepository.getPostList(page.toString());
+  Future<PostListResponse> getPostList(int? cursor, String category) async{
+    return await postListRepository.getPostList(cursor, category);
   }
 }

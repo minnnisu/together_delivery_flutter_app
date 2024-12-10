@@ -1,6 +1,7 @@
 import 'package:flutter/cupertino.dart';
 
-import '../../model/api/post_list_response.dart';
+import '../../../model/api/post_list_response.dart';
+
 
 class PostItemContent extends StatelessWidget {
   final Post post;
