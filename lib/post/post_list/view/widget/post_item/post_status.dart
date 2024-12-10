@@ -1,10 +1,14 @@
 import 'package:flutter/cupertino.dart';
+import 'package:flutter/material.dart';
+import 'package:together_delivery_app/common/config/color/app_color.dart';
 
 class PostActiveStatus extends StatelessWidget {
   const PostActiveStatus({super.key});
 
   @override
   Widget build(BuildContext context) {
+    final textTheme = Theme.of(context).textTheme;
+
     return Container(
       padding: EdgeInsets.symmetric(
         vertical: 1,
@@ -12,14 +16,16 @@ class PostActiveStatus extends StatelessWidget {
       ),
       decoration: BoxDecoration(
         border: Border.all(
-          color: Color(0xff80cd53), // 테두리 색상
-          width: 1.0, // 테두리 두께
+          color: AppColor.green, // 테두리 색상
+          width: 0.7, // 테두리 두께
         ),
-        borderRadius: BorderRadius.circular(10.0), // 테두리 둥글게 만들기
+        borderRadius: BorderRadius.circular(8.0), // 테두리 둥글게 만들기
       ),
       child: Text(
         "모집중",
-        style: TextStyle(color: Color(0xff80cd53), fontWeight: FontWeight.w600),
+        style: textTheme.bodySmall!.copyWith(
+          color: AppColor.green,
+        ),
       ),
     );
   }
@@ -30,6 +36,8 @@ class PostInactiveStatus extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final textTheme = Theme.of(context).textTheme;
+
     return Container(
       padding: EdgeInsets.symmetric(
         vertical: 1,
@@ -37,14 +45,14 @@ class PostInactiveStatus extends StatelessWidget {
       ),
       decoration: BoxDecoration(
         border: Border.all(
-          color: Color(0xff9a9a9a), // 테두리 색상
-          width: 1.0, // 테두리 두께
+          color: AppColor.gray60, // 테두리 색상
+          width: 0.7, // 테두리 두께
         ),
         borderRadius: BorderRadius.circular(10.0), // 테두리 둥글게 만들기
       ),
       child: Text(
         "모집마감",
-        style: TextStyle(color: Color(0xff9a9a9a), fontWeight: FontWeight.w600),
+        style: textTheme.bodySmall!.copyWith(color: AppColor.gray60),
       ),
     );
   }
